@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		085FA99D1AE13A0700EFD2F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99C1AE13A0700EFD2F0 /* main.m */; };
 		085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */; };
-		085FA9A31AE13A0700EFD2F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9A21AE13A0700EFD2F0 /* ViewController.m */; };
-		085FA9A61AE13A0700EFD2F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A41AE13A0700EFD2F0 /* Main.storyboard */; };
+		085FA9A31AE13A0700EFD2F0 /* ELaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9A21AE13A0700EFD2F0 /* ELaunchViewController.m */; };
 		085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A71AE13A0700EFD2F0 /* Images.xcassets */; };
 		085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */; };
 		085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */; };
+		08622E991AE13CFA00AE189A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08622E981AE13CFA00AE189A /* Main.storyboard */; };
+		08622E9B1AE144DF00AE189A /* ELaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +33,15 @@
 		085FA99C1AE13A0700EFD2F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		085FA99E1AE13A0700EFD2F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		085FA9A11AE13A0700EFD2F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		085FA9A21AE13A0700EFD2F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		085FA9A51AE13A0700EFD2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		085FA9A11AE13A0700EFD2F0 /* ELaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELaunchViewController.h; sourceTree = "<group>"; };
+		085FA9A21AE13A0700EFD2F0 /* ELaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELaunchViewController.m; sourceTree = "<group>"; };
 		085FA9A71AE13A0700EFD2F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		085FA9AA1AE13A0700EFD2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EleyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		085FA9B51AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleyeTests.m; sourceTree = "<group>"; };
+		08622E981AE13CFA00AE189A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELaunchViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +85,13 @@
 			children = (
 				085FA99E1AE13A0700EFD2F0 /* AppDelegate.h */,
 				085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */,
-				085FA9A11AE13A0700EFD2F0 /* ViewController.h */,
-				085FA9A21AE13A0700EFD2F0 /* ViewController.m */,
-				085FA9A41AE13A0700EFD2F0 /* Main.storyboard */,
+				085FA9A11AE13A0700EFD2F0 /* ELaunchViewController.h */,
+				085FA9A21AE13A0700EFD2F0 /* ELaunchViewController.m */,
+				08622E981AE13CFA00AE189A /* Main.storyboard */,
 				085FA9A71AE13A0700EFD2F0 /* Images.xcassets */,
 				085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */,
 				085FA99A1AE13A0700EFD2F0 /* Supporting Files */,
+				08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */,
 			);
 			path = Eleye;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				TargetAttributes = {
 					085FA9961AE13A0700EFD2F0 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 8YE95NG7ZZ;
 					};
 					085FA9AF1AE13A0700EFD2F0 = {
 						CreatedOnToolsVersion = 6.1;
@@ -199,7 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				085FA9A61AE13A0700EFD2F0 /* Main.storyboard in Resources */,
+				08622E991AE13CFA00AE189A /* Main.storyboard in Resources */,
+				08622E9B1AE144DF00AE189A /* ELaunchViewController.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
 			);
@@ -219,7 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				085FA9A31AE13A0700EFD2F0 /* ViewController.m in Sources */,
+				085FA9A31AE13A0700EFD2F0 /* ELaunchViewController.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
 			);
@@ -244,14 +249,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		085FA9A41AE13A0700EFD2F0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				085FA9A51AE13A0700EFD2F0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -345,9 +342,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Eleye/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -355,9 +355,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Eleye/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -414,6 +417,7 @@
 				085FA9BC1AE13A0700EFD2F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		085FA9BD1AE13A0700EFD2F0 /* Build configuration list for PBXNativeTarget "EleyeTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +426,7 @@
 				085FA9BF1AE13A0700EFD2F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 wheelab. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ELaunchViewController.h"
 
-@interface ViewController ()
+@interface ELaunchViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ELaunchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
