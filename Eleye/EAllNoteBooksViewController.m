@@ -7,11 +7,11 @@
 //
 
 #import "EAllNoteBooksViewController.h"
-#import <ENSDK/ENSDK.h>
+#import <ENSDKAdvanced.h>
 
 @interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *noteboosk_;
+    NSArray *notebooks_;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,14 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [[ENSession sharedSession] listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client listNotebooksWithSuccess:^(NSArray *notebooks) {
+        notebooks_ = notebooks;
         
-        if (listNotebooksError) {
-            NSLog(@"%@", listNotebooksError);
-        } else {
-            noteboosk_ = notebooks;
-            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取笔记本数据错误:%@", error);
         }
     }];
 
@@ -54,7 +54,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return noteboosk_.count;
+    return notebooks_.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -80,7 +80,7 @@
     
     UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:100];
     
-    ENNotebook *book = noteboosk_[indexPath.row];
+    EDAMNotebook *book = notebooks_[indexPath.row];
     titleLabel.text = book.name;
     
     return cell;
