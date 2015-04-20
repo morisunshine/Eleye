@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <ENSDK/ENSDK.h>
+#import "ELaunchViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +19,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;
+    
+    NSString *CONSUMER_KEY = @"yousurm-4843";
+    NSString *CONSUMER_SECRET = @"19601b04ea2a0f05";
+    
+    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
+    
+    UIViewController *rootViewController;
+    
+    if ([ENSession sharedSession].isAuthenticated) {
+        
+    } else {
+        rootViewController = [[ELaunchViewController alloc] init];
+    }
+    
+    [UIApplication sharedApplication].keyWindow.rootViewController = rootViewController;
+    
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL didHandle = [[ENSession sharedSession] handleOpenURL:url];
+    
+    return didHandle;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

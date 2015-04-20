@@ -13,8 +13,7 @@
 		085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A71AE13A0700EFD2F0 /* Images.xcassets */; };
 		085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */; };
 		085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */; };
-		08622E991AE13CFA00AE189A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08622E981AE13CFA00AE189A /* Main.storyboard */; };
-		08622E9B1AE144DF00AE189A /* ELaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */; };
+		08751F191AE5289D00FE17B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08751F181AE5289D00FE17B1 /* Main.storyboard */; };
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +40,9 @@
 		085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EleyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		085FA9B51AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleyeTests.m; sourceTree = "<group>"; };
-		08622E981AE13CFA00AE189A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELaunchViewController.xib; sourceTree = "<group>"; };
+		08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Eleye-Prefix.pch"; sourceTree = "<group>"; };
+		08751F141AE5250600FE17B1 /* COMMONCONSTANT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMMONCONSTANT.h; sourceTree = "<group>"; };
+		08751F181AE5289D00FE17B1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1975340930B8A6096BFC00AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0654875527BCBA8D47BF71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9F08A71444B99F1BC78B5E4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,15 +90,15 @@
 		085FA9991AE13A0700EFD2F0 /* Eleye */ = {
 			isa = PBXGroup;
 			children = (
+				08751F181AE5289D00FE17B1 /* Main.storyboard */,
+				08751F141AE5250600FE17B1 /* COMMONCONSTANT.h */,
 				085FA99E1AE13A0700EFD2F0 /* AppDelegate.h */,
 				085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */,
 				085FA9A11AE13A0700EFD2F0 /* ELaunchViewController.h */,
 				085FA9A21AE13A0700EFD2F0 /* ELaunchViewController.m */,
-				08622E981AE13CFA00AE189A /* Main.storyboard */,
 				085FA9A71AE13A0700EFD2F0 /* Images.xcassets */,
 				085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */,
 				085FA99A1AE13A0700EFD2F0 /* Supporting Files */,
-				08622E9A1AE144DF00AE189A /* ELaunchViewController.xib */,
 			);
 			path = Eleye;
 			sourceTree = "<group>";
@@ -106,6 +106,7 @@
 		085FA99A1AE13A0700EFD2F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */,
 				085FA99B1AE13A0700EFD2F0 /* Info.plist */,
 				085FA99C1AE13A0700EFD2F0 /* main.m */,
 			);
@@ -229,10 +230,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08622E991AE13CFA00AE189A /* Main.storyboard in Resources */,
-				08622E9B1AE144DF00AE189A /* ELaunchViewController.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
+				08751F191AE5289D00FE17B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
