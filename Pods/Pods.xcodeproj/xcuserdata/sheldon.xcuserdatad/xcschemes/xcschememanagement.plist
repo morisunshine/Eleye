@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-evernote-cloud-sdk-ios.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2A89C6A4F2B34FA3B8F96417</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4B5DCA263F500D717CF70736</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6099E4FE589086D98359A2F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>86E3536E6D28401A5FC87921</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
