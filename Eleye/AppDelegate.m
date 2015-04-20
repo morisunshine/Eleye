@@ -29,13 +29,20 @@
     
     UIViewController *rootViewController;
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     if ([ENSession sharedSession].isAuthenticated) {
-        
+        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
     } else {
-        rootViewController = [[ELaunchViewController alloc] init];
+        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
     }
     
-    [UIApplication sharedApplication].keyWindow.rootViewController = rootViewController;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    self.window.rootViewController = rootViewController;
     
     return YES;
 }
