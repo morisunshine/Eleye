@@ -140,6 +140,7 @@ static CGFloat kCellHeight = 49;
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
     allNotebookViewController.guid = notebook.guid;
+    allNotebookViewController.notebookName = notebook.name;
     [self.navigationController pushViewController:allNotebookViewController animated:YES];
 }
 
@@ -171,6 +172,7 @@ static CGFloat kCellHeight = 49;
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
         allNotebookViewController.guid = notebook.guid;
+        allNotebookViewController.notebookName = notebook.name;
         [self.navigationController pushViewController:allNotebookViewController animated:YES];
     }
     

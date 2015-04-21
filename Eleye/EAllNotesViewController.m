@@ -16,6 +16,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *notebookNameBtn;
 
 @end
 
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.notebookNameBtn setTitle:self.notebookName forState:UIControlStateNormal];
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
     //nil 时为获取所有笔记

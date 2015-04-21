@@ -4,12 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
+		<key>Pods-FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-FMDB.xcscheme</key>
+		<key>Pods-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SVPullToRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2A89C6A4F2B34FA3B8F96417</key>
+		<key>2B73AB1923D1F78B31293394</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B5DCA263F500D717CF70736</key>
+		<key>44B5CCD49AB706AB4C276F20</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6099E4FE589086D98359A2F1</key>
+		<key>6AE7985B591D73E9DF7E3CAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86E3536E6D28401A5FC87921</key>
+		<key>8402CD210ED738CD07BAE5CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D766BDE15C3633122B9ED711</key>
 		<dict>
 			<key>primary</key>
 			<true/>

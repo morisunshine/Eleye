@@ -11,5 +11,6 @@
 @interface EAllNotesViewController : UIViewController
 
 @property (nonatomic, strong) NSString *guid;
+@property (nonatomic, strong) NSString *notebookName;
 
 @end
