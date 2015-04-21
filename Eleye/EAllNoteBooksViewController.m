@@ -7,11 +7,12 @@
 //
 
 #import "EAllNoteBooksViewController.h"
+#import "ENotebookStackView.h"
 #import <ENSDKAdvanced.h>
 
 @interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *notebooks_;
+    NSMutableDictionary *notebooks_;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -27,7 +28,23 @@
     
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
-        notebooks_ = notebooks;
+        
+        notebooks_ = [[NSMutableDictionary alloc] init];
+        
+        for (EDAMNotebook *notebook in notebooks) {
+            if (notebook.stack == nil) {
+                [notebooks_ setObject:notebook forKey:notebook.name];
+            } else {
+                NSMutableArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+                if (subNotebooks) {
+                    [subNotebooks addObject:notebook];
+                } else {
+                    subNotebooks = [[NSMutableArray alloc] init];
+                    [subNotebooks addObject:notebook];
+                    [notebooks_ setObject:subNotebooks forKey:notebook.stack];
+                }
+            }
+        }
         
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
@@ -49,12 +66,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return notebooks_.allKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return notebooks_.count;
+    NSString *key = notebooks_.allKeys[section];
+    NSInteger count = 0;
+    id value = [notebooks_ objectForKey:key];
+    if ([value isKindOfClass:[NSArray class]]) {
+        NSArray *subNotebooks = [notebooks_ objectForKey:key];
+        count = subNotebooks.count;
+    }
+    
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -69,7 +94,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [UIView new];
+    ENotebookStackView *stackView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][0];
+    stackView.stackNameLabel.text = notebooks_.allKeys[section];
+    
+    return stackView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,8 +108,10 @@
     
     UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:100];
     
-    EDAMNotebook *book = notebooks_[indexPath.row];
-    titleLabel.text = book.name;
+    NSString *key = notebooks_.allKeys[indexPath.section];
+    NSArray *subNotebook = [notebooks_ objectForKey:key];
+    EDAMNotebook *notebook = subNotebook[indexPath.row];
+    titleLabel.text = notebook.name;
     
     return cell;
 }
