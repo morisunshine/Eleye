@@ -23,15 +23,19 @@ static CGFloat kCellHeight = 49;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *usernameBtn;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+@property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 @end
 
 @implementation EAllNoteBooksViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 
     [self listNotebooks];
+    
+    [self.tableView addSubview:self.refreshControl];
     
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
@@ -42,10 +46,24 @@ static CGFloat kCellHeight = 49;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Getters -
+
+- (UIRefreshControl *)refreshControl
+{
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    return _refreshControl;
+}
+
 #pragma mark - Private Methods -
 
 - (void)listNotebooks
 {
+    [self.refreshControl endRefreshing];
+    
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
         
@@ -194,6 +212,11 @@ static CGFloat kCellHeight = 49;
 - (IBAction)logoutBtnTapped:(id)sender {
     alertView_ = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
     [alertView_ show];
+}
+
+- (IBAction)refreshControlChanged:(UIRefreshControl *)sender
+{
+    [self listNotebooks];
 }
 
 #pragma mark - UIAlertView Delegate -
