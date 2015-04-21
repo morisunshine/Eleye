@@ -10,4 +10,6 @@
 
 @interface EAllNotesViewController : UIViewController
 
+@property (nonatomic, strong) NSString *guid;
+
 @end

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <ENSDK/ENSDK.h>
 #import "ELaunchViewController.h"
+#import "EAllNoteBooksViewController.h"
 
 @interface AppDelegate ()
 
@@ -27,22 +28,23 @@
     
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
     
-    UIViewController *rootViewController;
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    if ([ENSession sharedSession].isAuthenticated) {
-        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
-    } else {
-        rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
-    }
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = rootViewController;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    if ([ENSession sharedSession].isAuthenticated) {
+        EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allNotebooksViewController];
+        navController.navigationBarHidden = YES;
+        self.window.rootViewController = navController;
+    } else {
+        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        self.window.rootViewController = rootViewController;
+    }
+    
     
     return YES;
 }

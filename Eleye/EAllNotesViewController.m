@@ -7,8 +7,15 @@
 //
 
 #import "EAllNotesViewController.h"
+#import <ENSDKAdvanced.h>
+#import "ENoteCell.h"
 
-@interface EAllNotesViewController ()
+@interface EAllNotesViewController () <UITableViewDataSource, UITableViewDelegate>
+{
+    NSArray *notes_;
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -16,6 +23,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
+    //nil 时为获取所有笔记
+    filter.notebookGuid = self.guid;
+    //TODO 分页封装
+    EDAMRelatedQuery *query = [[EDAMRelatedQuery alloc] init];
+    query.filter = filter;
+    
+    [client findNotesWithFilter:filter offset:0 maxNotes:10 success:^(EDAMNoteList *list) {
+        notes_ = list.notes;
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取失败");
+        }
+    }];
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -27,8 +52,31 @@
 #pragma mark - Actions -
 
 - (IBAction)allNotesBtnTapped:(id)sender {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - TableView DataSource -
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return notes_.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *kCellIdentifier = @"noteCell";
+    ENoteCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    
+    EDAMNote *note = notes_[indexPath.row];
+    
+    [cell updateUIWithNote:note];
+    
+    return cell;
+}
 
 @end
