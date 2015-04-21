@@ -36,6 +36,11 @@ static CGFloat kCellHeight = 49;
         notebooks_ = [[NSMutableDictionary alloc] init];
         viewStatus_ = [[NSMutableDictionary alloc] init];
         
+        EDAMNotebook *allnoteBook = [[EDAMNotebook alloc] init];
+        allnoteBook.guid = nil;
+        allnoteBook.name = @"All notes";
+        [notebooks_ setObject:allnoteBook forKey:allnoteBook.name];
+        
         for (EDAMNotebook *notebook in notebooks) {
             if (notebook.stack == nil) {
                 [notebooks_ setObject:notebook forKey:notebook.name];
