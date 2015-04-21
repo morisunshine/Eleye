@@ -13,10 +13,11 @@
 
 static CGFloat kCellHeight = 49;
 
-@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     NSMutableDictionary *notebooks_;
     NSMutableDictionary *viewStatus_;
+    UIAlertView *alertView_;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,7 +30,22 @@ static CGFloat kCellHeight = 49;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self listNotebooks];
     
+    [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Methods -
+
+- (void)listNotebooks
+{
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
         
@@ -63,14 +79,6 @@ static CGFloat kCellHeight = 49;
             NSLog(@"获取笔记本数据错误:%@", error);
         }
     }];
-
-    [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - TableView Datasource -
@@ -181,6 +189,21 @@ static CGFloat kCellHeight = 49;
         [self.navigationController pushViewController:allNotebookViewController animated:YES];
     }
     
+}
+
+- (IBAction)logoutBtnTapped:(id)sender {
+    alertView_ = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];
+    [alertView_ show];
+}
+
+#pragma mark - UIAlertView Delegate -
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        [[ENSession sharedSession] unauthenticate];
+        //TODO 清除数据库, 退回到登录页面
+    }
 }
 
 @end
