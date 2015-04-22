@@ -8,10 +8,14 @@
 
 #import "EAllNotesViewController.h"
 #import "ENoteCell.h"
+#import <SVPullToRefresh.h>
+
+static int32_t kMaxCount = 20;
 
 @interface EAllNotesViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *notes_;
+    int32_t offset_;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,22 +30,7 @@
     [super viewDidLoad];
     
     [self.notebookNameBtn setTitle:self.notebookName forState:UIControlStateNormal];
-    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
-    //nil 时为获取所有笔记
-    filter.notebookGuid = self.guid;
-    //TODO 分页封装
-    EDAMRelatedQuery *query = [[EDAMRelatedQuery alloc] init];
-    query.filter = filter;
     
-    [client findNotesWithFilter:filter offset:0 maxNotes:10 success:^(EDAMNoteList *list) {
-        notes_ = list.notes;
-        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-    } failure:^(NSError *error) {
-        if (error) {
-            NSLog(@"获取失败");
-        }
-    }];
     
     [self configureUI];
 
@@ -54,6 +43,32 @@
 }
 
 #pragma mark - Private Methods -
+
+- (void)listNotesLoadingMore:(BOOL)loadingMore
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
+    filter.notebookGuid = self.guid;
+    EDAMRelatedQuery *query = [[EDAMRelatedQuery alloc] init];
+    query.filter = filter;
+    
+    if (loadingMore) {
+        
+    } else {
+        offset_ = 0;
+    }
+    
+    [client findNotesWithFilter:filter offset:offset_ maxNotes:kMaxCount success:^(EDAMNoteList *list) {
+        NSInteger totalCount = [list.totalNotes integerValue];
+        
+        notes_ = list.notes;
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取失败");
+        }
+    }];
+}
 
 - (void)configureUI
 {
