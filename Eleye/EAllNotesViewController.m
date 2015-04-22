@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *notebookNameBtn;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -42,6 +43,8 @@
             NSLog(@"获取失败");
         }
     }];
+    
+    [self configureUI];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -49,6 +52,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Methods -
+
+- (void)configureUI
+{
+    [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Actions -
@@ -79,6 +90,13 @@
     [cell updateUIWithNote:note];
     
     return cell;
+}
+
+#pragma mark - TableView Delegate -
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

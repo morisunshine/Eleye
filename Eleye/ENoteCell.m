@@ -25,6 +25,7 @@
 {
     self.titleLabel.text = note.title;
     self.contentLabel.text = note.content;
+//    [EUtility addlineOnView:self position:EViewPositionBottom insert:17];
 }
 
 @end

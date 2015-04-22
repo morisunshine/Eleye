@@ -24,6 +24,8 @@ static CGFloat kCellHeight = 49;
 @property (weak, nonatomic) IBOutlet UIButton *usernameBtn;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 @property (weak, nonatomic) IBOutlet UIButton *feedbackBtn;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 @end
@@ -63,9 +65,10 @@ static CGFloat kCellHeight = 49;
 {
     NSString *title = [NSString stringWithFormat:@"V%@ 问题反馈", APP_VERSION];
     
+    [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
+    [EUtility addlineOnView:self.footerView position:EViewPositionTop];
     [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
     [self.tableView addSubview:self.refreshControl];
-    [EUtility addlineOnView:self.tableView position:EViewPositionTop];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 }
