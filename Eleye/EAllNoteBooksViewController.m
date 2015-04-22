@@ -164,6 +164,7 @@ static CGFloat kCellHeight = 49;
             NSMutableArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
             ENoteBookDO *stackNotebook;
             if (!subNotebooks) {
+                [viewStatus_ setObject:@(YES) forKey:notebook.stack];
                 subNotebooks = [[NSMutableArray alloc] init];
                 stackNotebook = [[ENoteBookDO alloc] init];
                 stackNotebook.name = notebook.stack;
@@ -187,26 +188,25 @@ static CGFloat kCellHeight = 49;
 
 - (void)handleViewWithIndex:(NSInteger)section
 {
-    NSString *key = notebooks_.allKeys[section];
-    id value = [notebooks_ objectForKey:key];
-    if ([value isKindOfClass:[NSArray class]]) {
-        BOOL isOpen = [[viewStatus_ objectForKey:key] boolValue];
-        NSArray *subNotebooks = [notebooks_ objectForKey:key];
+    ENoteBookDO *notebook = mutNotebooks_[section];
+    if (notebook.stack) {
+
+        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
+        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         for (NSInteger i = 0;i < subNotebooks.count; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
             [indexPaths addObject:indexPath];
         }
+        
         if (isOpen == YES) {
-            [viewStatus_ setObject:key forKey:@(NO)];
+            [viewStatus_ setObject:notebook.stack forKey:@(NO)];
             [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         } else {
-            [viewStatus_ setObject:key forKey:@(YES)];
+            [viewStatus_ setObject:notebook.stack forKey:@(YES)];
             [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         }
-        
     } else {
-        ENoteBookDO *notebook = (ENoteBookDO *)value;
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
         allNotebookViewController.guid = notebook.guid;
@@ -229,8 +229,11 @@ static CGFloat kCellHeight = 49;
     NSInteger count = 0;
     
     if (notebook.stack) {
-        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-        count = subNotebooks.count;
+        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
+        if (isOpen) {
+            NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+            count = subNotebooks.count;
+        }
     }
     
     return count;
@@ -269,10 +272,13 @@ static CGFloat kCellHeight = 49;
     
     ENoteBookDO *notebook = mutNotebooks_[indexPath.section];
     if (notebook.stack) {
-        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-        ENoteBookDO *subNotebook = subNotebooks[indexPath.row];
-        [cell updateUIWithNotebook:subNotebook];
-        [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
+        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
+        if (isOpen) {
+            NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+            ENoteBookDO *subNotebook = subNotebooks[indexPath.row];
+            [cell updateUIWithNotebook:subNotebook];
+            [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
+        }
     }
     
     return cell;

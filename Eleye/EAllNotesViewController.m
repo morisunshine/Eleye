@@ -82,6 +82,8 @@ static NSInteger kCellHeight = 100;
     }
     
     [client findNotesWithFilter:filter offset:offset_ maxNotes:kMaxCount success:^(EDAMNoteList *list) {
+        NSArray *newNotes = [self newNotesFromNotes:list.notes];
+        
         [self.refreshControl endRefreshing];
         int32_t totalCount = [list.totalNotes intValue];
         int32_t startIndex = [list.startIndex intValue];
@@ -92,13 +94,22 @@ static NSInteger kCellHeight = 100;
         }
         
         if (loadingMore) {
-            notes_ = list.notes;
+            notes_ = newNotes;
         } else {
-            NSMutableArray *mutNote = [NSMutableArray arrayWithArray:notes_];
-            [mutNote addObjectsFromArray:list.notes];
+            NSMutableArray *mutNotes = [NSMutableArray arrayWithArray:notes_];
+            [mutNotes addObjectsFromArray:newNotes];
+            notes_ = mutNotes;
         }
         
-        [[ENoteDAO sharedENoteDAO] saveItems:list.notes];
+        for (ENoteDO *note in newNotes) {
+            [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:YES withResourcesAlternateData:YES success:^(EDAMNote *note) {
+                NSLog(@"%@", note.content);
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+        
+        [[ENoteDAO sharedENoteDAO] saveItems:newNotes];
         
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
@@ -106,6 +117,26 @@ static NSInteger kCellHeight = 100;
             NSLog(@"获取失败");
         }
     }];
+}
+
+- (NSArray *)newNotesFromNotes:(NSArray *)notes
+{
+    NSMutableArray *newNotes = [[NSMutableArray alloc] init];
+    for (EDAMNote *note in notes) {
+        ENoteDO *newNote = [[ENoteDO alloc] init];
+        newNote.title = note.title;
+        newNote.notebookGuid = note.notebookGuid;
+        newNote.content = note.content;
+        newNote.created = note.created;
+        newNote.updated = note.updated;
+        newNote.deleted = note.deleted;
+        newNote.active = note.active;
+        newNote.guid = note.guid;
+        
+        [newNotes addObject:newNote];
+    }
+    
+    return newNotes;
 }
 
 - (void)configureUI
