@@ -83,6 +83,7 @@ SINGLETON_CLASS(ENotebookDAO)
     notebook.name = [resultSet stringForColumn:@"name"];
     notebook.published = @([resultSet intForColumn:@"published"]);
     notebook.stack = [resultSet stringForColumn:@"stack"];
+    notebook.count = @([resultSet intForColumn:@"count"]);
     notebook.serviceCreated = @([resultSet intForColumn:@"serviceCreated"]);
     notebook.serviceUpdated = @([resultSet intForColumn:@"serviceUpdated"]);
     
