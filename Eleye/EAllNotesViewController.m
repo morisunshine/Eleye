@@ -101,14 +101,6 @@ static NSInteger kCellHeight = 100;
             notes_ = mutNotes;
         }
         
-        for (ENoteDO *note in newNotes) {
-            [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:YES withResourcesAlternateData:YES success:^(EDAMNote *note) {
-                NSLog(@"%@", note.content);
-            } failure:^(NSError *error) {
-                
-            }];
-        }
-        
         [[ENoteDAO sharedENoteDAO] saveItems:newNotes];
         
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
@@ -177,6 +169,14 @@ static NSInteger kCellHeight = 100;
     ENoteDO *note = notes_[indexPath.row];
     
     [cell updateUIWithNote:note];
+    
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:YES withResourcesAlternateData:YES success:^(EDAMNote *note) {
+        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
+        NSLog(@"%@", note.content);
+    } failure:^(NSError *error) {
+        
+    }];
     
     return cell;
 }
