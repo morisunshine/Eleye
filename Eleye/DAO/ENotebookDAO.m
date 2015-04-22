@@ -28,7 +28,7 @@ SINGLETON_CLASS(ENotebookDAO)
 
 - (BOOL)saveBaseDO:(NSObject *)baseDO fmdb:(FMDatabase *)db
 {
-    EDAMNotebook *notebook = (EDAMNotebook *)baseDO;
+    ENoteBookDO *notebook = (ENoteBookDO *)baseDO;
     
     BOOL result = NO;
     
@@ -37,14 +37,14 @@ SINGLETON_CLASS(ENotebookDAO)
     
     if ([resultSet next]) {
         NSString *updateSql = [NSString stringWithFormat:@"update %@ set name = ?, count = ?, published = ?, stack = ?, serviceCreated = ?, serviceUpdated = ? where guid = ?", [self tableName]];
-        result = [db executeUpdate:updateSql, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated, notebook.guid];
+        result = [db executeUpdate:updateSql, notebook.name, notebook.count, notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated, notebook.guid];
         
         if (!result) {
             NSLog(@"error update %@ error : %@", [self tableName], [db lastErrorMessage]);
         }
     } else {
         NSString *insertSql = [NSString stringWithFormat:@"insert into %@(guid, name, count, published, stack, serviceCreated, serviceUpdated) values(?,?,?,?,?,?,?)", [self tableName]];
-        result = [db executeUpdate:insertSql, notebook.guid, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated];
+        result = [db executeUpdate:insertSql, notebook.guid, notebook.name, notebook.count, notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated];
         if (!result) {
             NSLog(@"error insert %@ error : %@", [self tableName], [db lastErrorMessage]);
         }
@@ -64,7 +64,7 @@ SINGLETON_CLASS(ENotebookDAO)
         FMResultSet *resultSet = [db executeQuery:sql];
         
         while ([resultSet next]) {
-            EDAMNotebook *notebook = [self notebookFromResultSet:resultSet];
+            ENoteBookDO *notebook = [self notebookFromResultSet:resultSet];
             [mutNotebooks addObject:notebook];
         }
         
@@ -76,9 +76,9 @@ SINGLETON_CLASS(ENotebookDAO)
 
 #pragma mark - Private Methods -
 
-- (EDAMNotebook *)notebookFromResultSet:(FMResultSet *)resultSet
+- (ENoteBookDO *)notebookFromResultSet:(FMResultSet *)resultSet
 {
-    EDAMNotebook *notebook = [[EDAMNotebook alloc] init];
+    ENoteBookDO *notebook = [[ENoteBookDO alloc] init];
     notebook.guid = [resultSet stringForColumn:@"guid"];
     notebook.name = [resultSet stringForColumn:@"name"];
     notebook.published = @([resultSet intForColumn:@"published"]);

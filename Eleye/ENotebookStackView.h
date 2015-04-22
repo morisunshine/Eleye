@@ -12,7 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *stackNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *viewBtn;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @property (nonatomic, copy) void (^btnHandler)(NSInteger index);
+
+- (void)updateUIWithNotebook:(ENoteBookDO *)notebook;
 
 @end

@@ -14,4 +14,6 @@
     #import <ENSDKAdvanced.h>
     #import"COMMONCONSTANT.h"
     #import "EUtility.h"
+    #import "ENoteDO.h"
+    #import "ENoteBookDO.h"
 #endif

@@ -8,6 +8,7 @@
 
 #import "EAllNoteBooksViewController.h"
 #import "ENotebookStackView.h"
+#import "ENotebookCell.h"
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
 
@@ -15,6 +16,9 @@ static CGFloat kCellHeight = 49;
 
 @interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
+    NSMutableDictionary *stackDics_;
+    NSMutableArray *mutNotebooks_;
+    NSMutableDictionary *notebookCounts_;
     NSMutableDictionary *notebooks_;
     NSMutableDictionary *viewStatus_;
     UIAlertView *alertView_;
@@ -36,7 +40,7 @@ static CGFloat kCellHeight = 49;
     
     [super viewDidLoad];
 
-    [self listNotebooks];
+    [self getNotebookCounts];
     [self configureUI];
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
@@ -76,20 +80,56 @@ static CGFloat kCellHeight = 49;
 {
     [self.refreshControl endRefreshing];
     
-    //先获取数据库中的数据
-    [self getNotebooksFromDB];
-    
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
-        
-        [[ENotebookDAO sharedENotebookDAO] saveItems:notebooks];
-        [self doneloadWithNotebooks:notebooks];
+        NSArray *newNotebooks = [self newNotebooksFromNotebooks:notebooks];
+        [[ENotebookDAO sharedENotebookDAO] saveItems:newNotebooks];
+        [self doneloadWithNotebooks:newNotebooks];
         
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记本数据错误:%@", error);
         }
     }];
+}
+
+- (void)getNotebookCounts
+{
+    //先获取数据库中的数据
+    [self getNotebooksFromDB];
+    
+    EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
+    filter.notebookGuid = nil;//获取所有笔记本的数量
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client findNoteCountsWithFilter:filter withTrash:NO success:^(EDAMNoteCollectionCounts *counts) {
+        notebookCounts_ = [NSMutableDictionary dictionaryWithDictionary:counts.notebookCounts];
+        [self listNotebooks];
+    } failure:^(NSError *error) {
+        [self listNotebooks];
+        if (error) {
+            NSLog(@"获取数量失败");
+        }
+    }];
+}
+
+- (NSMutableArray *)newNotebooksFromNotebooks:(NSArray *)notebooks
+{
+    NSMutableArray *newNotebooks = [[NSMutableArray alloc] init];
+    
+    for (EDAMNotebook *notebook in notebooks) {
+        ENoteBookDO *newnotebook = [[ENoteBookDO alloc] init];
+        newnotebook.guid = notebook.guid;
+        newnotebook.name = notebook.name;
+        newnotebook.published = notebook.published;
+        newnotebook.stack = notebook.stack;
+        newnotebook.serviceCreated = notebook.serviceCreated;
+        newnotebook.serviceUpdated = notebook.serviceUpdated;
+        newnotebook.count = [notebookCounts_ objectForKey:notebook.guid];
+        
+        [newNotebooks addObject:newnotebook];
+    }
+    
+    return newNotebooks;
 }
 
 - (void)getNotebooksFromDB
@@ -100,27 +140,45 @@ static CGFloat kCellHeight = 49;
 
 - (void)doneloadWithNotebooks:(NSArray *)notebooks
 {
+    mutNotebooks_ = [[NSMutableArray alloc] init];
     notebooks_ = [[NSMutableDictionary alloc] init];
     viewStatus_ = [[NSMutableDictionary alloc] init];
+    stackDics_ = [[NSMutableDictionary alloc] init];
     
-    EDAMNotebook *allnoteBook = [[EDAMNotebook alloc] init];
+    ENoteBookDO *allnoteBook = [[ENoteBookDO alloc] init];
     allnoteBook.guid = nil;
     allnoteBook.name = @"All notes";
-    [notebooks_ setObject:allnoteBook forKey:allnoteBook.name];
+    NSInteger totalCount = 0;
+    for (NSNumber *count in notebookCounts_.allValues) {
+        totalCount += [count integerValue];
+    }
+    allnoteBook.count = @(totalCount);
+    [mutNotebooks_ addObject:allnoteBook];
     
-    for (EDAMNotebook *notebook in notebooks) {
+    for (ENoteBookDO *notebook in notebooks) {
+        NSNumber *count = [notebookCounts_ objectForKey:notebook.guid];
+        notebook.count = count;
         if (notebook.stack == nil) {
-            [notebooks_ setObject:notebook forKey:notebook.name];
+            [mutNotebooks_ addObject:notebook];
         } else {
-            [viewStatus_ setObject:@(YES) forKey:notebook.stack];
             NSMutableArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-            if (subNotebooks) {
-                [subNotebooks addObject:notebook];
-            } else {
+            ENoteBookDO *stackNotebook;
+            if (!subNotebooks) {
                 subNotebooks = [[NSMutableArray alloc] init];
-                [subNotebooks addObject:notebook];
-                [notebooks_ setObject:subNotebooks forKey:notebook.stack];
+                stackNotebook = [[ENoteBookDO alloc] init];
+                stackNotebook.name = notebook.stack;
+                stackNotebook.stack = notebook.stack;
+                stackNotebook.count = count;
+                [stackDics_ setObject:stackNotebook forKey:notebook.stack];
+                [mutNotebooks_ addObject:stackNotebook];
+            } else {
+                stackNotebook = [stackDics_ objectForKey:notebook.stack];
+                NSInteger totalCount = [stackNotebook.count integerValue] + [count integerValue];
+                stackNotebook.count = @(totalCount);
             }
+            
+            [subNotebooks addObject:notebook];
+            [notebooks_ setObject:subNotebooks forKey:notebook.stack];
         }
     }
     
@@ -148,7 +206,7 @@ static CGFloat kCellHeight = 49;
         }
         
     } else {
-        EDAMNotebook *notebook = (EDAMNotebook *)value;
+        ENoteBookDO *notebook = (ENoteBookDO *)value;
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
         allNotebookViewController.guid = notebook.guid;
@@ -161,22 +219,18 @@ static CGFloat kCellHeight = 49;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return notebooks_.allKeys.count;
+    return mutNotebooks_.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *key = notebooks_.allKeys[section];
+    ENoteBookDO *notebook = mutNotebooks_[section];
+    
     NSInteger count = 0;
-    id value = [notebooks_ objectForKey:key];
-    if ([value isKindOfClass:[NSArray class]]) {
-        BOOL isOpen = [[viewStatus_ objectForKey:key] boolValue];
-        if (isOpen == YES) {
-            NSArray *subNotebooks = [notebooks_ objectForKey:key];
-            count = subNotebooks.count;
-        } else {
-            count = 0;
-        }
+    
+    if (notebook.stack) {
+        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+        count = subNotebooks.count;
     }
     
     return count;
@@ -194,8 +248,11 @@ static CGFloat kCellHeight = 49;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    ENoteBookDO *notebook = mutNotebooks_[section];
+    
     ENotebookStackView *stackView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][0];
-    stackView.stackNameLabel.text = notebooks_.allKeys[section];
+    
+    [stackView updateUIWithNotebook:notebook];
     stackView.viewBtn.tag = 100 + section;
     stackView.btnHandler = ^(NSInteger index) {
         [self handleViewWithIndex:index];
@@ -208,15 +265,15 @@ static CGFloat kCellHeight = 49;
 {
     static NSString *CellIdentifier = @"notebookCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ENotebookCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:100];
-    
-    NSString *key = notebooks_.allKeys[indexPath.section];
-    NSArray *subNotebook = [notebooks_ objectForKey:key];
-    EDAMNotebook *notebook = subNotebook[indexPath.row];
-    titleLabel.text = notebook.name;
-    [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
+    ENoteBookDO *notebook = mutNotebooks_[indexPath.section];
+    if (notebook.stack) {
+        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+        ENoteBookDO *subNotebook = subNotebooks[indexPath.row];
+        [cell updateUIWithNotebook:subNotebook];
+        [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
+    }
     
     return cell;
 }
@@ -227,14 +284,16 @@ static CGFloat kCellHeight = 49;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *key = notebooks_.allKeys[indexPath.section];
-    NSArray *subNotebook = [notebooks_ objectForKey:key];
-    EDAMNotebook *notebook = subNotebook[indexPath.row];
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
-    allNotebookViewController.guid = notebook.guid;
-    allNotebookViewController.notebookName = notebook.name;
-    [self.navigationController pushViewController:allNotebookViewController animated:YES];
+    ENoteBookDO *notebook = mutNotebooks_[indexPath.section];
+    if (notebook.stack) {
+        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+        ENoteBookDO *subNotebook = subNotebooks[indexPath.row];
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
+        allNotebookViewController.guid = subNotebook.guid;
+        allNotebookViewController.notebookName = subNotebook.name;
+        [self.navigationController pushViewController:allNotebookViewController animated:YES];
+    }
 }
 
 #pragma mark - Actions -

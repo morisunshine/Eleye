@@ -19,6 +19,9 @@
 		08751F281AE67D0400FE17B1 /* ENotebookStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F271AE67D0400FE17B1 /* ENotebookStackView.m */; };
 		08751F2A1AE67D1100FE17B1 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08751F291AE67D1100FE17B1 /* View.xib */; };
 		08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F2C1AE68D7900FE17B1 /* ENoteCell.m */; };
+		08751F301AE7CBAC00FE17B1 /* ENoteDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F2F1AE7CBAC00FE17B1 /* ENoteDO.m */; };
+		08751F331AE7CBD300FE17B1 /* ENoteBookDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F321AE7CBD300FE17B1 /* ENoteBookDO.m */; };
+		08751F361AE7CEE600FE17B1 /* ENotebookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F351AE7CEE600FE17B1 /* ENotebookCell.m */; };
 		18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */; };
 		18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D601AE78E3500BEC3B5 /* EUtility.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
@@ -63,6 +66,12 @@
 		08751F291AE67D1100FE17B1 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		08751F2B1AE68D7900FE17B1 /* ENoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteCell.h; sourceTree = "<group>"; };
 		08751F2C1AE68D7900FE17B1 /* ENoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteCell.m; sourceTree = "<group>"; };
+		08751F2E1AE7CBAC00FE17B1 /* ENoteDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ENoteDO.h; path = Eleye/ENoteDO.h; sourceTree = SOURCE_ROOT; };
+		08751F2F1AE7CBAC00FE17B1 /* ENoteDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ENoteDO.m; path = Eleye/ENoteDO.m; sourceTree = SOURCE_ROOT; };
+		08751F311AE7CBD300FE17B1 /* ENoteBookDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ENoteBookDO.h; path = Eleye/ENoteBookDO.h; sourceTree = SOURCE_ROOT; };
+		08751F321AE7CBD300FE17B1 /* ENoteBookDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ENoteBookDO.m; path = Eleye/ENoteBookDO.m; sourceTree = SOURCE_ROOT; };
+		08751F341AE7CEE600FE17B1 /* ENotebookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENotebookCell.h; sourceTree = "<group>"; };
+		08751F351AE7CEE600FE17B1 /* ENotebookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENotebookCell.m; sourceTree = "<group>"; };
 		18688D5C1AE787A300BEC3B5 /* ENoteContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteContentViewController.h; sourceTree = "<group>"; };
 		18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteContentViewController.m; sourceTree = "<group>"; };
 		18688D5F1AE78E3500BEC3B5 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
@@ -146,6 +155,8 @@
 				18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */,
 				18688D5F1AE78E3500BEC3B5 /* EUtility.h */,
 				18688D601AE78E3500BEC3B5 /* EUtility.m */,
+				08751F341AE7CEE600FE17B1 /* ENotebookCell.h */,
+				08751F351AE7CEE600FE17B1 /* ENotebookCell.m */,
 			);
 			path = Eleye;
 			sourceTree = "<group>";
@@ -195,6 +206,10 @@
 		18FF6F151AE79B01000425E4 /* DO */ = {
 			isa = PBXGroup;
 			children = (
+				08751F2E1AE7CBAC00FE17B1 /* ENoteDO.h */,
+				08751F2F1AE7CBAC00FE17B1 /* ENoteDO.m */,
+				08751F311AE7CBD300FE17B1 /* ENoteBookDO.h */,
+				08751F321AE7CBD300FE17B1 /* ENoteBookDO.m */,
 			);
 			path = DO;
 			sourceTree = "<group>";
@@ -354,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08751F361AE7CEE600FE17B1 /* ENotebookCell.m in Sources */,
 				08751F251AE53CA900FE17B1 /* EAllNoteBooksViewController.m in Sources */,
 				085FA9A31AE13A0700EFD2F0 /* ELaunchViewController.m in Sources */,
 				18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */,
@@ -361,11 +377,13 @@
 				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
 				18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */,
+				08751F331AE7CBD300FE17B1 /* ENoteBookDO.m in Sources */,
 				18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */,
 				18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */,
 				08751F1F1AE537FA00FE17B1 /* EAllNotesViewController.m in Sources */,
 				18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
+				08751F301AE7CBAC00FE17B1 /* ENoteDO.m in Sources */,
 				08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

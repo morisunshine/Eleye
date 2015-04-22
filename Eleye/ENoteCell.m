@@ -21,7 +21,7 @@
     // Configure the view for the selected state
 }
 
-- (void)updateUIWithNote:(EDAMNote *)note
+- (void)updateUIWithNote:(ENoteDO *)note
 {
     self.titleLabel.text = note.title;
     self.contentLabel.text = note.content;

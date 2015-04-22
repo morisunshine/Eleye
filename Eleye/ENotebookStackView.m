@@ -17,11 +17,18 @@
     [EUtility addlineOnView:self position:EViewPositionBottom insert:17];
 }
 
+- (void)updateUIWithNotebook:(ENoteBookDO *)notebook
+{
+    self.stackNameLabel.text = notebook.name;
+    if (notebook.count) {
+        self.countLabel.text = [NSString stringWithFormat:@"%@ notes", notebook.count];
+    }
+}
+
 - (IBAction)viewBtnTapped:(UIButton *)sender {
     if (self.btnHandler) {
         self.btnHandler(sender.tag - 100);
     }
 }
-
 
 @end

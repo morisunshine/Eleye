@@ -143,7 +143,7 @@ static NSInteger kCellHeight = 100;
     static NSString *kCellIdentifier = @"noteCell";
     ENoteCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
-    EDAMNote *note = notes_[indexPath.row];
+    ENoteDO *note = notes_[indexPath.row];
     
     [cell updateUIWithNote:note];
     

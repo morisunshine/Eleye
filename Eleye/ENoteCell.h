@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class EDAMNote;
-
 @interface ENoteCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
-- (void)updateUIWithNote:(EDAMNote *)note;
+- (void)updateUIWithNote:(ENoteDO *)note;
 
 @end
