@@ -9,7 +9,7 @@
 #import "EAllNoteBooksViewController.h"
 #import "ENotebookStackView.h"
 #import "EAllNotesViewController.h"
-#import <ENSDKAdvanced.h>
+#import "ENotebookDAO.h"
 
 static CGFloat kCellHeight = 49;
 
@@ -67,49 +67,64 @@ static CGFloat kCellHeight = 49;
     
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     [EUtility addlineOnView:self.footerView position:EViewPositionTop];
-    [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
     [self.tableView addSubview:self.refreshControl];
+    [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
 }
 
 - (void)listNotebooks
 {
     [self.refreshControl endRefreshing];
     
+    //先获取数据库中的数据
+    [self getNotebooksFromDB];
+    
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
         
-        notebooks_ = [[NSMutableDictionary alloc] init];
-        viewStatus_ = [[NSMutableDictionary alloc] init];
+        [[ENotebookDAO sharedENotebookDAO] saveItems:notebooks];
+        [self doneloadWithNotebooks:notebooks];
         
-        EDAMNotebook *allnoteBook = [[EDAMNotebook alloc] init];
-        allnoteBook.guid = nil;
-        allnoteBook.name = @"All notes";
-        [notebooks_ setObject:allnoteBook forKey:allnoteBook.name];
-        
-        for (EDAMNotebook *notebook in notebooks) {
-            if (notebook.stack == nil) {
-                [notebooks_ setObject:notebook forKey:notebook.name];
-            } else {
-                [viewStatus_ setObject:@(YES) forKey:notebook.stack];
-                NSMutableArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-                if (subNotebooks) {
-                    [subNotebooks addObject:notebook];
-                } else {
-                    subNotebooks = [[NSMutableArray alloc] init];
-                    [subNotebooks addObject:notebook];
-                    [notebooks_ setObject:subNotebooks forKey:notebook.stack];
-                }
-            }
-        }
-        
-        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记本数据错误:%@", error);
         }
     }];
+}
+
+- (void)getNotebooksFromDB
+{
+    NSArray *notebooks = [[ENotebookDAO sharedENotebookDAO] notebooks];
+    [self doneloadWithNotebooks:notebooks];
+}
+
+- (void)doneloadWithNotebooks:(NSArray *)notebooks
+{
+    notebooks_ = [[NSMutableDictionary alloc] init];
+    viewStatus_ = [[NSMutableDictionary alloc] init];
+    
+    EDAMNotebook *allnoteBook = [[EDAMNotebook alloc] init];
+    allnoteBook.guid = nil;
+    allnoteBook.name = @"All notes";
+    [notebooks_ setObject:allnoteBook forKey:allnoteBook.name];
+    
+    for (EDAMNotebook *notebook in notebooks) {
+        if (notebook.stack == nil) {
+            [notebooks_ setObject:notebook forKey:notebook.name];
+        } else {
+            [viewStatus_ setObject:@(YES) forKey:notebook.stack];
+            NSMutableArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+            if (subNotebooks) {
+                [subNotebooks addObject:notebook];
+            } else {
+                subNotebooks = [[NSMutableArray alloc] init];
+                [subNotebooks addObject:notebook];
+                [notebooks_ setObject:subNotebooks forKey:notebook.stack];
+            }
+        }
+    }
+    
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 - (void)handleViewWithIndex:(NSInteger)section

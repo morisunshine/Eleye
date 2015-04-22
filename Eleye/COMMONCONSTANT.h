@@ -126,6 +126,19 @@
 #define APP_BUNDLEID [[NSBundle mainBundle] bundleIdentifier]
 #define APP_UNIQUEID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 
+//singleton
+#define SINGLETON_CLASS(classname) \
+\
++ (classname *)shared##classname \
+{\
+static dispatch_once_t pred = 0; \
+__strong static id _shared##classname = nil; \
+dispatch_once(&pred,^{ \
+_shared##classname = [[self alloc] init]; \
+});  \
+return _shared##classname; \
+}
+
 
 #pragma mark - app信息
 

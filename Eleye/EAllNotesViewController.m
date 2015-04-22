@@ -7,7 +7,6 @@
 //
 
 #import "EAllNotesViewController.h"
-#import <ENSDKAdvanced.h>
 #import "ENoteCell.h"
 
 @interface EAllNotesViewController () <UITableViewDataSource, UITableViewDelegate>

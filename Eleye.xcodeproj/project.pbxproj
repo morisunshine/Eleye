@@ -21,6 +21,10 @@
 		08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F2C1AE68D7900FE17B1 /* ENoteCell.m */; };
 		18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */; };
 		18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D601AE78E3500BEC3B5 /* EUtility.m */; };
+		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
+		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
+		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
+		18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F201AE79DA6000425E4 /* ENoteDAO.m */; };
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +67,14 @@
 		18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteContentViewController.m; sourceTree = "<group>"; };
 		18688D5F1AE78E3500BEC3B5 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
 		18688D601AE78E3500BEC3B5 /* EUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUtility.m; sourceTree = "<group>"; };
+		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
+		18FF6F171AE79B3E000425E4 /* EDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDBManager.m; sourceTree = "<group>"; };
+		18FF6F191AE79C3C000425E4 /* EBaseDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBaseDAO.h; sourceTree = "<group>"; };
+		18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBaseDAO.m; sourceTree = "<group>"; };
+		18FF6F1C1AE79D8B000425E4 /* ENotebookDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENotebookDAO.h; sourceTree = "<group>"; };
+		18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENotebookDAO.m; sourceTree = "<group>"; };
+		18FF6F1F1AE79DA6000425E4 /* ENoteDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDAO.h; sourceTree = "<group>"; };
+		18FF6F201AE79DA6000425E4 /* ENoteDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDAO.m; sourceTree = "<group>"; };
 		1975340930B8A6096BFC00AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0654875527BCBA8D47BF71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9F08A71444B99F1BC78B5E4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +122,8 @@
 		085FA9991AE13A0700EFD2F0 /* Eleye */ = {
 			isa = PBXGroup;
 			children = (
+				18FF6F141AE79B01000425E4 /* DAO */,
+				18FF6F151AE79B01000425E4 /* DO */,
 				08751F211AE5386900FE17B1 /* Main.storyboard */,
 				08751F141AE5250600FE17B1 /* COMMONCONSTANT.h */,
 				085FA99E1AE13A0700EFD2F0 /* AppDelegate.h */,
@@ -161,6 +175,28 @@
 				085FA9B51AE13A0700EFD2F0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18FF6F141AE79B01000425E4 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				18FF6F161AE79B3E000425E4 /* EDBManager.h */,
+				18FF6F171AE79B3E000425E4 /* EDBManager.m */,
+				18FF6F191AE79C3C000425E4 /* EBaseDAO.h */,
+				18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */,
+				18FF6F1C1AE79D8B000425E4 /* ENotebookDAO.h */,
+				18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */,
+				18FF6F1F1AE79DA6000425E4 /* ENoteDAO.h */,
+				18FF6F201AE79DA6000425E4 /* ENoteDAO.m */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		18FF6F151AE79B01000425E4 /* DO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DO;
 			sourceTree = "<group>";
 		};
 		B43AFE1829EB35E9156CDC20 /* Frameworks */ = {
@@ -320,11 +356,15 @@
 			files = (
 				08751F251AE53CA900FE17B1 /* EAllNoteBooksViewController.m in Sources */,
 				085FA9A31AE13A0700EFD2F0 /* ELaunchViewController.m in Sources */,
+				18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */,
 				08751F281AE67D0400FE17B1 /* ENotebookStackView.m in Sources */,
+				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
 				18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */,
 				18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */,
+				18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */,
 				08751F1F1AE537FA00FE17B1 /* EAllNotesViewController.m in Sources */,
+				18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
 				08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */,
 			);

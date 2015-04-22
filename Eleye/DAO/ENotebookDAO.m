@@ -1,0 +1,92 @@
+//
+//  ENotebookDAO.m
+//  Eleye
+//
+//  Created by sheldon on 15/4/22.
+//  Copyright (c) 2015年 wheelab. All rights reserved.
+//
+
+#import "ENotebookDAO.h"
+
+@implementation ENotebookDAO
+
+SINGLETON_CLASS(ENotebookDAO)
+
+#pragma mark - Rewrite -
+
+- (NSString *)tableName
+{
+    return @"table_notebook";
+}
+
+- (NSString *)createSqlString
+{
+    NSString *sql = [NSString stringWithFormat:@"create table if not exists %@(_id INTEGER PRIMARY KEY AUTOINCREMENT, guid VARCHAR(200), name VARCHAR(200), count INTEGER, published INTEGER, stack VARCHAR(200), serviceCreated INTEGER, serviceUpdated INTEGER)", [self tableName]];
+    
+    return sql;
+}
+
+- (BOOL)saveBaseDO:(NSObject *)baseDO fmdb:(FMDatabase *)db
+{
+    EDAMNotebook *notebook = (EDAMNotebook *)baseDO;
+    
+    BOOL result = NO;
+    
+    NSString *selectSql = [NSString stringWithFormat:@"select * from %@ where guid = ?", [self tableName]];
+    FMResultSet *resultSet = [db executeQuery:selectSql, notebook.guid];
+    
+    if ([resultSet next]) {
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set name = ?, count = ?, published = ?, stack = ?, serviceCreated = ?, serviceUpdated = ?", [self tableName]];
+        result = [db executeUpdate:updateSql, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated];
+        
+        if (!result) {
+            NSLog(@"error update %@ error : %@", [self tableName], [db lastErrorMessage]);
+        }
+    } else {
+        NSString *insertSql = [NSString stringWithFormat:@"insert into %@(guid, name, count, published, stack, serviceCreated, serviceUpdated) values(?,?,?,?,?,?,?)", [self tableName]];
+        result = [db executeUpdate:insertSql, notebook.guid, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated];
+        if (!result) {
+            NSLog(@"error insert %@ error : %@", [self tableName], [db lastErrorMessage]);
+        }
+    }
+    
+    return result;
+}
+
+#pragma mark - Public Methods -
+
+- (NSArray *)notebooks
+{
+    NSString *sql = [NSString stringWithFormat:@"select * from %@", [self tableName]];
+    
+    __block NSMutableArray *mutNotebooks = [[NSMutableArray alloc] init];
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next]) {
+            EDAMNotebook *notebook = [self notebookFromResultSet:resultSet];
+            [mutNotebooks addObject:notebook];
+        }
+        
+        [resultSet close];
+    }];
+    
+    return mutNotebooks;
+}
+
+#pragma mark - Private Methods -
+
+- (EDAMNotebook *)notebookFromResultSet:(FMResultSet *)resultSet
+{
+    EDAMNotebook *notebook = [[EDAMNotebook alloc] init];
+    notebook.guid = [resultSet stringForColumn:@"guid"];
+    notebook.name = [resultSet stringForColumn:@"name"];
+    notebook.published = @([resultSet intForColumn:@"published"]);
+    notebook.stack = [resultSet stringForColumn:@"stack"];
+    notebook.serviceCreated = @([resultSet intForColumn:@"serviceCreated"]);
+    notebook.serviceUpdated = @([resultSet intForColumn:@"serviceUpdated"]);
+    
+    return notebook;
+}
+
+@end
