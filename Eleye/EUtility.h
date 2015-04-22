@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 @interface EUtility : NSObject
 
++ (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert;
+
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation EUtility
 
-+ (void)addlineOnView:(UIView *)view position:(EViewPosition)position
++ (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert
 {
     CALayer *lineLayer = [CALayer layer];
     lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
@@ -18,7 +18,7 @@
     
     switch (position) {
         case EViewPositionTop: {
-            lineLayer.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 1);
+            lineLayer.frame = CGRectMake(insert, 0, CGRectGetWidth(view.frame) - insert * 2, 1);
             break;
         } 
         case EViewPositionLeft: {
@@ -30,12 +30,17 @@
             break;
         }
         case EViewPositionBottom: {
-            lineLayer.frame = CGRectMake(0, CGRectGetHeight(view.frame) - 1, CGRectGetWidth(view.frame), 1);
+            lineLayer.frame = CGRectMake(insert, CGRectGetHeight(view.frame) - 1, CGRectGetWidth(view.frame) - insert * 2, 1);
             break;
         }
     }
     
     [view.layer addSublayer:lineLayer];
+}
+
++ (void)addlineOnView:(UIView *)view position:(EViewPosition)position
+{
+    [[self class] addlineOnView:view position:position insert:0];
 }
 
 @end

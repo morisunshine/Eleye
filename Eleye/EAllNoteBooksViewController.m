@@ -35,12 +35,7 @@ static CGFloat kCellHeight = 49;
     [super viewDidLoad];
 
     [self listNotebooks];
-
-    NSString *title = [NSString stringWithFormat:@"%@ 问题反馈", APP_VERSION];
-    
-    [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
-    [self.tableView addSubview:self.refreshControl];
-    
+    [self configureUI];
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
@@ -63,6 +58,17 @@ static CGFloat kCellHeight = 49;
 }
 
 #pragma mark - Private Methods -
+
+- (void)configureUI
+{
+    NSString *title = [NSString stringWithFormat:@"V%@ 问题反馈", APP_VERSION];
+    
+    [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
+    [self.tableView addSubview:self.refreshControl];
+    [EUtility addlineOnView:self.tableView position:EViewPositionTop];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+}
 
 - (void)listNotebooks
 {
@@ -101,6 +107,36 @@ static CGFloat kCellHeight = 49;
             NSLog(@"获取笔记本数据错误:%@", error);
         }
     }];
+}
+
+- (void)handleViewWithIndex:(NSInteger)section
+{
+    NSString *key = notebooks_.allKeys[section];
+    id value = [notebooks_ objectForKey:key];
+    if ([value isKindOfClass:[NSArray class]]) {
+        BOOL isOpen = [[viewStatus_ objectForKey:key] boolValue];
+        NSArray *subNotebooks = [notebooks_ objectForKey:key];
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0;i < subNotebooks.count; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
+            [indexPaths addObject:indexPath];
+        }
+        if (isOpen == YES) {
+            [viewStatus_ setObject:key forKey:@(NO)];
+            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            [viewStatus_ setObject:key forKey:@(YES)];
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+    } else {
+        EDAMNotebook *notebook = (EDAMNotebook *)value;
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
+        allNotebookViewController.guid = notebook.guid;
+        allNotebookViewController.notebookName = notebook.name;
+        [self.navigationController pushViewController:allNotebookViewController animated:YES];
+    }
 }
 
 #pragma mark - TableView Datasource -
@@ -142,9 +178,10 @@ static CGFloat kCellHeight = 49;
 {
     ENotebookStackView *stackView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][0];
     stackView.stackNameLabel.text = notebooks_.allKeys[section];
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGR:)];
-    stackView.tag = section + 100;
-    [stackView addGestureRecognizer:tapGR];
+    stackView.viewBtn.tag = 100 + section;
+    stackView.btnHandler = ^(NSInteger index) {
+        [self handleViewWithIndex:index];
+    };
     
     return stackView;
 }
@@ -161,6 +198,7 @@ static CGFloat kCellHeight = 49;
     NSArray *subNotebook = [notebooks_ objectForKey:key];
     EDAMNotebook *notebook = subNotebook[indexPath.row];
     titleLabel.text = notebook.name;
+    [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
     
     return cell;
 }
@@ -169,6 +207,8 @@ static CGFloat kCellHeight = 49;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     NSString *key = notebooks_.allKeys[indexPath.section];
     NSArray *subNotebook = [notebooks_ objectForKey:key];
     EDAMNotebook *notebook = subNotebook[indexPath.row];
@@ -180,38 +220,6 @@ static CGFloat kCellHeight = 49;
 }
 
 #pragma mark - Actions -
-
-- (IBAction)tapGR:(UITapGestureRecognizer *)sender
-{
-    NSInteger section = sender.view.tag - 100;
-    NSString *key = notebooks_.allKeys[section];
-    id value = [notebooks_ objectForKey:key];
-    if ([value isKindOfClass:[NSArray class]]) {
-        BOOL isOpen = [[viewStatus_ objectForKey:key] boolValue];
-        NSArray *subNotebooks = [notebooks_ objectForKey:key];
-        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0;i < subNotebooks.count; i++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-            [indexPaths addObject:indexPath];
-        }
-        if (isOpen == YES) {
-            [viewStatus_ setObject:key forKey:@(NO)];
-            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        } else {
-            [viewStatus_ setObject:key forKey:@(YES)];
-            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        }
-        
-    } else {
-        EDAMNotebook *notebook = (EDAMNotebook *)value;
-        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
-        allNotebookViewController.guid = notebook.guid;
-        allNotebookViewController.notebookName = notebook.name;
-        [self.navigationController pushViewController:allNotebookViewController animated:YES];
-    }
-    
-}
 
 - (IBAction)logoutBtnTapped:(id)sender {
     alertView_ = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Logout", nil];

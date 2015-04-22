@@ -11,5 +11,8 @@
 @interface ENotebookStackView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *stackNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *viewBtn;
+
+@property (nonatomic, copy) void (^btnHandler)(NSInteger index);
 
 @end

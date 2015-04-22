@@ -10,12 +10,18 @@
 
 @implementation ENotebookStackView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [EUtility addlineOnView:self position:EViewPositionBottom insert:17];
 }
-*/
+
+- (IBAction)viewBtnTapped:(UIButton *)sender {
+    if (self.btnHandler) {
+        self.btnHandler(sender.tag - 100);
+    }
+}
+
 
 @end
