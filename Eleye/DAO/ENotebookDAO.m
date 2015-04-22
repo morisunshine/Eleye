@@ -36,8 +36,8 @@ SINGLETON_CLASS(ENotebookDAO)
     FMResultSet *resultSet = [db executeQuery:selectSql, notebook.guid];
     
     if ([resultSet next]) {
-        NSString *updateSql = [NSString stringWithFormat:@"update %@ set name = ?, count = ?, published = ?, stack = ?, serviceCreated = ?, serviceUpdated = ?", [self tableName]];
-        result = [db executeUpdate:updateSql, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated];
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set name = ?, count = ?, published = ?, stack = ?, serviceCreated = ?, serviceUpdated = ? where guid = ?", [self tableName]];
+        result = [db executeUpdate:updateSql, notebook.name, @(10), notebook.publishing, notebook.stack, notebook.serviceCreated, notebook.serviceUpdated, notebook.guid];
         
         if (!result) {
             NSLog(@"error update %@ error : %@", [self tableName], [db lastErrorMessage]);

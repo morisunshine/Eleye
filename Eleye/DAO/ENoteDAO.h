@@ -10,4 +10,8 @@
 
 @interface ENoteDAO : EBaseDAO
 
++ (instancetype)sharedENoteDAO;
+
+- (NSArray *)notesWithNotebookGuid:(NSString *)notebookGuid;
+
 @end

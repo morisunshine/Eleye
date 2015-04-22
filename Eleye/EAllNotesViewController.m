@@ -9,8 +9,10 @@
 #import "EAllNotesViewController.h"
 #import "ENoteCell.h"
 #import <SVPullToRefresh.h>
+#import "ENoteDAO.h"
 
 static int32_t kMaxCount = 20;
+static NSInteger kCellHeight = 100;
 
 @interface EAllNotesViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -38,8 +40,9 @@ static int32_t kMaxCount = 20;
         [weakSelf listNotesLoadingMore:YES];
     }];
     
-    [self listNotesLoadingMore:NO];
+    notes_ = [[ENoteDAO sharedENoteDAO] notesWithNotebookGuid:self.guid];
     
+    [self listNotesLoadingMore:NO];
     [self configureUI];
 
     // Do any additional setup after loading the view from its nib.
@@ -87,7 +90,16 @@ static int32_t kMaxCount = 20;
         } else {
             self.tableView.showsInfiniteScrolling = NO;
         }
-        notes_ = list.notes;
+        
+        if (loadingMore) {
+            notes_ = list.notes;
+        } else {
+            NSMutableArray *mutNote = [NSMutableArray arrayWithArray:notes_];
+            [mutNote addObjectsFromArray:list.notes];
+        }
+        
+        [[ENoteDAO sharedENoteDAO] saveItems:list.notes];
+        
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
         if (error) {
@@ -123,7 +135,7 @@ static int32_t kMaxCount = 20;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return kCellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
