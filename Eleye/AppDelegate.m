@@ -21,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
     NSString *SANDBOX_HOST = ENSessionHostSandbox;
     
     NSString *CONSUMER_KEY = @"yousurm-4843";
@@ -29,7 +30,6 @@
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
