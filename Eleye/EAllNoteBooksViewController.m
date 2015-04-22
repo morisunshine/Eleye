@@ -23,6 +23,7 @@ static CGFloat kCellHeight = 49;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *usernameBtn;
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+@property (weak, nonatomic) IBOutlet UIButton *feedbackBtn;
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 @end
@@ -34,7 +35,10 @@ static CGFloat kCellHeight = 49;
     [super viewDidLoad];
 
     [self listNotebooks];
+
+    NSString *title = [NSString stringWithFormat:@"%@ 问题反馈", APP_VERSION];
     
+    [self.feedbackBtn setTitle:title forState:UIControlStateNormal];
     [self.tableView addSubview:self.refreshControl];
     
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
@@ -217,6 +221,11 @@ static CGFloat kCellHeight = 49;
 - (IBAction)refreshControlChanged:(UIRefreshControl *)sender
 {
     [self listNotebooks];
+}
+
+- (IBAction)feedbackBtnTapped:(id)sender 
+{
+    
 }
 
 #pragma mark - UIAlertView Delegate -

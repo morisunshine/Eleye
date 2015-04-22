@@ -19,24 +19,6 @@
 #endif
 #endif
 
-#pragma mark - appID
-//应用的92社区ID,需要根据实际情况修改
-#define APPID           @"111"
-
-#pragma mark - appstore appid
-//appstore的应用ID，在建立了应用之后加入
-#define APPSTORE_APPID                     @"627359591"
-
-#pragma mark - URL和接口
-//URL
-#define URL_BASE_ONLINE                     @"http://new.gezbox.com"
-#define URL_BASE_DEV                        @"http://new.gezbox.com"
-#define URL_UPLOAD                          @""
-#define URL_CRASH_REPORT                    @"crash_reports"
-#define URL_THIRD_PARTY_REDIRECT            @"http://gezbox.com/public/oauth_hub.html"
-#define PATH_TAOBAO                         @"/router/rest"
-
-
 #pragma mark - Color 颜色
 //Color
 #define COLOR_CLEAR                         [UIColor clearColor];
@@ -138,14 +120,14 @@
 #define APP_SCREEN_HEIGHT                   [UIScreen mainScreen].bounds.size.height
 #define APP_SCREEN_CONTENT_HEIGHT           ([UIScreen mainScreen].bounds.size.height-20.0)
 #define KEYWINDOW                           [UIApplication sharedApplication].keyWindow
+#define APP_BUILD_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]
+#define APP_VERSION [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]
+#define APP_DISPLAY_NAME [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
+#define APP_BUNDLEID [[NSBundle mainBundle] bundleIdentifier]
+#define APP_UNIQUEID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 
 
 #pragma mark - app信息
-//app信息
-#define APP_NAME                            [NSString stringWithFormat:@"%@-%@", [[[UIDevice currentDevice] model] removeSpace], [[UIDevice currentDevice] systemVersion]]
-#define APP_VERSION                         [Utility appMarketVersion]
-
-
 
 #pragma mark - Log
 //Log

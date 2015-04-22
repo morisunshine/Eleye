@@ -19,6 +19,8 @@
 		08751F281AE67D0400FE17B1 /* ENotebookStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F271AE67D0400FE17B1 /* ENotebookStackView.m */; };
 		08751F2A1AE67D1100FE17B1 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08751F291AE67D1100FE17B1 /* View.xib */; };
 		08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08751F2C1AE68D7900FE17B1 /* ENoteCell.m */; };
+		18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */; };
+		18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D601AE78E3500BEC3B5 /* EUtility.m */; };
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,10 @@
 		08751F291AE67D1100FE17B1 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		08751F2B1AE68D7900FE17B1 /* ENoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteCell.h; sourceTree = "<group>"; };
 		08751F2C1AE68D7900FE17B1 /* ENoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteCell.m; sourceTree = "<group>"; };
+		18688D5C1AE787A300BEC3B5 /* ENoteContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteContentViewController.h; sourceTree = "<group>"; };
+		18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteContentViewController.m; sourceTree = "<group>"; };
+		18688D5F1AE78E3500BEC3B5 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
+		18688D601AE78E3500BEC3B5 /* EUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUtility.m; sourceTree = "<group>"; };
 		1975340930B8A6096BFC00AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0654875527BCBA8D47BF71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9F08A71444B99F1BC78B5E4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +128,10 @@
 				08751F291AE67D1100FE17B1 /* View.xib */,
 				08751F2B1AE68D7900FE17B1 /* ENoteCell.h */,
 				08751F2C1AE68D7900FE17B1 /* ENoteCell.m */,
+				18688D5C1AE787A300BEC3B5 /* ENoteContentViewController.h */,
+				18688D5D1AE787A300BEC3B5 /* ENoteContentViewController.m */,
+				18688D5F1AE78E3500BEC3B5 /* EUtility.h */,
+				18688D601AE78E3500BEC3B5 /* EUtility.m */,
 			);
 			path = Eleye;
 			sourceTree = "<group>";
@@ -312,6 +322,8 @@
 				085FA9A31AE13A0700EFD2F0 /* ELaunchViewController.m in Sources */,
 				08751F281AE67D0400FE17B1 /* ENotebookStackView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
+				18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */,
+				18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */,
 				08751F1F1AE537FA00FE17B1 /* EAllNotesViewController.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
 				08751F2D1AE68D7900FE17B1 /* ENoteCell.m in Sources */,
@@ -432,6 +444,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Eleye/Eleye-Prefix.pch";
 				INFOPLIST_FILE = Eleye/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -446,6 +460,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Eleye/Eleye-Prefix.pch";
 				INFOPLIST_FILE = Eleye/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
