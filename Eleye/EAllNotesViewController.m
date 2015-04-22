@@ -21,6 +21,7 @@ static int32_t kMaxCount = 20;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *notebookNameBtn;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 @end
 
@@ -31,6 +32,13 @@ static int32_t kMaxCount = 20;
     
     [self.notebookNameBtn setTitle:self.notebookName forState:UIControlStateNormal];
     
+    __weak EAllNotesViewController *weakSelf = self;
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf listNotesLoadingMore:YES];
+    }];
+    
+    [self listNotesLoadingMore:NO];
     
     [self configureUI];
 
@@ -40,6 +48,18 @@ static int32_t kMaxCount = 20;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Getters -
+
+- (UIRefreshControl *)refreshControl
+{
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+        [_refreshControl addTarget:self action:@selector(refreshControlChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    return _refreshControl;
 }
 
 #pragma mark - Private Methods -
@@ -53,14 +73,20 @@ static int32_t kMaxCount = 20;
     query.filter = filter;
     
     if (loadingMore) {
-        
+        self.tableView.showsInfiniteScrolling = YES;
     } else {
         offset_ = 0;
     }
     
     [client findNotesWithFilter:filter offset:offset_ maxNotes:kMaxCount success:^(EDAMNoteList *list) {
-        NSInteger totalCount = [list.totalNotes integerValue];
-        
+        [self.refreshControl endRefreshing];
+        int32_t totalCount = [list.totalNotes intValue];
+        int32_t startIndex = [list.startIndex intValue];
+        if (kMaxCount < totalCount - startIndex) {
+            offset_ = startIndex + kMaxCount + 1;
+        } else {
+            self.tableView.showsInfiniteScrolling = NO;
+        }
         notes_ = list.notes;
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
@@ -74,12 +100,18 @@ static int32_t kMaxCount = 20;
 {
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView addSubview:self.refreshControl];
 }
 
 #pragma mark - Actions -
 
 - (IBAction)allNotesBtnTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)refreshControlChanged:(UIRefreshControl *)sender
+{
+    [self listNotesLoadingMore:NO];
 }
 
 #pragma mark - TableView DataSource -
