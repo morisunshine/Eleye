@@ -38,6 +38,7 @@
     if ([ENSession sharedSession].isAuthenticated) {
         EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allNotebooksViewController];
+        navController.interactivePopGestureRecognizer.delegate = nil;
         navController.navigationBarHidden = YES;
         self.window.rootViewController = navController;
     } else {
