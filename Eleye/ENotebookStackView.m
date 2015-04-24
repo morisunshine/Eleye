@@ -20,9 +20,14 @@
 - (void)updateUIWithNotebook:(ENoteBookDO *)notebook
 {
     self.stackNameLabel.text = notebook.name;
+    NSString *text;
     if (notebook.count) {
-        self.countLabel.text = [NSString stringWithFormat:@"%@ notes", notebook.count];
+        text = [NSString stringWithFormat:@"%@ notes", notebook.count];
+    } else {
+        text = @"0 notes";
     }
+    
+    self.countLabel.text = text;
 }
 
 - (IBAction)viewBtnTapped:(UIButton *)sender {

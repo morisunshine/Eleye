@@ -25,10 +25,14 @@ static NSInteger kCellHeight = 49;
 - (void)updateUIWithNotebook:(ENoteBookDO *)noteBook
 {
     self.titleLabel.text = noteBook.name;
+    NSString *text;
     if (noteBook.count) {
-        self.countLabel.text = [NSString stringWithFormat:@"%@ notes", noteBook.count];
+        text = [NSString stringWithFormat:@"%@ notes", noteBook.count];
+    } else {
+        text = @"0 notes";
     }
     
+    self.countLabel.text = text;
     CALayer *lineLayer = [CALayer layer];
     lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
     lineLayer.borderWidth = .5;
