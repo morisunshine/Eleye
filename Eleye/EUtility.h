@@ -21,4 +21,6 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position;
 
++ (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid;
+
 @end

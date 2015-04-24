@@ -7,6 +7,7 @@
 //
 
 #import "EAllNotesViewController.h"
+#import "ENoteDetailViewController.h"
 #import "ENoteCell.h"
 #import <SVPullToRefresh.h>
 #import "ENoteDAO.h"
@@ -171,8 +172,10 @@ static NSInteger kCellHeight = 100;
     [cell updateUIWithNote:note];
     
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:YES withResourcesAlternateData:YES success:^(EDAMNote *note) {
+    [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *note) {
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
+        NSString *contentString = [resultNote.content enmlWithNote:resultNote];
+        [EUtility saveContentToFileWithContent:contentString guid:note.guid];
         NSLog(@"%@", note.content);
     } failure:^(NSError *error) {
         
@@ -186,6 +189,13 @@ static NSInteger kCellHeight = 100;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
+    ENoteDO *note = notes_[indexPath.row];
+    noteDetailViewController.noteTitle = note.title;
+    noteDetailViewController.guid = note.guid;
+    [self.navigationController pushViewController:noteDetailViewController animated:YES];
 }
 
 @end

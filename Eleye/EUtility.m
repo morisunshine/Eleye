@@ -43,4 +43,20 @@
     [[self class] addlineOnView:view position:position insert:0];
 }
 
++ (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryDirectory = [paths objectAtIndex:0];
+    NSString *notePath = [libraryDirectory stringByAppendingPathComponent:@"note"];
+    BOOL isPathExist = [[NSFileManager defaultManager] fileExistsAtPath:notePath];
+    if (isPathExist) {
+        
+    } else {
+        [[NSFileManager defaultManager] createDirectoryAtPath:notePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *path = [notePath stringByAppendingFormat:@"/note%@.html", guid];
+    [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
 @end

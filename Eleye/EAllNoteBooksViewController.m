@@ -324,8 +324,10 @@ static CGFloat kCellHeight = 49;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
-        [[ENSession sharedSession] unauthenticate];
-        //TODO 清除数据库, 退回到登录页面
+        [[UIApplication sharedApplication].keyWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
+            //TODO 删除数据库中的数据
+            [[ENSession sharedSession] unauthenticate];
+        }];
     }
 }
 
