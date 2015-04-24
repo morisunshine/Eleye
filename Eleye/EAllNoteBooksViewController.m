@@ -271,13 +271,13 @@ static CGFloat kCellHeight = 49;
     ENotebookCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     ENoteBookDO *notebook = mutNotebooks_[indexPath.section];
+    
     if (notebook.stack) {
         BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
         if (isOpen) {
             NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
             ENoteBookDO *subNotebook = subNotebooks[indexPath.row];
             [cell updateUIWithNotebook:subNotebook];
-            [EUtility addlineOnView:cell position:EViewPositionBottom insert:17];
         }
     }
     

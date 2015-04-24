@@ -8,6 +8,8 @@
 
 #import "ENotebookCell.h"
 
+static NSInteger kCellHeight = 49;
+
 @implementation ENotebookCell
 
 - (void)awakeFromNib {
@@ -26,6 +28,12 @@
     if (noteBook.count) {
         self.countLabel.text = [NSString stringWithFormat:@"%@ notes", noteBook.count];
     }
+    
+    CALayer *lineLayer = [CALayer layer];
+    lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
+    lineLayer.borderWidth = .5;
+    lineLayer.frame = CGRectMake(17, kCellHeight - 1, APP_SCREEN_WIDTH - 34, 1);
+    [self.contentView.layer addSublayer:lineLayer];
 }
 
 @end

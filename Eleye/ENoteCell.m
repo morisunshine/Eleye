@@ -9,6 +9,8 @@
 #import "ENoteCell.h"
 #import <ENSDKAdvanced.h>
 
+static NSInteger kCellHeight = 100;
+
 @implementation ENoteCell
 
 - (void)awakeFromNib {
@@ -25,7 +27,12 @@
 {
     self.titleLabel.text = note.title;
     self.contentLabel.text = note.content;
-//    [EUtility addlineOnView:self position:EViewPositionBottom insert:17];
+    
+    CALayer *lineLayer = [CALayer layer];
+    lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
+    lineLayer.borderWidth = .5;
+    lineLayer.frame = CGRectMake(17, kCellHeight - 1, APP_SCREEN_WIDTH - 34, 1);
+    [self.contentView.layer addSublayer:lineLayer];
 }
 
 @end
