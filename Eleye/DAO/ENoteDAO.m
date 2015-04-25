@@ -57,7 +57,13 @@ SINGLETON_CLASS(ENoteDAO)
 
 - (NSArray *)notesWithNotebookGuid:(NSString *)notebookGuid
 {
-    NSString *sql = [NSString stringWithFormat:@"select * from %@ where notebookGuid = ?", [self tableName]];
+    NSString *sql;
+    
+    if (notebookGuid == nil) {
+        sql = [NSString stringWithFormat:@"select * from %@", [self tableName]];
+    } else {
+        sql = [NSString stringWithFormat:@"select * from %@ where notebookGuid = ?", [self tableName]];
+    }
     
     __block NSMutableArray *mutNotes = [[NSMutableArray alloc] init];
     [dbQueue inDatabase:^(FMDatabase *db) {

@@ -19,8 +19,11 @@
 
 @implementation ELaunchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
+    
+    [self configureUI];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -39,7 +42,8 @@
     [self authorization];
 }
 
-- (IBAction)yxUserBtnTapped:(id)sender {
+- (IBAction)yxUserBtnTapped:(id)sender 
+{
     [self authorization];
 }
 
@@ -60,9 +64,12 @@
 
 - (void)authorizationWithSuccess
 {
-    EAllNoteBooksViewController *allNoteBooksViewController = [[EAllNoteBooksViewController alloc] init];   
-    UINavigationController *navigationViewController = [[UINavigationController alloc] initWithRootViewController:allNoteBooksViewController];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:navigationViewController animated:YES completion:nil];
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    EAllNoteBooksViewController *allNoteBooksViewController = [story instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
+    [self.navigationController pushViewController:allNoteBooksViewController animated:YES];
+    NSMutableArray *mutViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [mutViewControllers removeObjectAtIndex:1];
+    self.navigationController.viewControllers = mutViewControllers;
 }
 
 @end

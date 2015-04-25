@@ -11,6 +11,7 @@
 #import "ENotebookCell.h"
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
+#import "ELaunchViewController.h"
 
 static CGFloat kCellHeight = 49;
 
@@ -324,10 +325,14 @@ static CGFloat kCellHeight = 49;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
-        [[UIApplication sharedApplication].keyWindow.rootViewController dismissViewControllerAnimated:YES completion:^{
-            //TODO 删除数据库中的数据
-            [[ENSession sharedSession] unauthenticate];
-        }];
+        //TODO 删除数据库中的数据
+        [[ENSession sharedSession] unauthenticate];
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ELaunchViewController *allNoteBooksViewController = [story instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        [self.navigationController pushViewController:allNoteBooksViewController animated:YES];
+        NSMutableArray *mutViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        [mutViewControllers removeObjectAtIndex:1];
+        self.navigationController.viewControllers = mutViewControllers;
     }
 }
 

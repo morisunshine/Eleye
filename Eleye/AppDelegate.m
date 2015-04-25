@@ -34,18 +34,22 @@
     [self.window makeKeyAndVisible];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
+    UIViewController *viewController;
     if ([ENSession sharedSession].isAuthenticated) {
         EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:allNotebooksViewController];
-        navController.interactivePopGestureRecognizer.delegate = nil;
-        navController.navigationBarHidden = YES;
-        self.window.rootViewController = navController;
+        viewController = allNotebooksViewController;
     } else {
-        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
-        self.window.rootViewController = rootViewController;
+        UIViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        viewController = launchViewController;
     }
     
+    UIViewController *rootViewController = [[UIViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    navController.interactivePopGestureRecognizer.delegate = nil;
+    navController.navigationBarHidden = YES;
+    self.window.rootViewController = navController;
+    
+    [navController pushViewController:viewController animated:NO];
     
     return YES;
 }
