@@ -95,11 +95,11 @@ static NSInteger kCellHeight = 100;
         }
         
         if (loadingMore) {
-            notes_ = newNotes;
-        } else {
             NSMutableArray *mutNotes = [NSMutableArray arrayWithArray:notes_];
             [mutNotes addObjectsFromArray:newNotes];
             notes_ = mutNotes;
+        } else {
+            notes_ = newNotes;
         }
         
         [[ENoteDAO sharedENoteDAO] saveItems:newNotes];
