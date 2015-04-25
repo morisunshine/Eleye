@@ -7,6 +7,7 @@
 //
 
 #import "ENoteDetailViewController.h"
+#import <XMLDictionary.h>
 
 @interface ENoteDetailViewController ()
 
@@ -62,6 +63,15 @@
     NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     self.contentTextView.attributedText = attributedString;
+//    [self flattenHTML:content];
 }
+
+//- (NSDictionary *)flattenHTML:(NSString *)html 
+//{
+//    XMLDictionaryParser *parser = [[XMLDictionaryParser alloc] init];
+//    NSDictionary *xmlDic = [parser dictionaryWithString:html];
+//    
+//    return xmlDic;
+//}
 
 @end
