@@ -44,6 +44,14 @@ static CGFloat kCellHeight = 49;
     [self getNotebookCounts];
     [self configureUI];
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
+    
+    if (self.showAllNotes) {
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
+        allNotebookViewController.guid = nil;
+        allNotebookViewController.notebookName = @"All notes";
+        [self.navigationController pushViewController:allNotebookViewController animated:NO];
+    }
     // Do any additional setup after loading the view.
 }
 

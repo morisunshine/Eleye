@@ -66,6 +66,7 @@
 {
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EAllNoteBooksViewController *allNoteBooksViewController = [story instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
+    allNoteBooksViewController.showAllNotes = YES;
     [self.navigationController pushViewController:allNoteBooksViewController animated:YES];
     NSMutableArray *mutViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     [mutViewControllers removeObjectAtIndex:1];

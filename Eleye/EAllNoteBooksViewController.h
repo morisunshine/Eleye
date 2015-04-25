@@ -10,4 +10,6 @@
 
 @interface EAllNoteBooksViewController : UIViewController
 
+@property (nonatomic) BOOL showAllNotes;
+
 @end

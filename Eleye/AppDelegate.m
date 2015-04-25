@@ -37,6 +37,7 @@
     UIViewController *viewController;
     if ([ENSession sharedSession].isAuthenticated) {
         EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
+        allNotebooksViewController.showAllNotes = YES;
         viewController = allNotebooksViewController;
     } else {
         UIViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
