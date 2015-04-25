@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = self.noteTitle;
+    [self configureUI];
     
     [self readContentFromLocal];
     
@@ -50,6 +50,7 @@
 
 - (void)configureUI
 {
+    self.titleLabel.text = self.noteTitle;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
 }
 
