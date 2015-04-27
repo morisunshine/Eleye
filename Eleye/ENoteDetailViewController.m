@@ -8,7 +8,7 @@
 
 #import "ENoteDetailViewController.h"
 
-@interface ENoteDetailViewController ()
+@interface ENoteDetailViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
@@ -56,10 +56,22 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+#pragma mark - TextView Delegate -
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    NSLog(@"Selection changed");
+    
+    NSLog(@"loc = %ld", textView.selectedRange.location);
+    NSLog(@"len = %ld", textView.selectedRange.length);
+}
+
 #pragma mark - Private Methods -
 
 - (void)configureUI
 {
+    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
     self.titleLabel.text = self.noteTitle;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
 }
@@ -79,6 +91,30 @@
 //         [attributedString setAttributes:mutableAttributes range:range];
          
      }];
+}
+
+
+
+#pragma mark - Actions -
+
+- (IBAction)highlightBtnTapped:(UIButton *)sender
+{
+    NSLog(@"highlight");
+    
+    NSRange selectedRange = self.contentTextView.selectedRange;
+    
+    NSDictionary *currentAttributesDict = [self.contentTextView.textStorage attributesAtIndex:selectedRange.location
+                                                                    effectiveRange:nil];
+    
+    if ([currentAttributesDict objectForKey:NSForegroundColorAttributeName] == nil ||
+        [currentAttributesDict objectForKey:NSForegroundColorAttributeName] != [UIColor redColor]) {
+        
+        UIFont *font = [UIFont systemFontOfSize:16];
+        NSDictionary *dict = @{NSForegroundColorAttributeName: RGBCOLOR(158, 87, 48), NSFontAttributeName: font};
+        [self.contentTextView.textStorage beginEditing];
+        [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
+        [self.contentTextView.textStorage endEditing];
+    }
 }
 
 @end

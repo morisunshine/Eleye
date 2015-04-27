@@ -181,6 +181,9 @@
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="csm-aj-6LV" id="cC7-AA-JU7"/>
+                                </connections>
                             </textView>
                             <view contentMode="scaleToFill" id="IOj-hv-2xs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
