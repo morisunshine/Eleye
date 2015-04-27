@@ -7,7 +7,6 @@
 //
 
 #import "ENoteDetailViewController.h"
-#import <XMLDictionary.h>
 
 @interface ENoteDetailViewController ()
 
@@ -63,7 +62,15 @@
     NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     self.contentTextView.attributedText = attributedString;
-//    [self flattenHTML:content];
+    
+    [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:NSAttributedStringEnumerationReverse usingBlock:
+     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+         NSLog(@"%@", attributes);  
+//         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+//         [mutableAttributes setObject:[NSNumber numberWithInt:1] forKey:@"NSUnderline"];
+//         [attributedString setAttributes:mutableAttributes range:range];
+         
+     }];
 }
 
 //- (NSDictionary *)flattenHTML:(NSString *)html 
