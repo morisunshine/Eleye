@@ -9,6 +9,9 @@
 #import "ENoteDetailViewController.h"
 
 @interface ENoteDetailViewController () <UITextViewDelegate>
+{
+    NSMutableAttributedString *attributedText_;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
@@ -29,8 +32,9 @@
         
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
-        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        self.contentTextView.text = attributedString.string;
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
+        self.contentTextView.text = attributedText.string;
         
     } failure:^(NSError *error) {
         if (error) {
@@ -78,22 +82,9 @@
 
 - (void)readContentFromLocal
 {
-    NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:self.guid];
-    self.contentTextView.text = attributedString.string;
-    
-    [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:NSAttributedStringEnumerationReverse usingBlock:
-     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
-         NSString *subString = [attributedString.string substringWithRange:range];
-         NSLog(@"%@", attributes);
-         NSLog(@"SUBSTRING:%@", subString);
-//         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-//         [mutableAttributes setObject:[NSNumber numberWithInt:1] forKey:@"NSUnderline"];
-//         [attributedString setAttributes:mutableAttributes range:range];
-         
-     }];
+    attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
+    self.contentTextView.text = attributedText_.string;
 }
-
-
 
 #pragma mark - Actions -
 
@@ -115,6 +106,18 @@
         [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
         [self.contentTextView.textStorage endEditing];
     }
+    
+    [attributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationReverse usingBlock:
+     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+         NSString *subString = [attributedText_.string substringWithRange:range];
+         NSLog(@"%@", attributes);
+         NSLog(@"SUBSTRING:%@", subString);
+         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+         [mutableAttributes setObject:RGBCOLOR(158, 87, 48) forKey:NSBackgroundColorAttributeName];
+         [attributedText_ setAttributes:mutableAttributes range:range];
+     }];
+    
+    
 }
 
 @end
