@@ -31,7 +31,7 @@
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        self.contentTextView.attributedText = attributedString;
+        self.contentTextView.text = attributedString.string;
         
     } failure:^(NSError *error) {
         if (error) {
@@ -56,12 +56,8 @@
 
 - (void)readContentFromLocal
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/note%@.html", self.guid];
-    NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    self.contentTextView.attributedText = attributedString;
+    NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:self.guid];
+    self.contentTextView.text = attributedString.string;
     
     [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:NSAttributedStringEnumerationReverse usingBlock:
      ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
@@ -74,13 +70,5 @@
          
      }];
 }
-
-//- (NSDictionary *)flattenHTML:(NSString *)html 
-//{
-//    XMLDictionaryParser *parser = [[XMLDictionaryParser alloc] init];
-//    NSDictionary *xmlDic = [parser dictionaryWithString:html];
-//    
-//    return xmlDic;
-//}
 
 @end

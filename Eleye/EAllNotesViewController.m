@@ -169,21 +169,29 @@ static NSInteger kCellHeight = 100;
     
     ENoteDO *note = notes_[indexPath.row];
     
-    [cell updateUIWithNote:note];
-    
-    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
-        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
-        NSString *contentString = [resultNote.content enmlWithNote:resultNote];
-        [EUtility saveContentToFileWithContent:contentString guid:note.guid];
-        note.content = enote.content;
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        NSLog(@"content:%@", enote.content);
-    } failure:^(NSError *error) {
-        if (error) {
-            NSLog(@"获取笔记内容错误%@", error);
+    if (note.content == nil) {
+        
+        NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
+        if (attributedString) {
+            note.content = attributedString.string;
+        } else {
+            ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+            [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
+                ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
+                NSString *contentString = [resultNote.content enmlWithNote:resultNote];
+                [EUtility saveContentToFileWithContent:contentString guid:note.guid];
+                note.content = enote.content;
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                NSLog(@"content:%@", enote.content);
+            } failure:^(NSError *error) {
+                if (error) {
+                    NSLog(@"获取笔记内容错误%@", error);
+                }
+            }];
         }
-    }];
+    }
+    
+    [cell updateUIWithNote:note];
     
     return cell;
 }
