@@ -12,10 +12,11 @@
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
 #import "ELaunchViewController.h"
+#import <MessageUI/MessageUI.h>
 
 static CGFloat kCellHeight = 49;
 
-@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
     NSMutableDictionary *stackDics_;
     NSMutableArray *mutNotebooks_;
@@ -325,7 +326,21 @@ static CGFloat kCellHeight = 49;
 
 - (IBAction)feedbackBtnTapped:(id)sender 
 {
-    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setSubject:[NSString stringWithFormat:@"Eleye %@ 问题反馈", APP_VERSION]];
+        NSString *body = [NSString stringWithFormat:@"%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
+        [mail setMessageBody:body isHTML:NO];
+        [mail setToRecipients:@[@"wheelab7@gmail.com"]];
+        
+        [self presentViewController:mail animated:YES completion:nil];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
 }
 
 #pragma mark - UIAlertView Delegate -
