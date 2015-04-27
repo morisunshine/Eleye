@@ -65,7 +65,9 @@
     
     [attributedString enumerateAttributesInRange:NSMakeRange(0, attributedString.length) options:NSAttributedStringEnumerationReverse usingBlock:
      ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
-         NSLog(@"%@", attributes);  
+         NSString *subString = [attributedString.string substringWithRange:range];
+         NSLog(@"%@", attributes);
+         NSLog(@"SUBSTRING:%@", subString);
 //         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
 //         [mutableAttributes setObject:[NSNumber numberWithInt:1] forKey:@"NSUnderline"];
 //         [attributedString setAttributes:mutableAttributes range:range];
