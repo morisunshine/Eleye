@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     [self configureUI];
-    
     [self readContentFromLocal];
     
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
@@ -44,6 +43,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    
+    if ([self.contentTextView isFirstResponder] && [touch view] != self.contentTextView) {
+        [self.contentTextView resignFirstResponder];
+    }
+    
+    [super touchesBegan:touches withEvent:event];
 }
 
 #pragma mark - Private Methods -
