@@ -29,21 +29,7 @@
     
     [self configureUI];
     [self readContentFromLocal];
-    
-    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *note) {
-        
-        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
-        NSString *contentString = [resultNote.content enmlWithNote:resultNote];
-        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
-        self.contentTextView.text = attributedText.string;
-        
-    } failure:^(NSError *error) {
-        if (error) {
-            NSLog(@"获取笔记失败");
-        }
-    }];
+    [self fetchNoteDetail];
     // Do any additional setup after loading the view.
 }
 
@@ -80,6 +66,24 @@
 
 #pragma mark - Private Methods -
 
+- (void)fetchNoteDetail
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *note) {
+        
+        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
+        NSString *contentString = [resultNote.content enmlWithNote:resultNote];
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
+        self.contentTextView.text = attributedText.string;
+        
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取笔记失败");
+        }
+    }];
+}
+
 - (void)updateMenuView
 {
     NSRange selectedRange = self.contentTextView.selectedRange;
@@ -112,9 +116,10 @@
 {
     self.titleLabel.text = self.noteTitle;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
+    [self.contentTextView addSubview:self.titleView];
     [self.contentTextView addSubview:self.menuView];
     self.contentTextView.tintColor = RGBCOLOR(158, 87, 48);
-    self.contentTextView.textContainerInset = UIEdgeInsetsMake(0, 17, 0, 17);
+    self.contentTextView.textContainerInset = UIEdgeInsetsMake(46, 17, 0, 17);
 }
 
 - (void)readContentFromLocal
