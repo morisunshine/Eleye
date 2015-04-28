@@ -359,4 +359,11 @@ static CGFloat kCellHeight = 49;
     }
 }
 
+#pragma mark - MFMail Delegate -
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
