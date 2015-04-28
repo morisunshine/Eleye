@@ -162,6 +162,8 @@
          [mutableAttributes setObject:RGBCOLOR(158, 87, 48) forKey:NSBackgroundColorDocumentAttribute];
          [attributedText_ setAttributes:mutableAttributes range:range];
      }];
+    
+    self.contentTextView.selectedRange = NSMakeRange(0, 0);
 }
 
 @end
