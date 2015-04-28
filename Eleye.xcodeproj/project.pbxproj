@@ -26,6 +26,7 @@
 		18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 18688D601AE78E3500BEC3B5 /* EUtility.m */; };
 		1871B6941AEF8E220090578E /* EMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B6931AEF8E210090578E /* EMenuView.m */; };
 		1871B6971AEF93890090578E /* ETextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B6961AEF93890090578E /* ETextView.m */; };
+		1871B69A1AEF97610090578E /* UIView+GeometryAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B6991AEF97610090578E /* UIView+GeometryAddition.m */; };
 		18EE8F501AEA62E80063A1CB /* ENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE8F4F1AEA62E80063A1CB /* ENoteDetailViewController.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
@@ -83,6 +84,8 @@
 		1871B6931AEF8E210090578E /* EMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMenuView.m; sourceTree = "<group>"; };
 		1871B6951AEF93890090578E /* ETextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETextView.h; sourceTree = "<group>"; };
 		1871B6961AEF93890090578E /* ETextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETextView.m; sourceTree = "<group>"; };
+		1871B6981AEF97610090578E /* UIView+GeometryAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GeometryAddition.h"; sourceTree = "<group>"; };
+		1871B6991AEF97610090578E /* UIView+GeometryAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GeometryAddition.m"; sourceTree = "<group>"; };
 		18EE8F4E1AEA62E80063A1CB /* ENoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDetailViewController.h; sourceTree = "<group>"; };
 		18EE8F4F1AEA62E80063A1CB /* ENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDetailViewController.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 		085FA9991AE13A0700EFD2F0 /* Eleye */ = {
 			isa = PBXGroup;
 			children = (
+				1871B6981AEF97610090578E /* UIView+GeometryAddition.h */,
+				1871B6991AEF97610090578E /* UIView+GeometryAddition.m */,
 				18FF6F141AE79B01000425E4 /* DAO */,
 				18FF6F151AE79B01000425E4 /* DO */,
 				08751F211AE5386900FE17B1 /* Main.storyboard */,
@@ -392,6 +397,7 @@
 				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
 				1871B6971AEF93890090578E /* ETextView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
+				1871B69A1AEF97610090578E /* UIView+GeometryAddition.m in Sources */,
 				18688D611AE78E3500BEC3B5 /* EUtility.m in Sources */,
 				08751F331AE7CBD300FE17B1 /* ENoteBookDO.m in Sources */,
 				18688D5E1AE787A300BEC3B5 /* ENoteContentViewController.m in Sources */,

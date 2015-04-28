@@ -86,17 +86,16 @@
     __block CGRect lastRect;
     [self.contentTextView.layoutManager enumerateEnclosingRectsForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:self.contentTextView.textContainer usingBlock:^(CGRect rect, BOOL *stop) {
         lastRect = rect;
+        *stop = YES;
     }];
     
     
     // Position clippy at bottom-right of selection
     CGPoint clippyCenter;
-    clippyCenter.x = CGRectGetMaxX(lastRect) + self.contentTextView.textContainerInset.left;
-    clippyCenter.y = CGRectGetMaxY(lastRect) + self.contentTextView.textContainerInset.top;
-    
+    clippyCenter.x = CGRectGetMidX(lastRect) + self.contentTextView.textContainerInset.left;
+    clippyCenter.y = CGRectGetMinY(lastRect) + self.contentTextView.textContainerInset.top;
     clippyCenter = [self.contentTextView convertPoint:clippyCenter toView:self.view];
-    clippyCenter.x += self.menuView.bounds.size.width / 2;
-    clippyCenter.y += self.menuView.bounds.size.height / 2;
+    clippyCenter.y -= self.menuView.height * 2;
     
     self.menuView.hidden = NO;
     self.menuView.center = clippyCenter;
@@ -108,6 +107,7 @@
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
     [self.contentTextView addSubview:self.menuView];
     self.contentTextView.tintColor = RGBCOLOR(158, 87, 48);
+    self.contentTextView.textContainerInset = UIEdgeInsetsMake(0, 17, 0, 17);
 }
 
 - (void)readContentFromLocal

@@ -12,6 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <ENSDKAdvanced.h>
+    #import "UIView+GeometryAddition.h"
     #import"COMMONCONSTANT.h"
     #import "EUtility.h"
     #import "ENoteDO.h"
