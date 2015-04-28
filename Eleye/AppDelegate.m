@@ -46,7 +46,6 @@
     
     UIViewController *rootViewController = [[UIViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-    navController.interactivePopGestureRecognizer.delegate = nil;
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
     

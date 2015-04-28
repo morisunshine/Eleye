@@ -137,9 +137,19 @@ static NSInteger kCellHeight = 100;
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView addSubview:self.refreshControl];
+    UIPanGestureRecognizer *pagGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
+    [self.tableView addGestureRecognizer:pagGR];
 }
 
 #pragma mark - Actions -
+
+- (IBAction)panGestureRecognizer:(UIPanGestureRecognizer *)sender
+{
+    CGPoint vel = [sender velocityInView:self.view];
+    if (vel.x > 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 - (IBAction)allNotesBtnTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

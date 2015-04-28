@@ -16,7 +16,7 @@
 
 static CGFloat kCellHeight = 49;
 
-@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface EAllNoteBooksViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     NSMutableDictionary *stackDics_;
     NSMutableArray *mutNotebooks_;
