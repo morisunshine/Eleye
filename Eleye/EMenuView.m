@@ -10,12 +10,30 @@
 
 @implementation EMenuView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.layer.cornerRadius = 5;
+    self.clipsToBounds = YES;
 }
-*/
+
+- (IBAction)hightlightBtnTapped:(UIButton *)sender 
+{
+    if (self.highlightBtnTappedHandler) {
+        if ([sender.titleLabel.text isEqualToString:@"highlight"]) {
+            self.highlightBtnTappedHandler(YES);
+        } else {
+            self.highlightBtnTappedHandler(NO);
+        }
+    }
+}
+
+- (IBAction)cBtnTapped:(id)sender 
+{
+    if (self.copyBtnTappedHandler) {
+        self.copyBtnTappedHandler();
+    }
+}
 
 @end

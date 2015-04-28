@@ -59,6 +59,13 @@
     if (!_menuView) {
         _menuView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
         _menuView.hidden = YES;
+        __weak ENoteDetailViewController *weakSelf = self;
+        _menuView.highlightBtnTappedHandler = ^(BOOL isHighlight) {
+            [weakSelf highlightTextViewWithHighlight:isHighlight];
+        };
+        _menuView.copyBtnTappedHandler = ^() {
+            [weakSelf cBtnTapped];
+        };
     }
     
     return _menuView;
@@ -118,10 +125,14 @@
 
 #pragma mark - Actions -
 
-- (IBAction)highlightBtnTapped:(UIButton *)sender
+- (void)cBtnTapped
 {
-    NSLog(@"highlight");
-    
+    NSString *selectedText = [self.contentTextView.text substringWithRange:self.contentTextView.selectedRange];
+    [UIPasteboard generalPasteboard].string = selectedText;
+}
+
+- (void)highlightTextViewWithHighlight:(BOOL)highlight
+{
     NSRange selectedRange = self.contentTextView.selectedRange;
     
     NSDictionary *currentAttributesDict = [self.contentTextView.textStorage attributesAtIndex:selectedRange.location
