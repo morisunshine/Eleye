@@ -201,21 +201,21 @@ static CGFloat kCellHeight = 49;
     ENoteBookDO *notebook = mutNotebooks_[section];
     if (notebook.stack) {
 
-        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
-        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0;i < subNotebooks.count; i++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-            [indexPaths addObject:indexPath];
-        }
-        
-        if (isOpen == YES) {
-            [viewStatus_ setObject:notebook.stack forKey:@(NO)];
-            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        } else {
-            [viewStatus_ setObject:notebook.stack forKey:@(YES)];
-            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        }
+//        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
+//        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
+//        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//        for (NSInteger i = 0;i < subNotebooks.count; i++) {
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
+//            [indexPaths addObject:indexPath];
+//        }
+//        
+//        if (isOpen == YES) {
+//            [viewStatus_ setObject:notebook.stack forKey:@(NO)];
+//            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//        } else {
+//            [viewStatus_ setObject:notebook.stack forKey:@(YES)];
+//            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//        }
     } else {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];

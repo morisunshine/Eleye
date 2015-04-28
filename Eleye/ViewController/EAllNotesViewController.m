@@ -138,7 +138,7 @@ static NSInteger kCellHeight = 100;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView addSubview:self.refreshControl];
     UIPanGestureRecognizer *pagGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
-    [self.tableView addGestureRecognizer:pagGR];
+    [self.view addGestureRecognizer:pagGR];
 }
 
 #pragma mark - Actions -
