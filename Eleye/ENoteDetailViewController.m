@@ -7,15 +7,18 @@
 //
 
 #import "ENoteDetailViewController.h"
+#import "EMenuView.h"
+#import "ETextView.h"
 
 @interface ENoteDetailViewController () <UITextViewDelegate>
 {
     NSMutableAttributedString *attributedText_;
 }
 
+@property (nonatomic, retain) EMenuView *menuView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
-@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet ETextView *contentTextView;
 
 @end
 
@@ -49,35 +52,62 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = [[event allTouches] anyObject];
-    
-    if ([self.contentTextView isFirstResponder] && [touch view] != self.contentTextView) {
-        [self.contentTextView resignFirstResponder];
+#pragma mark - Getters -
+
+- (EMenuView *)menuView
+{
+    if (!_menuView) {
+        _menuView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
+        _menuView.hidden = YES;
     }
     
-    [super touchesBegan:touches withEvent:event];
+    return _menuView;
 }
 
 #pragma mark - TextView Delegate -
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
-    NSLog(@"Selection changed");
-    
-    NSLog(@"loc = %ld", textView.selectedRange.location);
-    NSLog(@"len = %ld", textView.selectedRange.length);
+    [self updateMenuView];
 }
 
 #pragma mark - Private Methods -
 
+- (void)updateMenuView
+{
+    NSRange selectedRange = self.contentTextView.selectedRange;
+    if (!selectedRange.length) {
+        self.menuView.hidden = YES;
+        return;
+    }   
+    
+    // Find last rect of selection
+    NSRange glyphRange = [self.contentTextView.layoutManager glyphRangeForCharacterRange:selectedRange actualCharacterRange:NULL];
+    __block CGRect lastRect;
+    [self.contentTextView.layoutManager enumerateEnclosingRectsForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:self.contentTextView.textContainer usingBlock:^(CGRect rect, BOOL *stop) {
+        lastRect = rect;
+    }];
+    
+    
+    // Position clippy at bottom-right of selection
+    CGPoint clippyCenter;
+    clippyCenter.x = CGRectGetMaxX(lastRect) + self.contentTextView.textContainerInset.left;
+    clippyCenter.y = CGRectGetMaxY(lastRect) + self.contentTextView.textContainerInset.top;
+    
+    clippyCenter = [self.contentTextView convertPoint:clippyCenter toView:self.view];
+    clippyCenter.x += self.menuView.bounds.size.width / 2;
+    clippyCenter.y += self.menuView.bounds.size.height / 2;
+    
+    self.menuView.hidden = NO;
+    self.menuView.center = clippyCenter;
+}
+
 - (void)configureUI
 {
-    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
-    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:menuItem]];
     self.titleLabel.text = self.noteTitle;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
+    [self.contentTextView addSubview:self.menuView];
+    self.contentTextView.tintColor = RGBCOLOR(158, 87, 48);
 }
 
 - (void)readContentFromLocal
@@ -113,11 +143,9 @@
          NSLog(@"%@", attributes);
          NSLog(@"SUBSTRING:%@", subString);
          NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-         [mutableAttributes setObject:RGBCOLOR(158, 87, 48) forKey:NSBackgroundColorAttributeName];
+         [mutableAttributes setObject:RGBCOLOR(158, 87, 48) forKey:NSBackgroundColorDocumentAttribute];
          [attributedText_ setAttributes:mutableAttributes range:range];
      }];
-    
-    
 }
 
 @end
