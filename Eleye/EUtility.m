@@ -7,6 +7,8 @@
 //
 
 #import "EUtility.h"
+#include <sys/sysctl.h>
+#include <sys/utsname.h>
 
 @implementation EUtility
 
@@ -72,8 +74,11 @@
 
 + (NSString *)platformString
 {
-    NSString *platform = [UIDevice currentDevice].model;
-    
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSLog(@"[NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding]: %@",[NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding]);
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+
     if ([platform isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
     if ([platform isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
     if ([platform isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";

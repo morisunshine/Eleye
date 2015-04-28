@@ -331,7 +331,7 @@ static CGFloat kCellHeight = 49;
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
         [mail setSubject:[NSString stringWithFormat:@"Eleye %@ 问题反馈", APP_VERSION]];
-        NSString *body = [NSString stringWithFormat:@"%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
+        NSString *body = [NSString stringWithFormat:@"\n\n\n\n\n\n%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
         [mail setMessageBody:body isHTML:NO];
         [mail setToRecipients:@[@"wheelab7@gmail.com"]];
         
