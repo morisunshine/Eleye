@@ -100,7 +100,6 @@
         *stop = YES;
     }];
     
-    
     // Position clippy at bottom-right of selection
     CGPoint clippyCenter;
     clippyCenter.x = CGRectGetMidX(lastRect) + self.contentTextView.textContainerInset.left;
@@ -143,11 +142,17 @@
     NSDictionary *currentAttributesDict = [self.contentTextView.textStorage attributesAtIndex:selectedRange.location
                                                                     effectiveRange:nil];
     
-    if ([currentAttributesDict objectForKey:NSForegroundColorAttributeName] == nil ||
-        [currentAttributesDict objectForKey:NSForegroundColorAttributeName] != [UIColor redColor]) {
+    if ([currentAttributesDict objectForKey:NSBackgroundColorAttributeName] == nil ||
+        [currentAttributesDict objectForKey:NSBackgroundColorAttributeName] != RGBACOLOR(168, 87, 48, 0.3)) {
         
         UIFont *font = [UIFont systemFontOfSize:16];
-        NSDictionary *dict = @{NSForegroundColorAttributeName: RGBCOLOR(158, 87, 48), NSFontAttributeName: font};
+        NSDictionary *dict = @{NSBackgroundColorAttributeName: RGBACOLOR(168, 87, 48, 0.3), NSFontAttributeName: font};
+        [self.contentTextView.textStorage beginEditing];
+        [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
+        [self.contentTextView.textStorage endEditing];
+    } else if ([currentAttributesDict objectForKey:NSBackgroundColorAttributeName] != RGBACOLOR(168, 87, 48, 0.3)) {
+        UIFont *font = [UIFont systemFontOfSize:16];
+        NSDictionary *dict = @{NSBackgroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font};
         [self.contentTextView.textStorage beginEditing];
         [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
         [self.contentTextView.textStorage endEditing];
@@ -159,7 +164,7 @@
          NSLog(@"%@", attributes);
          NSLog(@"SUBSTRING:%@", subString);
          NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-         [mutableAttributes setObject:RGBCOLOR(158, 87, 48) forKey:NSBackgroundColorDocumentAttribute];
+         [mutableAttributes setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
          [attributedText_ setAttributes:mutableAttributes range:range];
      }];
     
