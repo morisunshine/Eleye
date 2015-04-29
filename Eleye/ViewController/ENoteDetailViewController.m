@@ -9,6 +9,7 @@
 #import "ENoteDetailViewController.h"
 #import "EMenuView.h"
 #import "ETextView.h"
+#import "ETitleView.h"
 
 @interface ENoteDetailViewController () <UITextViewDelegate>
 {
@@ -17,8 +18,7 @@
 }
 
 @property (nonatomic, retain) EMenuView *menuView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (nonatomic, retain) ETitleView *titleView;
 @property (weak, nonatomic) IBOutlet ETextView *contentTextView;
 
 @end
@@ -56,6 +56,15 @@
     }
     
     return _menuView;
+}
+
+- (ETitleView *)titleView
+{
+    if (!_titleView) {
+        _titleView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][2];
+    }
+    
+    return _titleView;
 }
 
 #pragma mark - TextView Delegate -
@@ -119,7 +128,8 @@
     [self.contentTextView addGestureRecognizer:tapGR];
     UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGR:)];
     [self.view addGestureRecognizer:panGR];
-    self.titleLabel.text = self.noteTitle;
+    self.titleView.titleLabel.text = self.noteTitle;
+    self.titleView.top = self.contentTextView.top;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
     [self.contentTextView addSubview:self.titleView];
     [self.contentTextView addSubview:self.menuView];

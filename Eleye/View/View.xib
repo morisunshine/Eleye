@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,23 +10,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tN7-pF-JhF">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN7-pF-JhF">
                     <rect key="frame" x="17" y="14" width="213" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cD2-PI-TbR">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD2-PI-TbR">
                     <rect key="frame" x="235" y="14" width="60" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RNL-o8-QLe">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNL-o8-QLe">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -37,6 +33,20 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cD2-PI-TbR" firstAttribute="leading" secondItem="tN7-pF-JhF" secondAttribute="trailing" constant="5" id="51L-jH-QeA"/>
+                <constraint firstAttribute="centerX" secondItem="RNL-o8-QLe" secondAttribute="centerX" id="72Y-PT-XT3"/>
+                <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="CqF-3v-dxM" secondAttribute="top" constant="14" id="BSd-Sk-B3B"/>
+                <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="cD2-PI-TbR" secondAttribute="top" id="Bbn-3z-dQ7"/>
+                <constraint firstAttribute="centerX" secondItem="tN7-pF-JhF" secondAttribute="centerX" constant="36.5" id="P9E-m4-9dv"/>
+                <constraint firstItem="tN7-pF-JhF" firstAttribute="centerY" secondItem="RNL-o8-QLe" secondAttribute="centerY" id="V5C-VG-U2Q"/>
+                <constraint firstAttribute="trailing" secondItem="cD2-PI-TbR" secondAttribute="trailing" constant="25" id="czo-CM-14k"/>
+                <constraint firstAttribute="centerY" secondItem="RNL-o8-QLe" secondAttribute="centerY" id="gU9-kp-YN4"/>
+                <constraint firstItem="cD2-PI-TbR" firstAttribute="centerY" secondItem="tN7-pF-JhF" secondAttribute="centerY" id="iLu-Jv-XLQ"/>
+                <constraint firstItem="RNL-o8-QLe" firstAttribute="top" secondItem="CqF-3v-dxM" secondAttribute="top" id="jHe-h3-wYM"/>
+                <constraint firstItem="RNL-o8-QLe" firstAttribute="leading" secondItem="CqF-3v-dxM" secondAttribute="leading" id="xnT-W5-SDa"/>
+                <constraint firstItem="tN7-pF-JhF" firstAttribute="leading" secondItem="CqF-3v-dxM" secondAttribute="leading" constant="17" id="zTg-f4-ecl"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -50,9 +60,8 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k2x-7e-7Xc">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-7e-7Xc">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="highlight">
@@ -62,9 +71,8 @@
                         <action selector="hightlightBtnTapped:" destination="4Xa-iW-cpX" eventType="touchUpInside" id="deo-kW-QRy"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pe9-WN-fcV">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pe9-WN-fcV">
                     <rect key="frame" x="100" y="0.0" width="100" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="copy">
@@ -83,6 +91,30 @@
                 <outlet property="highlightActionBtn" destination="k2x-7e-7Xc" id="TPD-Cx-4lL"/>
             </connections>
             <point key="canvasLocation" x="169" y="-53"/>
+        </view>
+        <view contentMode="scaleToFill" id="6LO-N6-9JX" userLabel="titleView" customClass="ETitleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDR-Yc-7Ap">
+                    <rect key="frame" x="16" y="0.0" width="288" height="46"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="YDR-Yc-7Ap" secondAttribute="bottom" id="8Kq-QS-DLq"/>
+                <constraint firstAttribute="trailing" secondItem="YDR-Yc-7Ap" secondAttribute="trailing" constant="16" id="Gvr-8R-D5Q"/>
+                <constraint firstItem="YDR-Yc-7Ap" firstAttribute="top" secondItem="6LO-N6-9JX" secondAttribute="top" id="IPc-ij-bB2"/>
+                <constraint firstItem="YDR-Yc-7Ap" firstAttribute="leading" secondItem="6LO-N6-9JX" secondAttribute="leading" constant="16" id="lcG-4N-hPA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="titleLabel" destination="YDR-Yc-7Ap" id="wDy-fy-v8v"/>
+            </connections>
+            <point key="canvasLocation" x="356" y="215"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -28,6 +28,7 @@
 		08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */; };
 		08D4A1291AEFB6F2000BAC87 /* ENoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1191AEFB6F2000BAC87 /* ENoteContentViewController.m */; };
 		08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */; };
+		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
 		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
@@ -89,6 +90,8 @@
 		08D4A11A1AEFB6F2000BAC87 /* ENoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDetailViewController.h; sourceTree = "<group>"; };
 		08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDetailViewController.m; sourceTree = "<group>"; };
 		1871B69B1AEF9A4F0090578E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1871B69D1AF0AA970090578E /* ETitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETitleView.h; sourceTree = "<group>"; };
+		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
 		18FF6F171AE79B3E000425E4 /* EDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDBManager.m; sourceTree = "<group>"; };
 		18FF6F191AE79C3C000425E4 /* EBaseDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBaseDAO.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				08D4A10E1AEFB6F2000BAC87 /* ETextView.h */,
 				08D4A10F1AEFB6F2000BAC87 /* ETextView.m */,
 				08D4A1101AEFB6F2000BAC87 /* View.xib */,
+				1871B69D1AF0AA970090578E /* ETitleView.h */,
+				1871B69E1AF0AA970090578E /* ETitleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */,
 				18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */,
 				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
+				1871B69F1AF0AA970090578E /* ETitleView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
 				08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */,
 				08D4A1271AEFB6F2000BAC87 /* EAllNotesViewController.m in Sources */,
