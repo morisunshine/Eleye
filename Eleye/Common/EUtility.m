@@ -20,7 +20,7 @@
     
     switch (position) {
         case EViewPositionTop: {
-            lineLayer.frame = CGRectMake(insert, 0, CGRectGetWidth(view.frame) - insert * 2, 1);
+            lineLayer.frame = CGRectMake(insert, 0, APP_SCREEN_WIDTH - insert * 2, 1);
             break;
         } 
         case EViewPositionLeft: {
@@ -28,11 +28,11 @@
             break;
         }
         case EViewPositionRight: {
-            lineLayer.frame = CGRectMake(CGRectGetWidth(view.frame) - 1, 0, 1, CGRectGetHeight(view.frame));
+            lineLayer.frame = CGRectMake(APP_SCREEN_WIDTH - 1, 0, 1, CGRectGetHeight(view.frame));
             break;
         }
         case EViewPositionBottom: {
-            lineLayer.frame = CGRectMake(insert, CGRectGetHeight(view.frame) - 1, CGRectGetWidth(view.frame) - insert * 2, 1);
+            lineLayer.frame = CGRectMake(insert, CGRectGetHeight(view.frame) - 1, APP_SCREEN_WIDTH - insert * 2, 1);
             break;
         }
     }
