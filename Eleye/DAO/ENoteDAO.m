@@ -80,6 +80,24 @@ SINGLETON_CLASS(ENoteDAO)
     return mutNotes;
 }
 
+- (BOOL)deleteAllNotes
+{
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@", [self tableName]];
+    
+    __block BOOL result = NO;
+    
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        
+        result = [db executeUpdate:deleteSql];
+        
+        if (!result) {
+            NSLog(@"error delete %@ error:%@", [self tableName], [db lastErrorMessage]);
+        }
+    }];
+    
+    return result;
+}
+
 #pragma mark - Private Methods -
 
 - (ENoteDO *)noteFromResultSet:(FMResultSet *)resultSet

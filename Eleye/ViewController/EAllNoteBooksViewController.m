@@ -348,8 +348,8 @@ static CGFloat kCellHeight = 49;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
-        //TODO 删除数据库中的数据
         [[ENSession sharedSession] unauthenticate];
+        [EUtility clearDataBase];
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ELaunchViewController *allNoteBooksViewController = [story instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
         [self.navigationController pushViewController:allNoteBooksViewController animated:YES];

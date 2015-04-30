@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (NSString *)platformString;
 
++ (BOOL)clearDataBase;
+
 @end

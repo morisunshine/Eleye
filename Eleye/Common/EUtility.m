@@ -9,6 +9,8 @@
 #import "EUtility.h"
 #include <sys/sysctl.h>
 #include <sys/utsname.h>
+#import "ENotebookDAO.h"
+#import "ENoteDAO.h"
 
 @implementation EUtility
 
@@ -52,12 +54,16 @@
     NSString *notePath = [libraryDirectory stringByAppendingPathComponent:@"note"];
     BOOL isPathExist = [[NSFileManager defaultManager] fileExistsAtPath:notePath];
     if (isPathExist) {
-        
+        NSString *userPath = [notePath stringByAppendingFormat:@"/%@", @([ENSession sharedSession].userID)];
+        BOOL isUserPathExist = [[NSFileManager defaultManager] fileExistsAtPath:userPath];        
+        if (!isUserPathExist) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
     } else {
         [[NSFileManager defaultManager] createDirectoryAtPath:notePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    NSString *path = [notePath stringByAppendingFormat:@"/note%@.html", guid];
+    NSString *path = [notePath stringByAppendingFormat:@"/%@/note%@.html", @([ENSession sharedSession].userID), guid];
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
@@ -65,7 +71,7 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/note%@.html", guid];
+    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/note%@.html", @([ENSession sharedSession].userID), guid];
     NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
@@ -119,6 +125,19 @@
     if ([platform isEqualToString:@"x86_64"])       return @"Simulator";
     
     return platform;
+}
+
++ (BOOL)clearDataBase
+{
+    BOOL deleteAllNoteBooks = [[ENotebookDAO sharedENotebookDAO] deleteAllNoteBooks];
+    BOOL deleteAllNotes = [[ENoteDAO sharedENoteDAO] deleteAllNotes];
+    
+    BOOL deleteSuccess = NO;
+    
+    if (deleteAllNotes && deleteAllNoteBooks) {
+        deleteSuccess = YES;
+    }
+    return deleteSuccess;
 }
 
 @end

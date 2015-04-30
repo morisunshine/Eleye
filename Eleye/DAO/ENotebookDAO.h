@@ -14,4 +14,6 @@
 
 - (NSArray *)notebooks;
 
+- (BOOL)deleteAllNoteBooks;
+
 @end

@@ -74,6 +74,24 @@ SINGLETON_CLASS(ENotebookDAO)
     return mutNotebooks;
 }
 
+- (BOOL)deleteAllNoteBooks
+{
+    NSString *deleteSql = [NSString stringWithFormat:@"delete from %@", [self tableName]];
+    
+    __block BOOL result = NO;
+    
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        
+        result = [db executeUpdate:deleteSql];
+        
+        if (!result) {
+            NSLog(@"error delete %@ error:%@", [self tableName], [db lastErrorMessage]);
+        }
+    }];
+    
+    return result;
+}
+
 #pragma mark - Private Methods -
 
 - (ENoteBookDO *)notebookFromResultSet:(FMResultSet *)resultSet
