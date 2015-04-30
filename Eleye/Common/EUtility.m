@@ -56,14 +56,20 @@
     if (isPathExist) {
         NSString *userPath = [notePath stringByAppendingFormat:@"/%@", @([ENSession sharedSession].userID)];
         BOOL isUserPathExist = [[NSFileManager defaultManager] fileExistsAtPath:userPath];        
-        if (!isUserPathExist) {
+        if (isUserPathExist) {
+            NSString *guidPath = [userPath stringByAppendingFormat:@"/%@", guid];
+            BOOL isGuidPathExist = [[NSFileManager defaultManager] fileExistsAtPath:guidPath];
+            if (!isGuidPathExist) {
+                [[NSFileManager defaultManager] createDirectoryAtPath:guidPath withIntermediateDirectories:YES attributes:nil error:nil];
+            } 
+        } else {
             [[NSFileManager defaultManager] createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
     } else {
         [[NSFileManager defaultManager] createDirectoryAtPath:notePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    NSString *path = [notePath stringByAppendingFormat:@"/%@/note%@.html", @([ENSession sharedSession].userID), guid];
+    NSString *path = [notePath stringByAppendingFormat:@"/%@/%@/note.html", @([ENSession sharedSession].userID), guid];
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
