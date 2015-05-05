@@ -75,13 +75,20 @@
 
 + (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/note%@.html", @([ENSession sharedSession].userID), guid];
-    NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *content = [self contentFromLocalPathWithGuid:guid];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
     return attributedString;
+}
+
++ (NSString *)contentFromLocalPathWithGuid:(NSString *)guid
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryDirectory = [paths objectAtIndex:0];
+    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/%@/note.html", @([ENSession sharedSession].userID), guid];
+    NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
+    
+    return content;
 }
 
 + (NSString *)platformString

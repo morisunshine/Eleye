@@ -11,7 +11,7 @@
 #import "ETextView.h"
 #import "ETitleView.h"
 
-@interface ENoteDetailViewController () <UITextViewDelegate>
+@interface ENoteDetailViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 {
     NSMutableArray *highlightRanges_;
     NSMutableAttributedString *attributedText_;
@@ -97,7 +97,7 @@
 - (void)updateMenuView
 {
     NSRange selectedRange = self.contentTextView.selectedRange;
-    if (!selectedRange.length) {
+    if (selectedRange.length == 0) {
         self.menuView.hidden = YES;
         return;
     }   
@@ -127,7 +127,7 @@
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGR:)];
     [self.contentTextView addGestureRecognizer:tapGR];
     UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGR:)];
-    [self.view addGestureRecognizer:panGR];
+    [self.contentTextView addGestureRecognizer:panGR];
     self.titleView.titleLabel.text = self.noteTitle;
     self.titleView.top = self.contentTextView.top;
     [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
@@ -140,7 +140,7 @@
 - (void)readContentFromLocal
 {
     attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
-    self.contentTextView.text = attributedText_.string;
+    self.contentTextView.attributedText = attributedText_;
 }
 
 #pragma mark - Actions -
@@ -148,6 +148,7 @@
 - (IBAction)panGR:(UIPanGestureRecognizer *)sender
 {
     CGPoint vel = [sender velocityInView:self.view];
+    NSLog(@"vel:%@", NSStringFromCGPoint(vel));
     if (vel.x > 0) {
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -178,10 +179,6 @@
 - (void)highlightTextViewWithHighlight:(BOOL)highlight
 {
     NSRange selectedRange = self.contentTextView.selectedRange;
-    
-//    NSDictionary *currentAttributesDict = [self.contentTextView.textStorage attributesAtIndex:selectedRange.location
-//                                                                    effectiveRange:nil];
-    
     UIFont *font = [UIFont systemFontOfSize:16];
     NSDictionary *dict;
     

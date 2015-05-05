@@ -54,7 +54,7 @@
                 <outlet property="stackNameLabel" destination="tN7-pF-JhF" id="XPX-zH-Zgy"/>
                 <outlet property="viewBtn" destination="RNL-o8-QLe" id="Z4k-2c-PuW"/>
             </connections>
-            <point key="canvasLocation" x="196" y="-175.5"/>
+            <point key="canvasLocation" x="361" y="-20.5"/>
         </view>
         <view contentMode="scaleToFill" id="4Xa-iW-cpX" customClass="EMenuView">
             <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
