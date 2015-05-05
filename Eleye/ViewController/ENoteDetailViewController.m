@@ -9,7 +9,6 @@
 #import "ENoteDetailViewController.h"
 #import "EMenuView.h"
 #import "ETextView.h"
-#import "ETitleView.h"
 
 @interface ENoteDetailViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 {
@@ -18,7 +17,8 @@
 }
 
 @property (nonatomic, retain) EMenuView *menuView;
-@property (nonatomic, retain) ETitleView *titleView;
+@property (nonatomic, retain) UIView *titleView;
+@property (nonatomic, retain) UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet ETextView *contentTextView;
 
 @end
@@ -34,6 +34,11 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -44,7 +49,7 @@
 - (EMenuView *)menuView
 {
     if (!_menuView) {
-        _menuView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
+        _menuView = [[NSBundle mainBundle] loadNibNamed:@"MenuView" owner:self options:nil][0];
         _menuView.hidden = YES;
         __weak ENoteDetailViewController *weakSelf = self;
         _menuView.highlightBtnTappedHandler = ^(BOOL isHighlight) {
@@ -58,13 +63,26 @@
     return _menuView;
 }
 
-- (ETitleView *)titleView
+- (UIView *)titleView
 {
     if (!_titleView) {
-        _titleView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][2];
+        _titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APP_SCREEN_WIDTH, 46)];
+        [_titleView addSubview:self.titleLabel];
+        [EUtility addlineOnView:_titleView position:EViewPositionBottom];
     }
     
     return _titleView;
+}
+
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 0, APP_SCREEN_WIDTH - 34, 46)];
+        _titleLabel.textColor = RGBCOLOR(199, 199, 199);
+        _titleLabel.font = FONT(15);
+    }
+    
+    return _titleLabel;
 }
 
 #pragma mark - TextView Delegate -
@@ -127,10 +145,10 @@
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGR:)];
     [self.contentTextView addGestureRecognizer:tapGR];
     UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGR:)];
-    [self.contentTextView addGestureRecognizer:panGR];
-    self.titleView.titleLabel.text = self.noteTitle;
+    [self.view addGestureRecognizer:panGR];
+    self.titleLabel.text = self.noteTitle;
     self.titleView.top = self.contentTextView.top;
-    [EUtility addlineOnView:self.titleView position:EViewPositionBottom];
+    self.titleView.left = self.contentTextView.left;
     [self.contentTextView addSubview:self.titleView];
     [self.contentTextView addSubview:self.menuView];
     self.contentTextView.tintColor = RGBCOLOR(158, 87, 48);
@@ -140,7 +158,7 @@
 - (void)readContentFromLocal
 {
     attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
-    self.contentTextView.attributedText = attributedText_;
+    self.contentTextView.text = attributedText_.string;
 }
 
 #pragma mark - Actions -
@@ -156,18 +174,18 @@
 
 - (IBAction)tapGR:(UITapGestureRecognizer *)sender
 {
-//    CGPoint location = [sender locationInView:sender.view];
-//    CGRect tapRect = CGRectMake(location.x - 30, location.y - 30, 60, 60);
-//    NSRange range = [self.contentTextView.layoutManager glyphRangeForBoundingRect:tapRect inTextContainer:self.contentTextView.textContainer];
-//
-//    for (NSIndexPath *indexPath in highlightRanges_) {
-//        NSInteger location = indexPath.row;
-//        NSInteger length = indexPath.section;
-//        
-//        if (location <= range.location + range.length || range.location <= location + length) {
-//            NSLog(@"选中有高亮");
-//        }
-//    }
+    CGPoint location = [sender locationInView:sender.view];
+    CGRect tapRect = CGRectMake(location.x - 30, location.y - 30, 60, 60);
+    NSRange range = [self.contentTextView.layoutManager glyphRangeForBoundingRect:tapRect inTextContainer:self.contentTextView.textContainer];
+
+    for (NSIndexPath *indexPath in highlightRanges_) {
+        NSInteger location = indexPath.row;
+        NSInteger length = indexPath.section;
+        
+        if (location <= range.location + range.length || range.location <= location + length) {
+            NSLog(@"选中有高亮");
+        }
+    }
 }
 
 - (void)cBtnTapped

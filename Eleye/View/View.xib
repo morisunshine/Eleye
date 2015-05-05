@@ -56,66 +56,6 @@
             </connections>
             <point key="canvasLocation" x="361" y="-20.5"/>
         </view>
-        <view contentMode="scaleToFill" id="4Xa-iW-cpX" customClass="EMenuView">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-7e-7Xc">
-                    <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
-                    <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="highlight">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="hightlightBtnTapped:" destination="4Xa-iW-cpX" eventType="touchUpInside" id="deo-kW-QRy"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pe9-WN-fcV">
-                    <rect key="frame" x="100" y="0.0" width="100" height="40"/>
-                    <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="copy">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="cBtnTapped:" destination="4Xa-iW-cpX" eventType="touchUpInside" id="aYO-w4-abb"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="ctionBtn" destination="Pe9-WN-fcV" id="GPm-tW-RCI"/>
-                <outlet property="highlightActionBtn" destination="k2x-7e-7Xc" id="TPD-Cx-4lL"/>
-            </connections>
-            <point key="canvasLocation" x="169" y="-53"/>
-        </view>
-        <view contentMode="scaleToFill" id="6LO-N6-9JX" userLabel="titleView" customClass="ETitleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDR-Yc-7Ap">
-                    <rect key="frame" x="16" y="0.0" width="288" height="46"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="YDR-Yc-7Ap" secondAttribute="bottom" id="8Kq-QS-DLq"/>
-                <constraint firstAttribute="trailing" secondItem="YDR-Yc-7Ap" secondAttribute="trailing" constant="16" id="Gvr-8R-D5Q"/>
-                <constraint firstItem="YDR-Yc-7Ap" firstAttribute="top" secondItem="6LO-N6-9JX" secondAttribute="top" id="IPc-ij-bB2"/>
-                <constraint firstItem="YDR-Yc-7Ap" firstAttribute="leading" secondItem="6LO-N6-9JX" secondAttribute="leading" constant="16" id="lcG-4N-hPA"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="titleLabel" destination="YDR-Yc-7Ap" id="wDy-fy-v8v"/>
-            </connections>
-            <point key="canvasLocation" x="356" y="215"/>
-        </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

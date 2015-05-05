@@ -28,6 +28,7 @@
 		08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */; };
 		08D4A1291AEFB6F2000BAC87 /* ENoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1191AEFB6F2000BAC87 /* ENoteContentViewController.m */; };
 		08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */; };
+		183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C5DE81AF8B37D00ED224C /* MenuView.xib */; };
 		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
@@ -89,6 +90,7 @@
 		08D4A1191AEFB6F2000BAC87 /* ENoteContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteContentViewController.m; sourceTree = "<group>"; };
 		08D4A11A1AEFB6F2000BAC87 /* ENoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDetailViewController.h; sourceTree = "<group>"; };
 		08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDetailViewController.m; sourceTree = "<group>"; };
+		183C5DE81AF8B37D00ED224C /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
 		1871B69B1AEF9A4F0090578E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1871B69D1AF0AA970090578E /* ETitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETitleView.h; sourceTree = "<group>"; };
 		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				08D4A1101AEFB6F2000BAC87 /* View.xib */,
 				1871B69D1AF0AA970090578E /* ETitleView.h */,
 				1871B69E1AF0AA970090578E /* ETitleView.m */,
+				183C5DE81AF8B37D00ED224C /* MenuView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			files = (
 				08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */,
 				08751F221AE5386900FE17B1 /* Main.storyboard in Resources */,
+				183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
 			);
