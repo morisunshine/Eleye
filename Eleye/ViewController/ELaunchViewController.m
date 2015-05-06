@@ -9,11 +9,11 @@
 #import "ELaunchViewController.h"
 #import "EAllNoteBooksViewController.h"
 #import <ENSession.h>
+#import "ELoginView.h"
 
 @interface ELaunchViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *evernoteBtn;
-@property (weak, nonatomic) IBOutlet UIButton *yingxiangBtn;
+@property (nonatomic, retain) ELoginView *loginView;
 
 @end
 
@@ -27,27 +27,66 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.showNoAnimation == NO) {
+        self.loginView.evernoteBtn.alpha = 0;
+        self.loginView.yinxiangBtn.alpha = 0;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (self.showNoAnimation == NO) {
+        [UIView animateWithDuration:1 animations:^{
+            self.loginView.evernoteBtn.alpha = 1;
+            self.loginView.yinxiangBtn.alpha = 1;
+        }];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)configureUI
+#pragma mark - Getters -
+
+- (ELoginView *)loginView
 {
-    [EUtility addlineOnView:self.evernoteBtn position:EViewPositionBottom];
+    if (!_loginView) {
+        _loginView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
+        _loginView.evernoteBtn.alpha = 1;
+        _loginView.yinxiangBtn.alpha = 1;
+        [_loginView.evernoteBtn addTarget:self action:@selector(evernoteUserBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [_loginView.yinxiangBtn addTarget:self action:@selector(yxUserBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _loginView;
 }
 
-- (IBAction)evernoteUserBtnTapped:(id)sender 
+#pragma mark - Actions -
+
+- (IBAction)evernoteUserBtnTapped:(id)sender
 {
     [self authorization];
 }
 
-- (IBAction)yxUserBtnTapped:(id)sender 
+- (IBAction)yxUserBtnTapped:(id)sender
 {
     [self authorization];
 }
 
 #pragma mark - Private Methods -
+
+- (void)configureUI
+{
+    [self.view addSubview:self.loginView];
+}
 
 - (void)authorization
 {

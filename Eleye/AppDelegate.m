@@ -10,6 +10,7 @@
 #import <ENSDK/ENSDK.h>
 #import "ELaunchViewController.h"
 #import "EAllNoteBooksViewController.h"
+#import "EGuideViewController.h"
 
 @interface AppDelegate ()
 
@@ -40,7 +41,8 @@
         allNotebooksViewController.showAllNotes = YES;
         viewController = allNotebooksViewController;
     } else {
-        UIViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        launchViewController.showNoAnimation = YES;
         viewController = launchViewController;
     }
     
@@ -48,6 +50,11 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:SHOWGUIDE] == nil) {
+        EGuideViewController *guidViewController = [storyboard instantiateViewControllerWithIdentifier:@"EGuideViewController"];
+        [navController presentViewController:guidViewController animated:NO completion:nil];
+    }
     
     [navController pushViewController:viewController animated:NO];
     

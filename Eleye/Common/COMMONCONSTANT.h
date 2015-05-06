@@ -44,6 +44,8 @@
 //Offset
 #define OFFSET_SHADOW_NAVIGATION_TITLE      CGSizeMake(0, 1)
 
+#define SHOWGUIDE                           @"hasShowGuide"
+
 #pragma mark - 默认图片
 //默认图片
 #define DEFAULT_IMAGE_REPLACE               @"defaultImage.png"

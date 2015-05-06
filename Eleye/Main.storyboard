@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Launch View Controller-->
@@ -18,90 +17,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8r-ZV-Vhb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="239"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="eleye_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aVn-PJ-3Cm">
-                                        <rect key="frame" x="41" y="87" width="82" height="65"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="evernote_logo" translatesAutoresizingMaskIntoConstraints="NO" id="sns-KY-vX1">
-                                        <rect key="frame" x="200" y="82" width="62" height="75"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="connect" translatesAutoresizingMaskIntoConstraints="NO" id="X9I-mO-r9V">
-                                        <rect key="frame" x="148" y="110" width="25" height="19"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Memory &amp; Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFA-Ko-Ivw">
-                                        <rect key="frame" x="97" y="178" width="127" height="24"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="cFA-Ko-Ivw" secondAttribute="centerX" constant="-0.5" id="8Ju-2W-RVn"/>
-                                    <constraint firstAttribute="bottom" secondItem="cFA-Ko-Ivw" secondAttribute="bottom" constant="37" id="NyD-qe-hyy"/>
-                                    <constraint firstAttribute="centerX" secondItem="X9I-mO-r9V" secondAttribute="centerX" constant="-0.5" id="Z8x-GU-1oe"/>
-                                    <constraint firstAttribute="trailing" secondItem="sns-KY-vX1" secondAttribute="trailing" constant="58" id="cGP-P3-D3Q"/>
-                                    <constraint firstAttribute="centerY" secondItem="sns-KY-vX1" secondAttribute="centerY" id="haI-8q-SSQ"/>
-                                    <constraint firstAttribute="centerY" secondItem="aVn-PJ-3Cm" secondAttribute="centerY" id="jM1-ok-drk"/>
-                                    <constraint firstItem="aVn-PJ-3Cm" firstAttribute="leading" secondItem="q8r-ZV-Vhb" secondAttribute="leading" constant="41" id="kRO-g5-HeK"/>
-                                    <constraint firstAttribute="centerY" secondItem="X9I-mO-r9V" secondAttribute="centerY" id="v8d-zj-v2x"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAy-MH-tkc">
-                                <rect key="frame" x="0.0" y="239" width="320" height="329"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3a2-7X-oly">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Evernote users">
-                                            <color key="titleColor" red="0.61960784313725492" green="0.3411764705882353" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="evernoteUserBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9x4-a2-0Vr"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCH-MX-x3m">
-                                        <rect key="frame" x="0.0" y="167" width="320" height="162"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="印象笔记用户">
-                                            <color key="titleColor" red="0.61960784310000006" green="0.3411764706" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="yxUserBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bvZ-4S-b60"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="3a2-7X-oly" secondAttribute="centerX" id="4ir-JS-IZG"/>
-                                    <constraint firstItem="XCH-MX-x3m" firstAttribute="bottom" secondItem="3a2-7X-oly" secondAttribute="bottom" constant="170" id="81S-z6-DGF"/>
-                                    <constraint firstAttribute="centerY" secondItem="3a2-7X-oly" secondAttribute="centerY" multiplier="1/2" constant="85" placeholder="YES" id="H1u-51-Rhe"/>
-                                    <constraint firstItem="3a2-7X-oly" firstAttribute="top" secondItem="YAy-MH-tkc" secondAttribute="top" id="VnO-h8-UnH"/>
-                                    <constraint firstAttribute="width" secondItem="3a2-7X-oly" secondAttribute="width" id="Wav-18-Riv"/>
-                                    <constraint firstItem="XCH-MX-x3m" firstAttribute="width" secondItem="3a2-7X-oly" secondAttribute="width" id="e55-WF-Hkh"/>
-                                    <constraint firstItem="XCH-MX-x3m" firstAttribute="height" secondItem="3a2-7X-oly" secondAttribute="height" id="iYT-1d-kZ8"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="q8r-ZV-Vhb" secondAttribute="width" id="GgD-fg-9Wj"/>
-                            <constraint firstItem="YAy-MH-tkc" firstAttribute="bottom" secondItem="q8r-ZV-Vhb" secondAttribute="bottom" constant="329" id="dwT-7P-cMh"/>
-                            <constraint firstItem="YAy-MH-tkc" firstAttribute="width" secondItem="q8r-ZV-Vhb" secondAttribute="width" id="mWG-Yd-kZv"/>
-                            <constraint firstItem="q8r-ZV-Vhb" firstAttribute="top" secondItem="WgM-7a-o7K" secondAttribute="bottom" id="qeH-AY-fRe"/>
-                            <constraint firstItem="3aA-U2-S1R" firstAttribute="top" secondItem="YAy-MH-tkc" secondAttribute="bottom" id="w6D-0f-XqF"/>
-                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="evernoteBtn" destination="3a2-7X-oly" id="sAN-P9-ICw"/>
-                        <outlet property="yingxiangBtn" destination="XCH-MX-x3m" id="jbj-fj-jLd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -245,6 +163,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Asn-Oy-iqt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1525" y="314"/>
+        </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="oNr-Pk-MNq">
+            <objects>
+                <viewController storyboardIdentifier="EGuideViewController" id="zFV-t9-h6E" customClass="EGuideViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zm8-hK-T9x"/>
+                        <viewControllerLayoutGuide type="bottom" id="hjH-6E-fAB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ssl-aA-7kt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ME6-iY-RyI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zFV-t9-h6E" id="TLM-uA-eTg"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ME6-iY-RyI" firstAttribute="leading" secondItem="Ssl-aA-7kt" secondAttribute="leadingMargin" constant="-16" id="2oO-H0-A3N"/>
+                            <constraint firstItem="hjH-6E-fAB" firstAttribute="top" secondItem="ME6-iY-RyI" secondAttribute="bottom" id="7v8-zV-Rux"/>
+                            <constraint firstItem="ME6-iY-RyI" firstAttribute="top" secondItem="zm8-hK-T9x" secondAttribute="bottom" id="Xhn-9v-wDf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ME6-iY-RyI" secondAttribute="trailing" constant="-16" id="xz3-L6-EUe"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="scrollView" destination="ME6-iY-RyI" id="8t7-Su-Tpv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YNi-CY-KsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1910" y="314"/>
         </scene>
         <!--All Note Books View Controller-->
         <scene sceneID="9Ie-DL-Otn">
@@ -398,9 +352,6 @@
     <resources>
         <image name="Whee-lab-logo" width="20" height="20"/>
         <image name="account" width="24" height="24"/>
-        <image name="connect" width="25" height="19"/>
-        <image name="eleye_logo" width="87" height="65"/>
-        <image name="evernote_logo" width="62" height="75"/>
         <image name="notebook" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

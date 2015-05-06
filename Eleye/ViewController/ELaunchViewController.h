@@ -10,6 +10,7 @@
 
 @interface ELaunchViewController : UIViewController
 
+@property (nonatomic) BOOL showNoAnimation;
 
 @end
 
