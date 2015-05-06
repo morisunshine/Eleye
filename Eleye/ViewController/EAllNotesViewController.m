@@ -183,16 +183,16 @@ static NSInteger kCellHeight = 100;
         
         NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
         if (attributedString) {
-            note.content = attributedString.string;
+            note.content = [attributedString.string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         } else {
             ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
             [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
                 ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
                 NSString *contentString = [resultNote.content enmlWithNote:resultNote];
                 [EUtility saveContentToFileWithContent:contentString guid:note.guid];
-                note.content = enote.content;
+                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+                note.content = [attributedString.string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                NSLog(@"content:%@", enote.content);
             } failure:^(NSError *error) {
                 if (error) {
                     NSLog(@"获取笔记内容错误%@", error);

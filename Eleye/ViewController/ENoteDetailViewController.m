@@ -10,6 +10,7 @@
 #import "EMenuView.h"
 #import "ETextView.h"
 
+
 @interface ENoteDetailViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 {
     NSMutableArray *highlightRanges_;
@@ -168,12 +169,18 @@
 {
     [attributedText_ enumerateAttributesInRange:NSMakeRange(0, attributedText_.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
         NSLog(@"attrs:%@ range:%@, %@, text:%@", attrs, @(range.location), @(range.length), [attributedText_.string substringWithRange:range]);
-        UIFont *font = [UIFont systemFontOfSize:16];
+        UIFont *font = [attrs objectForKey:NSFontAttributeName];
+        if (font.pointSize < 17) {
+            font = [UIFont systemFontOfSize:14];
+        } else {
+            font = [UIFont systemFontOfSize:18];
+        }
+        NSParagraphStyle *paragraphStyle = [attrs objectForKey:NSParagraphStyleAttributeName];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{NSBackgroundColorAttributeName: [UIColor whiteColor],
                                                                                    NSFontAttributeName: font,
+                                                                                   NSParagraphStyleAttributeName: paragraphStyle,
                                                                                    NSForegroundColorAttributeName: RGBCOLOR(75, 75, 75)}];
         if ([attrs objectForKey:NSLinkAttributeName]) {
-            NSLog(@"有超连接");
             [dic setObject:@(NSUnderlineStyleSingle) forKey:NSUnderlineStyleAttributeName];
             [dic setObject:RGBCOLOR(168, 87, 48) forKey:NSForegroundColorAttributeName];
             [dic setObject:[attributedText_.string substringWithRange:range] forKey:NSLinkAttributeName];
