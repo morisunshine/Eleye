@@ -30,7 +30,9 @@
     
     [self configureUI];
     [self readContentFromLocal];
-    [self fetchNoteDetail];
+    if (!attributedText_) {
+        [self fetchNoteDetail];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -89,6 +91,7 @@
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
+    NSLog(@"selected:%@, %@", @(textView.selectedRange.location), @(textView.selectedRange.length));
     [self updateMenuView];
 }
 
@@ -103,7 +106,7 @@
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
         attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
-        self.contentTextView.text = attributedText.string;
+        self.contentTextView.attributedText = attributedText_;
         
     } failure:^(NSError *error) {
         if (error) {
@@ -158,7 +161,10 @@
 - (void)readContentFromLocal
 {
     attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
-    self.contentTextView.text = attributedText_.string;
+    self.contentTextView.attributedText = attributedText_;
+    [attributedText_ enumerateAttributesInRange:NSMakeRange(0, attributedText_.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        NSLog(@"attrs:%@ range:%@, %@, text:%@", attrs, @(range.location), @(range.length), [attributedText_.string substringWithRange:range]);
+    }];
 }
 
 #pragma mark - Actions -
@@ -167,25 +173,25 @@
 {
     CGPoint vel = [sender velocityInView:self.view];
     NSLog(@"vel:%@", NSStringFromCGPoint(vel));
-    if (vel.x > 0) {
+    if (vel.x > 50) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 - (IBAction)tapGR:(UITapGestureRecognizer *)sender
 {
-    CGPoint location = [sender locationInView:sender.view];
-    CGRect tapRect = CGRectMake(location.x - 30, location.y - 30, 60, 60);
-    NSRange range = [self.contentTextView.layoutManager glyphRangeForBoundingRect:tapRect inTextContainer:self.contentTextView.textContainer];
-
-    for (NSIndexPath *indexPath in highlightRanges_) {
-        NSInteger location = indexPath.row;
-        NSInteger length = indexPath.section;
-        
-        if (location <= range.location + range.length || range.location <= location + length) {
-            NSLog(@"选中有高亮");
-        }
-    }
+//    CGPoint location = [sender locationInView:sender.view];
+//    CGRect tapRect = CGRectMake(location.x - 30, location.y - 30, 60, 60);
+//    NSRange range = [self.contentTextView.layoutManager glyphRangeForBoundingRect:tapRect inTextContainer:self.contentTextView.textContainer];
+//
+//    for (NSIndexPath *indexPath in highlightRanges_) {
+//        NSInteger location = indexPath.row;
+//        NSInteger length = indexPath.section;
+//        
+//        if (location <= range.location + range.length || range.location <= location + length) {
+//            NSLog(@"选中有高亮");
+//        }
+//    }
 }
 
 - (void)cBtnTapped
