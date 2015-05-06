@@ -170,14 +170,15 @@
     [attributedText_ enumerateAttributesInRange:NSMakeRange(0, attributedText_.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
         NSLog(@"attrs:%@ range:%@, %@, text:%@", attrs, @(range.location), @(range.length), [attributedText_.string substringWithRange:range]);
         UIFont *font = [attrs objectForKey:NSFontAttributeName];
-        if (font.pointSize < 17) {
-            font = [UIFont systemFontOfSize:14];
-        } else {
-            font = [UIFont systemFontOfSize:16];
-        }
+//        if (font.pointSize < 17) {
+//            font = [UIFont systemFontOfSize:14];
+//        } else {
+//            font = [UIFont systemFontOfSize:16];
+//        }
+        UIFont *newFont = [UIFont systemFontOfSize:font.pointSize];
         NSParagraphStyle *paragraphStyle = [attrs objectForKey:NSParagraphStyleAttributeName];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{NSBackgroundColorAttributeName: [UIColor whiteColor],
-                                                                                   NSFontAttributeName: font,
+                                                                                   NSFontAttributeName: newFont,
                                                                                    NSParagraphStyleAttributeName: paragraphStyle,
                                                                                    NSForegroundColorAttributeName: RGBCOLOR(75, 75, 75)}];
         if ([attrs objectForKey:NSLinkAttributeName]) {
@@ -230,25 +231,6 @@
     }];
     
     self.contentTextView.attributedText = attributedText_;
-    
-//    if (highlight) {
-//        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedRange.location inSection:selectedRange.length];
-//        [highlightRanges_ addObject:selectedIndexPath];
-//        dict = @{NSBackgroundColorAttributeName: RGBACOLOR(168, 87, 48, 0.3), NSFontAttributeName: font};
-//    } else {
-//        dict = @{NSBackgroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font};
-//    }
-//    
-//    [self.contentTextView.textStorage beginEditing];
-//    [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
-//    [self.contentTextView.textStorage endEditing];
-//    
-//    [attributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationReverse usingBlock:
-//     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
-//         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-//         [mutableAttributes setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
-//         [attributedText_ setAttributes:mutableAttributes range:range];
-//     }];
     
     self.contentTextView.selectedRange = NSMakeRange(0, 0);
 }
