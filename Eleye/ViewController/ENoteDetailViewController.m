@@ -106,7 +106,7 @@
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
         attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
-        self.contentTextView.attributedText = attributedText_;
+        [self customStyleWithContent];
         
     } failure:^(NSError *error) {
         if (error) {
@@ -161,10 +161,29 @@
 - (void)readContentFromLocal
 {
     attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
-    self.contentTextView.attributedText = attributedText_;
+    [self customStyleWithContent];
+}
+
+- (void)customStyleWithContent
+{
     [attributedText_ enumerateAttributesInRange:NSMakeRange(0, attributedText_.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
         NSLog(@"attrs:%@ range:%@, %@, text:%@", attrs, @(range.location), @(range.length), [attributedText_.string substringWithRange:range]);
+        UIFont *font = [UIFont systemFontOfSize:16];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{NSBackgroundColorAttributeName: [UIColor whiteColor],
+                                                                                   NSFontAttributeName: font,
+                                                                                   NSForegroundColorAttributeName: RGBCOLOR(75, 75, 75)}];
+        if ([attrs objectForKey:NSLinkAttributeName]) {
+            NSLog(@"有超连接");
+            [dic setObject:@(NSUnderlineStyleSingle) forKey:NSUnderlineStyleAttributeName];
+            [dic setObject:RGBCOLOR(168, 87, 48) forKey:NSForegroundColorAttributeName];
+            [dic setObject:[attributedText_.string substringWithRange:range] forKey:NSLinkAttributeName];
+        } else {
+            [dic setObject:RGBCOLOR(75, 75, 75) forKey:NSForegroundColorAttributeName];
+        }
+        [attributedText_ setAttributes:dic range:range];
     }];
+    
+    self.contentTextView.attributedText = attributedText_;
 }
 
 #pragma mark - Actions -
