@@ -198,7 +198,6 @@
 - (IBAction)panGR:(UIPanGestureRecognizer *)sender
 {
     CGPoint vel = [sender velocityInView:self.view];
-    NSLog(@"vel:%@", NSStringFromCGPoint(vel));
     if (vel.x > 50) {
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -206,18 +205,7 @@
 
 - (IBAction)tapGR:(UITapGestureRecognizer *)sender
 {
-//    CGPoint location = [sender locationInView:sender.view];
-//    CGRect tapRect = CGRectMake(location.x - 30, location.y - 30, 60, 60);
-//    NSRange range = [self.contentTextView.layoutManager glyphRangeForBoundingRect:tapRect inTextContainer:self.contentTextView.textContainer];
-//
-//    for (NSIndexPath *indexPath in highlightRanges_) {
-//        NSInteger location = indexPath.row;
-//        NSInteger length = indexPath.section;
-//        
-//        if (location <= range.location + range.length || range.location <= location + length) {
-//            NSLog(@"选中有高亮");
-//        }
-//    }
+    self.contentTextView.selectedRange = NSMakeRange(0, 0);
 }
 
 - (void)cBtnTapped
@@ -229,27 +217,38 @@
 - (void)highlightTextViewWithHighlight:(BOOL)highlight
 {
     NSRange selectedRange = self.contentTextView.selectedRange;
-    UIFont *font = [UIFont systemFontOfSize:16];
-    NSDictionary *dict;
+    [attributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        NSMutableDictionary *mutAttrs = [NSMutableDictionary dictionaryWithDictionary:attrs];
+        if (highlight) {
+            NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedRange.location inSection:selectedRange.length];
+            [highlightRanges_ addObject:selectedIndexPath];
+            [mutAttrs setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
+        } else {
+            [mutAttrs setObject:[UIColor whiteColor] forKey:NSBackgroundColorAttributeName];
+        }
+        [attributedText_ setAttributes:mutAttrs range:range];
+    }];
     
-    if (highlight) {
-        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedRange.location inSection:selectedRange.length];
-        [highlightRanges_ addObject:selectedIndexPath];
-        dict = @{NSBackgroundColorAttributeName: RGBACOLOR(168, 87, 48, 0.3), NSFontAttributeName: font};
-    } else {
-        dict = @{NSBackgroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font};
-    }
+    self.contentTextView.attributedText = attributedText_;
     
-    [self.contentTextView.textStorage beginEditing];
-    [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
-    [self.contentTextView.textStorage endEditing];
-    
-    [attributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationReverse usingBlock:
-     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
-         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-         [mutableAttributes setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
-         [attributedText_ setAttributes:mutableAttributes range:range];
-     }];
+//    if (highlight) {
+//        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedRange.location inSection:selectedRange.length];
+//        [highlightRanges_ addObject:selectedIndexPath];
+//        dict = @{NSBackgroundColorAttributeName: RGBACOLOR(168, 87, 48, 0.3), NSFontAttributeName: font};
+//    } else {
+//        dict = @{NSBackgroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: font};
+//    }
+//    
+//    [self.contentTextView.textStorage beginEditing];
+//    [self.contentTextView.textStorage setAttributes:dict range:selectedRange];
+//    [self.contentTextView.textStorage endEditing];
+//    
+//    [attributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationReverse usingBlock:
+//     ^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+//         NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+//         [mutableAttributes setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
+//         [attributedText_ setAttributes:mutableAttributes range:range];
+//     }];
     
     self.contentTextView.selectedRange = NSMakeRange(0, 0);
 }
