@@ -173,7 +173,7 @@
         if (font.pointSize < 17) {
             font = [UIFont systemFontOfSize:14];
         } else {
-            font = [UIFont systemFontOfSize:18];
+            font = [UIFont systemFontOfSize:16];
         }
         NSParagraphStyle *paragraphStyle = [attrs objectForKey:NSParagraphStyleAttributeName];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{NSBackgroundColorAttributeName: [UIColor whiteColor],
@@ -183,7 +183,7 @@
         if ([attrs objectForKey:NSLinkAttributeName]) {
             [dic setObject:@(NSUnderlineStyleSingle) forKey:NSUnderlineStyleAttributeName];
             [dic setObject:RGBCOLOR(168, 87, 48) forKey:NSForegroundColorAttributeName];
-            [dic setObject:[attributedText_.string substringWithRange:range] forKey:NSLinkAttributeName];
+            [dic setObject:[attrs objectForKey:NSLinkAttributeName] forKey:NSLinkAttributeName];
         } else {
             [dic setObject:RGBCOLOR(75, 75, 75) forKey:NSForegroundColorAttributeName];
         }
