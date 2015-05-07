@@ -32,6 +32,22 @@
 		08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */; };
 		183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C5DE81AF8B37D00ED224C /* MenuView.xib */; };
 		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
+		18D63F491AFB475700094F8C /* editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 18D63EC51AFB475600094F8C /* editor.html */; };
+		18D63F961AFB475700094F8C /* CYRLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F161AFB475600094F8C /* CYRLayoutManager.m */; };
+		18D63F971AFB475700094F8C /* CYRTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F181AFB475700094F8C /* CYRTextStorage.m */; };
+		18D63F981AFB475700094F8C /* CYRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F1A1AFB475700094F8C /* CYRTextView.m */; };
+		18D63F991AFB475700094F8C /* CYRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F1C1AFB475700094F8C /* CYRToken.m */; };
+		18D63F9A1AFB475700094F8C /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F1E1AFB475700094F8C /* HRBrightnessCursor.m */; };
+		18D63F9B1AFB475700094F8C /* HRCgUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F201AFB475700094F8C /* HRCgUtil.m */; };
+		18D63F9C1AFB475700094F8C /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F221AFB475700094F8C /* HRColorCursor.m */; };
+		18D63F9D1AFB475700094F8C /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F251AFB475700094F8C /* HRColorPickerView.m */; };
+		18D63F9E1AFB475700094F8C /* HRColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F271AFB475700094F8C /* HRColorPickerViewController.m */; };
+		18D63F9F1AFB475700094F8C /* HRColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F291AFB475700094F8C /* HRColorUtil.m */; };
+		18D63FA11AFB475700094F8C /* ZSSBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F2D1AFB475700094F8C /* ZSSBarButtonItem.m */; };
+		18D63FAA1AFB475700094F8C /* ZSSRichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 18D63F3F1AFB475700094F8C /* ZSSRichTextEditor.js */; };
+		18D63FAB1AFB475700094F8C /* ZSSRichTextEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F401AFB475700094F8C /* ZSSRichTextEditor.m */; };
+		18D63FAD1AFB475700094F8C /* ZSSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F441AFB475700094F8C /* ZSSTextView.m */; };
+		18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63FAF1AFB496100094F8C /* ENoteViewController.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
 		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
@@ -100,6 +116,37 @@
 		1871B69B1AEF9A4F0090578E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1871B69D1AF0AA970090578E /* ETitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETitleView.h; sourceTree = "<group>"; };
 		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
+		18D63EC51AFB475600094F8C /* editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = editor.html; sourceTree = "<group>"; };
+		18D63F151AFB475600094F8C /* CYRLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYRLayoutManager.h; sourceTree = "<group>"; };
+		18D63F161AFB475600094F8C /* CYRLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYRLayoutManager.m; sourceTree = "<group>"; };
+		18D63F171AFB475700094F8C /* CYRTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYRTextStorage.h; sourceTree = "<group>"; };
+		18D63F181AFB475700094F8C /* CYRTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYRTextStorage.m; sourceTree = "<group>"; };
+		18D63F191AFB475700094F8C /* CYRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYRTextView.h; sourceTree = "<group>"; };
+		18D63F1A1AFB475700094F8C /* CYRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYRTextView.m; sourceTree = "<group>"; };
+		18D63F1B1AFB475700094F8C /* CYRToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYRToken.h; sourceTree = "<group>"; };
+		18D63F1C1AFB475700094F8C /* CYRToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYRToken.m; sourceTree = "<group>"; };
+		18D63F1D1AFB475700094F8C /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
+		18D63F1E1AFB475700094F8C /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
+		18D63F1F1AFB475700094F8C /* HRCgUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRCgUtil.h; sourceTree = "<group>"; };
+		18D63F201AFB475700094F8C /* HRCgUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRCgUtil.m; sourceTree = "<group>"; };
+		18D63F211AFB475700094F8C /* HRColorCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorCursor.h; sourceTree = "<group>"; };
+		18D63F221AFB475700094F8C /* HRColorCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorCursor.m; sourceTree = "<group>"; };
+		18D63F231AFB475700094F8C /* HRColorPickerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerMacros.h; sourceTree = "<group>"; };
+		18D63F241AFB475700094F8C /* HRColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerView.h; sourceTree = "<group>"; };
+		18D63F251AFB475700094F8C /* HRColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerView.m; sourceTree = "<group>"; };
+		18D63F261AFB475700094F8C /* HRColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerViewController.h; sourceTree = "<group>"; };
+		18D63F271AFB475700094F8C /* HRColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerViewController.m; sourceTree = "<group>"; };
+		18D63F281AFB475700094F8C /* HRColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorUtil.h; sourceTree = "<group>"; };
+		18D63F291AFB475700094F8C /* HRColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorUtil.m; sourceTree = "<group>"; };
+		18D63F2C1AFB475700094F8C /* ZSSBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSSBarButtonItem.h; sourceTree = "<group>"; };
+		18D63F2D1AFB475700094F8C /* ZSSBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSSBarButtonItem.m; sourceTree = "<group>"; };
+		18D63F3E1AFB475700094F8C /* ZSSRichTextEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSSRichTextEditor.h; sourceTree = "<group>"; };
+		18D63F3F1AFB475700094F8C /* ZSSRichTextEditor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ZSSRichTextEditor.js; sourceTree = "<group>"; };
+		18D63F401AFB475700094F8C /* ZSSRichTextEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSSRichTextEditor.m; sourceTree = "<group>"; };
+		18D63F431AFB475700094F8C /* ZSSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSSTextView.h; sourceTree = "<group>"; };
+		18D63F441AFB475700094F8C /* ZSSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSSTextView.m; sourceTree = "<group>"; };
+		18D63FAE1AFB496100094F8C /* ENoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteViewController.h; sourceTree = "<group>"; };
+		18D63FAF1AFB496100094F8C /* ENoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteViewController.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
 		18FF6F171AE79B3E000425E4 /* EDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDBManager.m; sourceTree = "<group>"; };
 		18FF6F191AE79C3C000425E4 /* EBaseDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBaseDAO.h; sourceTree = "<group>"; };
@@ -200,6 +247,7 @@
 		08D4A0FA1AEFB6F2000BAC87 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18D63EC01AFB475600094F8C /* ZSSRichTextEditor */,
 				08D4A0FB1AEFB6F2000BAC87 /* COMMONCONSTANT.h */,
 				08D4A0FC1AEFB6F2000BAC87 /* EUtility.h */,
 				08D4A0FD1AEFB6F2000BAC87 /* EUtility.m */,
@@ -258,8 +306,54 @@
 				08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */,
 				08E289AD1AFA58E4000C0CB9 /* EGuideViewController.h */,
 				08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */,
+				18D63FAE1AFB496100094F8C /* ENoteViewController.h */,
+				18D63FAF1AFB496100094F8C /* ENoteViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		18D63EC01AFB475600094F8C /* ZSSRichTextEditor */ = {
+			isa = PBXGroup;
+			children = (
+				18D63EC51AFB475600094F8C /* editor.html */,
+				18D63F141AFB475600094F8C /* Third Party */,
+				18D63F2C1AFB475700094F8C /* ZSSBarButtonItem.h */,
+				18D63F2D1AFB475700094F8C /* ZSSBarButtonItem.m */,
+				18D63F3E1AFB475700094F8C /* ZSSRichTextEditor.h */,
+				18D63F3F1AFB475700094F8C /* ZSSRichTextEditor.js */,
+				18D63F401AFB475700094F8C /* ZSSRichTextEditor.m */,
+				18D63F431AFB475700094F8C /* ZSSTextView.h */,
+				18D63F441AFB475700094F8C /* ZSSTextView.m */,
+			);
+			path = ZSSRichTextEditor;
+			sourceTree = "<group>";
+		};
+		18D63F141AFB475600094F8C /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				18D63F151AFB475600094F8C /* CYRLayoutManager.h */,
+				18D63F161AFB475600094F8C /* CYRLayoutManager.m */,
+				18D63F171AFB475700094F8C /* CYRTextStorage.h */,
+				18D63F181AFB475700094F8C /* CYRTextStorage.m */,
+				18D63F191AFB475700094F8C /* CYRTextView.h */,
+				18D63F1A1AFB475700094F8C /* CYRTextView.m */,
+				18D63F1B1AFB475700094F8C /* CYRToken.h */,
+				18D63F1C1AFB475700094F8C /* CYRToken.m */,
+				18D63F1D1AFB475700094F8C /* HRBrightnessCursor.h */,
+				18D63F1E1AFB475700094F8C /* HRBrightnessCursor.m */,
+				18D63F1F1AFB475700094F8C /* HRCgUtil.h */,
+				18D63F201AFB475700094F8C /* HRCgUtil.m */,
+				18D63F211AFB475700094F8C /* HRColorCursor.h */,
+				18D63F221AFB475700094F8C /* HRColorCursor.m */,
+				18D63F231AFB475700094F8C /* HRColorPickerMacros.h */,
+				18D63F241AFB475700094F8C /* HRColorPickerView.h */,
+				18D63F251AFB475700094F8C /* HRColorPickerView.m */,
+				18D63F261AFB475700094F8C /* HRColorPickerViewController.h */,
+				18D63F271AFB475700094F8C /* HRColorPickerViewController.m */,
+				18D63F281AFB475700094F8C /* HRColorUtil.h */,
+				18D63F291AFB475700094F8C /* HRColorUtil.m */,
+			);
+			path = "Third Party";
 			sourceTree = "<group>";
 		};
 		18FF6F141AE79B01000425E4 /* DAO */ = {
@@ -380,6 +474,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */,
+				18D63FAA1AFB475700094F8C /* ZSSRichTextEditor.js in Resources */,
+				18D63F491AFB475700094F8C /* editor.html in Resources */,
 				08751F221AE5386900FE17B1 /* Main.storyboard in Resources */,
 				183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
@@ -434,27 +530,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D63F9D1AFB475700094F8C /* HRColorPickerView.m in Sources */,
 				08D4A1211AEFB6F2000BAC87 /* ENotebookCell.m in Sources */,
 				08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */,
 				08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */,
 				08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */,
 				18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */,
+				18D63FAD1AFB475700094F8C /* ZSSTextView.m in Sources */,
 				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
 				08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */,
 				1871B69F1AF0AA970090578E /* ETitleView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
+				18D63F9B1AFB475700094F8C /* HRCgUtil.m in Sources */,
+				18D63F971AFB475700094F8C /* CYRTextStorage.m in Sources */,
 				08E289AC1AFA57FF000C0CB9 /* ELoginView.m in Sources */,
+				18D63F9F1AFB475700094F8C /* HRColorUtil.m in Sources */,
 				08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */,
 				08D4A1271AEFB6F2000BAC87 /* EAllNotesViewController.m in Sources */,
 				18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */,
+				18D63F981AFB475700094F8C /* CYRTextView.m in Sources */,
 				08D4A1221AEFB6F2000BAC87 /* ENotebookStackView.m in Sources */,
 				08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */,
 				08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */,
+				18D63F9C1AFB475700094F8C /* HRColorCursor.m in Sources */,
+				18D63F9E1AFB475700094F8C /* HRColorPickerViewController.m in Sources */,
 				08D4A1241AEFB6F2000BAC87 /* ETextView.m in Sources */,
+				18D63FA11AFB475700094F8C /* ZSSBarButtonItem.m in Sources */,
+				18D63FAB1AFB475700094F8C /* ZSSRichTextEditor.m in Sources */,
 				08D4A1291AEFB6F2000BAC87 /* ENoteContentViewController.m in Sources */,
+				18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */,
 				08D4A11F1AEFB6F2000BAC87 /* ENoteDO.m in Sources */,
+				18D63F9A1AFB475700094F8C /* HRBrightnessCursor.m in Sources */,
 				18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */,
 				08D4A11E1AEFB6F2000BAC87 /* ENoteBookDO.m in Sources */,
+				18D63F961AFB475700094F8C /* CYRLayoutManager.m in Sources */,
+				18D63F991AFB475700094F8C /* CYRToken.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
 				08D4A1231AEFB6F2000BAC87 /* ENoteCell.m in Sources */,
 			);
