@@ -18,7 +18,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD2-PI-TbR">
-                    <rect key="frame" x="244" y="14" width="36" height="21"/>
+                    <rect key="frame" x="254" y="14" width="36" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
-                    <rect key="frame" x="287" y="17" width="8" height="13"/>
+                    <rect key="frame" x="297" y="17" width="8" height="13"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,7 +41,7 @@
                 <constraint firstAttribute="centerX" secondItem="RNL-o8-QLe" secondAttribute="centerX" id="72Y-PT-XT3"/>
                 <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="CqF-3v-dxM" secondAttribute="top" constant="14" id="BSd-Sk-B3B"/>
                 <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="cD2-PI-TbR" secondAttribute="top" id="Bbn-3z-dQ7"/>
-                <constraint firstAttribute="trailing" secondItem="Zxm-ap-Dqm" secondAttribute="trailing" constant="25" id="JDN-0C-5Ox"/>
+                <constraint firstAttribute="trailing" secondItem="Zxm-ap-Dqm" secondAttribute="trailing" constant="15" id="JDN-0C-5Ox"/>
                 <constraint firstAttribute="centerY" secondItem="Zxm-ap-Dqm" secondAttribute="centerY" constant="1" id="JVm-a3-inZ"/>
                 <constraint firstAttribute="centerX" secondItem="tN7-pF-JhF" secondAttribute="centerX" constant="36.5" id="P9E-m4-9dv"/>
                 <constraint firstItem="Zxm-ap-Dqm" firstAttribute="trailing" secondItem="cD2-PI-TbR" secondAttribute="trailing" constant="15" id="T3H-S2-beB"/>

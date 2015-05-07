@@ -272,11 +272,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="tdW-En-f6E">
-                                                    <rect key="frame" x="294" y="16" width="8" height="13"/>
+                                                    <rect key="frame" x="304" y="16" width="8" height="13"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="tdW-En-f6E" secondAttribute="trailing" constant="10" id="OuD-x5-4US"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tdW-En-f6E" secondAttribute="trailing" id="OuD-x5-4US"/>
                                                 <constraint firstItem="tdW-En-f6E" firstAttribute="trailing" secondItem="uSQ-bv-nrB" secondAttribute="trailing" constant="15" id="RZx-W1-Z3E"/>
                                                 <constraint firstItem="vMG-Dl-AbC" firstAttribute="leading" secondItem="Y9I-xe-pzf" secondAttribute="leadingMargin" constant="26" id="V8l-sA-xrh"/>
                                                 <constraint firstItem="tdW-En-f6E" firstAttribute="centerY" secondItem="uSQ-bv-nrB" secondAttribute="centerY" id="aZj-XR-fNi"/>
