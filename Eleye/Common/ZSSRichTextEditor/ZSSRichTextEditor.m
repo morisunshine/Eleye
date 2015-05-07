@@ -12,67 +12,67 @@
 #import "HRColorUtil.h"
 
 
-@interface UIWebView (HackishAccessoryHiding)
-@property (nonatomic, assign) BOOL hidesInputAccessoryView;
-@end
-
-@implementation UIWebView (HackishAccessoryHiding)
-
-static const char * const hackishFixClassName = "UIWebBrowserViewMinusAccessoryView";
-static Class hackishFixClass = Nil;
-
-- (UIView *)hackishlyFoundBrowserView {
-    UIScrollView *scrollView = self.scrollView;
-    
-    UIView *browserView = nil;
-    for (UIView *subview in scrollView.subviews) {
-        if ([NSStringFromClass([subview class]) hasPrefix:@"UIWebBrowserView"]) {
-            browserView = subview;
-            break;
-        }
-    }
-    return browserView;
-}
-
-- (id)methodReturningNil {
-    return nil;
-}
-
-- (void)ensureHackishSubclassExistsOfBrowserViewClass:(Class)browserViewClass {
-    if (!hackishFixClass) {
-        Class newClass = objc_allocateClassPair(browserViewClass, hackishFixClassName, 0);
-        newClass = objc_allocateClassPair(browserViewClass, hackishFixClassName, 0);
-        IMP nilImp = [self methodForSelector:@selector(methodReturningNil)];
-        class_addMethod(newClass, @selector(inputAccessoryView), nilImp, "@@:");
-        objc_registerClassPair(newClass);
-        
-        hackishFixClass = newClass;
-    }
-}
-
-- (BOOL) hidesInputAccessoryView {
-    UIView *browserView = [self hackishlyFoundBrowserView];
-    return [browserView class] == hackishFixClass;
-}
-
-- (void) setHidesInputAccessoryView:(BOOL)value {
-    UIView *browserView = [self hackishlyFoundBrowserView];
-    if (browserView == nil) {
-        return;
-    }
-    [self ensureHackishSubclassExistsOfBrowserViewClass:[browserView class]];
-    
-    if (value) {
-        object_setClass(browserView, hackishFixClass);
-    }
-    else {
-        Class normalClass = objc_getClass("UIWebBrowserView");
-        object_setClass(browserView, normalClass);
-    }
-    [browserView reloadInputViews];
-}
-
-@end
+//@interface UIWebView (HackishAccessoryHiding)
+//@property (nonatomic, assign) BOOL hidesInputAccessoryView;
+//@end
+//
+//@implementation UIWebView (HackishAccessoryHiding)
+//
+//static const char * const hackishFixClassName = "UIWebBrowserViewMinusAccessoryView";
+//static Class hackishFixClass = Nil;
+//
+//- (UIView *)hackishlyFoundBrowserView {
+//    UIScrollView *scrollView = self.scrollView;
+//    
+//    UIView *browserView = nil;
+//    for (UIView *subview in scrollView.subviews) {
+//        if ([NSStringFromClass([subview class]) hasPrefix:@"UIWebBrowserView"]) {
+//            browserView = subview;
+//            break;
+//        }
+//    }
+//    return browserView;
+//}
+//
+//- (id)methodReturningNil {
+//    return nil;
+//}
+//
+//- (void)ensureHackishSubclassExistsOfBrowserViewClass:(Class)browserViewClass {
+//    if (!hackishFixClass) {
+//        Class newClass = objc_allocateClassPair(browserViewClass, hackishFixClassName, 0);
+//        newClass = objc_allocateClassPair(browserViewClass, hackishFixClassName, 0);
+//        IMP nilImp = [self methodForSelector:@selector(methodReturningNil)];
+//        class_addMethod(newClass, @selector(inputAccessoryView), nilImp, "@@:");
+//        objc_registerClassPair(newClass);
+//        
+//        hackishFixClass = newClass;
+//    }
+//}
+//
+//- (BOOL) hidesInputAccessoryView {
+//    UIView *browserView = [self hackishlyFoundBrowserView];
+//    return [browserView class] == hackishFixClass;
+//}
+//
+//- (void) setHidesInputAccessoryView:(BOOL)value {
+//    UIView *browserView = [self hackishlyFoundBrowserView];
+//    if (browserView == nil) {
+//        return;
+//    }
+//    [self ensureHackishSubclassExistsOfBrowserViewClass:[browserView class]];
+//    
+//    if (value) {
+//        object_setClass(browserView, hackishFixClass);
+//    }
+//    else {
+//        Class normalClass = objc_getClass("UIWebBrowserView");
+//        object_setClass(browserView, normalClass);
+//    }
+//    [browserView reloadInputViews];
+//}
+//
+//@end
 
 @interface ZSSRichTextEditor ()
 {
@@ -108,8 +108,6 @@ static Class hackishFixClass = Nil;
     // Editor View
     self.editorView = [[UIWebView alloc] initWithFrame:frame];
     self.editorView.delegate = self;
-    self.editorView.hidesInputAccessoryView = YES;
-    self.editorView.keyboardDisplayRequiresUserAction = NO;
     self.editorView.scalesPageToFit = YES;
     self.editorView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     self.editorView.dataDetectorTypes = UIDataDetectorTypeNone;
@@ -169,7 +167,6 @@ static Class hackishFixClass = Nil;
 #pragma mark - Editor Interaction
 
 - (void)focusTextEditor {
-    self.editorView.keyboardDisplayRequiresUserAction = NO;
     NSString *js = [NSString stringWithFormat:@"zss_editor.focusEditor();"];
     [self.editorView stringByEvaluatingJavaScriptFromString:js];
 }
@@ -215,10 +212,6 @@ static Class hackishFixClass = Nil;
 
 - (NSString *)getText {
     return [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getText();"];
-}
-
-- (void)dismissKeyboard {
-    [self.view endEditing:YES];
 }
 
 - (void)showHTMLSource:(ZSSBarButtonItem *)barButtonItem {
@@ -556,52 +549,33 @@ static Class hackishFixClass = Nil;
 
 - (void)updateToolBarWithButtonName:(NSString *)name {
     
-    // Items that are enabled
-    NSArray *itemNames = [name componentsSeparatedByString:@","];
-    
-    // Special case for link
-    NSMutableArray *itemsModified = [[NSMutableArray alloc] init];
-    for (NSString *linkItem in itemNames) {
-        NSString *updatedItem = linkItem;
-        if ([linkItem hasPrefix:@"link:"]) {
-            updatedItem = @"link";
-            self.selectedLinkURL = [linkItem stringByReplacingOccurrencesOfString:@"link:" withString:@""];
-        } else if ([linkItem hasPrefix:@"link-title:"]) {
-            self.selectedLinkTitle = [self stringByDecodingURLFormat:[linkItem stringByReplacingOccurrencesOfString:@"link-title:" withString:@""]];
-        } else if ([linkItem hasPrefix:@"image:"]) {
-            updatedItem = @"image";
-            self.selectedImageURL = [linkItem stringByReplacingOccurrencesOfString:@"image:" withString:@""];
-        } else if ([linkItem hasPrefix:@"image-alt:"]) {
-            self.selectedImageAlt = [self stringByDecodingURLFormat:[linkItem stringByReplacingOccurrencesOfString:@"image-alt:" withString:@""]];
-        } else {
-            self.selectedImageURL = nil;
-            self.selectedImageAlt = nil;
-            self.selectedLinkURL = nil;
-            self.selectedLinkTitle = nil;
-        }
-        [itemsModified addObject:updatedItem];
-    }
-    itemNames = [NSArray arrayWithArray:itemsModified];
+//    // Items that are enabled
+//    NSArray *itemNames = [name componentsSeparatedByString:@","];
+//    
+//    // Special case for link
+//    NSMutableArray *itemsModified = [[NSMutableArray alloc] init];
+//    for (NSString *linkItem in itemNames) {
+//        NSString *updatedItem = linkItem;
+//        if ([linkItem hasPrefix:@"link:"]) {
+//            updatedItem = @"link";
+//            self.selectedLinkURL = [linkItem stringByReplacingOccurrencesOfString:@"link:" withString:@""];
+//        } else if ([linkItem hasPrefix:@"link-title:"]) {
+//            self.selectedLinkTitle = [self stringByDecodingURLFormat:[linkItem stringByReplacingOccurrencesOfString:@"link-title:" withString:@""]];
+//        } else if ([linkItem hasPrefix:@"image:"]) {
+//            updatedItem = @"image";
+//            self.selectedImageURL = [linkItem stringByReplacingOccurrencesOfString:@"image:" withString:@""];
+//        } else if ([linkItem hasPrefix:@"image-alt:"]) {
+//            self.selectedImageAlt = [self stringByDecodingURLFormat:[linkItem stringByReplacingOccurrencesOfString:@"image-alt:" withString:@""]];
+//        } else {
+//            self.selectedImageURL = nil;
+//            self.selectedImageAlt = nil;
+//            self.selectedLinkURL = nil;
+//            self.selectedLinkTitle = nil;
+//        }
+//        [itemsModified addObject:updatedItem];
+//    }
+//    itemNames = [NSArray arrayWithArray:itemsModified];
 }
-
-
-#pragma mark - UITextView Delegate
-
-- (void)textViewDidChange:(UITextView *)textView {
-    CGRect line = [textView caretRectForPosition:textView.selectedTextRange.start];
-    CGFloat overflow = line.origin.y + line.size.height - ( textView.contentOffset.y + textView.bounds.size.height - textView.contentInset.bottom - textView.contentInset.top );
-    if ( overflow > 0 ) {
-        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
-        // Scroll caret to visible area
-        CGPoint offset = textView.contentOffset;
-        offset.y += overflow + 7; // leave 7 pixels margin
-        // Cannot animate with setContentOffset:animated: or caret will not appear
-        [UIView animateWithDuration:.2 animations:^{
-            [textView setContentOffset:offset];
-        }];
-    }
-}
-
 
 #pragma mark - UIWebView Delegate
 
