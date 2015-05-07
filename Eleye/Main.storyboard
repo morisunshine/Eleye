@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -259,21 +259,29 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMG-Dl-AbC">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMG-Dl-AbC">
                                                     <rect key="frame" x="34" y="16" width="202" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSQ-bv-nrB">
-                                                    <rect key="frame" x="235" y="16" width="60" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSQ-bv-nrB">
+                                                    <rect key="frame" x="225" y="16" width="60" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="tdW-En-f6E">
+                                                    <rect key="frame" x="294" y="16" width="8" height="13"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="uSQ-bv-nrB" secondAttribute="trailing" constant="17" id="o6h-wt-HM3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tdW-En-f6E" secondAttribute="trailing" constant="10" id="OuD-x5-4US"/>
+                                                <constraint firstItem="tdW-En-f6E" firstAttribute="trailing" secondItem="uSQ-bv-nrB" secondAttribute="trailing" constant="15" id="RZx-W1-Z3E"/>
+                                                <constraint firstItem="vMG-Dl-AbC" firstAttribute="leading" secondItem="Y9I-xe-pzf" secondAttribute="leadingMargin" constant="26" id="V8l-sA-xrh"/>
+                                                <constraint firstItem="tdW-En-f6E" firstAttribute="centerY" secondItem="uSQ-bv-nrB" secondAttribute="centerY" id="aZj-XR-fNi"/>
+                                                <constraint firstItem="tdW-En-f6E" firstAttribute="centerY" secondItem="vMG-Dl-AbC" secondAttribute="centerY" constant="-4" id="fAM-43-j8a"/>
+                                                <constraint firstAttribute="centerY" secondItem="tdW-En-f6E" secondAttribute="centerY" constant="1.5" id="us6-69-I6x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -346,12 +354,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS2-vI-6T4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="723" y="314"/>
+            <point key="canvasLocation" x="723" y="317"/>
         </scene>
     </scenes>
     <resources>
         <image name="Whee-lab-logo" width="20" height="20"/>
         <image name="account" width="24" height="24"/>
+        <image name="disclosure" width="8" height="13"/>
         <image name="notebook" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

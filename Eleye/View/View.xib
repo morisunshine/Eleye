@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,7 +18,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD2-PI-TbR">
-                    <rect key="frame" x="267" y="14" width="36" height="21"/>
+                    <rect key="frame" x="244" y="14" width="36" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -32,15 +32,20 @@
                         <action selector="viewBtnTapped:" destination="CqF-3v-dxM" eventType="touchUpInside" id="D4q-nX-gLW"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
+                    <rect key="frame" x="287" y="17" width="8" height="13"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="RNL-o8-QLe" secondAttribute="centerX" id="72Y-PT-XT3"/>
                 <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="CqF-3v-dxM" secondAttribute="top" constant="14" id="BSd-Sk-B3B"/>
                 <constraint firstItem="tN7-pF-JhF" firstAttribute="top" secondItem="cD2-PI-TbR" secondAttribute="top" id="Bbn-3z-dQ7"/>
+                <constraint firstAttribute="trailing" secondItem="Zxm-ap-Dqm" secondAttribute="trailing" constant="25" id="JDN-0C-5Ox"/>
+                <constraint firstAttribute="centerY" secondItem="Zxm-ap-Dqm" secondAttribute="centerY" constant="1" id="JVm-a3-inZ"/>
                 <constraint firstAttribute="centerX" secondItem="tN7-pF-JhF" secondAttribute="centerX" constant="36.5" id="P9E-m4-9dv"/>
+                <constraint firstItem="Zxm-ap-Dqm" firstAttribute="trailing" secondItem="cD2-PI-TbR" secondAttribute="trailing" constant="15" id="T3H-S2-beB"/>
                 <constraint firstItem="tN7-pF-JhF" firstAttribute="centerY" secondItem="RNL-o8-QLe" secondAttribute="centerY" id="V5C-VG-U2Q"/>
-                <constraint firstAttribute="trailing" secondItem="cD2-PI-TbR" secondAttribute="trailing" constant="17" id="czo-CM-14k"/>
                 <constraint firstAttribute="centerY" secondItem="RNL-o8-QLe" secondAttribute="centerY" id="gU9-kp-YN4"/>
                 <constraint firstItem="cD2-PI-TbR" firstAttribute="centerY" secondItem="tN7-pF-JhF" secondAttribute="centerY" id="iLu-Jv-XLQ"/>
                 <constraint firstItem="RNL-o8-QLe" firstAttribute="top" secondItem="CqF-3v-dxM" secondAttribute="top" id="jHe-h3-wYM"/>
@@ -107,6 +112,7 @@
         </view>
     </objects>
     <resources>
+        <image name="disclosure" width="8" height="13"/>
         <image name="guid05" width="375" height="667"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
