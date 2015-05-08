@@ -10,4 +10,7 @@
 
 @interface ENoteContentViewController : UIViewController
 
+@property (nonatomic, copy) NSString *guid;
+@property (nonatomic, copy) NSString *noteTitle;
+
 @end

@@ -164,6 +164,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return NO;
+}
+
 #pragma mark - Editor Interaction
 
 - (void)focusTextEditor {
