@@ -9,7 +9,6 @@
 #import "EAllNotesViewController.h"
 #import "ENoteDetailViewController.h"
 #import "ENoteViewController.h"
-#import "ENoteContentViewController.h"
 #import "ENoteCell.h"
 #import <SVPullToRefresh.h>
 #import "ENoteDAO.h"
@@ -214,12 +213,13 @@ static NSInteger kCellHeight = 100;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
+    ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
+//    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
     ENoteDO *note = notes_[indexPath.row];
-    noteDetailViewController.noteTitle = note.title;
-    noteDetailViewController.guid = note.guid;
-    [self.navigationController pushViewController:noteDetailViewController animated:YES];
+    noteViewController.noteTitle = note.title;
+    noteViewController.guid = note.guid;
+    [self.navigationController pushViewController:noteViewController animated:YES];
 }
 
 @end
