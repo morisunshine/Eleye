@@ -356,7 +356,7 @@ static CGFloat kCellHeight = 49;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"host"];
+        [USER_DEFAULT removeObjectForKey:HOSTNAME];
         [[ENSession sharedSession] unauthenticate];
         [EUtility clearDataBase];
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

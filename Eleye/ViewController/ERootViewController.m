@@ -23,7 +23,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *viewController;
     
-    NSString *host = [[NSUserDefaults standardUserDefaults] objectForKey:@"host"];
+    NSString *host = [USER_DEFAULT objectForKey:HOSTNAME];
     NSString *SANDBOX_HOST;
 #if DEBUG
     SANDBOX_HOST = ENSessionHostSandbox;
@@ -34,12 +34,12 @@
     NSString *CONSUMER_SECRET;
     
     if (host) {
-        if ([host isEqualToString:@"evernote"]) {
-            CONSUMER_KEY = @"yousurm";
-            CONSUMER_SECRET = @"cb61b2f2bbbcb741";
+        if ([host isEqualToString:EVERNOTEHOST]) {
+            CONSUMER_KEY = EVERNOTECONSUMER_KEY;
+            CONSUMER_SECRET = EVERNOTECONSUMER_SECRET;
         } else {
-            CONSUMER_KEY = @"yousurm-4843";
-            CONSUMER_SECRET = @"19601b04ea2a0f05";
+            CONSUMER_KEY = YINXIANGCONSUMER_KEY;
+            CONSUMER_SECRET = YINXIANGCONSUMER_SECRET;
         }
         
         [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
@@ -59,7 +59,7 @@
         viewController = launchViewController;
     }
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:SHOWGUIDE] == nil) {
+    if ([USER_DEFAULT objectForKey:SHOWGUIDE] == nil) {
         EGuideViewController *guidViewController = [storyboard instantiateViewControllerWithIdentifier:@"EGuideViewController"];
         [self.navigationController presentViewController:guidViewController animated:NO completion:nil];
     }

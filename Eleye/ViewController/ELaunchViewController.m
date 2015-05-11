@@ -100,11 +100,11 @@
     NSString *CONSUMER_SECRET;
     
     if (evernote) {
-        CONSUMER_KEY = @"yousurm";
-        CONSUMER_SECRET = @"cb61b2f2bbbcb741";
+        CONSUMER_KEY = EVERNOTECONSUMER_KEY;
+        CONSUMER_SECRET = EVERNOTECONSUMER_SECRET;
     } else {
-        CONSUMER_KEY = @"yousurm-4843";
-        CONSUMER_SECRET = @"19601b04ea2a0f05";
+        CONSUMER_KEY = YINXIANGCONSUMER_KEY;
+        CONSUMER_SECRET = YINXIANGCONSUMER_SECRET;
     }
     
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
@@ -121,7 +121,7 @@
             } else {
                 hostString = @"yingxiang";
             }
-            [[NSUserDefaults standardUserDefaults] setObject:hostString forKey:@"host"];
+            [[USER_DEFAULT] setObject:hostString forKey:@"host"];
             [self authorizationWithSuccess];
         }
     }];

@@ -53,33 +53,16 @@
 #define DEFAULT_IMAGE_BUTTON_BACK_TAPPED    @"button_back_tapped.png"
 #define DEFAULT_IMAGE_NAVIGATION_BAR        @"navigationbar.png"
 
-#pragma mark - 第三方Oauth的app id和app key
-//第三方Oauth的app id和app key
-#define OAUTH_DOUBAN_APPKEY                 @"0c183af4c0928a4d2448b0de41b79ee7"
-#define OAUTH_DOUBAN_APPSECRET              @"4f46b142c32b1d76"
-#define OAUTH_SINA_APPID                    @"3135285468"
-#define OAUTH_SINA_SECRET                   @"9c3dc5c796a39dbc046d2adbf0003e6b"
-#define OAUTH_WEIXIN_APPID                  @"wxec2c1e346938f71f"
-#define OAUTH_WEIXIN_APPKEY                 @"4277876c726f77bd4914b29cb9065111"
-#define OAUTH_TAOBAO_APPKEY                 @"21499475"
-#define OAUTH_TAOBAO_SECRET                 @"bc3fa5e643d1f0d87aa75194f740bc8d"
-#define OAUTH_RENREN_APPID                  @"fa3aae03b5f64794a4c30c24353361ef"
-#define OAUTH_RENREN_APPSECRET              @"99d4d7c498d74def9e395378896f0eae"
-#define OAUTH_TWITTER_APPKEY                @"X8LbRwk5B91cTiwPDf1g"
-#define OAUTH_TWITTER_APPSECRET             @"UTy6C4zmHZ7VqCBpn8wd3FeV1ORQrep0D55DFOk"
-#define OAUTH_FACEBOOK_APPID                @"224466694326390"
-#define OAUTH_FACEBOOK_APPSECRET            @"20ee82ab75f019748934d5d6e10fa786"
-#define OAUTH_QQ_APPKEY                     @"100289163"
+#pragma mark - Evernote - APPKEY
 
-#pragma mark - View Tag
-//view TAG
-#define TAG_VIEW_INDICATOR                  10000
-#define TAG_VIEW_LOADING_BLACKBACK          10001
+#define EVERNOTECONSUMER_KEY  @"yousurm"
+#define EVERNOTECONSUMER_SECRET @"cb61b2f2bbbcb741"
+#define YINXIANGCONSUMER_KEY @"yousurm-4843"
+#define YINXIANGCONSUMER_SECRET  @"19601b04ea2a0f05"
 
-#pragma mark - NOTIFICATION 编号
-//NOTIFICATION编号
-#define NOTIFICATION_UPLOADPROGRESS         @"uploadImageProgress"
-
+#define HOSTNAME  @"host"
+#define EVERNOTEHOST @"evernote"
+#define YINXIANGHOST @"yinxiang"
 
 #pragma mark - 函数定义
 //函数定义
@@ -94,7 +77,7 @@
 //单例
 #define IMAGE_CACHE                         [SDImageCache sharedImageCache]
 #define NOTIFICATION_CENTER                 [NSNotificationCenter defaultCenter]
-#define USER_DEFAULT                        [GVUserDefaults standardUserDefaults]
+#define USER_DEFAULT                        [NSUserDefaults standardUserDefaults]
 
 #pragma mark - Local Path
 //应用的某些使用率高的路径
