@@ -121,7 +121,7 @@
             } else {
                 hostString = @"yingxiang";
             }
-            [[USER_DEFAULT] setObject:hostString forKey:@"host"];
+            [USER_DEFAULT setObject:hostString forKey:@"host"];
             [self authorizationWithSuccess];
         }
     }];
