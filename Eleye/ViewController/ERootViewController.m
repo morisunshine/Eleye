@@ -61,10 +61,12 @@
     
     if ([USER_DEFAULT objectForKey:SHOWGUIDE] == nil) {
         EGuideViewController *guidViewController = [storyboard instantiateViewControllerWithIdentifier:@"EGuideViewController"];
-        [self.navigationController presentViewController:guidViewController animated:NO completion:nil];
+        [self.navigationController presentViewController:guidViewController animated:NO completion:^{
+            [self.navigationController pushViewController:viewController animated:NO];
+        }];
+    } else {
+        [self.navigationController pushViewController:viewController animated:NO];
     }
-    
-    [self.navigationController pushViewController:viewController animated:NO];
     // Do any additional setup after loading the view.
 }
 

@@ -117,11 +117,11 @@
             NSLog(@"授权成功");
             NSString *hostString;
             if (evernote) {
-                hostString = @"evernote";
+                hostString = EVERNOTEHOST;
             } else {
-                hostString = @"yingxiang";
+                hostString = YINXIANGHOST;
             }
-            [USER_DEFAULT setObject:hostString forKey:@"host"];
+            [USER_DEFAULT setObject:hostString forKey:HOSTNAME];
             [self authorizationWithSuccess];
         }
     }];
