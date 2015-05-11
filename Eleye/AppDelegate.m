@@ -7,10 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <ENSDK/ENSDK.h>
-#import "ELaunchViewController.h"
-#import "EAllNoteBooksViewController.h"
-#import "EGuideViewController.h"
+#import "ERootViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,41 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
-    NSString *SANDBOX_HOST = ENSessionHostSandbox;
-    
-    NSString *CONSUMER_KEY = @"yousurm-4843";
-    NSString *CONSUMER_SECRET = @"19601b04ea2a0f05";
-    
-    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *viewController;
-    if ([ENSession sharedSession].isAuthenticated) {
-        EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
-        allNotebooksViewController.showAllNotes = YES;
-        viewController = allNotebooksViewController;
-    } else {
-        ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
-        launchViewController.showNoAnimation = YES;
-        viewController = launchViewController;
-    }
-    
-    UIViewController *rootViewController = [[UIViewController alloc] init];
+    ERootViewController *rootViewController = [[ERootViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:SHOWGUIDE] == nil) {
-        EGuideViewController *guidViewController = [storyboard instantiateViewControllerWithIdentifier:@"EGuideViewController"];
-        [navController presentViewController:guidViewController animated:NO completion:nil];
-    }
-    
-    [navController pushViewController:viewController animated:NO];
     
     return YES;
 }

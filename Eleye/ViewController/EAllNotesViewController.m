@@ -214,8 +214,6 @@ static NSInteger kCellHeight = 100;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
-//    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
     ENoteDO *note = notes_[indexPath.row];
     noteViewController.noteTitle = note.title;
     noteViewController.guid = note.guid;
