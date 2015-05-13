@@ -9,12 +9,14 @@
 #import "ENoteDetailViewController.h"
 #import "EMenuView.h"
 #import "ETextView.h"
-
+#import <TFHpple.h>
 
 @interface ENoteDetailViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 {
+    NSMutableDictionary *mutHeadStyleDics_;
     NSMutableArray *highlightRanges_;
     NSMutableAttributedString *attributedText_;
+    NSMutableAttributedString *sourceAttributedText_;
 }
 
 @property (nonatomic, retain) EMenuView *menuView;
@@ -161,7 +163,25 @@
 
 - (void)readContentFromLocal
 {
+    mutHeadStyleDics_ = [[NSMutableDictionary alloc] init];
+    NSString *htmlString = [EUtility contentFromLocalPathWithGuid:self.guid];
+    NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:data];
+    
+    NSArray *headTags = @[@"title", @"h1", @"h2", @"h3", @"h4", @"h5", @"h6"];
+    
+    for (NSString *tag in headTags) {
+        NSString *xPath = [NSString stringWithFormat:@"//%@", tag];
+        NSArray *elements = [doc searchWithXPathQuery:xPath];
+        for (TFHppleElement *element in elements) {
+            if (element.text) {
+                [mutHeadStyleDics_ setObject:tag forKey:element.text];
+            }
+        }
+    }
+    
     attributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:[EUtility stringFromLocalPathWithGuid:self.guid]];
+    sourceAttributedText_ = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText_];
     [self customStyleWithContent];
 }
 
@@ -169,16 +189,32 @@
 {
     [attributedText_ enumerateAttributesInRange:NSMakeRange(0, attributedText_.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
         NSLog(@"attrs:%@ range:%@, %@, text:%@", attrs, @(range.location), @(range.length), [attributedText_.string substringWithRange:range]);
-        UIFont *font = [attrs objectForKey:NSFontAttributeName];
-//        if (font.pointSize < 17) {
-//            font = [UIFont systemFontOfSize:14];
-//        } else {
-//            font = [UIFont systemFontOfSize:16];
-//        }
-        UIFont *newFont = [UIFont systemFontOfSize:font.pointSize];
+        UIFont *font;
+        NSString *subString = [attributedText_.string substringWithRange:range];
+        subString = [subString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *tag = [mutHeadStyleDics_ objectForKey:subString];
+        if (tag) {
+            if ([tag isEqualToString:@"title"]) {
+                font = FONT(20);
+            } else if ([tag isEqualToString:@"h1"]) {
+                font = FONT(20);
+            } else if ([tag isEqualToString:@"h2"]) {
+                font = FONT(16);
+            } else if ([tag isEqualToString:@"h3"]) {
+                font = FONT(15);
+            } else if ([tag isEqualToString:@"h4"]) {
+                font = FONT(14);
+            } else if ([tag isEqualToString:@"h5"]) {
+                font = FONT(14);
+            } else if ([tag isEqualToString:@"h6"]) {
+                font = FONT(14);
+            }
+        } else {
+            font = FONT(14);
+        }
         NSParagraphStyle *paragraphStyle = [attrs objectForKey:NSParagraphStyleAttributeName];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{NSBackgroundColorAttributeName: [UIColor whiteColor],
-                                                                                   NSFontAttributeName: newFont,
+                                                                                   NSFontAttributeName: font,
                                                                                    NSParagraphStyleAttributeName: paragraphStyle,
                                                                                    NSForegroundColorAttributeName: RGBCOLOR(75, 75, 75)}];
         if ([attrs objectForKey:NSLinkAttributeName]) {
@@ -229,6 +265,20 @@
         }
         [attributedText_ setAttributes:mutAttrs range:range];
     }];
+    
+    [sourceAttributedText_ enumerateAttributesInRange:selectedRange options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        NSMutableDictionary *mutAttrs = [NSMutableDictionary dictionaryWithDictionary:attrs];
+        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedRange.location inSection:selectedRange.length];
+        [highlightRanges_ addObject:selectedIndexPath];
+        [mutAttrs setObject:RGBACOLOR(168, 87, 48, 0.3) forKey:NSBackgroundColorAttributeName];
+        [sourceAttributedText_ setAttributes:mutAttrs range:range];
+    }];
+    
+    NSDictionary *exportParams = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+    NSData *htmlData = [sourceAttributedText_ dataFromRange:NSMakeRange(0, sourceAttributedText_.length) documentAttributes:exportParams error:nil];
+    NSString *exportHtmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    
+    [EUtility saveContentToFileWithContent:exportHtmlString guid:self.guid];
     
     self.contentTextView.attributedText = attributedText_;
     

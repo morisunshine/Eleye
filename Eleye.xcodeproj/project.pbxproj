@@ -32,6 +32,7 @@
 		08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */; };
 		183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C5DE81AF8B37D00ED224C /* MenuView.xib */; };
 		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
+		187FE5171B02E715002829B8 /* MHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187FE5151B02E715002829B8 /* MHNavigationController.m */; };
 		18D63F491AFB475700094F8C /* editor.html in Resources */ = {isa = PBXBuildFile; fileRef = 18D63EC51AFB475600094F8C /* editor.html */; };
 		18D63F961AFB475700094F8C /* CYRLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F161AFB475600094F8C /* CYRLayoutManager.m */; };
 		18D63F971AFB475700094F8C /* CYRTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63F181AFB475700094F8C /* CYRTextStorage.m */; };
@@ -116,6 +117,8 @@
 		1871B69B1AEF9A4F0090578E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1871B69D1AF0AA970090578E /* ETitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETitleView.h; sourceTree = "<group>"; };
 		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
+		187FE5151B02E715002829B8 /* MHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHNavigationController.m; sourceTree = "<group>"; };
+		187FE5161B02E715002829B8 /* MHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHNavigationController.h; sourceTree = "<group>"; };
 		18D63EC51AFB475600094F8C /* editor.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = editor.html; sourceTree = "<group>"; };
 		18D63F151AFB475600094F8C /* CYRLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYRLayoutManager.h; sourceTree = "<group>"; };
 		18D63F161AFB475600094F8C /* CYRLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYRLayoutManager.m; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 		08D4A0FA1AEFB6F2000BAC87 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				187FE5151B02E715002829B8 /* MHNavigationController.m */,
+				187FE5161B02E715002829B8 /* MHNavigationController.h */,
 				18D63EC01AFB475600094F8C /* ZSSRichTextEditor */,
 				08D4A0FB1AEFB6F2000BAC87 /* COMMONCONSTANT.h */,
 				08D4A0FC1AEFB6F2000BAC87 /* EUtility.h */,
@@ -532,6 +537,7 @@
 			files = (
 				18D63F9D1AFB475700094F8C /* HRColorPickerView.m in Sources */,
 				08D4A1211AEFB6F2000BAC87 /* ENotebookCell.m in Sources */,
+				187FE5171B02E715002829B8 /* MHNavigationController.m in Sources */,
 				08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */,
 				08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */,
 				08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */,

@@ -13,6 +13,7 @@
 #import "ENotebookDAO.h"
 #import "ELaunchViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "MHNavigationController.h"
 
 static CGFloat kCellHeight = 49;
 
@@ -51,7 +52,7 @@ static CGFloat kCellHeight = 49;
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
         allNotebookViewController.guid = nil;
         allNotebookViewController.notebookName = @"All notes";
-        [self.navigationController pushViewController:allNotebookViewController animated:NO];
+        [(MHNavigationController *)self.navigationController customPushViewController:allNotebookViewController fromViewController:self];
     }
     // Do any additional setup after loading the view.
 }

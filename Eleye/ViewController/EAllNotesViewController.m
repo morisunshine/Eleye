@@ -139,19 +139,9 @@ static NSInteger kCellHeight = 100;
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView addSubview:self.refreshControl];
-    UIPanGestureRecognizer *pagGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
-    [self.view addGestureRecognizer:pagGR];
 }
 
 #pragma mark - Actions -
-
-- (IBAction)panGestureRecognizer:(UIPanGestureRecognizer *)sender
-{
-    CGPoint vel = [sender velocityInView:self.view];
-    if (vel.x > 0) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 
 - (IBAction)allNotesBtnTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -214,12 +204,13 @@ static NSInteger kCellHeight = 100;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
+//    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
+    ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
     ENoteDO *note = notes_[indexPath.row];
-    noteDetailViewController.noteTitle = note.title;
-    noteDetailViewController.guid = note.guid;
-    [self.navigationController pushViewController:noteDetailViewController animated:YES];
+    noteViewController.noteTitle = note.title;
+    noteViewController.guid = note.guid;
+    [self.navigationController pushViewController:noteViewController animated:YES];
 }
 
 @end

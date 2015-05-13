@@ -6,6 +6,12 @@
 // project.
 
 
+// Ashton
+#define COCOAPODS_POD_AVAILABLE_Ashton
+#define COCOAPODS_VERSION_MAJOR_Ashton 1
+#define COCOAPODS_VERSION_MINOR_Ashton 0
+#define COCOAPODS_VERSION_PATCH_Ashton 0
+
 // FMDB
 #define COCOAPODS_POD_AVAILABLE_FMDB
 #define COCOAPODS_VERSION_MAJOR_FMDB 2
@@ -24,12 +30,6 @@
 #define COCOAPODS_VERSION_MINOR_FMDB_standard 5
 #define COCOAPODS_VERSION_PATCH_FMDB_standard 0
 
-// Hpple
-#define COCOAPODS_POD_AVAILABLE_Hpple
-#define COCOAPODS_VERSION_MAJOR_Hpple 0
-#define COCOAPODS_VERSION_MINOR_Hpple 2
-#define COCOAPODS_VERSION_PATCH_Hpple 0
-
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
@@ -47,4 +47,10 @@
 #define COCOAPODS_VERSION_MAJOR_evernote_cloud_sdk_ios 2
 #define COCOAPODS_VERSION_MINOR_evernote_cloud_sdk_ios 0
 #define COCOAPODS_VERSION_PATCH_evernote_cloud_sdk_ios 2
+
+// hpple
+#define COCOAPODS_POD_AVAILABLE_hpple
+#define COCOAPODS_VERSION_MAJOR_hpple 0
+#define COCOAPODS_VERSION_MINOR_hpple 2
+#define COCOAPODS_VERSION_PATCH_hpple 0
 

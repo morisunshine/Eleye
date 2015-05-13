@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <ENSDK/ENSDK.h>
+#import "MHNavigationController.h"
 #import "ELaunchViewController.h"
 #import "EAllNoteBooksViewController.h"
 #import "EGuideViewController.h"
@@ -47,7 +48,7 @@
     }
     
     UIViewController *rootViewController = [[UIViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    MHNavigationController *navController = [[MHNavigationController alloc] initWithRootViewController:rootViewController];
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
     
