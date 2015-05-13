@@ -9,6 +9,9 @@
 #import "ENoteViewController.h"
 
 @interface ENoteViewController ()
+{
+    NSString *htmlString_;
+}
 
 @end
 
@@ -17,12 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *htmlString = [EUtility contentFromLocalPathWithGuid:self.guid];
-    
-    [self configureUI];
-    
+    htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
     // Set the HTML contents of the editor
-    [self setHTML:htmlString];
+    [self setHTML:htmlString_];
     // Do any additional setup after loading the view.
 }
 
@@ -31,22 +31,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Private Mathods -
-
-- (void)configureUI
+- (void)fetchNoteContent
 {
-    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGR:)];
-    [self.editorView addGestureRecognizer:panGR];
-}
-
-#pragma mark - Actions -
-
-- (IBAction)panGR:(UIPanGestureRecognizer *)sender
-{
-    CGPoint vel = [sender velocityInView:self.view];
-    if (vel.x > 50) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
+        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
+        htmlString_ = [resultNote.content enmlWithNote:resultNote];
+        [self setHTML:htmlString_];
+        [EUtility saveContentToFileWithContent:htmlString_ guid:self.guid];
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取笔记内容错误%@", error);
+        }
+    }];
 }
 
 @end

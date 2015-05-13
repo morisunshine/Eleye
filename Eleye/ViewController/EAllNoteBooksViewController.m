@@ -43,6 +43,7 @@ static CGFloat kCellHeight = 49;
     
     [super viewDidLoad];
 
+    [self getsyncState];
     [self getNotebookCounts];
     [self configureUI];
     [self.usernameBtn setTitle:[ENSession sharedSession].userDisplayName forState:UIControlStateNormal];
@@ -76,6 +77,37 @@ static CGFloat kCellHeight = 49;
 
 #pragma mark - Private Methods -
 
+- (void)getsyncState
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+
+    EDAMSyncChunkFilter *filter = [[EDAMSyncChunkFilter alloc] init];
+    filter.includeNotebooks = @(YES);
+    filter.includeNotes = @(YES);
+    filter.includeNoteResources = @(YES);
+    filter.includePreferences = @(YES);
+    NSNumber *chunkHighUSN = [USER_DEFAULT objectForKey:@"chunkUSN"];
+    int32_t afterUSN = 0;
+    if (chunkHighUSN) {
+        afterUSN = [chunkHighUSN intValue];
+    } 
+    [client getFilteredSyncChunkAfterUSN:afterUSN maxEntries:100 filter:filter success:^(EDAMSyncChunk *syncChunk) {
+        NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;
+        [USER_DEFAULT setObject:newChunkHighUSN forKey:@"chunkUSN"];
+        if (0 < syncChunk.notebooks) {
+            [USER_DEFAULT setObject:syncChunk.notebooks forKey:@"updateNotebooks"];
+        }
+        if (0 < syncChunk.notes) {  
+            NSLog(@"有更新！");
+            [USER_DEFAULT setObject:syncChunk.notes forKey:@"updateNotes"];
+        } 
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取同步信息失败:%@", error);
+        }
+    }];
+}
+
 - (void)configureUI
 {
     NSString *title = [NSString stringWithFormat:@"V%@ 问题反馈", APP_VERSION];
@@ -93,6 +125,7 @@ static CGFloat kCellHeight = 49;
     
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client listNotebooksWithSuccess:^(NSArray *notebooks) {
+        [[ENotebookDAO sharedENotebookDAO] deleteAllNoteBooks];
         NSArray *newNotebooks = [self newNotebooksFromNotebooks:notebooks];
         [[ENotebookDAO sharedENotebookDAO] saveItems:newNotebooks];
         [self doneloadWithNotebooks:newNotebooks];
@@ -108,8 +141,6 @@ static CGFloat kCellHeight = 49;
 {
     //先获取数据库中的数据
     [self getNotebooksFromDB];
-    
-    
     
     EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
     filter.notebookGuid = nil;//获取所有笔记本的数量
