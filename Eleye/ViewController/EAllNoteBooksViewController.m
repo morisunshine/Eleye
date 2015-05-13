@@ -109,6 +109,8 @@ static CGFloat kCellHeight = 49;
     //先获取数据库中的数据
     [self getNotebooksFromDB];
     
+    
+    
     EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
     filter.notebookGuid = nil;//获取所有笔记本的数量
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
@@ -146,6 +148,12 @@ static CGFloat kCellHeight = 49;
 - (void)getNotebooksFromDB
 {
     NSArray *notebooks = [[ENotebookDAO sharedENotebookDAO] notebooks];
+    notebookCounts_ = [[NSMutableDictionary alloc] init];
+    
+    for (ENoteBookDO *notebook in notebooks) {
+        [notebookCounts_ setObject:notebook.count forKey:notebook.guid];
+    }
+    
     [self doneloadWithNotebooks:notebooks];
 }
 
@@ -349,6 +357,7 @@ static CGFloat kCellHeight = 49;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
+        [USER_DEFAULT removeObjectForKey:HOSTNAME];
         [[ENSession sharedSession] unauthenticate];
         [EUtility clearDataBase];
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

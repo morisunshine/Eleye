@@ -73,12 +73,12 @@
 
 - (IBAction)evernoteUserBtnTapped:(id)sender
 {
-    [self authorization];
+    [self authorizationWithEvernote:YES];
 }
 
 - (IBAction)yxUserBtnTapped:(id)sender
 {
-    [self authorization];
+    [self authorizationWithEvernote:NO];
 }
 
 #pragma mark - Private Methods -
@@ -88,14 +88,40 @@
     [self.view addSubview:self.loginView];
 }
 
-- (void)authorization
+- (void)authorizationWithEvernote:(BOOL)evernote
 {
+    NSString *SANDBOX_HOST;
+#if DEBUG
+    SANDBOX_HOST = ENSessionHostSandbox;
+#else
+    SANDBOX_HOST = nil;
+#endif
+    NSString *CONSUMER_KEY;
+    NSString *CONSUMER_SECRET;
+    
+    if (evernote) {
+        CONSUMER_KEY = EVERNOTECONSUMER_KEY;
+        CONSUMER_SECRET = EVERNOTECONSUMER_SECRET;
+    } else {
+        CONSUMER_KEY = YINXIANGCONSUMER_KEY;
+        CONSUMER_SECRET = YINXIANGCONSUMER_SECRET;
+    }
+    
+    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
+    
     ENSession *session = [ENSession sharedSession];
     [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
         if (authenticateError) {
             NSLog(@"登录失败");
         } else {
             NSLog(@"授权成功");
+            NSString *hostString;
+            if (evernote) {
+                hostString = EVERNOTEHOST;
+            } else {
+                hostString = YINXIANGHOST;
+            }
+            [USER_DEFAULT setObject:hostString forKey:HOSTNAME];
             [self authorizationWithSuccess];
         }
     }];

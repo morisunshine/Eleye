@@ -7,11 +7,15 @@
 //
 
 #import "AppDelegate.h"
+<<<<<<< HEAD
 #import <ENSDK/ENSDK.h>
 #import "MHNavigationController.h"
 #import "ELaunchViewController.h"
 #import "EAllNoteBooksViewController.h"
 #import "EGuideViewController.h"
+=======
+#import "ERootViewController.h"
+>>>>>>> 199564432d96014a3bb37504e37d7060bcaf810f
 
 @interface AppDelegate ()
 
@@ -23,18 +27,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
-    NSString *SANDBOX_HOST = ENSessionHostSandbox;
-    
-    NSString *CONSUMER_KEY = @"yousurm-4843";
-    NSString *CONSUMER_SECRET = @"19601b04ea2a0f05";
-    
-    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+<<<<<<< HEAD
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *viewController;
     if ([ENSession sharedSession].isAuthenticated) {
@@ -49,15 +46,12 @@
     
     UIViewController *rootViewController = [[UIViewController alloc] init];
     MHNavigationController *navController = [[MHNavigationController alloc] initWithRootViewController:rootViewController];
+=======
+    ERootViewController *rootViewController = [[ERootViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+>>>>>>> 199564432d96014a3bb37504e37d7060bcaf810f
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:SHOWGUIDE] == nil) {
-        EGuideViewController *guidViewController = [storyboard instantiateViewControllerWithIdentifier:@"EGuideViewController"];
-        [navController presentViewController:guidViewController animated:NO completion:nil];
-    }
-    
-    [navController pushViewController:viewController animated:NO];
     
     return YES;
 }

@@ -70,6 +70,8 @@ static NSString * const ZSSRichTextEditorToolbarNone = @"com.zedsaid.toolbaritem
  */
 @property (nonatomic, strong) NSString *placeholder;
 
+@property (nonatomic, strong) UIWebView *editorView;
+
 /**
  *  Sets the HTML for the entire editor
  *

@@ -80,7 +80,6 @@
 }
 
 @property (nonatomic, strong) NSString *htmlString;
-@property (nonatomic, strong) UIWebView *editorView;
 @property (nonatomic) CGRect editorViewFrame;
 @property (nonatomic) BOOL resourcesLoaded;
 @property (nonatomic, strong) NSString *selectedLinkURL;

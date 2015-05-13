@@ -54,7 +54,7 @@
 {
     NSInteger currentPage = scrollView.contentOffset.x / APP_SCREEN_WIDTH;
     if (currentPage == 3) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:SHOWGUIDE];
+        [USER_DEFAULT setObject:@(YES) forKey:SHOWGUIDE];
         [UIView animateWithDuration:1 animations:^{
             lastView_.evernoteBtn.alpha = 1;
             lastView_.yinxiangBtn.alpha = 1;
