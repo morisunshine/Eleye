@@ -73,6 +73,8 @@ static NSInteger kCellHeight = 100;
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     EDAMNoteFilter *filter = [[EDAMNoteFilter alloc] init];
     filter.notebookGuid = self.guid;
+    filter.order = @(NoteSortOrder_UPDATED);
+    filter.ascending = @(NO);
     EDAMRelatedQuery *query = [[EDAMRelatedQuery alloc] init];
     query.filter = filter;
     
@@ -170,18 +172,18 @@ static NSInteger kCellHeight = 100;
     ENoteDO *note = notes_[indexPath.row];
     
     if (note.content == nil) {
-        
-        NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
-        if (attributedString) {
-            note.content = [attributedString.string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSString *contentString = [EUtility contentFromLocalPathWithGuid:note.guid];
+//        NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
+        if (contentString) {
+            note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         } else {
             ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
             [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
                 ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
                 NSString *contentString = [resultNote.content enmlWithNote:resultNote];
                 [EUtility saveContentToFileWithContent:contentString guid:note.guid];
-                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-                note.content = [attributedString.string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+                note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             } failure:^(NSError *error) {
                 if (error) {

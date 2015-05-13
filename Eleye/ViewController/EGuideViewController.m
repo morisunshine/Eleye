@@ -38,12 +38,13 @@
     for (NSInteger i = 0; i < 3; i++) {
         NSString *imageName = [NSString stringWithFormat:@"guid0%@", @(i + 1)];
         UIImageView *guideImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-        guideImageView.frame = self.scrollView.bounds;
+        guideImageView.frame = [UIScreen mainScreen].bounds;
         guideImageView.left = i * APP_SCREEN_WIDTH;
         [self.scrollView addSubview:guideImageView];
     }
     
     lastView_ = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
+    lastView_.frame = [UIScreen mainScreen].bounds;
     lastView_.left = APP_SCREEN_WIDTH * 3;
     [self.scrollView addSubview:lastView_];
 }

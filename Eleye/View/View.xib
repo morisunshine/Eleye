@@ -32,7 +32,7 @@
                         <action selector="viewBtnTapped:" destination="CqF-3v-dxM" eventType="touchUpInside" id="D4q-nX-gLW"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
                     <rect key="frame" x="297" y="17" width="8" height="13"/>
                 </imageView>
             </subviews>
@@ -99,6 +99,8 @@
                 <constraint firstItem="aBY-8r-Ulk" firstAttribute="width" secondItem="05A-pM-uaK" secondAttribute="width" id="KyI-wx-AZ7"/>
                 <constraint firstItem="0ez-B4-zEd" firstAttribute="leading" secondItem="UCR-x7-joz" secondAttribute="leading" id="N3p-SP-wOK"/>
                 <constraint firstItem="aBY-8r-Ulk" firstAttribute="height" secondItem="05A-pM-uaK" secondAttribute="height" id="brB-Tx-0U3"/>
+                <constraint firstAttribute="bottom" secondItem="0ez-B4-zEd" secondAttribute="bottom" id="cax-eW-2yH"/>
+                <constraint firstAttribute="trailing" secondItem="0ez-B4-zEd" secondAttribute="trailing" id="dz7-3m-VoP"/>
                 <constraint firstItem="0ez-B4-zEd" firstAttribute="top" secondItem="UCR-x7-joz" secondAttribute="top" id="hVG-vc-16E"/>
                 <constraint firstItem="aBY-8r-Ulk" firstAttribute="leading" secondItem="05A-pM-uaK" secondAttribute="leading" id="kUQ-yS-eFo"/>
                 <constraint firstItem="05A-pM-uaK" firstAttribute="top" secondItem="aBY-8r-Ulk" secondAttribute="bottom" constant="15" id="pNK-ey-wAJ"/>

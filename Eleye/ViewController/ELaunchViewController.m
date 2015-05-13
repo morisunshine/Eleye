@@ -60,6 +60,7 @@
 {
     if (!_loginView) {
         _loginView = [[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil][1];
+        _loginView.frame = [UIScreen mainScreen].bounds;
         _loginView.evernoteBtn.alpha = 1;
         _loginView.yinxiangBtn.alpha = 1;
         [_loginView.evernoteBtn addTarget:self action:@selector(evernoteUserBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
