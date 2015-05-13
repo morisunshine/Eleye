@@ -23,13 +23,44 @@
     htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
     // Set the HTML contents of the editor
     [self setHTML:htmlString_];
+    [self setTopTitle:self.noteTitle];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSMutableArray *extraItems = [[NSMutableArray alloc] init];
+    UIMenuItem *boldItem = [[UIMenuItem alloc] initWithTitle:@"Bold"
+                                                      action:@selector(highlightBtnTapped:)];
+    [extraItems addObject:boldItem];
+    [UIMenuController sharedMenuController].menuItems = extraItems;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[UIMenuController sharedMenuController] setMenuItems:nil];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (self.editorView.superview != nil) {
+        if (action == @selector(highlightBtnTapped:)) {
+            return YES;
+        }
+    }
+    
+    return [super canPerformAction:action withSender:sender];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Private Methods -
 
 - (void)fetchNoteContent
 {
@@ -44,6 +75,13 @@
             NSLog(@"获取笔记内容错误%@", error);
         }
     }];
+}
+
+#pragma mark - Actions -
+
+- (IBAction)highlightBtnTapped:(UIButton *)sender
+{
+    
 }
 
 @end

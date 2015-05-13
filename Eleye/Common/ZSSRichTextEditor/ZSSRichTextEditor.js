@@ -49,6 +49,7 @@ zss_editor.init = function() {
     $(document).on('selectionchange',function(e){
                    zss_editor.calculateEditorHeightWithCaretPosition();
                    zss_editor.setScrollPosition();
+                   console.log('select');
                    });
     
     $(window).on('scroll', function(e) {
@@ -105,6 +106,13 @@ zss_editor.setScrollPosition = function() {
     window.location = 'scroll://'+position;
 }
 
+zss_editor.setBackgroundColor = function(color) {
+    zss_editor.restorerange();
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('hiliteColor', false, color);
+    document.execCommand("styleWithCSS", null, false);
+    zss_editor.enabledEditingItems();
+}
 
 zss_editor.setPlaceholder = function(placeholder) {
     
@@ -334,14 +342,6 @@ zss_editor.setTextColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
     zss_editor.enabledEditingItems();
     // document.execCommand("removeFormat", false, "foreColor"); // Removes just foreColor
-}
-
-zss_editor.setBackgroundColor = function(color) {
-    zss_editor.restorerange();
-    document.execCommand("styleWithCSS", null, true);
-    document.execCommand('hiliteColor', false, color);
-    document.execCommand("styleWithCSS", null, false);
-    zss_editor.enabledEditingItems();
 }
 
 // Needs addClass method
@@ -621,16 +621,68 @@ zss_editor.focusEditor = function() {
     
     // the following was taken from http://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity/3866442#3866442
     // and ensures we move the cursor to the end of the editor
-    var editor = $('#zss_editor_content');
-    var range = document.createRange();
-    range.selectNodeContents(editor.get(0));
-    range.collapse(false);
-    var selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    editor.focus();
+//    var editor = $('#zss_editor_content');
+//    var range = document.createRange();
+//    range.selectNodeContents(editor.get(0));
+//    range.collapse(false);
+//    var selection = window.getSelection();
+//    selection.removeAllRanges();
+//    selection.addRange(range);
+//    editor.focus();
 }
 
 zss_editor.blurEditor = function() {
     $('#zss_editor_content').blur();
 }//end
+
+
+/**
+ * 添加高亮
+ */
+var HILITE_COLOR = 'rgb(224, 204, 193)';
+var ORIGIN_COLOR = '#fff';
+
+zss_editor.addHilite = function() {
+    zss_editor.restorerange();
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('hiliteColor', false, HILITE_COLOR);
+    document.execCommand("styleWithCSS", null, false);
+    zss_editor.enabledEditingItems();
+}
+/**
+ * 判断是否已经设置了高亮
+ */
+zss_editor.isHilite = function () {
+
+    var color = $(document.getSelection().baseNode.parentElement).css('background-color');
+
+    if(color === HILITE_COLOR) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * 移除高亮
+ */
+zss_editor.removeHilite = function () {
+    zss_editor.restorerange();
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('hiliteColor', false, ORIGIN_COLOR);
+    document.execCommand("styleWithCSS", null, false);
+    zss_editor.enabledEditingItems();
+}
+
+/**
+ * 顶部内容
+ * @author nirizhe
+ * @date   2015-05-13
+ * @return {[type]}   
+ */
+zss_editor.setTopTitle = function () {
+    $('#top-title').html(txt);
+}
+zss_editor.setContentTitle = function () {
+    $('#content-title').html(txt);
+}

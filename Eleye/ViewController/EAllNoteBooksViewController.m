@@ -105,10 +105,14 @@ static CGFloat kCellHeight = 49;
             }
             
             for (EDAMNote *note in syncChunk.notes) {
-                
+                if (note.deleted) {
+                    [updateNotes setObject:note.deleted forKey:note.guid];
+                } else {
+                    [updateNotes setObject:[NSNull null] forKey:note.guid];
+                }
             }
-//            [USER_DEFAULT setObject:syncChunk.notes forKey:@"updateNotes"];
-        } 
+            [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
+        }
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取同步信息失败:%@", error);

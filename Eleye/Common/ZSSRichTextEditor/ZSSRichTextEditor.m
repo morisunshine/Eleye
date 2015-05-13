@@ -87,6 +87,7 @@
 @property (nonatomic, strong) NSString *selectedImageURL;
 @property (nonatomic, strong) NSString *selectedImageAlt;
 @property (nonatomic, strong) NSString *internalHTML;
+@property (nonatomic, strong) NSString *internalTitle;
 @property (nonatomic) BOOL editorLoaded;
 - (NSString *)removeQuotesFromHTML:(NSString *)html;
 - (NSString *)tidyHTML:(NSString *)html;
@@ -179,6 +180,13 @@
     [self.editorView stringByEvaluatingJavaScriptFromString:js];
 }
 
+- (void)setTopTitle:(NSString *)title
+{
+    NSString *trigger = [NSString stringWithFormat:@"zss_editor.setTopTitle(\"%@\");", title];
+    
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
+
 - (void)setHTML:(NSString *)html {
     
     self.internalHTML = html;
@@ -195,6 +203,7 @@
     htmlString_ = html;
     NSString *cleanedHTML = [self removeQuotesFromHTML:htmlString_];
     NSString *trigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
+    
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
     
 }
