@@ -7,15 +7,9 @@
 //
 
 #import "AppDelegate.h"
-<<<<<<< HEAD
 #import <ENSDK/ENSDK.h>
 #import "MHNavigationController.h"
-#import "ELaunchViewController.h"
-#import "EAllNoteBooksViewController.h"
-#import "EGuideViewController.h"
-=======
 #import "ERootViewController.h"
->>>>>>> 199564432d96014a3bb37504e37d7060bcaf810f
 
 @interface AppDelegate ()
 
@@ -30,26 +24,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-<<<<<<< HEAD
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *viewController;
-    if ([ENSession sharedSession].isAuthenticated) {
-        EAllNoteBooksViewController *allNotebooksViewController = [storyboard instantiateViewControllerWithIdentifier:@"EAllNoteBooksViewController"];
-        allNotebooksViewController.showAllNotes = YES;
-        viewController = allNotebooksViewController;
-    } else {
-        ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
-        launchViewController.showNoAnimation = YES;
-        viewController = launchViewController;
-    }
-    
-    UIViewController *rootViewController = [[UIViewController alloc] init];
-    MHNavigationController *navController = [[MHNavigationController alloc] initWithRootViewController:rootViewController];
-=======
     ERootViewController *rootViewController = [[ERootViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
->>>>>>> 199564432d96014a3bb37504e37d7060bcaf810f
+    MHNavigationController *navController = [[MHNavigationController alloc] initWithRootViewController:rootViewController];
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
     

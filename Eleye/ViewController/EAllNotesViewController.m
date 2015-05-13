@@ -7,7 +7,6 @@
 //
 
 #import "EAllNotesViewController.h"
-#import "ENoteDetailViewController.h"
 #import "ENoteViewController.h"
 #import "ENoteCell.h"
 #import <SVPullToRefresh.h>
@@ -202,12 +201,7 @@ static NSInteger kCellHeight = 100;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-<<<<<<< HEAD
-//    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ENoteDetailViewController *noteDetailViewController = [story instantiateViewControllerWithIdentifier:@"ENoteDetailViewController"];
-=======
->>>>>>> 199564432d96014a3bb37504e37d7060bcaf810f
+
     ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
     ENoteDO *note = notes_[indexPath.row];
     noteViewController.noteTitle = note.title;

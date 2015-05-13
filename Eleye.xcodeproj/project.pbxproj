@@ -26,7 +26,6 @@
 		08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */; };
 		08D4A1271AEFB6F2000BAC87 /* EAllNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */; };
 		08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */; };
-		08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */; };
 		08DEAF5D1B00EAA10029A7B5 /* ERootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DEAF5C1B00EAA10029A7B5 /* ERootViewController.m */; };
 		08E289AC1AFA57FF000C0CB9 /* ELoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AB1AFA57FF000C0CB9 /* ELoginView.m */; };
 		08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */; };
@@ -105,8 +104,6 @@
 		08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAllNotesViewController.m; sourceTree = "<group>"; };
 		08D4A1161AEFB6F2000BAC87 /* ELaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELaunchViewController.h; sourceTree = "<group>"; };
 		08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELaunchViewController.m; sourceTree = "<group>"; };
-		08D4A11A1AEFB6F2000BAC87 /* ENoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDetailViewController.h; sourceTree = "<group>"; };
-		08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDetailViewController.m; sourceTree = "<group>"; };
 		08DEAF5B1B00EAA10029A7B5 /* ERootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERootViewController.h; sourceTree = "<group>"; };
 		08DEAF5C1B00EAA10029A7B5 /* ERootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERootViewController.m; sourceTree = "<group>"; };
 		08E289AA1AFA57FF000C0CB9 /* ELoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELoginView.h; sourceTree = "<group>"; };
@@ -305,8 +302,6 @@
 				08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */,
 				08D4A1161AEFB6F2000BAC87 /* ELaunchViewController.h */,
 				08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */,
-				08D4A11A1AEFB6F2000BAC87 /* ENoteDetailViewController.h */,
-				08D4A11B1AEFB6F2000BAC87 /* ENoteDetailViewController.m */,
 				08E289AD1AFA58E4000C0CB9 /* EGuideViewController.h */,
 				08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */,
 				18D63FAE1AFB496100094F8C /* ENoteViewController.h */,
@@ -540,7 +535,6 @@
 				187FE5171B02E715002829B8 /* MHNavigationController.m in Sources */,
 				08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */,
 				08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */,
-				08D4A12A1AEFB6F2000BAC87 /* ENoteDetailViewController.m in Sources */,
 				18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */,
 				18D63FAD1AFB475700094F8C /* ZSSTextView.m in Sources */,
 				18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */,
