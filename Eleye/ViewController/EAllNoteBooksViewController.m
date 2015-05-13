@@ -92,27 +92,31 @@ static CGFloat kCellHeight = 49;
         afterUSN = [chunkHighUSN intValue];
     } 
     [client getFilteredSyncChunkAfterUSN:afterUSN maxEntries:100 filter:filter success:^(EDAMSyncChunk *syncChunk) {
-        NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;
-        [USER_DEFAULT setObject:newChunkHighUSN forKey:@"chunkUSN"];
         if (0 < syncChunk.notebooks) {
 //            [USER_DEFAULT setObject:syncChunk.notebooks forKey:@"updateNotebooks"];
         }
         if (0 < syncChunk.notes) {
             NSLog(@"有更新！");
-            NSMutableDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
+            NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
+            NSMutableDictionary *newUpdateNotes;
             if (updateNotes == nil) {
-                updateNotes = [[NSMutableDictionary alloc] init];
+                newUpdateNotes = [[NSMutableDictionary alloc] init];
+            } else {
+                newUpdateNotes = [NSMutableDictionary dictionaryWithDictionary:updateNotes];
             }
             
             for (EDAMNote *note in syncChunk.notes) {
                 if (note.deleted) {
-                    [updateNotes setObject:note.deleted forKey:note.guid];
+                    [[ENotebookDAO sharedENotebookDAO] deleteNoteWithGuid:note.guid];
                 } else {
-                    [updateNotes setObject:[NSNull null] forKey:note.guid];
+                    [newUpdateNotes setObject:@(NO) forKey:note.guid];
                 }
             }
-            [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
+            [USER_DEFAULT setObject:newUpdateNotes forKey:@"updateNotes"];
         }
+        
+        NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;
+        [USER_DEFAULT setObject:newChunkHighUSN forKey:@"chunkUSN"];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取同步信息失败:%@", error);

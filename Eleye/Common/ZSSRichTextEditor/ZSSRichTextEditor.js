@@ -680,7 +680,7 @@ zss_editor.removeHilite = function () {
  * @date   2015-05-13
  * @return {[type]}   
  */
-zss_editor.setTopTitle = function () {
+zss_editor.setTopTitle = function (txt) {
     $('#top-title').html(txt);
 }
 zss_editor.setContentTitle = function () {

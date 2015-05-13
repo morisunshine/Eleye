@@ -141,6 +141,23 @@ static NSInteger kCellHeight = 100;
     [self.tableView addSubview:self.refreshControl];
 }
 
+- (void)updateNoteWithNote:(ENoteDO *)note indexPath:(NSIndexPath *)indexPath
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
+        ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
+        NSString *contentString = [resultNote.content enmlWithNote:resultNote];
+        [EUtility saveContentToFileWithContent:contentString guid:note.guid];
+        //                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } failure:^(NSError *error) {
+        if (error) {
+            NSLog(@"获取笔记内容错误%@", error);
+        }
+    }];
+}
+
 #pragma mark - Actions -
 
 - (IBAction)allNotesBtnTapped:(id)sender {
@@ -175,21 +192,14 @@ static NSInteger kCellHeight = 100;
         NSString *contentString = [EUtility contentFromLocalPathWithGuid:note.guid];
 //        NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
         if (contentString) {
-            note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        } else {
-            ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-            [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
-                ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
-                NSString *contentString = [resultNote.content enmlWithNote:resultNote];
-                [EUtility saveContentToFileWithContent:contentString guid:note.guid];
-//                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+            NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
+            if ([updateNotes objectForKey:note.guid]) {
+                [self updateNoteWithNote:note indexPath:indexPath];
+            } else {
                 note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            } failure:^(NSError *error) {
-                if (error) {
-                    NSLog(@"获取笔记内容错误%@", error);
-                }
-            }];
+            }
+        } else {
+            [self updateNoteWithNote:note indexPath:indexPath];
         }
     }
     

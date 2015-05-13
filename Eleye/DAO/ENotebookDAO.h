@@ -16,4 +16,6 @@
 
 - (BOOL)deleteAllNoteBooks;
 
+- (BOOL)deleteNoteWithGuid:(NSString *)guid;
+
 @end
