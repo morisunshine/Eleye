@@ -95,11 +95,19 @@ static CGFloat kCellHeight = 49;
         NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;
         [USER_DEFAULT setObject:newChunkHighUSN forKey:@"chunkUSN"];
         if (0 < syncChunk.notebooks) {
-            [USER_DEFAULT setObject:syncChunk.notebooks forKey:@"updateNotebooks"];
+//            [USER_DEFAULT setObject:syncChunk.notebooks forKey:@"updateNotebooks"];
         }
-        if (0 < syncChunk.notes) {  
+        if (0 < syncChunk.notes) {
             NSLog(@"有更新！");
-            [USER_DEFAULT setObject:syncChunk.notes forKey:@"updateNotes"];
+            NSMutableDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
+            if (updateNotes == nil) {
+                updateNotes = [[NSMutableDictionary alloc] init];
+            }
+            
+            for (EDAMNote *note in syncChunk.notes) {
+                
+            }
+//            [USER_DEFAULT setObject:syncChunk.notes forKey:@"updateNotes"];
         } 
     } failure:^(NSError *error) {
         if (error) {
