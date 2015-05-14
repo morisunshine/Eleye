@@ -49,6 +49,20 @@ static NSInteger kCellHeight = 100;
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotesWithNotification) name:@"UPDATENOTES" object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,6 +81,13 @@ static NSInteger kCellHeight = 100;
 }
 
 #pragma mark - Private Methods -
+
+- (void)updateNotesWithNotification
+{
+    notes_ = [[ENoteDAO sharedENoteDAO] notesWithNotebookGuid:self.guid];
+    
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+}
 
 - (void)listNotesLoadingMore:(BOOL)loadingMore
 {
@@ -150,7 +171,10 @@ static NSInteger kCellHeight = 100;
         [EUtility saveContentToFileWithContent:contentString guid:note.guid];
         //                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
         note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
+        [updateNotes removeObjectForKey:note.guid];
+        [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记内容错误%@", error);
