@@ -126,9 +126,7 @@
         [self.editorView loadHTMLString:htmlString baseURL:self.baseURL];
         self.resourcesLoaded = YES;
     }
-    
 }
-
 
 - (void)setPlaceholderText {
     
@@ -162,10 +160,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    return NO;
 }
 
 #pragma mark - Editor Interaction
@@ -633,7 +627,6 @@
     }
     [self updateHTML];
 }
-
 
 #pragma mark - Callbacks
 

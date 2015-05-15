@@ -21,7 +21,6 @@
 		08D4A1211AEFB6F2000BAC87 /* ENotebookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1091AEFB6F2000BAC87 /* ENotebookCell.m */; };
 		08D4A1221AEFB6F2000BAC87 /* ENotebookStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A10B1AEFB6F2000BAC87 /* ENotebookStackView.m */; };
 		08D4A1231AEFB6F2000BAC87 /* ENoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A10D1AEFB6F2000BAC87 /* ENoteCell.m */; };
-		08D4A1241AEFB6F2000BAC87 /* ETextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A10F1AEFB6F2000BAC87 /* ETextView.m */; };
 		08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D4A1101AEFB6F2000BAC87 /* View.xib */; };
 		08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */; };
 		08D4A1271AEFB6F2000BAC87 /* EAllNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */; };
@@ -95,8 +94,6 @@
 		08D4A10B1AEFB6F2000BAC87 /* ENotebookStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENotebookStackView.m; sourceTree = "<group>"; };
 		08D4A10C1AEFB6F2000BAC87 /* ENoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteCell.h; sourceTree = "<group>"; };
 		08D4A10D1AEFB6F2000BAC87 /* ENoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteCell.m; sourceTree = "<group>"; };
-		08D4A10E1AEFB6F2000BAC87 /* ETextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETextView.h; sourceTree = "<group>"; };
-		08D4A10F1AEFB6F2000BAC87 /* ETextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETextView.m; sourceTree = "<group>"; };
 		08D4A1101AEFB6F2000BAC87 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		08D4A1121AEFB6F2000BAC87 /* EAllNoteBooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAllNoteBooksViewController.h; sourceTree = "<group>"; };
 		08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAllNoteBooksViewController.m; sourceTree = "<group>"; };
@@ -281,8 +278,6 @@
 				08D4A10B1AEFB6F2000BAC87 /* ENotebookStackView.m */,
 				08D4A10C1AEFB6F2000BAC87 /* ENoteCell.h */,
 				08D4A10D1AEFB6F2000BAC87 /* ENoteCell.m */,
-				08D4A10E1AEFB6F2000BAC87 /* ETextView.h */,
-				08D4A10F1AEFB6F2000BAC87 /* ETextView.m */,
 				08D4A1101AEFB6F2000BAC87 /* View.xib */,
 				1871B69D1AF0AA970090578E /* ETitleView.h */,
 				1871B69E1AF0AA970090578E /* ETitleView.m */,
@@ -555,7 +550,6 @@
 				08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */,
 				18D63F9C1AFB475700094F8C /* HRColorCursor.m in Sources */,
 				18D63F9E1AFB475700094F8C /* HRColorPickerViewController.m in Sources */,
-				08D4A1241AEFB6F2000BAC87 /* ETextView.m in Sources */,
 				18D63FA11AFB475700094F8C /* ZSSBarButtonItem.m in Sources */,
 				18D63FAB1AFB475700094F8C /* ZSSRichTextEditor.m in Sources */,
 				18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */,

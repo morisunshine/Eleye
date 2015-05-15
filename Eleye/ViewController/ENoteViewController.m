@@ -7,6 +7,7 @@
 //
 
 #import "ENoteViewController.h"
+#import <objc/runtime.h>
 
 @interface ENoteViewController ()
 {
@@ -24,6 +25,8 @@
     // Set the HTML contents of the editor
     [self setHTML:htmlString_];
     [self setTopTitle:self.noteTitle];
+    
+    [self replaceUIWebBrowserView:self.editorView];
     // Do any additional setup after loading the view.
 }
 
@@ -32,9 +35,11 @@
     [super viewDidAppear:animated];
     
     NSMutableArray *extraItems = [[NSMutableArray alloc] init];
-    UIMenuItem *boldItem = [[UIMenuItem alloc] initWithTitle:@"Bold"
+    UIMenuItem *highlightItem = [[UIMenuItem alloc] initWithTitle:@"highlight"
                                                       action:@selector(highlightBtnTapped:)];
-    [extraItems addObject:boldItem];
+    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"copy" action:@selector(copyBtnTapped:)];
+    [extraItems addObject:highlightItem];
+    [extraItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = extraItems;
 }
 
@@ -43,16 +48,6 @@
     [super viewDidDisappear:animated];
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
-}
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    if (self.editorView.superview != nil) {
-        if (action == @selector(highlightBtnTapped:)) {
-            return YES;
-        }
-    }
-    
-    return [super canPerformAction:action withSender:sender];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,9 +72,62 @@
     }];
 }
 
+#pragma mark - Private Methods -
+
+- (void)replaceUIWebBrowserView: (UIView *)view
+{
+    //Iterate through subviews recursively looking for UIWebBrowserView
+    for (UIView *sub in view.subviews) {
+        [self replaceUIWebBrowserView:sub];
+        if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
+            
+            Class class = sub.class;
+            
+            SEL originalSelector = @selector(canPerformAction:withSender:);
+            SEL swizzledSelector = @selector(mightPerformAction:withSender:);
+            
+            Method originalMethod = class_getInstanceMethod(class, originalSelector);
+            Method swizzledMethod = class_getInstanceMethod(self.class, swizzledSelector);
+            
+            //add the method mightPerformAction:withSender: to UIWebBrowserView
+            BOOL didAddMethod = class_addMethod(class,
+                                                originalSelector,
+                                                method_getImplementation(swizzledMethod),
+                                                method_getTypeEncoding(swizzledMethod));
+            //replace canPerformAction:withSender: with mightPerformAction:withSender:
+            Method method = class_getClassMethod(class, swizzledSelector);
+            if (method) {
+                
+            } else {
+                method_exchangeImplementations(originalMethod, swizzledMethod);
+            }
+//            if (didAddMethod) {
+//                class_replaceMethod(class,
+//                                    swizzledSelector,
+//                                    method_getImplementation(originalMethod),
+//                                    method_getTypeEncoding(originalMethod));
+//                
+//            } else {
+//                
+//                
+//            }
+        }
+    }
+}
+
+- (BOOL)mightPerformAction:(SEL)action withSender:(id)sender
+{
+    return NO;
+}
+
 #pragma mark - Actions -
 
-- (IBAction)highlightBtnTapped:(UIButton *)sender
+- (IBAction)highlightBtnTapped:(id)sender
+{
+    
+}
+
+- (IBAction)copyBtnTapped:(id)sender
 {
     
 }
