@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (NSString *)contentFromLocalPathWithGuid:(NSString *)guid;
 
++ (NSString *)noteContentWithGuid:(NSString *)guid;
+
 + (NSString *)platformString;
 
 + (BOOL)clearDataBase;

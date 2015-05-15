@@ -71,6 +71,29 @@
     
     NSString *path = [notePath stringByAppendingFormat:@"/%@/%@/note.html", @([ENSession sharedSession].userID), guid];
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        NSString *string = attributedString.string;
+        NSString *subString;
+        if (200 < string.length) {
+            subString = [string substringToIndex:200];
+        } else {
+            subString = [string substringToIndex:string.length];
+        }
+        NSString *contentPath = [notePath stringByAppendingFormat:@"/%@/%@/note", @([ENSession sharedSession].userID), guid];
+        [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    });
+}
+
++ (NSString *)noteContentWithGuid:(NSString *)guid
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryDirectory = [paths objectAtIndex:0];
+    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/%@/note", @([ENSession sharedSession].userID), guid];
+    NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
+    
+    return content;
 }
 
 + (BOOL)deleteNotePathWithGuid:(NSString *)guid
@@ -86,7 +109,10 @@
 + (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid
 {
     NSString *content = [self contentFromLocalPathWithGuid:guid];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    __block NSAttributedString *attributedString;
+    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
+        attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    });
     
     return attributedString;
 }

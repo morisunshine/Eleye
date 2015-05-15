@@ -169,8 +169,8 @@ static NSInteger kCellHeight = 100;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         [EUtility saveContentToFileWithContent:contentString guid:note.guid];
-        //                NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[enote.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSString *noteString = [EUtility noteContentWithGuid:note.guid];
+        note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
         [updateNotes removeObjectForKey:note.guid];
         [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
@@ -213,8 +213,7 @@ static NSInteger kCellHeight = 100;
     ENoteDO *note = notes_[indexPath.row];
     
     if (note.content == nil) {
-        NSString *contentString = [EUtility contentFromLocalPathWithGuid:note.guid];
-//        NSAttributedString *attributedString = [EUtility stringFromLocalPathWithGuid:note.guid];
+        NSString *contentString = [EUtility noteContentWithGuid:note.guid];
         if (contentString) {
             NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
             if ([updateNotes objectForKey:note.guid]) {
