@@ -26,7 +26,6 @@
     [self setHTML:htmlString_];
     [self setTopTitle:self.noteTitle];
     
-    [self replaceUIWebBrowserView:self.editorView];
     // Do any additional setup after loading the view.
 }
 
@@ -34,10 +33,12 @@
 {
     [super viewDidAppear:animated];
     
+    [self replaceUIWebBrowserView:self.editorView];
+    
     NSMutableArray *extraItems = [[NSMutableArray alloc] init];
-    UIMenuItem *highlightItem = [[UIMenuItem alloc] initWithTitle:@"highlight"
+    UIMenuItem *highlightItem = [[UIMenuItem alloc] initWithTitle:@"Highlight"
                                                       action:@selector(highlightBtnTapped:)];
-    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"copy" action:@selector(copyBtnTapped:)];
+    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyBtnTapped:)];
     [extraItems addObject:highlightItem];
     [extraItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = extraItems;
@@ -46,6 +47,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    [self replaceUIWebBrowserView:self.editorView];
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
 }
@@ -87,30 +90,16 @@
             SEL swizzledSelector = @selector(mightPerformAction:withSender:);
             
             Method originalMethod = class_getInstanceMethod(class, originalSelector);
-            Method swizzledMethod = class_getInstanceMethod(self.class, swizzledSelector);
-            
+            Method swizzledMethod = class_getInstanceMethod(self.class, swizzledSelector);            
             //add the method mightPerformAction:withSender: to UIWebBrowserView
-            BOOL didAddMethod = class_addMethod(class,
-                                                originalSelector,
-                                                method_getImplementation(swizzledMethod),
-                                                method_getTypeEncoding(swizzledMethod));
+            
             //replace canPerformAction:withSender: with mightPerformAction:withSender:
-            Method method = class_getClassMethod(class, swizzledSelector);
-            if (method) {
-                
-            } else {
-                method_exchangeImplementations(originalMethod, swizzledMethod);
-            }
-//            if (didAddMethod) {
-//                class_replaceMethod(class,
-//                                    swizzledSelector,
-//                                    method_getImplementation(originalMethod),
-//                                    method_getTypeEncoding(originalMethod));
-//                
-//            } else {
-//                
-//                
-//            }
+            
+            class_addMethod(class,
+                            originalSelector,
+                            method_getImplementation(swizzledMethod),
+                            method_getTypeEncoding(swizzledMethod));
+            method_exchangeImplementations(originalMethod, swizzledMethod);
         }
     }
 }
