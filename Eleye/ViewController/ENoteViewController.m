@@ -113,7 +113,7 @@
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
-    
+    [self addHighlight];
 }
 
 - (IBAction)copyBtnTapped:(id)sender

@@ -402,6 +402,13 @@
     
 }
 
+- (void)addHighlight
+{
+    NSString *trigger;
+    trigger = [NSString stringWithFormat:@"zss_editor.addHilite()"];
+    
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
 
 - (void)showInsertLinkDialogWithLink:(NSString *)url title:(NSString *)title {
     

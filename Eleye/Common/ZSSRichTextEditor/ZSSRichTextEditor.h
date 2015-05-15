@@ -163,4 +163,9 @@ static NSString * const ZSSRichTextEditorToolbarNone = @"com.zedsaid.toolbaritem
  */
 - (void)editorDidScrollWithPosition:(NSInteger)position;
 
+/**
+ *  add the highlight
+ */
+- (void)addHighlight;
+
 @end
