@@ -170,7 +170,7 @@ static NSInteger kCellHeight = 100;
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         [EUtility saveContentToFileWithContent:contentString guid:note.guid];
         NSString *noteString = [EUtility noteContentWithGuid:note.guid];
-        note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
         NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
         [updateNotes removeObjectForKey:note.guid];
         [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
@@ -219,7 +219,7 @@ static NSInteger kCellHeight = 100;
             if ([updateNotes objectForKey:note.guid]) {
                 [self updateNoteWithNote:note indexPath:indexPath];
             } else {
-                note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
             }
         } else {
             [self updateNoteWithNote:note indexPath:indexPath];
