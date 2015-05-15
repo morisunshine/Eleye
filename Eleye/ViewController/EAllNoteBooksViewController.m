@@ -11,6 +11,7 @@
 #import "ENotebookCell.h"
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
+#import "ENoteDAO.h"
 #import "ELaunchViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MHNavigationController.h"
@@ -107,12 +108,16 @@ static CGFloat kCellHeight = 49;
             
             for (EDAMNote *note in syncChunk.notes) {
                 if (note.deleted) {
-                    [[ENotebookDAO sharedENotebookDAO] deleteNoteWithGuid:note.guid];
+                    
+                    [EUtility deleteNotePathWithGuid:note.guid];
+                    [[ENoteDAO sharedENoteDAO] deleteNoteWithGuid:note.guid];
                 } else {
                     [newUpdateNotes setObject:@(NO) forKey:note.guid];
                 }
             }
+            
             [USER_DEFAULT setObject:newUpdateNotes forKey:@"updateNotes"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATENOTES" object:nil];
         }
         
         NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;

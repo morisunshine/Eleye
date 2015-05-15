@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid;
 
++ (BOOL)deleteNotePathWithGuid:(NSString *)guid;
+
 + (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid;
 
 + (NSString *)contentFromLocalPathWithGuid:(NSString *)guid;

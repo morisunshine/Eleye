@@ -98,6 +98,26 @@ SINGLETON_CLASS(ENoteDAO)
     return result;
 }
 
+- (BOOL)deleteNoteWithGuid:(NSString *)guid
+{  
+    __block BOOL result = NO;
+    
+    if (guid) {
+        NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where guid = \"%@\"", [self tableName], guid];
+        
+        [dbQueue inDatabase:^(FMDatabase *db) {
+            
+            result = [db executeUpdate:deleteSql];
+            
+            if (!result) {
+                NSLog(@"error delete %@ error:%@", [self tableName], [db lastErrorMessage]);
+            }
+        }];
+    }
+    
+    return result;
+}
+
 #pragma mark - Private Methods -
 
 - (ENoteDO *)noteFromResultSet:(FMResultSet *)resultSet

@@ -73,6 +73,16 @@
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
++ (BOOL)deleteNotePathWithGuid:(NSString *)guid
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryDirectory = [paths objectAtIndex:0];
+    NSString *notePath = [libraryDirectory stringByAppendingFormat:@"/note/%@/%@", @([ENSession sharedSession].userID), guid];
+    BOOL deleteSuccess = [[NSFileManager defaultManager] removeItemAtPath:notePath error:nil];
+    
+    return deleteSuccess;
+}
+
 + (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid
 {
     NSString *content = [self contentFromLocalPathWithGuid:guid];
