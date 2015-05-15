@@ -53,7 +53,8 @@ static NSInteger kCellHeight = 100;
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotesWithNotification) name:@"UPDATENOTES" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotesWithNotification) name:UPDATENOTENOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotesWithNotification) name:UPDATENOTELISTNOTIFICATION object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -168,7 +169,7 @@ static NSInteger kCellHeight = 100;
     [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
-        [EUtility saveContentToFileWithContent:contentString guid:note.guid];
+        [[EUtility sharedEUtility] saveContentToFileWithContent:contentString guid:note.guid];
         NSString *noteString = [EUtility noteContentWithGuid:note.guid];
         note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
         NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];

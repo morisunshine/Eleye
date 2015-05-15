@@ -17,11 +17,13 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 @interface EUtility : NSObject
 
+- (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid;
+
++ (instancetype)sharedEUtility;
+
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert;
 
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position;
-
-+ (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid;
 
 + (BOOL)deleteNotePathWithGuid:(NSString *)guid;
 

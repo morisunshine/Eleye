@@ -18,13 +18,23 @@
 
 @implementation ENoteViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
-    // Set the HTML contents of the editor
-    [self setHTML:htmlString_];
-    [self setTopTitle:self.noteTitle];
+    
+    if (htmlString_) {
+        NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
+        if ([updateNotes objectForKey:self.guid]) {
+            [self fetchNoteContent];
+        } else {
+            //不需要更新
+            [self configUI];
+        }
+    } else {
+        [self fetchNoteContent];
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -60,14 +70,20 @@
 
 #pragma mark - Private Methods -
 
+- (void)configUI
+{
+    [self setHTML:htmlString_];
+    [self setTopTitle:self.noteTitle];
+}
+
 - (void)fetchNoteContent
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
-        [self setHTML:htmlString_];
-        [EUtility saveContentToFileWithContent:htmlString_ guid:self.guid];
+        [self configUI];
+        [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记内容错误%@", error);

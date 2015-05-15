@@ -46,6 +46,9 @@
 
 #define SHOWGUIDE                           @"hasShowGuide"
 
+#define UPDATENOTENOTIFICATION              @"UPDATENOTES"
+#define UPDATENOTELISTNOTIFICATION          @"UPDATENOTELISTS"
+
 #pragma mark - 默认图片
 //默认图片
 #define DEFAULT_IMAGE_REPLACE               @"defaultImage.png"

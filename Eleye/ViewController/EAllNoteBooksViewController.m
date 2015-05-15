@@ -117,7 +117,7 @@ static CGFloat kCellHeight = 49;
             }
             
             [USER_DEFAULT setObject:newUpdateNotes forKey:@"updateNotes"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATENOTES" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATENOTENOTIFICATION object:nil];
         }
         
         NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;

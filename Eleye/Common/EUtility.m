@@ -14,6 +14,8 @@
 
 @implementation EUtility
 
+SINGLETON_CLASS(EUtility)
+
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert
 {
     CALayer *lineLayer = [CALayer layer];
@@ -47,7 +49,7 @@
     [[self class] addlineOnView:view position:position insert:0];
 }
 
-+ (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid
+- (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *libraryDirectory = [paths objectAtIndex:0];
@@ -83,6 +85,8 @@
         }
         NSString *contentPath = [notePath stringByAppendingFormat:@"/%@/%@/note", @([ENSession sharedSession].userID), guid];
         [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        
+        [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
     });
 }
 
