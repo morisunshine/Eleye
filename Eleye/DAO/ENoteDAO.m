@@ -60,9 +60,9 @@ SINGLETON_CLASS(ENoteDAO)
     NSString *sql;
     
     if (notebookGuid == nil) {
-        sql = [NSString stringWithFormat:@"select * from %@", [self tableName]];
+        sql = [NSString stringWithFormat:@"select * from %@ order by updated desc", [self tableName]];
     } else {
-        sql = [NSString stringWithFormat:@"select * from %@ where notebookGuid = ?", [self tableName]];
+        sql = [NSString stringWithFormat:@"select * from %@ where notebookGuid = ? order by updated desc", [self tableName]];
     }
     
     __block NSMutableArray *mutNotes = [[NSMutableArray alloc] init];
