@@ -118,7 +118,9 @@
 
 - (IBAction)copyBtnTapped:(id)sender
 {
-    
+    NSString *selectedText = [self.editorView stringByEvaluatingJavaScriptFromString: @"window.getSelection().toString()"];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:selectedText];
 }
 
 @end

@@ -32,7 +32,7 @@
                         <action selector="viewBtnTapped:" destination="CqF-3v-dxM" eventType="touchUpInside" id="D4q-nX-gLW"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-ap-Dqm">
                     <rect key="frame" x="297" y="17" width="8" height="13"/>
                 </imageView>
             </subviews>
