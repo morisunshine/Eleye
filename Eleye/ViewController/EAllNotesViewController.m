@@ -42,6 +42,7 @@ static NSInteger kCellHeight = 100;
     }];
     
     notes_ = [[ENoteDAO sharedENoteDAO] notesWithNotebookGuid:self.guid];
+    self.tableView.showsInfiniteScrolling = NO;
     
     [self listNotesLoadingMore:NO];
     [self configureUI];
@@ -100,12 +101,9 @@ static NSInteger kCellHeight = 100;
     EDAMRelatedQuery *query = [[EDAMRelatedQuery alloc] init];
     query.filter = filter;
     
-    if (loadingMore) {
-        self.tableView.showsInfiniteScrolling = YES;
-    } else {
+    if (loadingMore == NO) {
         offset_ = 0;
     }
-    
     [client findNotesWithFilter:filter offset:offset_ maxNotes:kMaxCount success:^(EDAMNoteList *list) {
         NSArray *newNotes = [self newNotesFromNotes:list.notes];
         
@@ -114,6 +112,7 @@ static NSInteger kCellHeight = 100;
         int32_t startIndex = [list.startIndex intValue];
         if (kMaxCount < totalCount - startIndex) {
             offset_ = startIndex + kMaxCount + 1;
+            self.tableView.showsInfiniteScrolling = YES;
         } else {
             self.tableView.showsInfiniteScrolling = NO;
         }

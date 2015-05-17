@@ -107,11 +107,17 @@ zss_editor.setScrollPosition = function() {
 }
 
 zss_editor.setBackgroundColor = function(color) {
-    zss_editor.restorerange();
-    document.execCommand("styleWithCSS", null, true);
-    document.execCommand('hiliteColor', false, color);
-    document.execCommand("styleWithCSS", null, false);
-    zss_editor.enabledEditingItems();
+    try{
+        zss_editor.restorerange();
+        document.execCommand("styleWithCSS", null, true);
+        document.execCommand('hiliteColor', false, color);
+        document.execCommand("styleWithCSS", null, false);
+        zss_editor.enabledEditingItems();
+    }
+    
+    catch(e) {
+        alert(e);
+    }
 }
 
 zss_editor.setPlaceholder = function(placeholder) {
@@ -639,10 +645,13 @@ zss_editor.blurEditor = function() {
 /**
  * 添加高亮
  */
-var HILITE_COLOR = 'rgb(224, 204, 193)';
+var HILITE_COLOR = '#ccc';
 var ORIGIN_COLOR = '#fff';
 
 zss_editor.addHilite = function() {
+    
+    alert("highligt");
+    var HILITE_COLOR = '#ccc';
     zss_editor.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, HILITE_COLOR);
