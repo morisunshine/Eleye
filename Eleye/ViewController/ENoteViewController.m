@@ -45,13 +45,7 @@
     
     [self replaceUIWebBrowserView:self.editorView];
     
-    NSMutableArray *extraItems = [[NSMutableArray alloc] init];
-    UIMenuItem *highlightItem = [[UIMenuItem alloc] initWithTitle:@"Highlight"
-                                                      action:@selector(highlightBtnTapped:)];
-    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyBtnTapped:)];
-    [extraItems addObject:highlightItem];
-    [extraItems addObject:copyItem];
-    [UIMenuController sharedMenuController].menuItems = extraItems;
+    [self changeMenuItemsWithShowHighLight:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -125,11 +119,33 @@
     return NO;
 }
 
+- (void)changeMenuItemsWithShowHighLight:(BOOL)showHighlight
+{
+    NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+    UIMenuItem *actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel"
+                                                           action:@selector(highlightBtnTapped:)];
+    if (showHighlight) {
+        actionItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
+    } else {
+        actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel" action:@selector(cancelBtnTapped:)];
+    }
+    
+    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyBtnTapped:)];
+    [menuItems addObject:actionItem];
+    [menuItems addObject:copyItem];
+    [UIMenuController sharedMenuController].menuItems = menuItems;
+}
+
 #pragma mark - Actions -
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
     [self addHighlight];
+}
+
+- (IBAction)cancelBtnTapped:(id)sender
+{
+    
 }
 
 - (IBAction)copyBtnTapped:(id)sender

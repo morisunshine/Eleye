@@ -94,7 +94,7 @@ static CGFloat kCellHeight = 49;
     } 
     [client getFilteredSyncChunkAfterUSN:afterUSN maxEntries:100 filter:filter success:^(EDAMSyncChunk *syncChunk) {
         if (0 < syncChunk.notebooks) {
-//            [USER_DEFAULT setObject:syncChunk.notebooks forKey:@"updateNotebooks"];
+            
         }
         if (0 < syncChunk.notes) {
             NSLog(@"有更新！");
@@ -400,6 +400,7 @@ static CGFloat kCellHeight = 49;
     }
     else
     {
+        [EUtility showAutoHintTips:@"您的设备不能发送邮件！"];
         NSLog(@"This device cannot send email");
     }
 }
