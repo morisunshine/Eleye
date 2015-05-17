@@ -1,6 +1,6 @@
 @import "normalize-important.less";
 * {
-  outline: 0px solid transparent !important;
+    outline: 0px solid transparent !important;
 }
 
 html,
@@ -25,20 +25,27 @@ tr {
     max-width: 100% !important;
 }
 
+a {
+    color: #9C5228 !important;
+    text-decoration: underline !important;
+}
+
 #top-title {
     padding: 1rem 0;
     color: #c7c7c7;
     border-bottom: #c7c7c7 1px solid;
     margin-bottom: .75rem;
 }
+
 #zss_editor_content {
-  width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow: auto;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
 }
 
-a {
-    color: #9C5228 !important;
-    text-decoration: underline !important;
-}
+@import "github.less";
+
 
 /*ZSSEditor origin style*/
 /** {outline: 0px solid transparent; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-touch-callout: none;}
