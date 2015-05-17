@@ -237,14 +237,6 @@
     return [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getText();"];
 }
 
-- (void)showHTMLSource:(ZSSBarButtonItem *)barButtonItem {
-//    if (barButtonItem.sho) {
-//        htmlString_ = [self getHTML];
-//    } else {
-//        [self setHTML:htmlString_];
-//    }
-}
-
 - (void)removeFormat {
     NSString *trigger = @"zss_editor.removeFormating();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
