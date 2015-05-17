@@ -120,9 +120,21 @@
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
         NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
         NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+
+        // ZSSRichTextEditor.js
         NSString *source = [[NSBundle mainBundle] pathForResource:@"ZSSRichTextEditor" ofType:@"js"];
         NSString *jsString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:source] encoding:NSUTF8StringEncoding];
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
+
+        // jquery.js
+        NSString *jQuery = [[NSBundle mainBundle] pathForResource:@"jquery" ofType:@"js"];
+        NSString *jQueryString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:jQuery] encoding:NSUTF8StringEncoding];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--jquery-->" withString:jQueryString];
+
+        // main.css
+        NSString *cssPathMain   = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"];
+        NSString *cssDataMain = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:cssPathMain] encoding:NSUTF8StringEncoding];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"/*main*/" withString:cssDataMain];
         
         [self.editorView loadHTMLString:htmlString baseURL:self.baseURL];
         self.resourcesLoaded = YES;

@@ -52,6 +52,8 @@
 		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
 		18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F201AE79DA6000425E4 /* ENoteDAO.m */; };
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
+		D230CF431B08BC88009230ED /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = D230CF421B08BC88009230ED /* jquery.js */; };
+		D230CF471B08BF65009230ED /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = D230CF461B08BF64009230ED /* main.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +157,8 @@
 		1975340930B8A6096BFC00AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0654875527BCBA8D47BF71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9F08A71444B99F1BC78B5E4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D230CF421B08BC88009230ED /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = jquery.js; path = Assets/js/jquery.js; sourceTree = "<group>"; };
+		D230CF461B08BF64009230ED /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +314,8 @@
 		18D63EC01AFB475600094F8C /* ZSSRichTextEditor */ = {
 			isa = PBXGroup;
 			children = (
+				D230CF461B08BF64009230ED /* main.css */,
+				D230CF421B08BC88009230ED /* jquery.js */,
 				18D63EC51AFB475600094F8C /* editor.html */,
 				18D63F141AFB475600094F8C /* Third Party */,
 				18D63F2C1AFB475700094F8C /* ZSSBarButtonItem.h */,
@@ -472,7 +478,9 @@
 				18D63FAA1AFB475700094F8C /* ZSSRichTextEditor.js in Resources */,
 				18D63F491AFB475700094F8C /* editor.html in Resources */,
 				08751F221AE5386900FE17B1 /* Main.storyboard in Resources */,
+				D230CF431B08BC88009230ED /* jquery.js in Resources */,
 				183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */,
+				D230CF471B08BF65009230ED /* main.css in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
 			);
