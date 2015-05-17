@@ -604,6 +604,9 @@
     NSLog(@"web request");
     NSLog(@"%@", urlString);
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        
         return NO;
     } else if ([urlString rangeOfString:@"callback://0/"].location != NSNotFound) {
         
