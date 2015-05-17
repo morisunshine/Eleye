@@ -193,4 +193,74 @@ SINGLETON_CLASS(EUtility)
     return deleteSuccess;
 }
 
++ (void)showAutoHintTips:(NSString *)string
+{
+    UIView *view = [UIApplication sharedApplication].keyWindow;
+    static BOOL hasShowTips;
+    if(hasShowTips) return;
+    
+    hasShowTips = YES;
+    
+    CGFloat posY = floor(CGRectGetHeight(view.bounds)/2)-100;
+    
+    UIFont *font = [UIFont boldSystemFontOfSize:16];
+    
+    UIView *tipView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 100)];
+    tipView.layer.cornerRadius = 10;
+    tipView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
+    tipView.userInteractionEnabled = NO;
+    tipView.layer.opacity = 0;
+    
+    UILabel *stringLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(tipView.bounds)-20, 20)];
+    stringLabel.textColor = [UIColor whiteColor];
+    stringLabel.backgroundColor = [UIColor clearColor];
+    stringLabel.adjustsFontSizeToFitWidth = YES;
+    stringLabel.textAlignment = NSTextAlignmentCenter;
+    stringLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    stringLabel.font = font;
+    //    stringLabel.numberOfLines = 2;
+    stringLabel.numberOfLines = 0;
+    stringLabel.text = string;
+    [stringLabel sizeToFit];
+    stringLabel.width = tipView.width-20;
+    stringLabel.shadowColor = [UIColor blackColor];
+    stringLabel.shadowOffset = CGSizeMake(0, -1);
+    [tipView addSubview:stringLabel];
+    
+    tipView.height = stringLabel.height + 20;
+    
+    if(![tipView isDescendantOfView:view]) {
+        tipView.layer.opacity = 0;
+        [view addSubview:tipView];
+    }
+    
+    if(tipView.layer.opacity != 1) {
+        
+        posY+=(CGRectGetHeight(tipView.bounds)/2);
+        tipView.center = CGPointMake(CGRectGetWidth(tipView.superview.bounds)/2, posY);
+        
+        tipView.layer.transform = CATransform3DScale(CATransform3DMakeTranslation(0, 0, 0), 1.3, 1.3, 1);
+        tipView.layer.opacity = 0.3;
+        
+        [UIView animateWithDuration:0.15
+                              delay:0
+                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut
+                         animations:^{
+                             tipView.layer.transform = CATransform3DScale(CATransform3DMakeTranslation(0, 0, 0), 1, 1, 1);
+                             tipView.layer.opacity = 1;
+                         }completion:NULL];
+    }
+    
+    [UIView animateWithDuration:0.15
+                          delay:2.5
+                        options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         tipView.layer.transform = CATransform3DScale(CATransform3DMakeTranslation(0, 0, 0), 0.8, 0.8, 1.0);
+                         tipView.layer.opacity = 0;
+                     }completion:^(BOOL finished){
+                         if(tipView.layer.opacity == 0) [tipView removeFromSuperview];
+                         hasShowTips = NO;
+                     }];
+}
+
 @end
