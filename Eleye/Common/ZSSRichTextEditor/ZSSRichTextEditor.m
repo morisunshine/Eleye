@@ -87,6 +87,7 @@
 @property (nonatomic, strong) NSString *selectedImageURL;
 @property (nonatomic, strong) NSString *selectedImageAlt;
 @property (nonatomic, strong) NSString *internalHTML;
+@property (nonatomic, strong) NSString *topTitle;
 @property (nonatomic, strong) NSString *internalTitle;
 @property (nonatomic) BOOL editorLoaded;
 - (NSString *)removeQuotesFromHTML:(NSString *)html;
@@ -174,11 +175,13 @@
     [self.editorView stringByEvaluatingJavaScriptFromString:js];
 }
 
-- (void)setTopTitle:(NSString *)title
+- (void)changeTopTitle:(NSString *)title
 {
-    NSString *trigger = [NSString stringWithFormat:@"zss_editor.setTopTitle(\"%@\");", title];
+    self.topTitle = title;
     
-    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+    if (self.editorLoaded) {
+        [self updateHTML];
+    }
 }
 
 - (void)setHTML:(NSString *)html {
@@ -196,9 +199,11 @@
     NSString *html = self.internalHTML;
     htmlString_ = html;
     NSString *cleanedHTML = [self removeQuotesFromHTML:htmlString_];
-    NSString *trigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
+    NSString *htmlTrigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
+    NSString *titleTrigger = [NSString stringWithFormat:@"zss_editor.setTopTitle(\"%@\");", self.topTitle];
     
-    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+    [self.editorView stringByEvaluatingJavaScriptFromString:titleTrigger];
+    [self.editorView stringByEvaluatingJavaScriptFromString:htmlTrigger];
     
 }
 

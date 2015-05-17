@@ -73,7 +73,7 @@
 - (void)configUI
 {
     [self setHTML:htmlString_];
-    [self setTopTitle:self.noteTitle];
+    [self changeTopTitle:self.noteTitle];
 }
 
 - (void)fetchNoteContent
