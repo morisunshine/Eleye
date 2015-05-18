@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 wheelab. All rights reserved.
 //
 
-#import "ZSSRichTextEditor.h"
+#import "EReaderViewController.h"
 
-@interface ENoteViewController : ZSSRichTextEditor
+@interface ENoteViewController : EReaderViewController
 
 @property (nonatomic, copy) NSString *guid;
 @property (nonatomic, copy) NSString *noteTitle;

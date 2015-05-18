@@ -12,6 +12,7 @@
 @interface ENoteViewController ()
 {
     NSString *htmlString_;
+    EDAMNote *enote_;
 }
 
 @end
@@ -45,13 +46,7 @@
     
     [self replaceUIWebBrowserView:self.editorView];
     
-    NSMutableArray *extraItems = [[NSMutableArray alloc] init];
-    UIMenuItem *highlightItem = [[UIMenuItem alloc] initWithTitle:@"Highlight"
-                                                      action:@selector(highlightBtnTapped:)];
-    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyBtnTapped:)];
-    [extraItems addObject:highlightItem];
-    [extraItems addObject:copyItem];
-    [UIMenuController sharedMenuController].menuItems = extraItems;
+    [self changeMenuItemsWithShowHighLight:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -80,6 +75,7 @@
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
+        enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self configUI];
@@ -90,8 +86,6 @@
         }
     }];
 }
-
-#pragma mark - Private Methods -
 
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
@@ -125,11 +119,44 @@
     return NO;
 }
 
+- (void)changeMenuItemsWithShowHighLight:(BOOL)showHighlight
+{
+    NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+    UIMenuItem *actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel"
+                                                           action:@selector(highlightBtnTapped:)];
+    if (showHighlight) {
+        actionItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
+    } else {
+        actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel" action:@selector(cancelBtnTapped:)];
+    }
+    
+    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyBtnTapped:)];
+    [menuItems addObject:actionItem];
+    [menuItems addObject:copyItem];
+    [UIMenuController sharedMenuController].menuItems = menuItems;
+}
+
+- (void)updateNote
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    //TODO 更新笔记
+    [client updateNote:enote_ success:^(EDAMNote *note) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - Actions -
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
     [self addHighlight];
+}
+
+- (IBAction)cancelBtnTapped:(id)sender
+{
+    
 }
 
 - (IBAction)copyBtnTapped:(id)sender
