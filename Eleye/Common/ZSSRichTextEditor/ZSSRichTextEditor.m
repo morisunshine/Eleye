@@ -127,9 +127,9 @@
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
 
         // jquery.js
-        NSString *jQuery = [[NSBundle mainBundle] pathForResource:@"jquery" ofType:@"js"];
-        NSString *jQueryString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:jQuery] encoding:NSUTF8StringEncoding];
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--jquery-->" withString:jQueryString];
+        NSString *jsPath = [[NSBundle mainBundle] pathForResource:@"main.min" ofType:@"js"];
+        NSString *jsData = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:jsPath] encoding:NSUTF8StringEncoding];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--js-->" withString:jsData];
 
         // main.css
         NSString *cssPathMain   = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"];
@@ -421,7 +421,7 @@
 
 - (void)addHighlight
 {
-    NSString *trigger = [NSString stringWithFormat:@"zss_editor.setBackgroundColor(\"#ccc\")"];
+    NSString *trigger = [NSString stringWithFormat:@"zss_editor.addHilite()"];
     
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }

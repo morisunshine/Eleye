@@ -37,82 +37,43 @@
     // Sets to true when extra footer gap shows and requires to hide
     zss_editor.updateScrollOffset = false;
 
-
-    var serializedHighlights = decodeURIComponent(window.location.search.slice(window.location.search.indexOf("=") + 1));
-        var highlighter;
-
-        var initialDoc;
-    function initHighlighter() {
-        rangy.init();
-
-        highlighter = rangy.createHighlighter();
-
-        highlighter.addClassApplier(rangy.createClassApplier("eleye-hilite", {
-            ignoreWhiteSpace: true,
-            tagNames: ["span", "a"]
-        }));
-
-        highlighter.addClassApplier(rangy.createClassApplier("note", {
-            ignoreWhiteSpace: true,
-            elementTagName: "a",
-            elementProperties: {
-                href: "#",
-                onclick: function() {
-                    var highlight = highlighter.getHighlightForElement(this);
-                    if (window.confirm("Delete this note (ID " + highlight.id + ")?")) {
-                        highlighter.removeHighlights( [highlight] );
-                    }
-                    return false;
-                }
-            }
-        }));
-
-
-        if (serializedHighlights) {
-            highlighter.deserialize(serializedHighlights);
-        }
-    }
-
     /**
      * The initializer function that must be called onLoad
      */
     zss_editor.init = function() {
 
-        initHighlighter();
+            $('#zss_editor_content').on('touchend', function(e) {
+                zss_editor.enabledEditingItems(e);
+                var clicked = $(e.target);
+                if (!clicked.hasClass('zs_active')) {
+                    $('img').removeClass('zs_active');
+                }
+            });
 
-            // $('#zss_editor_content').on('touchend', function(e) {
-            //     zss_editor.enabledEditingItems(e);
-            //     var clicked = $(e.target);
-            //     if (!clicked.hasClass('zs_active')) {
-            //         $('img').removeClass('zs_active');
-            //     }
-            // });
+            $(document).on('selectionchange', function(e) {
+                zss_editor.calculateEditorHeightWithCaretPosition();
+                zss_editor.setScrollPosition();
+                console.log('select');
+            });
 
-            // $(document).on('selectionchange', function(e) {
-            //     zss_editor.calculateEditorHeightWithCaretPosition();
-            //     zss_editor.setScrollPosition();
-            //     console.log('select');
-            // });
+            $(window).on('scroll', function(e) {
+                zss_editor.updateOffset();
+            });
 
-            // $(window).on('scroll', function(e) {
-            //     zss_editor.updateOffset();
-            // });
-
-            // // Make sure that when we tap anywhere in the document we focus on the editor
-            // $(window).on('touchmove', function(e) {
-            //     zss_editor.isDragging = true;
-            //     zss_editor.updateScrollOffset = true;
-            //     zss_editor.setScrollPosition();
-            // });
-            // $(window).on('touchstart', function(e) {
-            //     // zss_editor.isDragging = false;
-            //     highlighter.highlightSelection("eleye-hilite");
-            // });
-            // $(window).on('touchend', function(e) {
-            //     if (!zss_editor.isDragging) {
-            //         zss_editor.focusEditor();
-            //     }
-            // });
+            // Make sure that when we tap anywhere in the document we focus on the editor
+            $(window).on('touchmove', function(e) {
+                zss_editor.isDragging = true;
+                zss_editor.updateScrollOffset = true;
+                zss_editor.setScrollPosition();
+            });
+            $(window).on('touchstart', function(e) {
+                zss_editor.isDragging = false;
+            });
+            $(window).on('touchend', function(e) {
+                if (!zss_editor.isDragging) {
+                    zss_editor.focusEditor();
+                }
+            });
 
         } //end
 
@@ -701,15 +662,14 @@
 
             try {
 
-                // var sel = window.getSelection(),
-                //     range = sel.getRangeAt(0),
-                //     span = document.createElement('span'); // something happening here preventing selection of elements
+                var sel = window.getSelection(),
+                    range = sel.getRangeAt(0),
+                    span = document.createElement('span'); // something happening here preventing selection of elements
 
-                // range.surroundContents(span);
+                range.surroundContents(span);
 
-                // $(span).addClass(HILITE_CLASS_NAME).
-                // css('backgroundColor', HILITE_COLOR);
-                highlighter.highlightSelection("eleye-hilite");
+                $(span).addClass(HILITE_CLASS_NAME).
+                css('backgroundColor', HILITE_COLOR);
 
             } catch (e) {
                 alert(e);
