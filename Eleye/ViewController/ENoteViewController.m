@@ -8,6 +8,8 @@
 
 #import "ENoteViewController.h"
 #import <objc/runtime.h>
+#import <NSData+EvernoteSDK.h>
+#import <ENMIMEUtils.h>
 
 @interface ENoteViewController ()
 {
@@ -25,13 +27,19 @@
     
     htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
     
+    [self changeTopTitle:self.noteTitle];
+    
+    //TODO
+    [self fetchNoteContent];
+    //TODO
+    
     if (htmlString_) {
         NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
         if ([updateNotes objectForKey:self.guid]) {
             [self fetchNoteContent];
         } else {
             //不需要更新
-            [self configUI];
+            [self setupData];
         }
     } else {
         [self fetchNoteContent];
@@ -65,7 +73,7 @@
 
 #pragma mark - Private Methods -
 
-- (void)configUI
+- (void)setupData
 {
     [self setHTML:htmlString_];
     [self changeTopTitle:self.noteTitle];
@@ -77,8 +85,20 @@
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
+        //
+        NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:enote.resources.count];
+        for (ENResource * resource in resultNote.resources) {
+            EDAMResource * edamResource = [resource EDAMResource];
+            if (edamResource.attributes.sourceURL == nil) {
+                NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+                NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+                NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+                edamResource.attributes.sourceURL = fakeUrl;
+            }
+            [edamResources addObject:edamResource];
+        }
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
-        [self configUI];
+        [self setupData];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
     } failure:^(NSError *error) {
         if (error) {
