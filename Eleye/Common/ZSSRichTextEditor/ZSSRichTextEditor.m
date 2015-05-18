@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *internalHTML;
 @property (nonatomic, strong) NSString *topTitle;
 @property (nonatomic) BOOL editorLoaded;
+
 - (NSString *)removeQuotesFromHTML:(NSString *)html;
 - (NSString *)tidyHTML:(NSString *)html;
 
@@ -72,11 +73,13 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated 
+{
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
 }
 
@@ -136,8 +139,8 @@
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
-- (void)setSelectedColor:(UIColor*)color tag:(int)tag {
-    
+- (void)setSelectedColor:(UIColor*)color tag:(int)tag 
+{    
     NSString *hex = @"#c0c0c0";
     NSString *trigger;
     if (tag == 1) {
@@ -146,7 +149,6 @@
         trigger = [NSString stringWithFormat:@"zss_editor.setBackgroundColor(\"%@\");", hex];
     }
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
-    
 }
 
 - (void)addHighlight
@@ -158,10 +160,8 @@
 
 #pragma mark - UIWebView Delegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    
-    
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType 
+{    
     NSString *urlString = [[request URL] absoluteString];
     NSLog(@"web request");
     NSLog(@"%@", urlString);
@@ -191,36 +191,25 @@
     }
     
     return YES;
-    
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(UIWebView *)webView 
+{
     self.editorLoaded = YES;
-    //[self setPlaceholderText];
+    
     if (!self.internalHTML) {
         self.internalHTML = @"";
     }
+    
     [self updateHTML];
 }
 
 #pragma mark - Callbacks
 
-// Blank implementation
-- (void)editorDidScrollWithPosition:(NSInteger)position {
+- (void)editorDidScrollWithPosition:(NSInteger)position 
+{
     
 }
-
-#pragma mark - Asset Picker
-
-- (void)showInsertURLAlternatePicker {
-    // Blank method. User should implement this in their subclass
-}
-
-
-- (void)showInsertImageAlternatePicker {
-    // Blank method. User should implement this in their subclass
-}
-
 
 #pragma mark - Utilities
 
@@ -231,8 +220,7 @@
     html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
     html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
     return html;
-}//end
-
+}
 
 - (NSString *)tidyHTML:(NSString *)html {
     html = [html stringByReplacingOccurrencesOfString:@"<br>" withString:@"<br />"];
@@ -241,7 +229,7 @@
         html = [self.editorView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"style_html(\"%@\");", html]];
     }
     return html;
-}//end
+}
 
 - (NSString *)stringByDecodingURLFormat:(NSString *)string {
     NSString *result = [string stringByReplacingOccurrencesOfString:@"+" withString:@" "];
