@@ -80,6 +80,25 @@ SINGLETON_CLASS(ENoteDAO)
     return mutNotes;
 }
 
+- (ENoteDO *)noteWithGuid:(NSString *)noteGuid
+{
+    NSString *sql;
+    
+    sql = [NSString stringWithFormat:@"select * from %@ where guid = ?", [self tableName]];
+    
+    __block ENoteDO *note;
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *resultSet = [db executeQuery:sql, noteGuid];
+        
+        if([resultSet next]) {
+            note = [self noteFromResultSet:resultSet];
+        }
+        [resultSet close];
+    }];
+    
+    return note;
+}
+
 - (BOOL)deleteAllNotes
 {
     NSString *deleteSql = [NSString stringWithFormat:@"delete from %@", [self tableName]];

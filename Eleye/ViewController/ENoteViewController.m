@@ -8,8 +8,7 @@
 
 #import "ENoteViewController.h"
 #import <objc/runtime.h>
-#import <NSData+EvernoteSDK.h>
-#import <ENMIMEUtils.h>
+#import "ENoteDAO.h"
 
 @interface ENoteViewController ()
 {
@@ -31,6 +30,7 @@
     
     //TODO 测试
     [self fetchNoteContent];
+    enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     //TODO
     
     if (htmlString_) {
@@ -62,6 +62,8 @@
     [super viewDidDisappear:animated];
     
     [self replaceUIWebBrowserView:self.editorView];
+    
+    [self updateNote];
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
 }
@@ -165,11 +167,15 @@
 - (void)updateNote
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    //TODO 更新笔记
+    
+    enote_.content = htmlString_;
+    
     [client updateNote:enote_ success:^(EDAMNote *note) {
-        
+        NSLog(@"更新笔记成功 %@", note.content);
     } failure:^(NSError *error) {
-        
+        if (error) {
+            NSLog(@"更新笔记失败%@", error);
+        }
     }];
 }
 

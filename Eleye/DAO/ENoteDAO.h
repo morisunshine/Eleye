@@ -14,6 +14,8 @@
 
 - (NSArray *)notesWithNotebookGuid:(NSString *)notebookGuid;
 
+- (ENoteDO *)noteWithGuid:(NSString *)noteGuid;
+
 - (BOOL)deleteAllNotes;
 
 - (BOOL)deleteNoteWithGuid:(NSString *)guid;
