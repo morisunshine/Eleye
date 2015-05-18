@@ -12,6 +12,7 @@
 @interface ENoteViewController ()
 {
     NSString *htmlString_;
+    EDAMNote *enote_;
 }
 
 @end
@@ -74,6 +75,7 @@
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
+        enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self configUI];
@@ -84,8 +86,6 @@
         }
     }];
 }
-
-#pragma mark - Private Methods -
 
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
@@ -134,6 +134,17 @@
     [menuItems addObject:actionItem];
     [menuItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = menuItems;
+}
+
+- (void)updateNote
+{
+    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
+    //TODO 更新笔记
+    [client updateNote:enote_ success:^(EDAMNote *note) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Actions -
