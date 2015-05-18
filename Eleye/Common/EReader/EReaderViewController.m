@@ -8,9 +8,9 @@
 
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
-#import "ZSSRichTextEditor.h"
+#import "EReaderViewController.h"
 
-@interface ZSSRichTextEditor ()
+@interface EReaderViewController ()
 {
     NSString *htmlString_;
 }
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation ZSSRichTextEditor
+@implementation EReaderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,12 +49,12 @@
     [self.view addSubview:self.editorView];
     
     if (!self.resourcesLoaded) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"reader" ofType:@"html"];
         NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
         NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
 
         // ZSSRichTextEditor.js
-        NSString *source = [[NSBundle mainBundle] pathForResource:@"ZSSRichTextEditor" ofType:@"js"];
+        NSString *source = [[NSBundle mainBundle] pathForResource:@"EReader" ofType:@"js"];
         NSString *jsString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:source] encoding:NSUTF8StringEncoding];
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
 

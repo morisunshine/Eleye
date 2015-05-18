@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZSSBarButtonItem;
-
 /**
  *  The viewController used with ZSSRichTextEditor
  */
-@interface ZSSRichTextEditor : UIViewController <UIWebViewDelegate, UITextViewDelegate>
+@interface EReaderViewController : UIViewController <UIWebViewDelegate, UITextViewDelegate>
 
 
 /**
