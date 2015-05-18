@@ -93,6 +93,9 @@ static CGFloat kCellHeight = 49;
         afterUSN = [chunkHighUSN intValue];
     } 
     [client getFilteredSyncChunkAfterUSN:afterUSN maxEntries:100 filter:filter success:^(EDAMSyncChunk *syncChunk) {
+        if (0 < syncChunk.resources) {
+            NSLog(@"笔记中的资源文件有更新！");
+        }
         if (0 < syncChunk.notebooks) {
             
         }

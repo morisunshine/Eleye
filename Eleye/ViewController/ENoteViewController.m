@@ -29,7 +29,7 @@
     
     [self changeTopTitle:self.noteTitle];
     
-    //TODO
+    //TODO 测试
     [self fetchNoteContent];
     //TODO
     
@@ -85,18 +85,7 @@
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
-        //
-        NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:enote.resources.count];
-        for (ENResource * resource in resultNote.resources) {
-            EDAMResource * edamResource = [resource EDAMResource];
-            if (edamResource.attributes.sourceURL == nil) {
-                NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
-                NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
-                NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
-                edamResource.attributes.sourceURL = fakeUrl;
-            }
-            [edamResources addObject:edamResource];
-        }
+        [self downloadImagesWithResources:resultNote.resources];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self setupData];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
@@ -154,6 +143,23 @@
     [menuItems addObject:actionItem];
     [menuItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = menuItems;
+}
+
+- (void)downloadImagesWithResources:(NSArray *)resources
+{
+    //        //
+    //        NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:enote.resources.count];
+    //        for (ENResource * resource in resultNote.resources) {
+    //            EDAMResource * edamResource = [resource EDAMResource];
+    //            if (edamResource.attributes.sourceURL == nil) {
+    //                NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+    //                NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+    //                NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+    //                edamResource.attributes.sourceURL = fakeUrl;
+    //            }
+    //            [edamResources addObject:edamResource];
+    //        }
+
 }
 
 - (void)updateNote
