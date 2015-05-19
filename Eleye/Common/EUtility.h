@@ -39,4 +39,10 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (BOOL)createFloderWithPath:(NSString *)path;
 
++ (void)setSafeValue:(id)value key:(NSString *)key fileName:(NSString *)fileName;
+
++ (id)valueWithKey:(NSString *)key fileName:(NSString *)fileName;
+
++ (void)removeValueWithKey:(NSString *)key fileName:(NSString *)fileName;
+
 @end

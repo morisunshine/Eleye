@@ -101,25 +101,24 @@ static CGFloat kCellHeight = 49;
         }
         if (0 < syncChunk.notes) {
             NSLog(@"有更新！");
-            NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
-            NSMutableDictionary *newUpdateNotes;
-            if (updateNotes == nil) {
-                newUpdateNotes = [[NSMutableDictionary alloc] init];
-            } else {
-                newUpdateNotes = [NSMutableDictionary dictionaryWithDictionary:updateNotes];
-            }
             
             for (EDAMNote *note in syncChunk.notes) {
                 if (note.deleted) {
-                    
                     [EUtility deleteNotePathWithGuid:note.guid];
                     [[ENoteDAO sharedENoteDAO] deleteNoteWithGuid:note.guid];
                 } else {
-                    [newUpdateNotes setObject:@(NO) forKey:note.guid];
+                    NSNumber *updateNume = [EUtility valueWithKey:note.guid fileName:LOCALUPDATEFILE];
+                    if (updateNume) {
+                        if ([updateNume integerValue] < [note.updated integerValue]) {
+                            [EUtility setSafeValue:@(NO) key:note.guid fileName:REMOTEUPDATEDTITLE];
+                        }
+                        [EUtility removeValueWithKey:note.guid fileName:LOCALUPDATEFILE];
+                    } else {
+                        [EUtility setSafeValue:@(NO) key:note.guid fileName:REMOTEUPDATEDTITLE];
+                    }
                 }
             }
             
-            [USER_DEFAULT setObject:newUpdateNotes forKey:@"updateNotes"];
             [[NSNotificationCenter defaultCenter] postNotificationName:UPDATENOTENOTIFICATION object:nil];
         }
         

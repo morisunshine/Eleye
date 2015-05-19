@@ -21,14 +21,14 @@ SINGLETON_CLASS(ENoteDAO)
 
 - (NSString *)createSqlString
 {
-    NSString *sql = [NSString stringWithFormat:@"create table if not exists %@(_id INTEGER PRIMARY KEY AUTOINCREMENT, guid VARCHAR(200), notebookGuid VARCHAR(200), title VARCHAR(200), content VARCHAR(500), path VARCHAR(100), contentLength INTEGER, created INTEGER, updated INTEGER, deleted INTEGER, active INTEGER)", [self tableName]];
+    NSString *sql = [NSString stringWithFormat:@"create table if not exists %@(_id INTEGER PRIMARY KEY AUTOINCREMENT, guid VARCHAR(200), notebookGuid VARCHAR(200), title VARCHAR(200), content VARCHAR(500), contentLength INTEGER, created INTEGER, updated INTEGER, deleted INTEGER, active INTEGER)", [self tableName]];
     
     return sql;
 }
 
 - (BOOL)saveBaseDO:(NSObject *)baseDO fmdb:(FMDatabase *)db
 {
-    ENoteDO *note = (ENoteDO *)baseDO;
+    EDAMNote *note = (EDAMNote *)baseDO;
     
     BOOL result = NO;
     
@@ -36,15 +36,15 @@ SINGLETON_CLASS(ENoteDAO)
     FMResultSet *resultSet = [db executeQuery:selectSql, note.guid];
     
     if ([resultSet next]) {
-        NSString *updateSql = [NSString stringWithFormat:@"update %@ set notebookGuid = ?, title = ?, content = ?, path = ?, contentLength = ?, created = ?, updated = ?, deleted = ?, active = ? where guid = ?", [self tableName]];
-        result = [db executeUpdate:updateSql, note.notebookGuid, note.title, note.content, note.path, note.contentLength, note.created, note.updated, note.deleted, note.active, note.guid];
+        NSString *updateSql = [NSString stringWithFormat:@"update %@ set notebookGuid = ?, title = ?, content = ?, contentLength = ?, created = ?, updated = ?, deleted = ?, active = ? where guid = ?", [self tableName]];
+        result = [db executeUpdate:updateSql, note.notebookGuid, note.title, note.content, note.contentLength, note.created, note.updated, note.deleted, note.active, note.guid];
         
         if (!result) {
             NSLog(@"error update %@ error : %@", [self tableName], [db lastErrorMessage]);
         }
     } else {
-        NSString *insertSql = [NSString stringWithFormat:@"insert into %@(guid, notebookGuid, title, content, path, contentLength, created, updated, deleted, active) values(?,?,?,?,?,?,?,?,?,?)", [self tableName]];
-        result = [db executeUpdate:insertSql, note.guid, note.notebookGuid, note.title, note.content, note.path, note.contentLength, note.created, note.updated, note.deleted, note.active];
+        NSString *insertSql = [NSString stringWithFormat:@"insert into %@(guid, notebookGuid, title, content, contentLength, created, updated, deleted, active) values(?,?,?,?,?,?,?,?,?)", [self tableName]];
+        result = [db executeUpdate:insertSql, note.guid, note.notebookGuid, note.title, note.content, note.contentLength, note.created, note.updated, note.deleted, note.active];
         if (!result) {
             NSLog(@"error insert %@ error : %@", [self tableName], [db lastErrorMessage]);
         }
@@ -70,7 +70,7 @@ SINGLETON_CLASS(ENoteDAO)
         FMResultSet *resultSet = [db executeQuery:sql, notebookGuid];
         
         while ([resultSet next]) {
-            ENoteDO *note = [self noteFromResultSet:resultSet];
+            EDAMNote *note = [self noteFromResultSet:resultSet];
             [mutNotes addObject:note];
         }
         
@@ -80,13 +80,13 @@ SINGLETON_CLASS(ENoteDAO)
     return mutNotes;
 }
 
-- (ENoteDO *)noteWithGuid:(NSString *)noteGuid
+- (EDAMNote *)noteWithGuid:(NSString *)noteGuid
 {
     NSString *sql;
     
     sql = [NSString stringWithFormat:@"select * from %@ where guid = ?", [self tableName]];
     
-    __block ENoteDO *note;
+    __block EDAMNote *note;
     [dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *resultSet = [db executeQuery:sql, noteGuid];
         
@@ -139,9 +139,9 @@ SINGLETON_CLASS(ENoteDAO)
 
 #pragma mark - Private Methods -
 
-- (ENoteDO *)noteFromResultSet:(FMResultSet *)resultSet
+- (EDAMNote *)noteFromResultSet:(FMResultSet *)resultSet
 {
-    ENoteDO *note = [[ENoteDO alloc] init];
+    EDAMNote *note = [[EDAMNote alloc] init];
     note.guid = [resultSet stringForColumn:@"guid"];
     note.notebookGuid = [resultSet stringForColumn:@"notebookGuid"];
     note.title = [resultSet stringForColumn:@"title"];
@@ -151,7 +151,6 @@ SINGLETON_CLASS(ENoteDAO)
     note.updated = @([resultSet intForColumn:@"updated"]);
     note.deleted = @([resultSet intForColumn:@"deleted"]);
     note.active = @([resultSet intForColumn:@"active"]);
-    note.path = [resultSet stringForColumn:@"path"];
     
     return note;
 }

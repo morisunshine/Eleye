@@ -257,4 +257,46 @@ SINGLETON_CLASS(EUtility)
     return createSuccess;
 }
 
++ (void)setSafeValue:(id)value key:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    
+    if (mutDic == nil) {
+        mutDic = [[NSMutableDictionary alloc] init];
+    } 
+    
+    if (value != nil) {
+        [mutDic setObject:value forKey:key];
+    }
+    
+    [mutDic writeToFile:path atomically:YES];
+}
+
++ (id)valueWithKey:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    id value;
+    
+    if (dic) {
+        value = [dic objectForKey:key];
+    }
+    
+    return value;
+}
+
++ (void)removeValueWithKey:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    [dic removeObjectForKey:key];
+    
+    [dic writeToFile:path atomically:YES];
+}
+
 @end

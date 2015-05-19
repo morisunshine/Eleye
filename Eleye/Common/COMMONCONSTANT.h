@@ -66,6 +66,9 @@
 #define HOSTNAME  @"host"
 #define EVERNOTEHOST @"app.evernote.com"
 #define YINXIANGHOST @"app.yinxiang.com"
+#define LOCALUPDATEFILE @"LOCALUPDATEFILE"
+#define REMOTEUPDATEDTITLE @"REMOTEUPDATEDTITLE"
+#define WAITUPLOADFILE @"WAITUPLOADFILE"
 
 #pragma mark - 函数定义
 //函数定义

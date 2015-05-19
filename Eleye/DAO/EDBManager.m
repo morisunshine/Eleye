@@ -17,9 +17,8 @@ SINGLETON_CLASS(EDBManager)
 
 - (NSString *)databasePath
 {
-    NSString *path = [APP_DOCUMENT stringByAppendingPathComponent:kPath];
     NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
-    path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@", hostName, @([ENSession sharedSession].userID)];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@", hostName, @([ENSession sharedSession].userID)];
     if ([EUtility createFloderWithPath:path]) {
         path = [path stringByAppendingPathComponent:kPath];
     }

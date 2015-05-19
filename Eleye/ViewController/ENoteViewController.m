@@ -35,8 +35,7 @@
     enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     
     if (htmlString_) {
-        NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
-        if ([updateNotes objectForKey:self.guid]) {
+        if ([EUtility valueWithKey:self.guid fileName:REMOTEUPDATEDTITLE]) {
             [self fetchNoteContent];
         } else {
             //不需要更新
@@ -94,9 +93,7 @@
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self setupData];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
-        NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
-        [updateNotes removeObjectForKey:self.guid];
-        [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
+        [EUtility removeValueWithKey:self.guid fileName:REMOTEUPDATEDTITLE];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记内容错误%@", error);
@@ -173,6 +170,12 @@
     
     [client updateNote:enote_ success:^(EDAMNote *note) {
         NSLog(@"更新笔记成功 %@", note.title);
+        
+        [EUtility setSafeValue:note.updated key:self.guid fileName:LOCALUPDATEFILE];
+        
+        enote_.updated = note.updated;
+        [[ENoteDAO sharedENoteDAO] saveBaseDO:enote_];
+        [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"更新笔记失败%@", error);

@@ -16,7 +16,6 @@
 		08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FD1AEFB6F2000BAC87 /* EUtility.m */; };
 		08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */; };
 		08D4A11E1AEFB6F2000BAC87 /* ENoteBookDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */; };
-		08D4A11F1AEFB6F2000BAC87 /* ENoteDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */; };
 		08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1071AEFB6F2000BAC87 /* EMenuView.m */; };
 		08D4A1211AEFB6F2000BAC87 /* ENotebookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1091AEFB6F2000BAC87 /* ENotebookCell.m */; };
 		08D4A1221AEFB6F2000BAC87 /* ENotebookStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A10B1AEFB6F2000BAC87 /* ENotebookStackView.m */; };
@@ -74,8 +73,6 @@
 		08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GeometryAddition.m"; sourceTree = "<group>"; };
 		08D4A1011AEFB6F2000BAC87 /* ENoteBookDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteBookDO.h; sourceTree = "<group>"; };
 		08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteBookDO.m; sourceTree = "<group>"; };
-		08D4A1031AEFB6F2000BAC87 /* ENoteDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDO.h; sourceTree = "<group>"; };
-		08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDO.m; sourceTree = "<group>"; };
 		08D4A1061AEFB6F2000BAC87 /* EMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMenuView.h; sourceTree = "<group>"; };
 		08D4A1071AEFB6F2000BAC87 /* EMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMenuView.m; sourceTree = "<group>"; };
 		08D4A1081AEFB6F2000BAC87 /* ENotebookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENotebookCell.h; sourceTree = "<group>"; };
@@ -228,8 +225,6 @@
 			children = (
 				08D4A1011AEFB6F2000BAC87 /* ENoteBookDO.h */,
 				08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */,
-				08D4A1031AEFB6F2000BAC87 /* ENoteDO.h */,
-				08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */,
 			);
 			path = DO;
 			sourceTree = "<group>";
@@ -498,7 +493,6 @@
 				08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */,
 				08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */,
 				18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */,
-				08D4A11F1AEFB6F2000BAC87 /* ENoteDO.m in Sources */,
 				18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */,
 				08D4A11E1AEFB6F2000BAC87 /* ENoteBookDO.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,

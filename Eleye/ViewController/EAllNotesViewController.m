@@ -105,8 +105,6 @@ static NSInteger kCellHeight = 100;
         offset_ = 0;
     }
     [client findNotesWithFilter:filter offset:offset_ maxNotes:kMaxCount success:^(EDAMNoteList *list) {
-        NSArray *newNotes = [self newNotesFromNotes:list.notes];
-        
         [self.refreshControl endRefreshing];
         int32_t totalCount = [list.totalNotes intValue];
         int32_t startIndex = [list.startIndex intValue];
@@ -119,13 +117,13 @@ static NSInteger kCellHeight = 100;
         
         if (loadingMore) {
             NSMutableArray *mutNotes = [NSMutableArray arrayWithArray:notes_];
-            [mutNotes addObjectsFromArray:newNotes];
+            [mutNotes addObjectsFromArray:list.notes];
             notes_ = mutNotes;
         } else {
-            notes_ = newNotes;
+            notes_ = list.notes;
         }
         
-        [[ENoteDAO sharedENoteDAO] saveItems:newNotes];
+        [[ENoteDAO sharedENoteDAO] saveItems:list.notes];
         
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     } failure:^(NSError *error) {
@@ -135,26 +133,6 @@ static NSInteger kCellHeight = 100;
     }];
 }
 
-- (NSArray *)newNotesFromNotes:(NSArray *)notes
-{
-    NSMutableArray *newNotes = [[NSMutableArray alloc] init];
-    for (EDAMNote *note in notes) {
-        ENoteDO *newNote = [[ENoteDO alloc] init];
-        newNote.title = note.title;
-        newNote.notebookGuid = note.notebookGuid;
-        newNote.content = note.content;
-        newNote.created = note.created;
-        newNote.updated = note.updated;
-        newNote.deleted = note.deleted;
-        newNote.active = note.active;
-        newNote.guid = note.guid;
-        
-        [newNotes addObject:newNote];
-    }
-    
-    return newNotes;
-}
-
 - (void)configureUI
 {
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
@@ -162,7 +140,7 @@ static NSInteger kCellHeight = 100;
     [self.tableView addSubview:self.refreshControl];
 }
 
-- (void)updateNoteWithNote:(ENoteDO *)note indexPath:(NSIndexPath *)indexPath
+- (void)updateNoteWithNote:(EDAMNote *)note indexPath:(NSIndexPath *)indexPath
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     [client getNoteWithGuid:note.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
@@ -171,9 +149,7 @@ static NSInteger kCellHeight = 100;
         [[EUtility sharedEUtility] saveContentToFileWithContent:contentString guid:note.guid];
         NSString *noteString = [EUtility noteContentWithGuid:note.guid];
         note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-        NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
-        [updateNotes removeObjectForKey:note.guid];
-        [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
+        [EUtility removeValueWithKey:note.guid fileName:REMOTEUPDATEDTITLE];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         if (error) {
@@ -210,13 +186,12 @@ static NSInteger kCellHeight = 100;
     static NSString *kCellIdentifier = @"noteCell";
     ENoteCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
-    ENoteDO *note = notes_[indexPath.row];
+    EDAMNote *note = notes_[indexPath.row];
     
     if (note.content == nil) {
         NSString *contentString = [EUtility noteContentWithGuid:note.guid];
         if (contentString) {
-            NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
-            if ([updateNotes objectForKey:note.guid]) {
+            if ([EUtility valueWithKey:note.guid fileName:REMOTEUPDATEDTITLE]) {
                 [self updateNoteWithNote:note indexPath:indexPath];
             } else {
                 note.content = [contentString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
@@ -238,7 +213,7 @@ static NSInteger kCellHeight = 100;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
-    ENoteDO *note = notes_[indexPath.row];
+    EDAMNote *note = notes_[indexPath.row];
     noteViewController.noteTitle = note.title;
     noteViewController.guid = note.guid;
     [self.navigationController pushViewController:noteViewController animated:YES];
