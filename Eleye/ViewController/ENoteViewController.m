@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import "ENoteDAO.h"
 #import <ENMIMEUtils.h>
+#import <ENMLUtility.h>
 #import <NSData+EvernoteSDK.h>
 #import "EResourceDO.h"
 #import "EResourceDAO.h"
@@ -43,7 +44,7 @@
             [self fetchNoteContent];
         } else {
             //不需要更新
-            [self setupData];
+            [self setupDataWithResources:nil];
         }
     } else {
         [self fetchNoteContent];
@@ -81,9 +82,32 @@
 
 #pragma mark - Private Methods -
 
-- (void)setupData
+- (void)setupDataWithResources:(NSArray *)resources
 {
-    [self setHTML:htmlString_];
+//    if (resources == nil) {
+//        resources = [[EResourceDAO sharedEResourceDAO] resourcesWithNoteGuid:self.guid];
+//    }
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
+    for (ENResource * resource in resources) {
+        EDAMResource * edamResource = [resource EDAMResource];
+        if (!edamResource.attributes.sourceURL) {
+            NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+            NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+            NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+            edamResource.attributes.sourceURL = fakeUrl;
+        }
+        [edamResources addObject:edamResource];
+    }
+    
+    if (0 < resources.count) {
+        ENMLUtility *utility = [[ENMLUtility alloc] init];
+        [utility convertENMLToHTML:htmlString_ withInlinedResources:edamResources completionBlock:^(NSString *html, NSError *error) {
+            [self setHTML:html];
+        }];
+    } else {
+        [self setHTML:htmlString_];
+    }
+
     [self changeTopTitle:self.noteTitle];
 }
 
@@ -95,7 +119,7 @@
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         [EUtility saveDataBaseResources:resultNote.resources withNoteGuid:self.guid];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
-        [self setupData];
+        [self setupDataWithResources:resultNote.resources];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
         [EUtility removeValueWithKey:self.guid fileName:REMOTEUPDATEDTITLE];
     } failure:^(NSError *error) {
