@@ -14,6 +14,7 @@
 {
     NSString *htmlString_;
     EDAMNote *enote_;
+    BOOL hasUpdateNote_;
 }
 
 @end
@@ -63,7 +64,9 @@
     
     [self replaceUIWebBrowserView:self.editorView];
     
-    [self updateNote];
+    if (hasUpdateNote_) {
+        [self updateNote];
+    }
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
 }
@@ -100,7 +103,6 @@
 
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
-    //Iterate through subviews recursively looking for UIWebBrowserView
     for (UIView *sub in view.subviews) {
         [self replaceUIWebBrowserView:sub];
         if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
@@ -112,9 +114,6 @@
             
             Method originalMethod = class_getInstanceMethod(class, originalSelector);
             Method swizzledMethod = class_getInstanceMethod(self.class, swizzledSelector);            
-            //add the method mightPerformAction:withSender: to UIWebBrowserView
-            
-            //replace canPerformAction:withSender: with mightPerformAction:withSender:
             
             class_addMethod(class,
                             originalSelector,
@@ -133,8 +132,7 @@
 - (void)changeMenuItemsWithShowHighLight:(BOOL)showHighlight
 {
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
-    UIMenuItem *actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel"
-                                                           action:@selector(highlightBtnTapped:)];
+    UIMenuItem *actionItem;
     if (showHighlight) {
         actionItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
     } else {
@@ -171,7 +169,7 @@
     enote_.content = htmlString_;
     
     [client updateNote:enote_ success:^(EDAMNote *note) {
-        NSLog(@"更新笔记成功 %@", note.content);
+        NSLog(@"更新笔记成功 %@", note.title);
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"更新笔记失败%@", error);
@@ -183,12 +181,15 @@
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
+    //TODO 根据高亮的文字变化
+    hasUpdateNote_ = YES;
     [self addHighlight];
 }
 
 - (IBAction)cancelBtnTapped:(id)sender
 {
-    
+    //TODO 根据高亮的文字变化
+    hasUpdateNote_ = NO;
 }
 
 - (IBAction)copyBtnTapped:(id)sender
