@@ -11,6 +11,8 @@
 #import "ENoteDAO.h"
 #import <ENMIMEUtils.h>
 #import <NSData+EvernoteSDK.h>
+#import "EResourceDO.h"
+#import "EResourceDAO.h"
 
 @interface ENoteViewController ()
 {
@@ -91,7 +93,7 @@
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
-        [self downloadImagesWithResources:resultNote.resources];
+        [EUtility saveDataBaseResources:resultNote.resources withNoteGuid:self.guid];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self setupData];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
@@ -145,38 +147,6 @@
     [menuItems addObject:actionItem];
     [menuItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = menuItems;
-}
-
-- (void)downloadImagesWithResources:(NSArray *)resources
-{
-    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
-    for (ENResource * resource in resources) {
-        EDAMResource * edamResource = [resource EDAMResource];
-        if (!edamResource.attributes.sourceURL) {
-            NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
-            NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
-            NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
-            edamResource.attributes.sourceURL = fakeUrl;
-        }
-        [edamResources addObject:edamResource];
-    }
-}
-
-- (void)downloadImageWithURL:(NSURL *)url guid:(NSString *)guid fileType:(NSString *)fileType completionBlock:(void (^)(BOOL succeeded))completionBlock
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (error == nil) {
-                                   NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
-                                   NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@/%@", hostname, @([ENSession sharedSession].userID), self.guid, guid];
-                                   [data writeToFile:notePath atomically:YES];
-                                   completionBlock(YES);
-                               } else{
-                                   completionBlock(NO);
-                               }
-                           }];
 }
 
 - (void)updateNote

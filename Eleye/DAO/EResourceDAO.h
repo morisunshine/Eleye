@@ -12,4 +12,8 @@
 
 + (instancetype)sharedEResourceDAO;
 
+- (BOOL)deleteResourcesWithNoteGuid:(NSString *)noteGuid;
+
+- (NSArray *)resourcesWithNoteGuid:(NSString *)noteGuid;
+
 @end

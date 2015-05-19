@@ -45,4 +45,6 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (void)removeValueWithKey:(NSString *)key fileName:(NSString *)fileName;
 
++ (void)saveDataBaseResources:(NSArray *)resources withNoteGuid:(NSString *)noteGuid;
+
 @end

@@ -147,6 +147,7 @@ static NSInteger kCellHeight = 100;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
         NSString *contentString = [resultNote.content enmlWithNote:resultNote];
         [[EUtility sharedEUtility] saveContentToFileWithContent:contentString guid:note.guid];
+        [EUtility saveDataBaseResources:resultNote.resources withNoteGuid:note.guid];
         NSString *noteString = [EUtility noteContentWithGuid:note.guid];
         note.content = [noteString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
         [EUtility removeValueWithKey:note.guid fileName:REMOTEUPDATEDTITLE];

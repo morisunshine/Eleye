@@ -11,6 +11,8 @@
 #include <sys/utsname.h>
 #import "ENotebookDAO.h"
 #import "ENoteDAO.h"
+#import "EResourceDO.h"
+#import "EResourceDAO.h"
 
 @implementation EUtility
 
@@ -297,6 +299,28 @@ SINGLETON_CLASS(EUtility)
     [dic removeObjectForKey:key];
     
     [dic writeToFile:path atomically:YES];
+}
+
++ (void)saveDataBaseResources:(NSArray *)resources withNoteGuid:(NSString *)noteGuid
+{
+    [[EResourceDAO sharedEResourceDAO] deleteResourcesWithNoteGuid:noteGuid];
+    
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
+    for (ENResource * resource in resources) {
+        EDAMResource *edamResource = [resource EDAMResource];
+        EResourceDO *newResource = [[EResourceDO alloc] init];
+        newResource.guid = edamResource.guid;
+        newResource.data = resource.data;
+        newResource.noteGuid = noteGuid;
+        newResource.width = edamResource.width;
+        newResource.height = edamResource.height;
+        newResource.mimeType = resource.mimeType;
+        newResource.fileName = resource.filename;
+        
+        [edamResources addObject:newResource];
+    }
+    
+    [[EResourceDAO sharedEResourceDAO] saveItems:edamResources];
 }
 
 @end

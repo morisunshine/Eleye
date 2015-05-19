@@ -22,7 +22,7 @@ SINGLETON_CLASS(EResourceDAO)
 
 - (NSString *)createSqlString
 {
-    NSString *sql = [NSString stringWithFormat:@"create table if not exists %@(_id INTEGER PRIMARY KEY AUTOINCREMENT, guid VARCHAR(200), noteGuid VARCHAR(200), width INTEGER, height INTEGER, data BINARY, mimeType VARCHAR(100), fileName VARCHAR(100)", [self tableName]];
+    NSString *sql = [NSString stringWithFormat:@"create table if not exists %@(_id INTEGER PRIMARY KEY AUTOINCREMENT, guid VARCHAR(200), noteGuid VARCHAR(200), width INTEGER, height INTEGER, data BINARY, mimeType VARCHAR(100), fileName VARCHAR(100))", [self tableName]];
     
     return sql;
 }
@@ -52,6 +52,64 @@ SINGLETON_CLASS(EResourceDAO)
     }
     
     return result;
+}
+
+#pragma mark - Public Methods -
+
+- (BOOL)deleteResourcesWithNoteGuid:(NSString *)noteGuid
+{
+    __block BOOL result = NO;
+    
+    if (noteGuid) {
+        NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where noteGuid = \"%@\"", [self tableName], noteGuid];
+        
+        [dbQueue inDatabase:^(FMDatabase *db) {
+            
+            result = [db executeUpdate:deleteSql];
+            
+            if (!result) {
+                NSLog(@"error delete %@ error:%@", [self tableName], [db lastErrorMessage]);
+            }
+        }];
+    }
+    
+    return result;
+}
+
+- (NSArray *)resourcesWithNoteGuid:(NSString *)noteGuid
+{
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where noteGuid = ?", [self tableName]];
+    
+    __block NSMutableArray *mutResources = [[NSMutableArray alloc] init];
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *resultSet = [db executeQuery:sql, noteGuid];
+        
+        while ([resultSet next]) {
+            EResourceDO *resource = [self resourceFromResultSet:resultSet];
+            [mutResources addObject:resource];
+        }
+        
+        [resultSet close];
+    }];
+    
+    return mutResources;
+}
+
+#pragma mark - Private Methods -
+
+- (EResourceDO *)resourceFromResultSet:(FMResultSet *)resultSet
+{
+    EResourceDO *resource = [[EResourceDO alloc] init];
+    
+    resource.guid = [resultSet stringForColumn:@"guid"];
+    resource.noteGuid = [resultSet stringForColumn:@"noteGuid"];
+    resource.width = @([resultSet intForColumn:@"width"]);
+    resource.height = @([resultSet intForColumn:@"height"]);
+    resource.data = [resultSet dataForColumn:@"data"];
+    resource.mimeType = [resultSet stringForColumn:@"mimeType"];
+    resource.fileName = [resultSet stringForColumn:@"fileName"];
+    
+    return resource;
 }
 
 @end
