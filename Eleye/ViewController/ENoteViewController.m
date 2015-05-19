@@ -94,6 +94,9 @@
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
         [self setupData];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
+        NSMutableDictionary *updateNotes = [NSMutableDictionary dictionaryWithDictionary:[USER_DEFAULT objectForKey:@"updateNotes"]];
+        [updateNotes removeObjectForKey:self.guid];
+        [USER_DEFAULT setObject:updateNotes forKey:@"updateNotes"];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记内容错误%@", error);
