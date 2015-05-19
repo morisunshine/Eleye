@@ -9,6 +9,8 @@
 #import "ENoteViewController.h"
 #import <objc/runtime.h>
 #import "ENoteDAO.h"
+#import <ENMIMEUtils.h>
+#import <NSData+EvernoteSDK.h>
 
 @interface ENoteViewController ()
 {
@@ -30,7 +32,7 @@
     [self changeTopTitle:self.noteTitle];
     
     //TODO 测试
-//    [self fetchNoteContent];
+    [self fetchNoteContent];
     //TODO
     enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     
@@ -147,19 +149,34 @@
 
 - (void)downloadImagesWithResources:(NSArray *)resources
 {
-    //        //
-    //        NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:enote.resources.count];
-    //        for (ENResource * resource in resultNote.resources) {
-    //            EDAMResource * edamResource = [resource EDAMResource];
-    //            if (edamResource.attributes.sourceURL == nil) {
-    //                NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
-    //                NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
-    //                NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
-    //                edamResource.attributes.sourceURL = fakeUrl;
-    //            }
-    //            [edamResources addObject:edamResource];
-    //        }
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
+    for (ENResource * resource in resources) {
+        EDAMResource * edamResource = [resource EDAMResource];
+        if (!edamResource.attributes.sourceURL) {
+            NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+            NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+            NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+            edamResource.attributes.sourceURL = fakeUrl;
+        }
+        [edamResources addObject:edamResource];
+    }
+}
 
+- (void)downloadImageWithURL:(NSURL *)url guid:(NSString *)guid fileType:(NSString *)fileType completionBlock:(void (^)(BOOL succeeded))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (error == nil) {
+                                   NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
+                                   NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@/%@", hostname, @([ENSession sharedSession].userID), self.guid, guid];
+                                   [data writeToFile:notePath atomically:YES];
+                                   completionBlock(YES);
+                               } else{
+                                   completionBlock(NO);
+                               }
+                           }];
 }
 
 - (void)updateNote

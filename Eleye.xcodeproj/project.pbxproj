@@ -35,6 +35,8 @@
 		18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */; };
 		18B74BFF1B09821C00CAEFC0 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF71B09821C00CAEFC0 /* main.css */; };
 		18B74C021B09821C00CAEFC0 /* EReader.js in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BFA1B09821C00CAEFC0 /* EReader.js */; };
+		18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */; };
+		18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB31B0B640600B16B6B /* EResourceDO.m */; };
 		18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63FAF1AFB496100094F8C /* ENoteViewController.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
@@ -106,6 +108,10 @@
 		18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EReaderViewController.m; sourceTree = "<group>"; };
 		18B74BF71B09821C00CAEFC0 /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 		18B74BFA1B09821C00CAEFC0 /* EReader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EReader.js; sourceTree = "<group>"; };
+		18C3FFAF1B0B611F00B16B6B /* EResourceDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDAO.h; sourceTree = "<group>"; };
+		18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDAO.m; sourceTree = "<group>"; };
+		18C3FFB21B0B640600B16B6B /* EResourceDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDO.h; sourceTree = "<group>"; };
+		18C3FFB31B0B640600B16B6B /* EResourceDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDO.m; sourceTree = "<group>"; };
 		18D63FAE1AFB496100094F8C /* ENoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteViewController.h; sourceTree = "<group>"; };
 		18D63FAF1AFB496100094F8C /* ENoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteViewController.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
@@ -225,6 +231,8 @@
 			children = (
 				08D4A1011AEFB6F2000BAC87 /* ENoteBookDO.h */,
 				08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */,
+				18C3FFB21B0B640600B16B6B /* EResourceDO.h */,
+				18C3FFB31B0B640600B16B6B /* EResourceDO.m */,
 			);
 			path = DO;
 			sourceTree = "<group>";
@@ -309,6 +317,8 @@
 				18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */,
 				18FF6F1F1AE79DA6000425E4 /* ENoteDAO.h */,
 				18FF6F201AE79DA6000425E4 /* ENoteDAO.m */,
+				18C3FFAF1B0B611F00B16B6B /* EResourceDAO.h */,
+				18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -483,7 +493,9 @@
 				08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */,
 				1871B69F1AF0AA970090578E /* ETitleView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
+				18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */,
 				18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */,
+				18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */,
 				08DEAF5D1B00EAA10029A7B5 /* ERootViewController.m in Sources */,
 				08E289AC1AFA57FF000C0CB9 /* ELoginView.m in Sources */,
 				08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */,
