@@ -34,9 +34,6 @@
     
     [self changeTopTitle:self.noteTitle];
     
-    //TODO 测试
-    [self fetchNoteContent];
-    //TODO
     enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     
     if (htmlString_) {
@@ -84,11 +81,24 @@
 
 - (void)setupDataWithResources:(NSArray *)resources
 {
-//    if (resources == nil) {
-//        resources = [[EResourceDAO sharedEResourceDAO] resourcesWithNoteGuid:self.guid];
-//    }
-    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
-    for (ENResource * resource in resources) {
+    NSMutableArray *newResources;
+    if (resources) {
+        NSMutableArray *mutResources = [[NSMutableArray alloc] init];
+        for (ENResource *resource in resources) {
+            EResourceDO *resourceDO = [[EResourceDO alloc] init];
+            resourceDO.noteGuid = self.guid;
+            resourceDO.resource = resource;
+            [mutResources addObject:resourceDO];
+        }
+        newResources = mutResources;
+        [[EResourceDAO sharedEResourceDAO] saveItems:mutResources];
+    } else {
+        resources = [[EResourceDAO sharedEResourceDAO] resourcesWithNoteGuid:self.guid];
+        newResources = [NSMutableArray arrayWithArray:resources];
+    }
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:newResources.count];
+    for (EResourceDO * resourceDO in newResources) {
+        ENResource *resource = resourceDO.resource;
         EDAMResource * edamResource = [resource EDAMResource];
         if (!edamResource.attributes.sourceURL) {
             NSString * dataHash = [resource.dataHash enlowercaseHexDigits];

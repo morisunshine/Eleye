@@ -8,14 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class ENResource;
+
 @interface EResourceDO : NSObject
 
-@property (nonatomic, strong) NSString *guid;
 @property (nonatomic, strong) NSString *noteGuid;
-@property (nonatomic, strong) NSNumber *width;
-@property (nonatomic, strong) NSNumber *height;
-@property (nonatomic, strong) NSData *data;
-@property (nonatomic, strong) NSString *mimeType;
-@property (nonatomic, strong) NSString *fileName;
+@property (nonatomic, strong) ENResource *resource;
 
 @end

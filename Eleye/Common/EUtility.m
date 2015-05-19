@@ -307,15 +307,9 @@ SINGLETON_CLASS(EUtility)
     
     NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
     for (ENResource * resource in resources) {
-        EDAMResource *edamResource = [resource EDAMResource];
         EResourceDO *newResource = [[EResourceDO alloc] init];
-        newResource.guid = edamResource.guid;
-        newResource.data = resource.data;
         newResource.noteGuid = noteGuid;
-        newResource.width = edamResource.width;
-        newResource.height = edamResource.height;
-        newResource.mimeType = resource.mimeType;
-        newResource.fileName = resource.filename;
+        newResource.resource = resource;
         
         [edamResources addObject:newResource];
     }
