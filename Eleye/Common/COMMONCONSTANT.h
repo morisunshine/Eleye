@@ -64,8 +64,8 @@
 #define YINXIANGCONSUMER_SECRET  @"19601b04ea2a0f05"
 
 #define HOSTNAME  @"host"
-#define EVERNOTEHOST @"evernote"
-#define YINXIANGHOST @"yinxiang"
+#define EVERNOTEHOST @"app.evernote.com"
+#define YINXIANGHOST @"app.yinxiang.com"
 
 #pragma mark - 函数定义
 //函数定义

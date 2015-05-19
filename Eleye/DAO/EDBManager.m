@@ -17,13 +17,15 @@ SINGLETON_CLASS(EDBManager)
 
 - (NSString *)databasePath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = paths[0];
-    docDir = [docDir stringByAppendingPathComponent:kPath];
+    NSString *path = [APP_DOCUMENT stringByAppendingPathComponent:kPath];
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@", hostName, @([ENSession sharedSession].userID)];
+    if ([EUtility createFloderWithPath:path]) {
+        path = [path stringByAppendingPathComponent:kPath];
+    }
+    NSLog(@"sqlit path: %@", path);
     
-    NSLog(@"sqlit path: %@", docDir);
-    
-    return docDir;
+    return path;
 }
 
 - (id)init

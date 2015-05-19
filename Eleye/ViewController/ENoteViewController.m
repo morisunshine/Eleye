@@ -24,14 +24,14 @@
 {
     [super viewDidLoad];
     
-    htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
+    htmlString_ = [EUtility noteHtmlFromLocalPathWithGuid:self.guid];
     
     [self changeTopTitle:self.noteTitle];
     
     //TODO 测试
-    [self fetchNoteContent];
-    enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
+//    [self fetchNoteContent];
     //TODO
+    enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     
     if (htmlString_) {
         NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];

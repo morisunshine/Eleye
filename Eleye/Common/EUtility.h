@@ -27,9 +27,7 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (BOOL)deleteNotePathWithGuid:(NSString *)guid;
 
-+ (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid;
-
-+ (NSString *)contentFromLocalPathWithGuid:(NSString *)guid;
++ (NSString *)noteHtmlFromLocalPathWithGuid:(NSString *)guid;
 
 + (NSString *)noteContentWithGuid:(NSString *)guid;
 
@@ -38,5 +36,7 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 + (BOOL)clearDataBase;
 
 + (void)showAutoHintTips:(NSString *)string;
+
++ (BOOL)createFloderWithPath:(NSString *)path;
 
 @end
