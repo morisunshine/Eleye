@@ -104,7 +104,6 @@ SINGLETON_CLASS(EResourceDAO)
     newResource.data = [resultSet dataForColumn:@"data"];
     newResource.mimeType = [resultSet stringForColumn:@"mime_type"];
     newResource.filename = [resultSet stringForColumn:@"file_name"];
-    newResource.dataHash = [resultSet dataForColumn:@"data_hash"];
     newResource.sourceUrl = [resultSet stringForColumn:@"source_url"];
     EResourceDO *resource = [[EResourceDO alloc] init];
     resource.noteGuid = [resultSet stringForColumn:@"note_guid"];
