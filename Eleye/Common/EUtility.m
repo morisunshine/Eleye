@@ -198,8 +198,6 @@ SINGLETON_CLASS(EUtility)
     stringLabel.text = string;
     [stringLabel sizeToFit];
     stringLabel.width = tipView.width-20;
-    stringLabel.shadowColor = [UIColor blackColor];
-    stringLabel.shadowOffset = CGSizeMake(0, -1);
     [tipView addSubview:stringLabel];
     
     tipView.height = stringLabel.height + 20;

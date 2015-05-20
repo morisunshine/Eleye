@@ -133,7 +133,7 @@ static CGFloat kCellHeight = 49;
 
 - (void)configureUI
 {
-    NSString *title = [NSString stringWithFormat:@"V%@ 问题反馈", APP_VERSION];
+    NSString *title = [NSString stringWithFormat:@"V%@ %@", APP_VERSION, LOCALSTRING(@"Feedback")];
     
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     [EUtility addlineOnView:self.footerView position:EViewPositionTop];
@@ -263,22 +263,7 @@ static CGFloat kCellHeight = 49;
 {
     ENoteBookDO *notebook = mutNotebooks_[section];
     if (notebook.stack) {
-
-//        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
-//        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-//        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-//        for (NSInteger i = 0;i < subNotebooks.count; i++) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-//            [indexPaths addObject:indexPath];
-//        }
-//        
-//        if (isOpen == YES) {
-//            [viewStatus_ setObject:notebook.stack forKey:@(NO)];
-//            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//        } else {
-//            [viewStatus_ setObject:notebook.stack forKey:@(YES)];
-//            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//        }
+        
     } else {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
@@ -393,7 +378,7 @@ static CGFloat kCellHeight = 49;
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
-        [mail setSubject:[NSString stringWithFormat:@"Eleye %@ 问题反馈", APP_VERSION]];
+        [mail setSubject:[NSString stringWithFormat:@"Eleye %@ %@", APP_VERSION, LOCALSTRING(@"Feedback")]];
         NSString *body = [NSString stringWithFormat:@"\n\n\n\n\n\n%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
         [mail setMessageBody:body isHTML:NO];
         [mail setToRecipients:@[@"wheelab7@gmail.com"]];
@@ -402,8 +387,7 @@ static CGFloat kCellHeight = 49;
     }
     else
     {
-        [EUtility showAutoHintTips:@"您的设备不能发送邮件！"];
-        NSLog(@"This device cannot send email");
+        [EUtility showAutoHintTips:LOCALSTRING(@"Your device cannot send email!")];
     }
 }
 

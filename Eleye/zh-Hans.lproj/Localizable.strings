@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Eleye
+
+  Created by Sheldon on 15/5/20.
+  Copyright (c) 2015年 wheelab. All rights reserved.
+*/
+
+"Login success"  = "登录成功";
+"Login failure" = "登录失败";
+"Feedback" = "问题反馈";
+"Your device cannot send email!" = "您的设备不能发送邮件！";

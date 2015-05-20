@@ -109,10 +109,10 @@
     [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
         if (authenticateError) {
             NSLog(@"登录失败:%@", authenticateError);
-            [EUtility showAutoHintTips:@"登录失败"];
+            [EUtility showAutoHintTips:LOCALSTRING(@"Login failure")];
         } else {
             NSLog(@"授权成功");
-            [EUtility showAutoHintTips:@"登录成功"];
+            [EUtility showAutoHintTips:LOCALSTRING(@"Login success")];
             NSString *hostString;
             if (evernote) {
                 hostString = EVERNOTEHOST;
