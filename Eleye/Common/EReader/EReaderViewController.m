@@ -53,20 +53,15 @@
         NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
         NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
 
-        // ZSSRichTextEditor.js
-        NSString *source = [[NSBundle mainBundle] pathForResource:@"EReader" ofType:@"js"];
+        // import js file
+        NSString *source = [[NSBundle mainBundle] pathForResource:@"main.min" ofType:@"js"];
         NSString *jsString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:source] encoding:NSUTF8StringEncoding];
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
-
-        // jquery.js
-        NSString *jQuery = [[NSBundle mainBundle] pathForResource:@"jquery" ofType:@"js"];
-        NSString *jQueryString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:jQuery] encoding:NSUTF8StringEncoding];
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--jquery-->" withString:jQueryString];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--js-->" withString:jsString];
 
         // main.css
         NSString *cssPathMain   = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"];
         NSString *cssDataMain = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:cssPathMain] encoding:NSUTF8StringEncoding];
-        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"/*main*/" withString:cssDataMain];
+        htmlString = [htmlString stringByReplacingOccurrencesOfString:@"/*css*/" withString:cssDataMain];
         
         [self.editorView loadHTMLString:htmlString baseURL:self.baseURL];
         self.resourcesLoaded = YES;

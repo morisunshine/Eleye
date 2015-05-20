@@ -2,11 +2,11 @@
 // @koala-prepend 'assets/vender/rangy-core.js',
 // @koala-prepend 'assets/vender/rangy-classapplier.js',
 // @koala-prepend 'assets/vender/rangy-highlighter.js',
-// @koala-prepend 'assets/js/ZSSRichTextEditor.js'
+// @koala-prepend 'assets/js/EReader.js'
 
 $(function () {
     try {
-        zss_editor.init();
+        // zss_editor.init();
         
     } catch(e) {
         alert(e);
