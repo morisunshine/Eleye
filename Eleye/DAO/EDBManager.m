@@ -36,4 +36,9 @@ SINGLETON_CLASS(EDBManager)
     return self;
 }
 
+- (void)renewQueue
+{
+    self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self databasePath]];
+}
+
 @end

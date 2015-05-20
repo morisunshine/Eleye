@@ -398,7 +398,7 @@ static CGFloat kCellHeight = 49;
     if (buttonIndex != alertView.cancelButtonIndex) {
         [USER_DEFAULT removeObjectForKey:HOSTNAME];
         [[ENSession sharedSession] unauthenticate];
-//        [EUtility clearDataBase];//TODO 暂时先不删除数据库
+        [EUtility clearDataBase];//TODO 暂时先不删除数据库
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ELoginViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         [self.navigationController pushViewController:launchViewController animated:YES];

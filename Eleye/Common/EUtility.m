@@ -10,6 +10,7 @@
 #include <sys/sysctl.h>
 #include <sys/utsname.h>
 #import "ENotebookDAO.h"
+#import "EDBManager.h"
 #import "ENoteDAO.h"
 #import "EResourceDO.h"
 #import "EResourceDAO.h"
@@ -155,17 +156,19 @@ SINGLETON_CLASS(EUtility)
     return platform;
 }
 
-+ (BOOL)clearDataBase
++ (void)clearDataBase
 {
-    BOOL deleteAllNoteBooks = [[ENotebookDAO sharedENotebookDAO] deleteAllNoteBooks];
-    BOOL deleteAllNotes = [[ENoteDAO sharedENoteDAO] deleteAllNotes];
-    
-    BOOL deleteSuccess = NO;
-    
-    if (deleteAllNotes && deleteAllNoteBooks) {
-        deleteSuccess = YES;
-    }
-    return deleteSuccess;
+    [[ENotebookDAO sharedENotebookDAO] clearFMDatabase];
+    [[ENoteDAO sharedENoteDAO] clearFMDatabase];
+    [[EResourceDAO sharedEResourceDAO] clearFMDatabase];
+}
+
++ (void)renewDataBase
+{
+    [[EDBManager sharedEDBManager] renewQueue];
+    [[ENotebookDAO sharedENotebookDAO] renewFmDataBase];
+    [[ENoteDAO sharedENoteDAO] renewFmDataBase];
+    [[EResourceDAO sharedEResourceDAO] renewFmDataBase];
 }
 
 + (void)showAutoHintTips:(NSString *)string

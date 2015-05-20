@@ -16,7 +16,10 @@
 {
     FMDatabaseQueue *dbQueue;
 }
-
+//清除数据库
+- (void)clearFMDatabase;
+//重置数据库
+- (void)renewFmDataBase;
 //删除数据表
 - (BOOL)dropTableWithTableName:(NSString *)tableName;
 //创建数据表

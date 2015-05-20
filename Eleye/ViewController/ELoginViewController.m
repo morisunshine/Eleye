@@ -120,6 +120,7 @@
                 hostString = YINXIANGHOST;
             }
             [USER_DEFAULT setObject:hostString forKey:HOSTNAME];
+            [EUtility renewDataBase];
             [self authorizationWithSuccess];
         }
     }];

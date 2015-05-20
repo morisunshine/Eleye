@@ -33,7 +33,9 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (NSString *)platformString;
 
-+ (BOOL)clearDataBase;
++ (void)clearDataBase;
+
++ (void)renewDataBase;
 
 + (void)showAutoHintTips:(NSString *)string;
 
