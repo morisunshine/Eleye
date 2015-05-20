@@ -12,7 +12,7 @@
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
 #import "ENoteDAO.h"
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MHNavigationController.h"
 
@@ -381,7 +381,7 @@ static CGFloat kCellHeight = 49;
         [mail setSubject:[NSString stringWithFormat:@"Eleye %@ %@", APP_VERSION, LOCALSTRING(@"Feedback")]];
         NSString *body = [NSString stringWithFormat:@"\n\n\n\n\n\n%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
         [mail setMessageBody:body isHTML:NO];
-        [mail setToRecipients:@[@"wheelab7@gmail.com"]];
+        [mail setToRecipients:@[EMAIL]];
         
         [self presentViewController:mail animated:YES completion:nil];
     }
@@ -400,7 +400,7 @@ static CGFloat kCellHeight = 49;
         [[ENSession sharedSession] unauthenticate];
 //        [EUtility clearDataBase];//TODO 暂时先不删除数据库
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ELaunchViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        ELoginViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         [self.navigationController pushViewController:launchViewController animated:YES];
         NSMutableArray *mutViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
         [mutViewControllers removeObjectAtIndex:1];

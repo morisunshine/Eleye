@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ELaunchViewController : UIViewController
+@interface ELoginViewController : UIViewController
 
 @property (nonatomic) BOOL showNoAnimation;
 

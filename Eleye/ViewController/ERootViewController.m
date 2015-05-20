@@ -8,7 +8,7 @@
 
 #import "ERootViewController.h"
 #import "EAllNoteBooksViewController.h"
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import "EGuideViewController.h"
 
 @interface ERootViewController ()
@@ -44,12 +44,12 @@
             allNotebooksViewController.showAllNotes = YES;
             viewController = allNotebooksViewController;
         } else {
-            ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+            ELoginViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELoginViewController"];
             launchViewController.showNoAnimation = YES;
             viewController = launchViewController;
         }
     } else {
-        ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        ELoginViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         launchViewController.showNoAnimation = YES;
         viewController = launchViewController;
     }

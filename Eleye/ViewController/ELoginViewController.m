@@ -6,18 +6,18 @@
 //  Copyright (c) 2015年 wheelab. All rights reserved.
 //
 
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import "EAllNoteBooksViewController.h"
 #import <ENSession.h>
 #import "ELoginView.h"
 
-@interface ELaunchViewController ()
+@interface ELoginViewController ()
 
 @property (nonatomic, retain) ELoginView *loginView;
 
 @end
 
-@implementation ELaunchViewController
+@implementation ELoginViewController
 
 - (void)viewDidLoad 
 {
