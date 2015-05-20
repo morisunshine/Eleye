@@ -91,12 +91,7 @@
 
 - (void)authorizationWithEvernote:(BOOL)evernote
 {
-    NSString *SANDBOX_HOST;
-#if DEBUG
-    SANDBOX_HOST = ENSessionHostSandbox;
-#else
-    SANDBOX_HOST = nil;
-#endif
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;//TODO 线上后要改为nil
     NSString *CONSUMER_KEY;
     NSString *CONSUMER_SECRET;
     
@@ -111,9 +106,9 @@
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
     
     ENSession *session = [ENSession sharedSession];
-    [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
+    [session authenticateWithViewController:self preferRegistration:YES completion:^(NSError *authenticateError) {
         if (authenticateError) {
-            NSLog(@"登录失败");
+            NSLog(@"登录失败:%@", authenticateError);
             [EUtility showAutoHintTips:@"登录失败"];
         } else {
             NSLog(@"授权成功");
