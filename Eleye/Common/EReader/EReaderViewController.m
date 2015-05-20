@@ -148,7 +148,7 @@
 
 - (void)addHighlight
 {
-    NSString *trigger = [NSString stringWithFormat:@"zss_editor.setBackgroundColor(\"#ccc\")"];
+    NSString *trigger = [NSString stringWithFormat:@"zss_editor.addHilite()"];
     
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
