@@ -106,7 +106,7 @@
     [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
     
     ENSession *session = [ENSession sharedSession];
-    [session authenticateWithViewController:self preferRegistration:YES completion:^(NSError *authenticateError) {
+    [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
         if (authenticateError) {
             NSLog(@"登录失败:%@", authenticateError);
             [EUtility showAutoHintTips:@"登录失败"];

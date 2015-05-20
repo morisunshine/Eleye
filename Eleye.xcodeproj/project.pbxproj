@@ -11,7 +11,6 @@
 		085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */; };
 		085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A71AE13A0700EFD2F0 /* Images.xcassets */; };
 		085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */; };
-		085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */; };
 		08751F221AE5386900FE17B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08751F211AE5386900FE17B1 /* Main.storyboard */; };
 		08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FD1AEFB6F2000BAC87 /* EUtility.m */; };
 		08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */; };
@@ -45,16 +44,6 @@
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		085FA9B11AE13A0700EFD2F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 085FA98F1AE13A0700EFD2F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 085FA9961AE13A0700EFD2F0;
-			remoteInfo = Eleye;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		085FA9971AE13A0700EFD2F0 /* Eleye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eleye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		085FA99B1AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,9 +52,6 @@
 		085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		085FA9A71AE13A0700EFD2F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		085FA9AA1AE13A0700EFD2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EleyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		085FA9B51AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleyeTests.m; sourceTree = "<group>"; };
 		08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Eleye-Prefix.pch"; sourceTree = "<group>"; };
 		08751F211AE5386900FE17B1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		08D4A0FB1AEFB6F2000BAC87 /* COMMONCONSTANT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMMONCONSTANT.h; sourceTree = "<group>"; };
@@ -136,13 +122,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		085FA9AD1AE13A0700EFD2F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -150,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				085FA9991AE13A0700EFD2F0 /* Eleye */,
-				085FA9B31AE13A0700EFD2F0 /* EleyeTests */,
 				085FA9981AE13A0700EFD2F0 /* Products */,
 				DB868C516EBE1E9E7A2257C3 /* Pods */,
 				B43AFE1829EB35E9156CDC20 /* Frameworks */,
@@ -161,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				085FA9971AE13A0700EFD2F0 /* Eleye.app */,
-				085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,23 +167,6 @@
 				08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */,
 				085FA99B1AE13A0700EFD2F0 /* Info.plist */,
 				085FA99C1AE13A0700EFD2F0 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		085FA9B31AE13A0700EFD2F0 /* EleyeTests */ = {
-			isa = PBXGroup;
-			children = (
-				085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */,
-				085FA9B41AE13A0700EFD2F0 /* Supporting Files */,
-			);
-			path = EleyeTests;
-			sourceTree = "<group>";
-		};
-		085FA9B41AE13A0700EFD2F0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				085FA9B51AE13A0700EFD2F0 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -363,24 +323,6 @@
 			productReference = 085FA9971AE13A0700EFD2F0 /* Eleye.app */;
 			productType = "com.apple.product-type.application";
 		};
-		085FA9AF1AE13A0700EFD2F0 /* EleyeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 085FA9BD1AE13A0700EFD2F0 /* Build configuration list for PBXNativeTarget "EleyeTests" */;
-			buildPhases = (
-				085FA9AC1AE13A0700EFD2F0 /* Sources */,
-				085FA9AD1AE13A0700EFD2F0 /* Frameworks */,
-				085FA9AE1AE13A0700EFD2F0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				085FA9B21AE13A0700EFD2F0 /* PBXTargetDependency */,
-			);
-			name = EleyeTests;
-			productName = EleyeTests;
-			productReference = 085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -394,10 +336,6 @@
 					085FA9961AE13A0700EFD2F0 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 8YE95NG7ZZ;
-					};
-					085FA9AF1AE13A0700EFD2F0 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 085FA9961AE13A0700EFD2F0;
 					};
 				};
 			};
@@ -415,7 +353,6 @@
 			projectRoot = "";
 			targets = (
 				085FA9961AE13A0700EFD2F0 /* Eleye */,
-				085FA9AF1AE13A0700EFD2F0 /* EleyeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -434,13 +371,6 @@
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
 				18B74C021B09821C00CAEFC0 /* EReader.js in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		085FA9AE1AE13A0700EFD2F0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,23 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		085FA9AC1AE13A0700EFD2F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		085FA9B21AE13A0700EFD2F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 085FA9961AE13A0700EFD2F0 /* Eleye */;
-			targetProxy = 085FA9B11AE13A0700EFD2F0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */ = {
@@ -652,40 +566,6 @@
 			};
 			name = Release;
 		};
-		085FA9BE1AE13A0700EFD2F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EleyeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eleye.app/Eleye";
-			};
-			name = Debug;
-		};
-		085FA9BF1AE13A0700EFD2F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EleyeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eleye.app/Eleye";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -703,15 +583,6 @@
 			buildConfigurations = (
 				085FA9BB1AE13A0700EFD2F0 /* Debug */,
 				085FA9BC1AE13A0700EFD2F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		085FA9BD1AE13A0700EFD2F0 /* Build configuration list for PBXNativeTarget "EleyeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				085FA9BE1AE13A0700EFD2F0 /* Debug */,
-				085FA9BF1AE13A0700EFD2F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
