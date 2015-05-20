@@ -211,6 +211,8 @@
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = YES;
     [self addHighlight];
+    self.editorView.userInteractionEnabled = NO;
+    self.editorView.userInteractionEnabled = YES;
 }
 
 - (IBAction)cancelBtnTapped:(id)sender
