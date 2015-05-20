@@ -1,0 +1,23 @@
+PODS:
+  - evernote-cloud-sdk-ios (2.0.2)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - MBProgressHUD (0.9.1)
+  - SVPullToRefresh (0.4.1)
+
+DEPENDENCIES:
+  - evernote-cloud-sdk-ios
+  - FMDB
+  - MBProgressHUD
+  - SVPullToRefresh
+
+SPEC CHECKSUMS:
+  evernote-cloud-sdk-ios: 7a6e5402b837ea79ef0179caff5ffe7b4f235615
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+
+COCOAPODS: 0.37.1
