@@ -733,11 +733,13 @@
      * 移除高亮
      */
     zss_editor.removeHilite = function() {
-        zss_editor.restorerange();
-        document.execCommand("styleWithCSS", null, true);
-        document.execCommand('hiliteColor', false, ORIGIN_COLOR);
-        document.execCommand("styleWithCSS", null, false);
-        zss_editor.enabledEditingItems();
+        // zss_editor.restorerange();
+        // document.execCommand("styleWithCSS", null, true);
+        // document.execCommand('hiliteColor', false, ORIGIN_COLOR);
+        // document.execCommand("styleWithCSS", null, false);
+        // zss_editor.enabledEditingItems();
+        // 
+        highlighter.unhighlightSelection();
     }
 
     /**
