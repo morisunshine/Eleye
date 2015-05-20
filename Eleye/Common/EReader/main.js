@@ -3,12 +3,3 @@
 // @koala-prepend 'assets/vender/rangy-classapplier.js',
 // @koala-prepend 'assets/vender/rangy-highlighter.js',
 // @koala-prepend 'assets/js/EReader.js'
-
-$(function () {
-    try {
-        // zss_editor.init();
-        
-    } catch(e) {
-        alert(e);
-    }
-});
