@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		080C03381B0CB6730006A4E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 080C033A1B0CB6730006A4E7 /* Localizable.strings */; };
+		080C03411B0CCE600006A4E7 /* EReader.js in Resources */ = {isa = PBXBuildFile; fileRef = 080C03401B0CCE600006A4E7 /* EReader.js */; };
+		080C03431B0CCE740006A4E7 /* main.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 080C03421B0CCE740006A4E7 /* main.min.js */; };
 		085FA99D1AE13A0700EFD2F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99C1AE13A0700EFD2F0 /* main.m */; };
 		085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */; };
 		085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A71AE13A0700EFD2F0 /* Images.xcassets */; };
@@ -30,11 +32,9 @@
 		183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C5DE81AF8B37D00ED224C /* MenuView.xib */; };
 		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
 		187FE5171B02E715002829B8 /* MHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187FE5151B02E715002829B8 /* MHNavigationController.m */; };
-		18B74BFB1B09821C00CAEFC0 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF21B09821C00CAEFC0 /* jquery.js */; };
 		18B74BFC1B09821C00CAEFC0 /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF31B09821C00CAEFC0 /* reader.html */; };
 		18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */; };
 		18B74BFF1B09821C00CAEFC0 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF71B09821C00CAEFC0 /* main.css */; };
-		18B74C021B09821C00CAEFC0 /* EReader.js in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BFA1B09821C00CAEFC0 /* EReader.js */; };
 		18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */; };
 		18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB31B0B640600B16B6B /* EResourceDO.m */; };
 		18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63FAF1AFB496100094F8C /* ENoteViewController.m */; };
@@ -49,6 +49,8 @@
 		080C03391B0CB6730006A4E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		080C033B1B0CB68F0006A4E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		080C033C1B0CB68F0006A4E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		080C03401B0CCE600006A4E7 /* EReader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = EReader.js; path = assets/js/EReader.js; sourceTree = "<group>"; };
+		080C03421B0CCE740006A4E7 /* main.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.min.js; sourceTree = "<group>"; };
 		085FA9971AE13A0700EFD2F0 /* Eleye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eleye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		085FA99B1AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085FA99C1AE13A0700EFD2F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,12 +94,10 @@
 		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
 		187FE5151B02E715002829B8 /* MHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHNavigationController.m; sourceTree = "<group>"; };
 		187FE5161B02E715002829B8 /* MHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHNavigationController.h; sourceTree = "<group>"; };
-		18B74BF21B09821C00CAEFC0 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
 		18B74BF31B09821C00CAEFC0 /* reader.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reader.html; sourceTree = "<group>"; };
 		18B74BF41B09821C00CAEFC0 /* EReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EReaderViewController.h; sourceTree = "<group>"; };
 		18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EReaderViewController.m; sourceTree = "<group>"; };
 		18B74BF71B09821C00CAEFC0 /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
-		18B74BFA1B09821C00CAEFC0 /* EReader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EReader.js; sourceTree = "<group>"; };
 		18C3FFAF1B0B611F00B16B6B /* EResourceDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDAO.h; sourceTree = "<group>"; };
 		18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDAO.m; sourceTree = "<group>"; };
 		18C3FFB21B0B640600B16B6B /* EResourceDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDO.h; sourceTree = "<group>"; };
@@ -245,30 +245,14 @@
 		18B74BEF1B09821C00CAEFC0 /* EReader */ = {
 			isa = PBXGroup;
 			children = (
-				18B74BF01B09821C00CAEFC0 /* Assets */,
+				080C03421B0CCE740006A4E7 /* main.min.js */,
+				080C03401B0CCE600006A4E7 /* EReader.js */,
 				18B74BF31B09821C00CAEFC0 /* reader.html */,
 				18B74BF41B09821C00CAEFC0 /* EReaderViewController.h */,
 				18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */,
 				18B74BF71B09821C00CAEFC0 /* main.css */,
-				18B74BFA1B09821C00CAEFC0 /* EReader.js */,
 			);
 			path = EReader;
-			sourceTree = "<group>";
-		};
-		18B74BF01B09821C00CAEFC0 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				18B74BF11B09821C00CAEFC0 /* js */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		18B74BF11B09821C00CAEFC0 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				18B74BF21B09821C00CAEFC0 /* jquery.js */,
-			);
-			path = js;
 			sourceTree = "<group>";
 		};
 		18FF6F141AE79B01000425E4 /* DAO */ = {
@@ -368,15 +352,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18B74BFB1B09821C00CAEFC0 /* jquery.js in Resources */,
+				080C03411B0CCE600006A4E7 /* EReader.js in Resources */,
 				18B74BFC1B09821C00CAEFC0 /* reader.html in Resources */,
 				18B74BFF1B09821C00CAEFC0 /* main.css in Resources */,
 				08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */,
 				08751F221AE5386900FE17B1 /* Main.storyboard in Resources */,
+				080C03431B0CCE740006A4E7 /* main.min.js in Resources */,
 				080C03381B0CB6730006A4E7 /* Localizable.strings in Resources */,
 				183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
-				18B74C021B09821C00CAEFC0 /* EReader.js in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
