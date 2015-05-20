@@ -12,7 +12,7 @@
 #import "EAllNotesViewController.h"
 #import "ENotebookDAO.h"
 #import "ENoteDAO.h"
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MHNavigationController.h"
 
@@ -93,30 +93,32 @@ static CGFloat kCellHeight = 49;
         afterUSN = [chunkHighUSN intValue];
     } 
     [client getFilteredSyncChunkAfterUSN:afterUSN maxEntries:100 filter:filter success:^(EDAMSyncChunk *syncChunk) {
+        if (0 < syncChunk.resources) {
+            NSLog(@"笔记中的资源文件有更新！");
+        }
         if (0 < syncChunk.notebooks) {
             
         }
         if (0 < syncChunk.notes) {
             NSLog(@"有更新！");
-            NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
-            NSMutableDictionary *newUpdateNotes;
-            if (updateNotes == nil) {
-                newUpdateNotes = [[NSMutableDictionary alloc] init];
-            } else {
-                newUpdateNotes = [NSMutableDictionary dictionaryWithDictionary:updateNotes];
-            }
             
             for (EDAMNote *note in syncChunk.notes) {
                 if (note.deleted) {
-                    
                     [EUtility deleteNotePathWithGuid:note.guid];
                     [[ENoteDAO sharedENoteDAO] deleteNoteWithGuid:note.guid];
                 } else {
-                    [newUpdateNotes setObject:@(NO) forKey:note.guid];
+                    NSNumber *updateNume = [EUtility valueWithKey:note.guid fileName:LOCALUPDATEFILE];
+                    if (updateNume) {
+                        if ([updateNume integerValue] < [note.updated integerValue]) {
+                            [EUtility setSafeValue:@(NO) key:note.guid fileName:REMOTEUPDATEDTITLE];
+                        }
+                        [EUtility removeValueWithKey:note.guid fileName:LOCALUPDATEFILE];
+                    } else {
+                        [EUtility setSafeValue:@(NO) key:note.guid fileName:REMOTEUPDATEDTITLE];
+                    }
                 }
             }
             
-            [USER_DEFAULT setObject:newUpdateNotes forKey:@"updateNotes"];
             [[NSNotificationCenter defaultCenter] postNotificationName:UPDATENOTENOTIFICATION object:nil];
         }
         
@@ -131,7 +133,7 @@ static CGFloat kCellHeight = 49;
 
 - (void)configureUI
 {
-    NSString *title = [NSString stringWithFormat:@"V%@ 问题反馈", APP_VERSION];
+    NSString *title = [NSString stringWithFormat:@"V%@ %@", APP_VERSION, LOCALSTRING(@"Feedback")];
     
     [EUtility addlineOnView:self.headerView position:EViewPositionBottom];
     [EUtility addlineOnView:self.footerView position:EViewPositionTop];
@@ -261,22 +263,7 @@ static CGFloat kCellHeight = 49;
 {
     ENoteBookDO *notebook = mutNotebooks_[section];
     if (notebook.stack) {
-
-//        BOOL isOpen = [[viewStatus_ objectForKey:notebook.stack] boolValue];
-//        NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
-//        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-//        for (NSInteger i = 0;i < subNotebooks.count; i++) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-//            [indexPaths addObject:indexPath];
-//        }
-//        
-//        if (isOpen == YES) {
-//            [viewStatus_ setObject:notebook.stack forKey:@(NO)];
-//            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//        } else {
-//            [viewStatus_ setObject:notebook.stack forKey:@(YES)];
-//            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//        }
+        
     } else {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
@@ -391,17 +378,16 @@ static CGFloat kCellHeight = 49;
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
-        [mail setSubject:[NSString stringWithFormat:@"Eleye %@ 问题反馈", APP_VERSION]];
+        [mail setSubject:[NSString stringWithFormat:@"Eleye %@ %@", APP_VERSION, LOCALSTRING(@"Feedback")]];
         NSString *body = [NSString stringWithFormat:@"\n\n\n\n\n\n%@ %@ %@ \n APP version %@ Build %@", [EUtility platformString], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APP_VERSION, APP_BUILD_VERSION];
         [mail setMessageBody:body isHTML:NO];
-        [mail setToRecipients:@[@"wheelab7@gmail.com"]];
+        [mail setToRecipients:@[EMAIL]];
         
         [self presentViewController:mail animated:YES completion:nil];
     }
     else
     {
-        [EUtility showAutoHintTips:@"您的设备不能发送邮件！"];
-        NSLog(@"This device cannot send email");
+        [EUtility showAutoHintTips:LOCALSTRING(@"Your device cannot send email!")];
     }
 }
 
@@ -412,9 +398,9 @@ static CGFloat kCellHeight = 49;
     if (buttonIndex != alertView.cancelButtonIndex) {
         [USER_DEFAULT removeObjectForKey:HOSTNAME];
         [[ENSession sharedSession] unauthenticate];
-        [EUtility clearDataBase];
+        [EUtility clearDataBase];//TODO 暂时先不删除数据库
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ELaunchViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        ELoginViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         [self.navigationController pushViewController:launchViewController animated:YES];
         NSMutableArray *mutViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
         [mutViewControllers removeObjectAtIndex:1];

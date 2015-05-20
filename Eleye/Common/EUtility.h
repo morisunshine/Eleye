@@ -27,16 +27,26 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (BOOL)deleteNotePathWithGuid:(NSString *)guid;
 
-+ (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid;
-
-+ (NSString *)contentFromLocalPathWithGuid:(NSString *)guid;
++ (NSString *)noteHtmlFromLocalPathWithGuid:(NSString *)guid;
 
 + (NSString *)noteContentWithGuid:(NSString *)guid;
 
 + (NSString *)platformString;
 
-+ (BOOL)clearDataBase;
++ (void)clearDataBase;
+
++ (void)renewDataBase;
 
 + (void)showAutoHintTips:(NSString *)string;
+
++ (BOOL)createFloderWithPath:(NSString *)path;
+
++ (void)setSafeValue:(id)value key:(NSString *)key fileName:(NSString *)fileName;
+
++ (id)valueWithKey:(NSString *)key fileName:(NSString *)fileName;
+
++ (void)removeValueWithKey:(NSString *)key fileName:(NSString *)fileName;
+
++ (void)saveDataBaseResources:(NSArray *)resources withNoteGuid:(NSString *)noteGuid;
 
 @end

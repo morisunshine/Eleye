@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
-- (void)updateUIWithNote:(ENoteDO *)note;
+- (void)updateUIWithNote:(EDAMNote *)note;
 
 @end

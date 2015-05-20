@@ -23,7 +23,7 @@ static NSInteger kCellHeight = 100;
     // Configure the view for the selected state
 }
 
-- (void)updateUIWithNote:(ENoteDO *)note
+- (void)updateUIWithNote:(EDAMNote *)note
 {
     self.titleLabel.text = note.title;
     self.contentLabel.text = note.content;

@@ -15,6 +15,5 @@
     #import "UIView+GeometryAddition.h"
     #import"COMMONCONSTANT.h"
     #import "EUtility.h"
-    #import "ENoteDO.h"
     #import "ENoteBookDO.h"
 #endif

@@ -16,4 +16,6 @@
 
 + (instancetype)sharedEDBManager;
 
+- (void)renewQueue;
+
 @end

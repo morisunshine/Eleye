@@ -6,18 +6,18 @@
 //  Copyright (c) 2015年 wheelab. All rights reserved.
 //
 
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import "EAllNoteBooksViewController.h"
 #import <ENSession.h>
 #import "ELoginView.h"
 
-@interface ELaunchViewController ()
+@interface ELoginViewController ()
 
 @property (nonatomic, retain) ELoginView *loginView;
 
 @end
 
-@implementation ELaunchViewController
+@implementation ELoginViewController
 
 - (void)viewDidLoad 
 {
@@ -91,12 +91,7 @@
 
 - (void)authorizationWithEvernote:(BOOL)evernote
 {
-    NSString *SANDBOX_HOST;
-#if DEBUG
-    SANDBOX_HOST = ENSessionHostSandbox;
-#else
-    SANDBOX_HOST = nil;
-#endif
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;//TODO 线上后要改为nil
     NSString *CONSUMER_KEY;
     NSString *CONSUMER_SECRET;
     
@@ -113,11 +108,11 @@
     ENSession *session = [ENSession sharedSession];
     [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
         if (authenticateError) {
-            NSLog(@"登录失败");
-            [EUtility showAutoHintTips:@"登录失败"];
+            NSLog(@"登录失败:%@", authenticateError);
+            [EUtility showAutoHintTips:LOCALSTRING(@"Login failure")];
         } else {
             NSLog(@"授权成功");
-            [EUtility showAutoHintTips:@"登录成功"];
+            [EUtility showAutoHintTips:LOCALSTRING(@"Login success")];
             NSString *hostString;
             if (evernote) {
                 hostString = EVERNOTEHOST;
@@ -125,6 +120,7 @@
                 hostString = YINXIANGHOST;
             }
             [USER_DEFAULT setObject:hostString forKey:HOSTNAME];
+            [EUtility renewDataBase];
             [self authorizationWithSuccess];
         }
     }];

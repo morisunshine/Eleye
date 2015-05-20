@@ -17,13 +17,14 @@ SINGLETON_CLASS(EDBManager)
 
 - (NSString *)databasePath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = paths[0];
-    docDir = [docDir stringByAppendingPathComponent:kPath];
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@", hostName, @([ENSession sharedSession].userID)];
+    if ([EUtility createFloderWithPath:path]) {
+        path = [path stringByAppendingPathComponent:kPath];
+    }
+    NSLog(@"sqlit path: %@", path);
     
-    NSLog(@"sqlit path: %@", docDir);
-    
-    return docDir;
+    return path;
 }
 
 - (id)init
@@ -33,6 +34,11 @@ SINGLETON_CLASS(EDBManager)
     }
     
     return self;
+}
+
+- (void)renewQueue
+{
+    self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:[self databasePath]];
 }
 
 @end

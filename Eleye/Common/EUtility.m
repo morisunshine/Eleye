@@ -10,7 +10,10 @@
 #include <sys/sysctl.h>
 #include <sys/utsname.h>
 #import "ENotebookDAO.h"
+#import "EDBManager.h"
 #import "ENoteDAO.h"
+#import "EResourceDO.h"
+#import "EResourceDAO.h"
 
 @implementation EUtility
 
@@ -51,27 +54,14 @@ SINGLETON_CLASS(EUtility)
 
 - (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [libraryDirectory stringByAppendingPathComponent:@"note"];
+    NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@", hostname, @([ENSession sharedSession].userID), guid];
     BOOL isPathExist = [[NSFileManager defaultManager] fileExistsAtPath:notePath];
-    if (isPathExist) {
-        NSString *userPath = [notePath stringByAppendingFormat:@"/%@", @([ENSession sharedSession].userID)];
-        BOOL isUserPathExist = [[NSFileManager defaultManager] fileExistsAtPath:userPath];        
-        if (isUserPathExist) {
-            NSString *guidPath = [userPath stringByAppendingFormat:@"/%@", guid];
-            BOOL isGuidPathExist = [[NSFileManager defaultManager] fileExistsAtPath:guidPath];
-            if (!isGuidPathExist) {
-                [[NSFileManager defaultManager] createDirectoryAtPath:guidPath withIntermediateDirectories:YES attributes:nil error:nil];
-            } 
-        } else {
-            [[NSFileManager defaultManager] createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-    } else {
+    if (isPathExist == NO) {
         [[NSFileManager defaultManager] createDirectoryAtPath:notePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
+    } 
     
-    NSString *path = [notePath stringByAppendingFormat:@"/%@/%@/note.html", @([ENSession sharedSession].userID), guid];
+    NSString *path = [notePath stringByAppendingPathComponent:@"note.html"];
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
@@ -83,7 +73,7 @@ SINGLETON_CLASS(EUtility)
         } else {
             subString = [string substringToIndex:string.length];
         }
-        NSString *contentPath = [notePath stringByAppendingFormat:@"/%@/%@/note", @([ENSession sharedSession].userID), guid];
+        NSString *contentPath = [notePath stringByAppendingPathComponent:@"note"];
         [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
         [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
@@ -92,9 +82,8 @@ SINGLETON_CLASS(EUtility)
 
 + (NSString *)noteContentWithGuid:(NSString *)guid
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/%@/note", @([ENSession sharedSession].userID), guid];
+    NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@/note", hostname, @([ENSession sharedSession].userID), guid];
     NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
     
     return content;
@@ -102,30 +91,17 @@ SINGLETON_CLASS(EUtility)
 
 + (BOOL)deleteNotePathWithGuid:(NSString *)guid
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [libraryDirectory stringByAppendingFormat:@"/note/%@/%@", @([ENSession sharedSession].userID), guid];
+    NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@", hostname, @([ENSession sharedSession].userID), guid];
     BOOL deleteSuccess = [[NSFileManager defaultManager] removeItemAtPath:notePath error:nil];
     
     return deleteSuccess;
 }
 
-+ (NSAttributedString *)stringFromLocalPathWithGuid:(NSString *)guid
++ (NSString *)noteHtmlFromLocalPathWithGuid:(NSString *)guid
 {
-    NSString *content = [self contentFromLocalPathWithGuid:guid];
-    __block NSAttributedString *attributedString;
-    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
-        attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    });
-    
-    return attributedString;
-}
-
-+ (NSString *)contentFromLocalPathWithGuid:(NSString *)guid
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSString *notePath = [[libraryDirectory stringByAppendingPathComponent:@"note"] stringByAppendingFormat:@"/%@/%@/note.html", @([ENSession sharedSession].userID), guid];
+    NSString *hostname = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *notePath = [APP_LIBRARY stringByAppendingFormat:@"/Private Documents/%@/%@/content/%@/note.html", hostname, @([ENSession sharedSession].userID), guid];
     NSString *content = [NSString stringWithContentsOfFile:notePath encoding:NSUTF8StringEncoding error:nil];
     
     return content;
@@ -180,17 +156,19 @@ SINGLETON_CLASS(EUtility)
     return platform;
 }
 
-+ (BOOL)clearDataBase
++ (void)clearDataBase
 {
-    BOOL deleteAllNoteBooks = [[ENotebookDAO sharedENotebookDAO] deleteAllNoteBooks];
-    BOOL deleteAllNotes = [[ENoteDAO sharedENoteDAO] deleteAllNotes];
-    
-    BOOL deleteSuccess = NO;
-    
-    if (deleteAllNotes && deleteAllNoteBooks) {
-        deleteSuccess = YES;
-    }
-    return deleteSuccess;
+    [[ENotebookDAO sharedENotebookDAO] clearFMDatabase];
+    [[ENoteDAO sharedENoteDAO] clearFMDatabase];
+    [[EResourceDAO sharedEResourceDAO] clearFMDatabase];
+}
+
++ (void)renewDataBase
+{
+    [[EDBManager sharedEDBManager] renewQueue];
+    [[ENotebookDAO sharedENotebookDAO] renewFmDataBase];
+    [[ENoteDAO sharedENoteDAO] renewFmDataBase];
+    [[EResourceDAO sharedEResourceDAO] renewFmDataBase];
 }
 
 + (void)showAutoHintTips:(NSString *)string
@@ -223,8 +201,6 @@ SINGLETON_CLASS(EUtility)
     stringLabel.text = string;
     [stringLabel sizeToFit];
     stringLabel.width = tipView.width-20;
-    stringLabel.shadowColor = [UIColor blackColor];
-    stringLabel.shadowOffset = CGSizeMake(0, -1);
     [tipView addSubview:stringLabel];
     
     tipView.height = stringLabel.height + 20;
@@ -261,6 +237,85 @@ SINGLETON_CLASS(EUtility)
                          if(tipView.layer.opacity == 0) [tipView removeFromSuperview];
                          hasShowTips = NO;
                      }];
+}
+
++ (BOOL)createFloderWithPath:(NSString *)path
+{   
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    BOOL createSuccess = NO;
+    
+    if ([fileManager fileExistsAtPath:path]) {
+        createSuccess = YES;
+    } else {
+        NSError *error;
+        
+        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        if (error == nil) {
+            createSuccess = YES;
+        }
+    }
+    
+    return createSuccess;
+}
+
++ (void)setSafeValue:(id)value key:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    
+    if (mutDic == nil) {
+        mutDic = [[NSMutableDictionary alloc] init];
+    } 
+    
+    if (value != nil) {
+        [mutDic setObject:value forKey:key];
+    }
+    
+    [mutDic writeToFile:path atomically:YES];
+}
+
++ (id)valueWithKey:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    id value;
+    
+    if (dic) {
+        value = [dic objectForKey:key];
+    }
+    
+    return value;
+}
+
++ (void)removeValueWithKey:(NSString *)key fileName:(NSString *)fileName
+{
+    NSString *hostName = [USER_DEFAULT objectForKey:HOSTNAME];
+    NSString *path = [APP_DOCUMENT stringByAppendingFormat:@"/%@/%@/%@", hostName, @([ENSession sharedSession].userID), fileName];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    [dic removeObjectForKey:key];
+    
+    [dic writeToFile:path atomically:YES];
+}
+
++ (void)saveDataBaseResources:(NSArray *)resources withNoteGuid:(NSString *)noteGuid
+{
+    [[EResourceDAO sharedEResourceDAO] deleteResourcesWithNoteGuid:noteGuid];
+    
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:resources.count];
+    for (ENResource * resource in resources) {
+        EResourceDO *newResource = [[EResourceDO alloc] init];
+        newResource.noteGuid = noteGuid;
+        newResource.resource = resource;
+        
+        [edamResources addObject:newResource];
+    }
+    
+    [[EResourceDAO sharedEResourceDAO] saveItems:edamResources];
 }
 
 @end

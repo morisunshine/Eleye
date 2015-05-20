@@ -8,11 +8,18 @@
 
 #import "ENoteViewController.h"
 #import <objc/runtime.h>
+#import "ENoteDAO.h"
+#import <ENMIMEUtils.h>
+#import <ENMLUtility.h>
+#import <NSData+EvernoteSDK.h>
+#import "EResourceDO.h"
+#import "EResourceDAO.h"
 
 @interface ENoteViewController ()
 {
     NSString *htmlString_;
     EDAMNote *enote_;
+    BOOL hasUpdateNote_;
 }
 
 @end
@@ -23,15 +30,18 @@
 {
     [super viewDidLoad];
     
-    htmlString_ = [EUtility contentFromLocalPathWithGuid:self.guid];
+    htmlString_ = [EUtility noteHtmlFromLocalPathWithGuid:self.guid];
+    
+    [self changeTopTitle:self.noteTitle];
+    
+    enote_ = [[ENoteDAO sharedENoteDAO] noteWithGuid:self.guid];
     
     if (htmlString_) {
-        NSDictionary *updateNotes = [USER_DEFAULT objectForKey:@"updateNotes"];
-        if ([updateNotes objectForKey:self.guid]) {
+        if ([EUtility valueWithKey:self.guid fileName:REMOTEUPDATEDTITLE]) {
             [self fetchNoteContent];
         } else {
             //不需要更新
-            [self configUI];
+            [self setupDataWithResources:nil];
         }
     } else {
         [self fetchNoteContent];
@@ -55,6 +65,10 @@
     
     [self replaceUIWebBrowserView:self.editorView];
     
+    if (hasUpdateNote_) {
+        [self updateNote];
+    }
+    
     [[UIMenuController sharedMenuController] setMenuItems:nil];
 }
 
@@ -65,9 +79,45 @@
 
 #pragma mark - Private Methods -
 
-- (void)configUI
+- (void)setupDataWithResources:(NSArray *)resources
 {
-    [self setHTML:htmlString_];
+    NSMutableArray *newResources;
+    if (resources) {
+        NSMutableArray *mutResources = [[NSMutableArray alloc] init];
+        for (ENResource *resource in resources) {
+            EResourceDO *resourceDO = [[EResourceDO alloc] init];
+            resourceDO.noteGuid = self.guid;
+            resourceDO.resource = resource;
+            [mutResources addObject:resourceDO];
+        }
+        newResources = mutResources;
+        [[EResourceDAO sharedEResourceDAO] saveItems:mutResources];
+    } else {
+        resources = [[EResourceDAO sharedEResourceDAO] resourcesWithNoteGuid:self.guid];
+        newResources = [NSMutableArray arrayWithArray:resources];
+    }
+    NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:newResources.count];
+    for (EResourceDO * resourceDO in newResources) {
+        ENResource *resource = resourceDO.resource;
+        EDAMResource * edamResource = [resource EDAMResource];
+        if (!edamResource.attributes.sourceURL) {
+            NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+            NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+            NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+            edamResource.attributes.sourceURL = fakeUrl;
+        }
+        [edamResources addObject:edamResource];
+    }
+    
+    if (0 < resources.count) {
+        ENMLUtility *utility = [[ENMLUtility alloc] init];
+        [utility convertENMLToHTML:htmlString_ withInlinedResources:edamResources completionBlock:^(NSString *html, NSError *error) {
+            [self setHTML:html];
+        }];
+    } else {
+        [self setHTML:htmlString_];
+    }
+
     [self changeTopTitle:self.noteTitle];
 }
 
@@ -77,9 +127,11 @@
     [client getNoteWithGuid:self.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote *enote) {
         enote_ = enote;
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:enote];
+        [EUtility saveDataBaseResources:resultNote.resources withNoteGuid:self.guid];
         htmlString_ = [resultNote.content enmlWithNote:resultNote];
-        [self configUI];
+        [self setupDataWithResources:resultNote.resources];
         [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
+        [EUtility removeValueWithKey:self.guid fileName:REMOTEUPDATEDTITLE];
     } failure:^(NSError *error) {
         if (error) {
             NSLog(@"获取笔记内容错误%@", error);
@@ -89,7 +141,6 @@
 
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
-    //Iterate through subviews recursively looking for UIWebBrowserView
     for (UIView *sub in view.subviews) {
         [self replaceUIWebBrowserView:sub];
         if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
@@ -101,9 +152,6 @@
             
             Method originalMethod = class_getInstanceMethod(class, originalSelector);
             Method swizzledMethod = class_getInstanceMethod(self.class, swizzledSelector);            
-            //add the method mightPerformAction:withSender: to UIWebBrowserView
-            
-            //replace canPerformAction:withSender: with mightPerformAction:withSender:
             
             class_addMethod(class,
                             originalSelector,
@@ -122,8 +170,7 @@
 - (void)changeMenuItemsWithShowHighLight:(BOOL)showHighlight
 {
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
-    UIMenuItem *actionItem = [[UIMenuItem alloc] initWithTitle:@"Cancel"
-                                                           action:@selector(highlightBtnTapped:)];
+    UIMenuItem *actionItem;
     if (showHighlight) {
         actionItem = [[UIMenuItem alloc] initWithTitle:@"Highlight" action:@selector(highlightBtnTapped:)];
     } else {
@@ -139,11 +186,21 @@
 - (void)updateNote
 {
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    //TODO 更新笔记
+    
+    enote_.content = htmlString_;
+    
     [client updateNote:enote_ success:^(EDAMNote *note) {
+        NSLog(@"更新笔记成功 %@", note.title);
         
+        [EUtility setSafeValue:note.updated key:self.guid fileName:LOCALUPDATEFILE];
+        
+        enote_.updated = note.updated;
+        [[ENoteDAO sharedENoteDAO] saveBaseDO:enote_];
+        [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
     } failure:^(NSError *error) {
-        
+        if (error) {
+            NSLog(@"更新笔记失败%@", error);
+        }
     }];
 }
 
@@ -151,12 +208,15 @@
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
+    //TODO 根据高亮的文字变化
+    hasUpdateNote_ = YES;
     [self addHighlight];
 }
 
 - (IBAction)cancelBtnTapped:(id)sender
 {
-    
+    //TODO 根据高亮的文字变化
+    hasUpdateNote_ = NO;
 }
 
 - (IBAction)copyBtnTapped:(id)sender

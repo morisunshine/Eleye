@@ -8,7 +8,7 @@
 
 #import "ERootViewController.h"
 #import "EAllNoteBooksViewController.h"
-#import "ELaunchViewController.h"
+#import "ELoginViewController.h"
 #import "EGuideViewController.h"
 
 @interface ERootViewController ()
@@ -24,12 +24,7 @@
     UIViewController *viewController;
     
     NSString *host = [USER_DEFAULT objectForKey:HOSTNAME];
-    NSString *SANDBOX_HOST;
-#if DEBUG
-    SANDBOX_HOST = ENSessionHostSandbox;
-#else
-    SANDBOX_HOST = nil;
-#endif
+    NSString *SANDBOX_HOST = ENSessionHostSandbox;
     NSString *CONSUMER_KEY;
     NSString *CONSUMER_SECRET;
     
@@ -49,12 +44,12 @@
             allNotebooksViewController.showAllNotes = YES;
             viewController = allNotebooksViewController;
         } else {
-            ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+            ELoginViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELoginViewController"];
             launchViewController.showNoAnimation = YES;
             viewController = launchViewController;
         }
     } else {
-        ELaunchViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELaunchViewController"];
+        ELoginViewController *launchViewController = [storyboard instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         launchViewController.showNoAnimation = YES;
         viewController = launchViewController;
     }

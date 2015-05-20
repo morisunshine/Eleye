@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080C03381B0CB6730006A4E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 080C033A1B0CB6730006A4E7 /* Localizable.strings */; };
 		085FA99D1AE13A0700EFD2F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99C1AE13A0700EFD2F0 /* main.m */; };
 		085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */; };
 		085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A71AE13A0700EFD2F0 /* Images.xcassets */; };
 		085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */; };
-		085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */; };
 		08751F221AE5386900FE17B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08751F211AE5386900FE17B1 /* Main.storyboard */; };
 		08D4A11C1AEFB6F2000BAC87 /* EUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FD1AEFB6F2000BAC87 /* EUtility.m */; };
 		08D4A11D1AEFB6F2000BAC87 /* UIView+GeometryAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */; };
 		08D4A11E1AEFB6F2000BAC87 /* ENoteBookDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */; };
-		08D4A11F1AEFB6F2000BAC87 /* ENoteDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */; };
 		08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1071AEFB6F2000BAC87 /* EMenuView.m */; };
 		08D4A1211AEFB6F2000BAC87 /* ENotebookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1091AEFB6F2000BAC87 /* ENotebookCell.m */; };
 		08D4A1221AEFB6F2000BAC87 /* ENotebookStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A10B1AEFB6F2000BAC87 /* ENotebookStackView.m */; };
@@ -24,36 +23,32 @@
 		08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D4A1101AEFB6F2000BAC87 /* View.xib */; };
 		08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */; };
 		08D4A1271AEFB6F2000BAC87 /* EAllNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */; };
-		08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */; };
+		08D4A1281AEFB6F2000BAC87 /* ELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D4A1171AEFB6F2000BAC87 /* ELoginViewController.m */; };
 		08DEAF5D1B00EAA10029A7B5 /* ERootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DEAF5C1B00EAA10029A7B5 /* ERootViewController.m */; };
 		08E289AC1AFA57FF000C0CB9 /* ELoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AB1AFA57FF000C0CB9 /* ELoginView.m */; };
 		08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */; };
 		183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C5DE81AF8B37D00ED224C /* MenuView.xib */; };
 		1871B69F1AF0AA970090578E /* ETitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871B69E1AF0AA970090578E /* ETitleView.m */; };
 		187FE5171B02E715002829B8 /* MHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187FE5151B02E715002829B8 /* MHNavigationController.m */; };
+		18B74BFB1B09821C00CAEFC0 /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF21B09821C00CAEFC0 /* jquery.js */; };
 		18B74BFC1B09821C00CAEFC0 /* reader.html in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF31B09821C00CAEFC0 /* reader.html */; };
 		18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */; };
 		18B74BFF1B09821C00CAEFC0 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BF71B09821C00CAEFC0 /* main.css */; };
+		18B74C021B09821C00CAEFC0 /* EReader.js in Resources */ = {isa = PBXBuildFile; fileRef = 18B74BFA1B09821C00CAEFC0 /* EReader.js */; };
+		18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */; };
+		18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB31B0B640600B16B6B /* EResourceDO.m */; };
 		18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63FAF1AFB496100094F8C /* ENoteViewController.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
 		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
 		18FF6F211AE79DA6000425E4 /* ENoteDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F201AE79DA6000425E4 /* ENoteDAO.m */; };
 		1D040437341224869DDCEDFF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975340930B8A6096BFC00AA /* libPods.a */; };
-		D20B51F41B0CB92500CB303D /* main.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D20B51F31B0CB92500CB303D /* main.min.js */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		085FA9B11AE13A0700EFD2F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 085FA98F1AE13A0700EFD2F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 085FA9961AE13A0700EFD2F0;
-			remoteInfo = Eleye;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		080C03391B0CB6730006A4E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		080C033B1B0CB68F0006A4E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		080C033C1B0CB68F0006A4E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		085FA9971AE13A0700EFD2F0 /* Eleye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eleye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		085FA99B1AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085FA99C1AE13A0700EFD2F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,9 +56,6 @@
 		085FA99F1AE13A0700EFD2F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		085FA9A71AE13A0700EFD2F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		085FA9AA1AE13A0700EFD2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EleyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		085FA9B51AE13A0700EFD2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleyeTests.m; sourceTree = "<group>"; };
 		08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Eleye-Prefix.pch"; sourceTree = "<group>"; };
 		08751F211AE5386900FE17B1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		08D4A0FB1AEFB6F2000BAC87 /* COMMONCONSTANT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMMONCONSTANT.h; sourceTree = "<group>"; };
@@ -73,8 +65,6 @@
 		08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GeometryAddition.m"; sourceTree = "<group>"; };
 		08D4A1011AEFB6F2000BAC87 /* ENoteBookDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteBookDO.h; sourceTree = "<group>"; };
 		08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteBookDO.m; sourceTree = "<group>"; };
-		08D4A1031AEFB6F2000BAC87 /* ENoteDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteDO.h; sourceTree = "<group>"; };
-		08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteDO.m; sourceTree = "<group>"; };
 		08D4A1061AEFB6F2000BAC87 /* EMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMenuView.h; sourceTree = "<group>"; };
 		08D4A1071AEFB6F2000BAC87 /* EMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMenuView.m; sourceTree = "<group>"; };
 		08D4A1081AEFB6F2000BAC87 /* ENotebookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENotebookCell.h; sourceTree = "<group>"; };
@@ -88,8 +78,8 @@
 		08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAllNoteBooksViewController.m; sourceTree = "<group>"; };
 		08D4A1141AEFB6F2000BAC87 /* EAllNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAllNotesViewController.h; sourceTree = "<group>"; };
 		08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAllNotesViewController.m; sourceTree = "<group>"; };
-		08D4A1161AEFB6F2000BAC87 /* ELaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELaunchViewController.h; sourceTree = "<group>"; };
-		08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELaunchViewController.m; sourceTree = "<group>"; };
+		08D4A1161AEFB6F2000BAC87 /* ELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELoginViewController.h; sourceTree = "<group>"; };
+		08D4A1171AEFB6F2000BAC87 /* ELoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELoginViewController.m; sourceTree = "<group>"; };
 		08DEAF5B1B00EAA10029A7B5 /* ERootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERootViewController.h; sourceTree = "<group>"; };
 		08DEAF5C1B00EAA10029A7B5 /* ERootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERootViewController.m; sourceTree = "<group>"; };
 		08E289AA1AFA57FF000C0CB9 /* ELoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELoginView.h; sourceTree = "<group>"; };
@@ -102,10 +92,16 @@
 		1871B69E1AF0AA970090578E /* ETitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETitleView.m; sourceTree = "<group>"; };
 		187FE5151B02E715002829B8 /* MHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHNavigationController.m; sourceTree = "<group>"; };
 		187FE5161B02E715002829B8 /* MHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHNavigationController.h; sourceTree = "<group>"; };
+		18B74BF21B09821C00CAEFC0 /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
 		18B74BF31B09821C00CAEFC0 /* reader.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = reader.html; sourceTree = "<group>"; };
 		18B74BF41B09821C00CAEFC0 /* EReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EReaderViewController.h; sourceTree = "<group>"; };
 		18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EReaderViewController.m; sourceTree = "<group>"; };
 		18B74BF71B09821C00CAEFC0 /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
+		18B74BFA1B09821C00CAEFC0 /* EReader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EReader.js; sourceTree = "<group>"; };
+		18C3FFAF1B0B611F00B16B6B /* EResourceDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDAO.h; sourceTree = "<group>"; };
+		18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDAO.m; sourceTree = "<group>"; };
+		18C3FFB21B0B640600B16B6B /* EResourceDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EResourceDO.h; sourceTree = "<group>"; };
+		18C3FFB31B0B640600B16B6B /* EResourceDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDO.m; sourceTree = "<group>"; };
 		18D63FAE1AFB496100094F8C /* ENoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteViewController.h; sourceTree = "<group>"; };
 		18D63FAF1AFB496100094F8C /* ENoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteViewController.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
@@ -119,7 +115,6 @@
 		1975340930B8A6096BFC00AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0654875527BCBA8D47BF71 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9F08A71444B99F1BC78B5E4C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D20B51F31B0CB92500CB303D /* main.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.min.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,13 +126,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		085FA9AD1AE13A0700EFD2F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -145,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				085FA9991AE13A0700EFD2F0 /* Eleye */,
-				085FA9B31AE13A0700EFD2F0 /* EleyeTests */,
 				085FA9981AE13A0700EFD2F0 /* Products */,
 				DB868C516EBE1E9E7A2257C3 /* Pods */,
 				B43AFE1829EB35E9156CDC20 /* Frameworks */,
@@ -156,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				085FA9971AE13A0700EFD2F0 /* Eleye.app */,
-				085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,23 +171,7 @@
 				08751F131AE524CE00FE17B1 /* Eleye-Prefix.pch */,
 				085FA99B1AE13A0700EFD2F0 /* Info.plist */,
 				085FA99C1AE13A0700EFD2F0 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		085FA9B31AE13A0700EFD2F0 /* EleyeTests */ = {
-			isa = PBXGroup;
-			children = (
-				085FA9B61AE13A0700EFD2F0 /* EleyeTests.m */,
-				085FA9B41AE13A0700EFD2F0 /* Supporting Files */,
-			);
-			path = EleyeTests;
-			sourceTree = "<group>";
-		};
-		085FA9B41AE13A0700EFD2F0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				085FA9B51AE13A0700EFD2F0 /* Info.plist */,
+				080C033A1B0CB6730006A4E7 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -226,8 +196,8 @@
 			children = (
 				08D4A1011AEFB6F2000BAC87 /* ENoteBookDO.h */,
 				08D4A1021AEFB6F2000BAC87 /* ENoteBookDO.m */,
-				08D4A1031AEFB6F2000BAC87 /* ENoteDO.h */,
-				08D4A1041AEFB6F2000BAC87 /* ENoteDO.m */,
+				18C3FFB21B0B640600B16B6B /* EResourceDO.h */,
+				18C3FFB31B0B640600B16B6B /* EResourceDO.m */,
 			);
 			path = DO;
 			sourceTree = "<group>";
@@ -260,8 +230,8 @@
 				08D4A1131AEFB6F2000BAC87 /* EAllNoteBooksViewController.m */,
 				08D4A1141AEFB6F2000BAC87 /* EAllNotesViewController.h */,
 				08D4A1151AEFB6F2000BAC87 /* EAllNotesViewController.m */,
-				08D4A1161AEFB6F2000BAC87 /* ELaunchViewController.h */,
-				08D4A1171AEFB6F2000BAC87 /* ELaunchViewController.m */,
+				08D4A1161AEFB6F2000BAC87 /* ELoginViewController.h */,
+				08D4A1171AEFB6F2000BAC87 /* ELoginViewController.m */,
 				08E289AD1AFA58E4000C0CB9 /* EGuideViewController.h */,
 				08E289AE1AFA58E4000C0CB9 /* EGuideViewController.m */,
 				18D63FAE1AFB496100094F8C /* ENoteViewController.h */,
@@ -275,13 +245,30 @@
 		18B74BEF1B09821C00CAEFC0 /* EReader */ = {
 			isa = PBXGroup;
 			children = (
-				D20B51F31B0CB92500CB303D /* main.min.js */,
+				18B74BF01B09821C00CAEFC0 /* Assets */,
 				18B74BF31B09821C00CAEFC0 /* reader.html */,
 				18B74BF41B09821C00CAEFC0 /* EReaderViewController.h */,
 				18B74BF51B09821C00CAEFC0 /* EReaderViewController.m */,
 				18B74BF71B09821C00CAEFC0 /* main.css */,
+				18B74BFA1B09821C00CAEFC0 /* EReader.js */,
 			);
 			path = EReader;
+			sourceTree = "<group>";
+		};
+		18B74BF01B09821C00CAEFC0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				18B74BF11B09821C00CAEFC0 /* js */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		18B74BF11B09821C00CAEFC0 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				18B74BF21B09821C00CAEFC0 /* jquery.js */,
+			);
+			path = js;
 			sourceTree = "<group>";
 		};
 		18FF6F141AE79B01000425E4 /* DAO */ = {
@@ -295,6 +282,8 @@
 				18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */,
 				18FF6F1F1AE79DA6000425E4 /* ENoteDAO.h */,
 				18FF6F201AE79DA6000425E4 /* ENoteDAO.m */,
+				18C3FFAF1B0B611F00B16B6B /* EResourceDAO.h */,
+				18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -339,24 +328,6 @@
 			productReference = 085FA9971AE13A0700EFD2F0 /* Eleye.app */;
 			productType = "com.apple.product-type.application";
 		};
-		085FA9AF1AE13A0700EFD2F0 /* EleyeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 085FA9BD1AE13A0700EFD2F0 /* Build configuration list for PBXNativeTarget "EleyeTests" */;
-			buildPhases = (
-				085FA9AC1AE13A0700EFD2F0 /* Sources */,
-				085FA9AD1AE13A0700EFD2F0 /* Frameworks */,
-				085FA9AE1AE13A0700EFD2F0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				085FA9B21AE13A0700EFD2F0 /* PBXTargetDependency */,
-			);
-			name = EleyeTests;
-			productName = EleyeTests;
-			productReference = 085FA9B01AE13A0700EFD2F0 /* EleyeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -371,10 +342,6 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 8YE95NG7ZZ;
 					};
-					085FA9AF1AE13A0700EFD2F0 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 085FA9961AE13A0700EFD2F0;
-					};
 				};
 			};
 			buildConfigurationList = 085FA9921AE13A0700EFD2F0 /* Build configuration list for PBXProject "Eleye" */;
@@ -384,6 +351,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 085FA98E1AE13A0700EFD2F0;
 			productRefGroup = 085FA9981AE13A0700EFD2F0 /* Products */;
@@ -391,7 +359,6 @@
 			projectRoot = "";
 			targets = (
 				085FA9961AE13A0700EFD2F0 /* Eleye */,
-				085FA9AF1AE13A0700EFD2F0 /* EleyeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -401,21 +368,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20B51F41B0CB92500CB303D /* main.min.js in Resources */,
+				18B74BFB1B09821C00CAEFC0 /* jquery.js in Resources */,
 				18B74BFC1B09821C00CAEFC0 /* reader.html in Resources */,
 				18B74BFF1B09821C00CAEFC0 /* main.css in Resources */,
 				08D4A1251AEFB6F2000BAC87 /* View.xib in Resources */,
 				08751F221AE5386900FE17B1 /* Main.storyboard in Resources */,
+				080C03381B0CB6730006A4E7 /* Localizable.strings in Resources */,
 				183C5DE91AF8B37D00ED224C /* MenuView.xib in Resources */,
 				085FA9AB1AE13A0700EFD2F0 /* LaunchScreen.xib in Resources */,
+				18B74C021B09821C00CAEFC0 /* EReader.js in Resources */,
 				085FA9A81AE13A0700EFD2F0 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		085FA9AE1AE13A0700EFD2F0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +430,9 @@
 				08E289AF1AFA58E4000C0CB9 /* EGuideViewController.m in Sources */,
 				1871B69F1AF0AA970090578E /* ETitleView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
+				18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */,
 				18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */,
+				18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */,
 				08DEAF5D1B00EAA10029A7B5 /* ERootViewController.m in Sources */,
 				08E289AC1AFA57FF000C0CB9 /* ELoginView.m in Sources */,
 				08D4A1201AEFB6F2000BAC87 /* EMenuView.m in Sources */,
@@ -476,9 +440,8 @@
 				18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */,
 				08D4A1221AEFB6F2000BAC87 /* ENotebookStackView.m in Sources */,
 				08D4A1261AEFB6F2000BAC87 /* EAllNoteBooksViewController.m in Sources */,
-				08D4A1281AEFB6F2000BAC87 /* ELaunchViewController.m in Sources */,
+				08D4A1281AEFB6F2000BAC87 /* ELoginViewController.m in Sources */,
 				18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */,
-				08D4A11F1AEFB6F2000BAC87 /* ENoteDO.m in Sources */,
 				18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */,
 				08D4A11E1AEFB6F2000BAC87 /* ENoteBookDO.m in Sources */,
 				085FA99D1AE13A0700EFD2F0 /* main.m in Sources */,
@@ -486,29 +449,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		085FA9AC1AE13A0700EFD2F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				085FA9B71AE13A0700EFD2F0 /* EleyeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		085FA9B21AE13A0700EFD2F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 085FA9961AE13A0700EFD2F0 /* Eleye */;
-			targetProxy = 085FA9B11AE13A0700EFD2F0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
+		080C033A1B0CB6730006A4E7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				080C03391B0CB6730006A4E7 /* en */,
+				080C033B1B0CB68F0006A4E7 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		085FA9A91AE13A0700EFD2F0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				085FA9AA1AE13A0700EFD2F0 /* Base */,
+				080C033C1B0CB68F0006A4E7 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -626,42 +583,6 @@
 			};
 			name = Release;
 		};
-		085FA9BE1AE13A0700EFD2F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EleyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eleye.app/Eleye";
-			};
-			name = Debug;
-		};
-		085FA9BF1AE13A0700EFD2F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EleyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eleye.app/Eleye";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -679,15 +600,6 @@
 			buildConfigurations = (
 				085FA9BB1AE13A0700EFD2F0 /* Debug */,
 				085FA9BC1AE13A0700EFD2F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		085FA9BD1AE13A0700EFD2F0 /* Build configuration list for PBXNativeTarget "EleyeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				085FA9BE1AE13A0700EFD2F0 /* Debug */,
-				085FA9BF1AE13A0700EFD2F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

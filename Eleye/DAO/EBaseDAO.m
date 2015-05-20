@@ -15,6 +15,7 @@
 - (id)init
 {
     self = [super init];
+    
     if (self) {
         sqlite3_config(SQLITE_CONFIG_SERIALIZED);
     }
@@ -106,6 +107,17 @@
 - (BOOL)clearEmptyData
 {   
     return YES;
+}
+
+- (void)clearFMDatabase
+{
+    dbQueue = nil;
+}
+
+- (void)renewFmDataBase
+{
+    [self createFMDatabase];
+    [self createTable];
 }
 
 @end
