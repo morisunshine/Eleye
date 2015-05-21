@@ -15,6 +15,12 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
     EViewPositionBottom
 };
 
+@interface UIButton (backgroundColorState)
+
+- (void)setBackgoundColor:(UIColor *)color forState:(UIControlState)state;
+
+@end
+
 @interface EUtility : NSObject
 
 - (void)saveContentToFileWithContent:(NSString *)content guid:(NSString *)guid;

@@ -18,7 +18,10 @@ static NSInteger kCellHeight = 49;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
+    UIView * selectedBackgroundView = [[UIView alloc] init];
+    [selectedBackgroundView setBackgroundColor:SELECTEDCOLOR];
+    [self setSelectedBackgroundView:selectedBackgroundView];
     // Configure the view for the selected state
 }
 

@@ -9,11 +9,15 @@
 #ifndef demo_COMMONCONSTANT_h
 #define demo_COMMONCONSTANT_h
 
-#pragma mark - Font 字体
+#pragma mark - Font -
 //Font
 #define FONT_NAVIGATION_TITILE              [UIFont boldSystemFontOfSize:20]
 #define FONT_TABLEVIEW_TEXT                 [UIFont systemFontOfSize:14]
 #define FONE_TABBAR_TEXT                    [UIFont systemFontOfSize:12.]
+
+#pragma mark - Color -
+
+#define SELECTEDCOLOR                       RGBCOLOR(242, 242, 242)
 
 #define SHOWGUIDE                           @"hasShowGuide"
 

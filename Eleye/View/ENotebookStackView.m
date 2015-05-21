@@ -15,6 +15,8 @@
     [super awakeFromNib];
     
     [EUtility addlineOnView:self position:EViewPositionBottom insert:17];
+    [self.viewBtn setBackgoundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.viewBtn setBackgoundColor:SELECTEDCOLOR forState:UIControlStateHighlighted];
 }
 
 - (void)updateUIWithNotebook:(ENoteBookDO *)notebook
