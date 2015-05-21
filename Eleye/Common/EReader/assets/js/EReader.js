@@ -18,21 +18,10 @@
             this.log('EReader init finished...');
         },
 
-        bindEvents: function () {
+        bindEvents: function() {
+            var _this = this;
             $(window).on('touchend', function(e) {
-                 if (!this.isDragging) {
-                    window.location = "EReader-callback/"   ;    
-                 }
-             });
-
-            $(window).on('touchstart', function(e) {
-                 this.isDragging = false;
-            });
-
-            $(window).on('touchmove', function(e) {
-                 this.isDragging = true;
-                 // zss_editor.updateScrollOffset = true;
-                 // zss_editor.setScrollPosition();
+                _this.log("callback://");   
              });
         },
 
@@ -95,9 +84,26 @@
         },
 
         // This will show up in the XCode console as we are able to push this into an NSLog.
-        log: function(msg) {
-            window.location = 'debug://'+msg;
+        log: function(log) {
+          var iframe = document.createElement("IFRAME");
+          iframe.setAttribute("src", "ios-log:#iOS#" + log);
+          document.documentElement.appendChild(iframe);
+          iframe.parentNode.removeChild(iframe);
+          iframe = null;    
         }
+
+        // console = new Object();
+        // console.log = function(log) {
+        //   var iframe = document.createElement("IFRAME");
+        //   iframe.setAttribute("src", "ios-log:#iOS#" + log);
+        //   document.documentElement.appendChild(iframe);
+        //   iframe.parentNode.removeChild(iframe);
+        //   iframe = null;    
+        // };
+        // console.debug = console.log;
+        // console.info = console.log;
+        // console.warn = console.log;
+        // console.error = console.log;
     };
 
     window.EReader = EReader;
