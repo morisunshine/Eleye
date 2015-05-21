@@ -55,7 +55,7 @@
         isHilite: function() {
 
             var $el = $(document.getSelection().baseNode.parentElement);
-            return $el.hasClass(MY_GLOBAL.HILITE_COLOR);
+            return $el.hasClass(MY_GLOBAL.HILITE_CLASS_NAME);
         },
 
         removeHilite: function() {
