@@ -245,4 +245,32 @@
     [self clearSelectionRange];
 }
 
+#pragma mark - Webview Delegate  -
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *urlString = [[request URL] absoluteString];
+    NSLog(@"web request");
+    NSLog(@"%@", urlString);
+    
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        
+        [[Mixpanel sharedInstance] track:@"点击外部链接"];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        
+        return NO;
+    } else if ([urlString rangeOfString:@"callback://"].location != NSNotFound) {
+        NSString *result = [self.editorView stringByEvaluatingJavaScriptFromString:@"EReader.isHilite()"];
+        NSLog(@"选中是否高亮，%@", result);
+        BOOL isHighlight = NO;
+        if ([result isEqualToString:@"false"]) {
+            isHighlight = YES;
+        }
+        [self changeMenuItemsWithShowHighLight:isHighlight];
+    }
+    
+    return YES;
+}
+
 @end
