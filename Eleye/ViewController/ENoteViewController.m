@@ -139,6 +139,7 @@
     }];
 }
 
+//Thanks Shayan RC http://stackoverflow.com/a/25263688/2194236
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
     for (UIView *sub in view.subviews) {
