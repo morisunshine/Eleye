@@ -84,6 +84,9 @@
                     el.setAttribute("class", elClass);
                 }
             }
+
+            //加入内联样式 by jerryni 2015-05-21
+            $(el).css('backgroundColor', MY_GLOBAL.HILITE_COLOR);
         }
 
         var removeClass = (function() {
@@ -104,6 +107,10 @@
                         el.setAttribute("class", elClass);
                     }
                 }
+
+                //HACK: 加入内联样式 by jerryni 2015-05-21 去除背景色 
+                //这里会有一个问题：会把用户原来的颜色也去掉，暂时先这样吧，没有更好的方案暂时
+                $(el).css('backgroundColor', '');
             };
         })();
 
@@ -806,6 +813,7 @@
                         this.elementHasAttributes(parent, this.elementAttributes)) {
 
                         addClass(parent, this.className);
+                        
                     } else {
                         var textNodeParent = textNode.parentNode;
                         var el = this.createContainer(textNodeParent);

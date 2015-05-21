@@ -111,26 +111,26 @@
     NSString *html = self.internalHTML;
     htmlString_ = html;
     NSString *cleanedHTML = [self removeQuotesFromHTML:htmlString_];
-    NSString *htmlTrigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
-    NSString *titleTrigger = [NSString stringWithFormat:@"zss_editor.setTopTitle(\"%@\");", self.topTitle];
+    NSString *htmlTrigger = [NSString stringWithFormat:@"EReader.setHTML(\"%@\");", cleanedHTML];
+    NSString *titleTrigger = [NSString stringWithFormat:@"EReader.setTopTitle(\"%@\");", self.topTitle];
     
     [self.editorView stringByEvaluatingJavaScriptFromString:titleTrigger];
     [self.editorView stringByEvaluatingJavaScriptFromString:htmlTrigger];
 }
 
 - (NSString *)getHTML {
-    NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getHTML();"];
+    NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"EReader.getHTML();"];
     html = [self removeQuotesFromHTML:html];
     html = [self tidyHTML:html];
     return html;
 }
 
 - (NSString *)getText {
-    return [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getText();"];
+    return [self.editorView stringByEvaluatingJavaScriptFromString:@"EReader.getText();"];
 }
 
 - (void)removeFormat {
-    NSString *trigger = @"zss_editor.removeFormating();";
+    NSString *trigger = @"EReader.removeFormating();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
@@ -139,16 +139,16 @@
     NSString *hex = @"#c0c0c0";
     NSString *trigger;
     if (tag == 1) {
-        trigger = [NSString stringWithFormat:@"zss_editor.setTextColor(\"%@\");", hex];
+        trigger = [NSString stringWithFormat:@"EReader.setTextColor(\"%@\");", hex];
     } else if (tag == 2) {
-        trigger = [NSString stringWithFormat:@"zss_editor.setBackgroundColor(\"%@\");", hex];
+        trigger = [NSString stringWithFormat:@"EReader.setBackgroundColor(\"%@\");", hex];
     }
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
 - (void)addHighlight
 {
-    NSString *trigger = [NSString stringWithFormat:@"zss_editor.addHilite()"];
+    NSString *trigger = [NSString stringWithFormat:@"EReader.addHilite()"];
     
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }

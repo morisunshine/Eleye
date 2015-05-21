@@ -1,4 +1,6 @@
 @import "normalize-important.less";
+/*@mainColor: #9e5230;*/
+@mainColor: #e1ccc0;
 * {
     outline: 0px solid transparent !important;
     -webkit-touch-callout: none;
@@ -28,6 +30,24 @@ body {
 h1, h2, h3, h4, h5, h6, p, em, span, strong {
     color: #4a4a4a !important;
 }
+h1 {
+    font-size: 1.625rem !important;
+}
+h2 {
+    font-size: 1.5rem !important;
+}
+h3 {
+    font-size: 1.375rem !important;
+}
+h4 {
+    font-size: 1.25rem !important;
+}
+h5 {
+    font-size: 1.125rem !important;
+}
+h6 {
+    font-size: 1rem !important;
+}
 
 div,
 table,
@@ -37,18 +57,18 @@ tr {
 }
 
 a {
-    color: #9C5228 !important;
+    color: @mainColor !important;
     text-decoration: underline !important;
 }
 
-#top-title {
+#header {
     padding: 1rem 0 !important;
     color: #c7c7c7 !important;
     border-bottom: #c7c7c7 1px solid !important;
     margin-bottom: .75rem !important;
 }
 
-#zss_editor_content {
+#content {
     width: 100% !important;
     height: 100% !important;
     -webkit-overflow-scrolling: touch;
@@ -56,7 +76,7 @@ a {
 }
 
 span.eleye-hilite {
-    background-color: #e1ccc0 !important;
+    background-color: @mainColor !important;
 }
 
 *.unselectable {
