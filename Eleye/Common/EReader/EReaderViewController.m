@@ -160,6 +160,7 @@
     NSString *urlString = [[request URL] absoluteString];
     NSLog(@"web request");
     NSLog(@"%@", urlString);
+    
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];

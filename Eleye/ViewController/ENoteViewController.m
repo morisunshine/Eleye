@@ -139,6 +139,7 @@
     }];
 }
 
+//Thanks Shayan RC http://stackoverflow.com/a/25263688/2194236
 - (void)replaceUIWebBrowserView: (UIView *)view
 {
     for (UIView *sub in view.subviews) {
@@ -204,6 +205,12 @@
     }];
 }
 
+- (void)clearSelectionRange
+{
+    self.editorView.userInteractionEnabled = NO;
+    self.editorView.userInteractionEnabled = YES;
+}
+
 #pragma mark - Actions -
 
 - (IBAction)highlightBtnTapped:(id)sender
@@ -211,14 +218,16 @@
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = YES;
     [self addHighlight];
-    self.editorView.userInteractionEnabled = NO;
-    self.editorView.userInteractionEnabled = YES;
+    
+    [self clearSelectionRange];
 }
 
 - (IBAction)cancelBtnTapped:(id)sender
 {
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = NO;
+    
+    [self clearSelectionRange];
 }
 
 - (IBAction)copyBtnTapped:(id)sender
@@ -226,6 +235,8 @@
     NSString *selectedText = [self.editorView stringByEvaluatingJavaScriptFromString: @"window.getSelection().toString()"];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     [pasteboard setString:selectedText];
+    
+    [self clearSelectionRange];
 }
 
 @end
