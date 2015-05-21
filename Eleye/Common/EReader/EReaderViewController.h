@@ -54,13 +54,13 @@
 - (NSString *)getText;
 
 /**
- *  Scroll event callback with position
- */
-- (void)editorDidScrollWithPosition:(NSInteger)position;
-
-/**
  *  add the highlight
  */
 - (void)addHighlight;
+
+/**
+ *  remove the highlight
+ */
+- (void)cancelHighlight;
 
 @end

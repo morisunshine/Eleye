@@ -233,6 +233,8 @@
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = NO;
     
+    [self cancelHighlight];
+    
     [self clearSelectionRange];
 }
 

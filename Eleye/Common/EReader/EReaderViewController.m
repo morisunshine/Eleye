@@ -153,6 +153,13 @@
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
+- (void)cancelHighlight
+{
+    NSString *trigger = [NSString stringWithFormat:@"EReader.removeHilite()"];
+    
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
+
 #pragma mark - UIWebView Delegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -184,8 +191,6 @@
     } else if ([urlString rangeOfString:@"scroll://"].location != NSNotFound) {
         
         NSInteger position = [[urlString stringByReplacingOccurrencesOfString:@"scroll://" withString:@""] integerValue];
-        [self editorDidScrollWithPosition:position];
-        
     }
     
     return YES;
@@ -200,13 +205,6 @@
     }
     
     [self updateHTML];
-}
-
-#pragma mark - Callbacks
-
-- (void)editorDidScrollWithPosition:(NSInteger)position 
-{
-    
 }
 
 #pragma mark - Utilities
