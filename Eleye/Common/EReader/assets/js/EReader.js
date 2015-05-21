@@ -20,8 +20,8 @@
 
         bindEvents: function() {
             var _this = this;
-            $(window).on('touchend', function(e) {
-                _this.log("callback://");   
+            $(document).on('selectionchange', function(e) {
+                _this.log("callback://");
              });
         },
 
@@ -89,21 +89,8 @@
           iframe.setAttribute("src", "ios-log:#iOS#" + log);
           document.documentElement.appendChild(iframe);
           iframe.parentNode.removeChild(iframe);
-          iframe = null;    
+          iframe = null;
         }
-
-        // console = new Object();
-        // console.log = function(log) {
-        //   var iframe = document.createElement("IFRAME");
-        //   iframe.setAttribute("src", "ios-log:#iOS#" + log);
-        //   document.documentElement.appendChild(iframe);
-        //   iframe.parentNode.removeChild(iframe);
-        //   iframe = null;    
-        // };
-        // console.debug = console.log;
-        // console.info = console.log;
-        // console.warn = console.log;
-        // console.error = console.log;
     };
 
     window.EReader = EReader;
