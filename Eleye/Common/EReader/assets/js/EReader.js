@@ -12,7 +12,28 @@
     EReader = {
         init: function() {
             this.bindElments();
+            this.bindEvents();
             this._initHighlighter();
+
+            this.log('EReader init finished...');
+        },
+
+        bindEvents: function () {
+            $(window).on('touchend', function(e) {
+                 if (!this.isDragging) {
+                    window.location = "EReader-callback/"   ;    
+                 }
+             });
+
+            $(window).on('touchstart', function(e) {
+                 this.isDragging = false;
+            });
+
+            $(window).on('touchmove', function(e) {
+                 this.isDragging = true;
+                 // zss_editor.updateScrollOffset = true;
+                 // zss_editor.setScrollPosition();
+             });
         },
 
         bindElments: function() {
@@ -37,7 +58,7 @@
                 highlighter.highlightSelection(MY_GLOBAL.HILITE_CLASS_NAME);
 
             } catch (e) {
-                console.log(e);
+                this.log(e);
             }
             return this;
         },
@@ -53,7 +74,7 @@
             try {
                 highlighter.unhighlightSelection();
             } catch (e) {
-                console.log(e);
+                this.log(e);
             }
             return this;
         },
@@ -71,6 +92,11 @@
 
         getHTML: function() {
             return this.$content.html();
+        },
+
+        // This will show up in the XCode console as we are able to push this into an NSLog.
+        log: function(msg) {
+            window.location = 'debug://'+msg;
         }
     };
 
