@@ -20,8 +20,8 @@
 
         bindEvents: function() {
             var _this = this;
-            $(window).on('touchend', function(e) {
-                _this.log("callback://");   
+            $(document).on('selectionchange', function(e) {
+                _this.log("callback://");
              });
         },
 
@@ -89,7 +89,7 @@
           iframe.setAttribute("src", "ios-log:#iOS#" + log);
           document.documentElement.appendChild(iframe);
           iframe.parentNode.removeChild(iframe);
-          iframe = null;    
+          iframe = null;
         }
     };
 
