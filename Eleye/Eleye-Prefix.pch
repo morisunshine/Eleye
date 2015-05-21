@@ -16,4 +16,5 @@
     #import"COMMONCONSTANT.h"
     #import "EUtility.h"
     #import "ENoteBookDO.h"
+    #import <Mixpanel.h>
 #endif

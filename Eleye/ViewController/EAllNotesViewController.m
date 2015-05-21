@@ -212,6 +212,8 @@ static NSInteger kCellHeight = 100;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [[Mixpanel sharedInstance] track:@"点击文章详情"];
 
     ENoteViewController *noteViewController = [[ENoteViewController alloc] init];
     EDAMNote *note = notes_[indexPath.row];

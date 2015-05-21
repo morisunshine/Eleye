@@ -163,6 +163,8 @@
     
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         
+        [[Mixpanel sharedInstance] track:@"点击外部链接"];
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         
         return NO;

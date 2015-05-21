@@ -54,6 +54,8 @@
 {
     [super viewDidAppear:animated];
     
+    [[Mixpanel sharedInstance] timeEvent:@"单篇文章"];
+    
     [self replaceUIWebBrowserView:self.editorView];
     
     [self changeMenuItemsWithShowHighLight:YES];
@@ -62,6 +64,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    [[Mixpanel sharedInstance] track:@"单篇文章"];
     
     [self replaceUIWebBrowserView:self.editorView];
     
@@ -215,6 +219,7 @@
 
 - (IBAction)highlightBtnTapped:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"高亮文字"];
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = YES;
     [self addHighlight];
@@ -224,6 +229,7 @@
 
 - (IBAction)cancelBtnTapped:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"取消高亮文字"];
     //TODO 根据高亮的文字变化
     hasUpdateNote_ = NO;
     

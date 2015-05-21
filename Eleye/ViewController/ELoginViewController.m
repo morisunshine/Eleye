@@ -115,8 +115,10 @@
             [EUtility showAutoHintTips:LOCALSTRING(@"Login success")];
             NSString *hostString;
             if (evernote) {
+                [[Mixpanel sharedInstance] track:@"Evernote 用户的登录成功"];
                 hostString = EVERNOTEHOST;
             } else {
+                [[Mixpanel sharedInstance] track:@"印象笔记用户的登录成功"];
                 hostString = YINXIANGHOST;
             }
             [USER_DEFAULT setObject:hostString forKey:HOSTNAME];

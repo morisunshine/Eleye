@@ -29,6 +29,8 @@
     navController.navigationBarHidden = YES;
     self.window.rootViewController = navController;
     
+    [Mixpanel sharedInstanceWithToken:MIXPANELTOKEN];
+    
     return YES;
 }
 

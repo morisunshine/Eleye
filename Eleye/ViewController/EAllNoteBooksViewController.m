@@ -265,6 +265,8 @@ static CGFloat kCellHeight = 49;
     if (notebook.stack) {
         
     } else {
+        [[Mixpanel sharedInstance] track:@"点击笔记本列表"];
+        
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         EAllNotesViewController *allNotebookViewController = [story instantiateViewControllerWithIdentifier:@"EAllNotesViewController"];
         allNotebookViewController.guid = notebook.guid;
@@ -348,6 +350,8 @@ static CGFloat kCellHeight = 49;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [[Mixpanel sharedInstance] track:@"点击笔记本列表"];
+    
     ENoteBookDO *notebook = mutNotebooks_[indexPath.section];
     if (notebook.stack) {
         NSArray *subNotebooks = [notebooks_ objectForKey:notebook.stack];
@@ -398,7 +402,7 @@ static CGFloat kCellHeight = 49;
     if (buttonIndex != alertView.cancelButtonIndex) {
         [USER_DEFAULT removeObjectForKey:HOSTNAME];
         [[ENSession sharedSession] unauthenticate];
-        [EUtility clearDataBase];//TODO 暂时先不删除数据库
+        [EUtility clearDataBase];
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ELoginViewController *launchViewController = [story instantiateViewControllerWithIdentifier:@"ELoginViewController"];
         [self.navigationController pushViewController:launchViewController animated:YES];

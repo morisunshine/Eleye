@@ -27,6 +27,10 @@
 #define YINXIANGCONSUMER_KEY @"yousurm-4843"
 #define YINXIANGCONSUMER_SECRET  @"19601b04ea2a0f05"
 
+#pragma mark - Mixpanel -
+
+#define MIXPANELTOKEN @"bdcda3c728d10cafcd3cae9c4829f353"
+
 #define EMAIL @"wheelab7@gmail.com"
 #define HOSTNAME  @"host"
 #define EVERNOTEHOST @"app.evernote.com"
