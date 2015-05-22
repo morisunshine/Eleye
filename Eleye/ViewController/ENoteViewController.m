@@ -225,6 +225,7 @@
 - (IBAction)highlightBtnTapped:(id)sender
 {
     [[Mixpanel sharedInstance] track:@"高亮文字"];
+    
     [self addHighlight];
     
     [self clearSelectionRange];
