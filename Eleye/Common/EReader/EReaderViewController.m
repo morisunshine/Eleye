@@ -119,9 +119,11 @@
 }
 
 - (NSString *)getHTML {
+    
     NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"EReader.getHTML();"];
     html = [self removeQuotesFromHTML:html];
     html = [self tidyHTML:html];
+    
     return html;
 }
 
@@ -188,10 +190,7 @@
         debug = [debug stringByReplacingPercentEscapesUsingEncoding:NSStringEncodingConversionAllowLossy];
         NSLog(@"%@", debug);
         
-    } else if ([urlString rangeOfString:@"scroll://"].location != NSNotFound) {
-        
-        NSInteger position = [[urlString stringByReplacingOccurrencesOfString:@"scroll://" withString:@""] integerValue];
-    }
+    } 
     
     return YES;
 }
@@ -215,15 +214,14 @@
     html = [html stringByReplacingOccurrencesOfString:@"”" withString:@"&quot;"];
     html = [html stringByReplacingOccurrencesOfString:@"\r"  withString:@"\\r"];
     html = [html stringByReplacingOccurrencesOfString:@"\n"  withString:@"\\n"];
+    
     return html;
 }
 
 - (NSString *)tidyHTML:(NSString *)html {
     html = [html stringByReplacingOccurrencesOfString:@"<br>" withString:@"<br />"];
     html = [html stringByReplacingOccurrencesOfString:@"<hr>" withString:@"<hr />"];
-    if (self.formatHTML) {
-        html = [self.editorView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"style_html(\"%@\");", html]];
-    }
+    
     return html;
 }
 

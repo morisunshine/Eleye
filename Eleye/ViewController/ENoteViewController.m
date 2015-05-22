@@ -19,7 +19,6 @@
 {
     NSString *htmlString_;
     EDAMNote *enote_;
-    BOOL hasUpdateNote_;
 }
 
 @end
@@ -69,8 +68,11 @@
     
     [self replaceUIWebBrowserView:self.editorView];
     
-    if (hasUpdateNote_) {
-        [self updateNote];
+    NSString *currentHtml = [self getHTML];
+    
+    if ([currentHtml isEqualToString:htmlString_] == NO) {
+        NSLog(@"需要更新！");
+//        [self updateNote];
     }
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
@@ -220,8 +222,6 @@
 - (IBAction)highlightBtnTapped:(id)sender
 {
     [[Mixpanel sharedInstance] track:@"高亮文字"];
-    //TODO 根据高亮的文字变化
-    hasUpdateNote_ = YES;
     [self addHighlight];
     
     [self clearSelectionRange];
@@ -230,8 +230,6 @@
 - (IBAction)cancelBtnTapped:(id)sender
 {
     [[Mixpanel sharedInstance] track:@"取消高亮文字"];
-    //TODO 根据高亮的文字变化
-    hasUpdateNote_ = NO;
     
     [self cancelHighlight];
     
