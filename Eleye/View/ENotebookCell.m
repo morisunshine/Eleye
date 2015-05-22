@@ -36,11 +36,7 @@ static NSInteger kCellHeight = 49;
     }
     
     self.countLabel.text = text;
-    CALayer *lineLayer = [CALayer layer];
-    lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
-    lineLayer.borderWidth = .5;
-    lineLayer.frame = CGRectMake(17, kCellHeight - 1, APP_SCREEN_WIDTH - 34, 1);
-    [self.contentView.layer addSublayer:lineLayer];
+    [EUtility addlineOnView:self cellHeight:kCellHeight];
 }
 
 @end

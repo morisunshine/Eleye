@@ -37,27 +37,36 @@
 
 SINGLETON_CLASS(EUtility)
 
++ (void)addlineOnView:(UIView *)view cellHeight:(NSInteger)cellHeight
+{
+    CALayer *lineLayer = [CALayer layer];
+    lineLayer.borderColor = RGBCOLOR(242, 242, 242).CGColor;
+    lineLayer.borderWidth = .5;
+    lineLayer.frame = CGRectMake(17, cellHeight - 0.5, APP_SCREEN_WIDTH - 34, 0.5);
+    [view.layer addSublayer:lineLayer];
+}
+
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert
 {
     CALayer *lineLayer = [CALayer layer];
-    lineLayer.borderColor = RGBCOLOR(217, 217, 217).CGColor;
+    lineLayer.borderColor = RGBCOLOR(242, 242, 242).CGColor;
     lineLayer.borderWidth = .5;
     
     switch (position) {
         case EViewPositionTop: {
-            lineLayer.frame = CGRectMake(insert, 0, APP_SCREEN_WIDTH - insert * 2, 1);
+            lineLayer.frame = CGRectMake(insert, 0, APP_SCREEN_WIDTH - insert * 1, 0.5);
             break;
         } 
         case EViewPositionLeft: {
-            lineLayer.frame = CGRectMake(0, 0, 1, CGRectGetHeight(view.frame));
+            lineLayer.frame = CGRectMake(0, 0, 0.5, CGRectGetHeight(view.frame));
             break;
         }
         case EViewPositionRight: {
-            lineLayer.frame = CGRectMake(APP_SCREEN_WIDTH - 1, 0, 1, CGRectGetHeight(view.frame));
+            lineLayer.frame = CGRectMake(APP_SCREEN_WIDTH - 0.5, 0, 0.5, CGRectGetHeight(view.frame));
             break;
         }
         case EViewPositionBottom: {
-            lineLayer.frame = CGRectMake(insert, CGRectGetHeight(view.frame) - 1, APP_SCREEN_WIDTH - insert * 2, 1);
+            lineLayer.frame = CGRectMake(insert, CGRectGetHeight(view.frame) - 0.5, APP_SCREEN_WIDTH - insert * 1, 0.5);
             break;
         }
     }

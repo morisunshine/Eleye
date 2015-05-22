@@ -72,7 +72,10 @@
     
     if ([currentHtml isEqualToString:htmlString_] == NO) {
         NSLog(@"需要更新！");
-//        [self updateNote];
+        NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+        long long currentTime = time * 1000.0;
+        
+        [EUtility setSafeValue:@(currentTime) key:self.guid fileName:WAITUPLOADFILE];
     }
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];

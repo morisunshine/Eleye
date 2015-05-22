@@ -27,6 +27,8 @@ typedef NS_ENUM(NSInteger, EViewPosition) {
 
 + (instancetype)sharedEUtility;
 
++ (void)addlineOnView:(UIView *)view cellHeight:(NSInteger)cellHeight;
+
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position insert:(NSInteger)insert;
 
 + (void)addlineOnView:(UIView *)view position:(EViewPosition)position;
