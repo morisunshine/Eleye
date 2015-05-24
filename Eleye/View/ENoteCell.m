@@ -30,8 +30,21 @@ static NSInteger kCellHeight = 100;
 {
     self.titleLabel.text = note.title;
     self.contentLabel.text = note.content;
+    CGFloat titleWidth = [self widthOfString:note.title withFont:self.titleLabel.font];
+    if (titleWidth < 287) {
+        self.titleLabel.numberOfLines = 1;
+        self.contentLabel.numberOfLines = 2;
+    } else {
+        self.titleLabel.numberOfLines = 2;
+        self.contentLabel.numberOfLines = 1;
+    }
     
     [EUtility addlineOnView:self cellHeight:kCellHeight];
+}
+
+- (CGFloat)widthOfString:(NSString *)string withFont:(UIFont *)font {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    return [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
 }
 
 @end
