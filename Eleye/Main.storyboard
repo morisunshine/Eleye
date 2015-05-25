@@ -37,14 +37,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-Uc-qce">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GcM-Uc-qce">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhH-PU-k0Q">
                                         <rect key="frame" x="16" y="11" width="288" height="24"/>
                                         <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="All Notes" image="notebook">
-                                            <color key="titleColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -53,8 +53,11 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="RoJ-f5-E6E"/>
+                                </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ieg-nl-nmE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ieg-nl-nmE">
                                 <rect key="frame" x="0.0" y="47" width="320" height="521"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="7Um-iu-3YZ">
@@ -76,7 +79,7 @@
                                                     <color key="textColor" red="0.29019607843137257" green="0.29019607843137257" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWP-0L-L1m">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWP-0L-L1m">
                                                     <rect key="frame" x="17" y="46" width="287" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,6 +89,7 @@
                                             <constraints>
                                                 <constraint firstItem="CAN-zL-16K" firstAttribute="top" secondItem="3Iw-0G-qJN" secondAttribute="topMargin" constant="4" id="N6F-l9-vJx"/>
                                                 <constraint firstItem="CAN-zL-16K" firstAttribute="leading" secondItem="3Iw-0G-qJN" secondAttribute="leadingMargin" constant="9" id="YgG-hP-447"/>
+                                                <constraint firstItem="FWP-0L-L1m" firstAttribute="bottom" secondItem="3Iw-0G-qJN" secondAttribute="bottomMargin" id="mAI-rg-WHm"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="CAN-zL-16K" secondAttribute="trailing" constant="8" id="mD3-Pu-E6x"/>
                                                 <constraint firstItem="CAN-zL-16K" firstAttribute="leading" secondItem="FWP-0L-L1m" secondAttribute="leading" id="oMV-a1-y4F"/>
                                                 <constraint firstItem="CAN-zL-16K" firstAttribute="width" secondItem="FWP-0L-L1m" secondAttribute="width" id="xeB-Ok-uBl"/>
@@ -108,6 +112,7 @@
                             <constraint firstItem="GcM-Uc-qce" firstAttribute="width" secondItem="E1w-Se-mlZ" secondAttribute="width" id="5aT-sw-2AA"/>
                             <constraint firstAttribute="width" secondItem="Ieg-nl-nmE" secondAttribute="width" id="Bfe-xH-XW8"/>
                             <constraint firstItem="GcM-Uc-qce" firstAttribute="top" secondItem="Ieg-nl-nmE" secondAttribute="top" constant="-47" id="Jcg-CA-Gpd"/>
+                            <constraint firstAttribute="centerX" secondItem="Ieg-nl-nmE" secondAttribute="centerX" id="P5u-lG-JZO"/>
                             <constraint firstItem="k6X-qg-LRM" firstAttribute="top" secondItem="Ieg-nl-nmE" secondAttribute="bottom" id="Pfm-aQ-7kN"/>
                             <constraint firstItem="GcM-Uc-qce" firstAttribute="top" secondItem="F3C-z2-ig7" secondAttribute="bottom" id="ZpX-49-AE5"/>
                         </constraints>
@@ -230,7 +235,7 @@
                                         <rect key="frame" x="15" y="11" width="189" height="24"/>
                                         <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="usename" image="account">
-                                            <color key="titleColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.29019607843137257" green="0.29019607843137257" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>

@@ -15,6 +15,7 @@
 #import "ELoginViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MHNavigationController.h"
+#import "ENoteUpdateManager.h"
 
 static CGFloat kCellHeight = 49;
 
@@ -121,6 +122,8 @@ static CGFloat kCellHeight = 49;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:UPDATENOTENOTIFICATION object:nil];
         }
+        
+        [[ENoteUpdateManager sharedENoteUpdateManager] checkUnUploadNotes];
         
         NSNumber *newChunkHighUSN = syncChunk.chunkHighUSN;
         [USER_DEFAULT setObject:newChunkHighUSN forKey:@"chunkUSN"];

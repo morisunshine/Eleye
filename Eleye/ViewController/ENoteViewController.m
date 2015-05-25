@@ -14,6 +14,7 @@
 #import <NSData+EvernoteSDK.h>
 #import "EResourceDO.h"
 #import "EResourceDAO.h"
+#import "ENoteUpdateManager.h"
 
 @interface ENoteViewController ()
 {
@@ -71,11 +72,14 @@
     NSString *currentHtml = [self getHTML];
     
     if ([currentHtml isEqualToString:htmlString_] == NO) {
+        //TODO 判断更新的机制需要修改
         NSLog(@"需要更新！");
         NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
         long long currentTime = time * 1000.0;
         
+        [[EUtility sharedEUtility] saveContentToFileWithContent:currentHtml guid:self.guid];
         [EUtility setSafeValue:@(currentTime) key:self.guid fileName:WAITUPLOADFILE];
+        [[ENoteUpdateManager sharedENoteUpdateManager] addUploadNoteWithGuid:self.guid];
     }
     
     [[UIMenuController sharedMenuController] setMenuItems:nil];
@@ -191,27 +195,6 @@
     [menuItems addObject:actionItem];
     [menuItems addObject:copyItem];
     [UIMenuController sharedMenuController].menuItems = menuItems;
-}
-
-- (void)updateNote
-{
-    ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
-    
-    enote_.content = htmlString_;
-    
-    [client updateNote:enote_ success:^(EDAMNote *note) {
-        NSLog(@"更新笔记成功 %@", note.title);
-        
-        [EUtility setSafeValue:note.updated key:self.guid fileName:LOCALUPDATEFILE];
-        
-        enote_.updated = note.updated;
-        [[ENoteDAO sharedENoteDAO] saveBaseDO:enote_];
-        [[EUtility sharedEUtility] saveContentToFileWithContent:htmlString_ guid:self.guid];
-    } failure:^(NSError *error) {
-        if (error) {
-            NSLog(@"更新笔记失败%@", error);
-        }
-    }];
 }
 
 - (void)clearSelectionRange
