@@ -38,6 +38,7 @@
 		18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB01B0B611F00B16B6B /* EResourceDAO.m */; };
 		18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3FFB31B0B640600B16B6B /* EResourceDO.m */; };
 		18D63FB01AFB496100094F8C /* ENoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D63FAF1AFB496100094F8C /* ENoteViewController.m */; };
+		18F550261B12EE6400651991 /* ENoteUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F550251B12EE6400651991 /* ENoteUpdateManager.m */; };
 		18FF6F181AE79B3E000425E4 /* EDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F171AE79B3E000425E4 /* EDBManager.m */; };
 		18FF6F1B1AE79C3C000425E4 /* EBaseDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1A1AE79C3C000425E4 /* EBaseDAO.m */; };
 		18FF6F1E1AE79D8B000425E4 /* ENotebookDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF6F1D1AE79D8B000425E4 /* ENotebookDAO.m */; };
@@ -104,6 +105,8 @@
 		18C3FFB31B0B640600B16B6B /* EResourceDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EResourceDO.m; sourceTree = "<group>"; };
 		18D63FAE1AFB496100094F8C /* ENoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteViewController.h; sourceTree = "<group>"; };
 		18D63FAF1AFB496100094F8C /* ENoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteViewController.m; sourceTree = "<group>"; };
+		18F550241B12EE6400651991 /* ENoteUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENoteUpdateManager.h; sourceTree = "<group>"; };
+		18F550251B12EE6400651991 /* ENoteUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENoteUpdateManager.m; sourceTree = "<group>"; };
 		18FF6F161AE79B3E000425E4 /* EDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDBManager.h; sourceTree = "<group>"; };
 		18FF6F171AE79B3E000425E4 /* EDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDBManager.m; sourceTree = "<group>"; };
 		18FF6F191AE79C3C000425E4 /* EBaseDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBaseDAO.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				08D4A0FD1AEFB6F2000BAC87 /* EUtility.m */,
 				08D4A0FE1AEFB6F2000BAC87 /* UIView+GeometryAddition.h */,
 				08D4A0FF1AEFB6F2000BAC87 /* UIView+GeometryAddition.m */,
+				18F550241B12EE6400651991 /* ENoteUpdateManager.h */,
+				18F550251B12EE6400651991 /* ENoteUpdateManager.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				1871B69F1AF0AA970090578E /* ETitleView.m in Sources */,
 				085FA9A01AE13A0700EFD2F0 /* AppDelegate.m in Sources */,
 				18C3FFB41B0B640600B16B6B /* EResourceDO.m in Sources */,
+				18F550261B12EE6400651991 /* ENoteUpdateManager.m in Sources */,
 				18B74BFD1B09821C00CAEFC0 /* EReaderViewController.m in Sources */,
 				18C3FFB11B0B611F00B16B6B /* EResourceDAO.m in Sources */,
 				08DEAF5D1B00EAA10029A7B5 /* ERootViewController.m in Sources */,
