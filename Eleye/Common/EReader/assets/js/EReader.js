@@ -23,6 +23,10 @@
             $(document).on('selectionchange', function(e) {
                 _this.log("callback://");
              });
+
+            $(document).on('touchend', '.' + MY_GLOBAL.HILITE_CLASS_NAME, function(){
+                _this.log("hiliteClicked://");
+            });
         },
 
         bindElments: function() {
