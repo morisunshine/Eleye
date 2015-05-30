@@ -91,7 +91,6 @@
 
 - (void)authorizationWithEvernote:(BOOL)evernote
 {
-    NSString *SANDBOX_HOST = ENSessionHostSandbox;//TODO 线上后要改为nil
     NSString *CONSUMER_KEY;
     NSString *CONSUMER_SECRET;
     
@@ -103,7 +102,7 @@
         CONSUMER_SECRET = YINXIANGCONSUMER_SECRET;
     }
     
-    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:SANDBOX_HOST];
+    [ENSession setSharedSessionConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET optionalHost:nil];
     
     ENSession *session = [ENSession sharedSession];
     [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
