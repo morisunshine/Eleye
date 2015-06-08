@@ -110,20 +110,6 @@ SINGLETON_CLASS(EUtility)
             
         });
     });
-//    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
-//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-//        NSString *string = attributedString.string;
-//        NSString *subString;
-//        if (200 < string.length) {
-//            subString = [string substringToIndex:200];
-//        } else {
-//            subString = [string substringToIndex:string.length];
-//        }
-//        NSString *contentPath = [notePath stringByAppendingPathComponent:@"note"];
-//        [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//        
-//        [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
-//    });
 }
 
 + (NSString *)noteContentWithGuid:(NSString *)guid

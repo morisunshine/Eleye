@@ -20,6 +20,7 @@
 {
     NSString *htmlString_;
     EDAMNote *enote_;
+    BOOL hasChange_;
 }
 
 @end
@@ -71,7 +72,7 @@
     
     NSString *currentHtml = [self getHTML];
     
-    if ([currentHtml isEqualToString:htmlString_] == NO) {
+    if (hasChange_ == YES) {
         //TODO 判断更新的机制需要修改
         NSLog(@"需要更新！");
         NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
@@ -208,6 +209,8 @@
 - (IBAction)highlightBtnTapped:(id)sender
 {
     [[Mixpanel sharedInstance] track:@"高亮文字"];
+    
+    hasChange_ = YES;
     
     [self addHighlight];
     
