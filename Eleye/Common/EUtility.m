@@ -91,7 +91,8 @@ SINGLETON_CLASS(EUtility)
     NSString *path = [notePath stringByAppendingPathComponent:@"note.html"];
     [content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
-    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
         NSString *string = attributedString.string;
         NSString *subString;
@@ -103,8 +104,26 @@ SINGLETON_CLASS(EUtility)
         NSString *contentPath = [notePath stringByAppendingPathComponent:@"note"];
         [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
-        [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
+            
+        });
     });
+//    dispatch_async(dispatch_queue_create("com.duotin.attribted.html", DISPATCH_QUEUE_SERIAL), ^{
+//        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+//        NSString *string = attributedString.string;
+//        NSString *subString;
+//        if (200 < string.length) {
+//            subString = [string substringToIndex:200];
+//        } else {
+//            subString = [string substringToIndex:string.length];
+//        }
+//        NSString *contentPath = [notePath stringByAppendingPathComponent:@"note"];
+//        [subString writeToFile:contentPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//        
+//        [NOTIFICATION_CENTER postNotificationName:UPDATENOTELISTNOTIFICATION object:nil];
+//    });
 }
 
 + (NSString *)noteContentWithGuid:(NSString *)guid

@@ -24,7 +24,7 @@
     UIViewController *viewController;
     
     NSString *host = [USER_DEFAULT objectForKey:HOSTNAME];
-    NSString *SANDBOX_HOST = ENSessionHostSandbox;
+    NSString *SANDBOX_HOST = nil;
     NSString *CONSUMER_KEY;
     NSString *CONSUMER_SECRET;
     
