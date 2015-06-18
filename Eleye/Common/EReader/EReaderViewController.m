@@ -120,11 +120,11 @@
 
 - (NSString *)getHTML {
     
-    NSString *evernoteDocument = @"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">";
+//    NSString *evernoteDocument = @"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">";
     NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"EReader.getHTML();"];
     html = [html stringByReplacingOccurrencesOfString:@"<!--?" withString:@"<?"];
     html = [html stringByReplacingOccurrencesOfString:@"?-->" withString:@"?>"];
-    html = [[html componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:evernoteDocument];
+    html = [[html componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     return html;
 }
