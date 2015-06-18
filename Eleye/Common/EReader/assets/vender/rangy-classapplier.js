@@ -67,22 +67,25 @@
 
         function addClass(el, className) {
             if (typeof el.classList == "object") {
-                el.classList.add(className);
+                //不能用class的方案，因为evernote api 会报错 edit by jerryni 2015-06-18 
+                // el.classList.add(className);
             } else {
                 var classNameSupported = (typeof el.className == "string");
                 var elClass = classNameSupported ? el.className : el.getAttribute("class");
-                if (elClass) {
-                    if (!classNameContainsClass(elClass, className)) {
-                        elClass += " " + className;
-                    }
-                } else {
-                    elClass = className;
-                }
-                if (classNameSupported) {
-                    el.className = elClass;
-                } else {
-                    el.setAttribute("class", elClass);
-                }
+                
+                //不能用class的方案，因为evernote api 会报错 edit by jerryni 2015-06-18 
+                // if (elClass) {
+                //     if (!classNameContainsClass(elClass, className)) {
+                //         elClass += " " + className;
+                //     }
+                // } else {
+                //     elClass = className;
+                // }
+                // if (classNameSupported) {
+                //     el.className = elClass;
+                // } else {
+                //     el.setAttribute("class", elClass);
+                // }
             }
 
             //加入内联样式 by jerryni 2015-05-21
