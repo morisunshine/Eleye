@@ -80,7 +80,16 @@
         },
 
         getHTML: function() {
-            return this.$content.html();
+            //这边手动加入evernote需要的evernote DOCTYPE
+            var originHtml = this.$content.html(),
+                index,
+                html = '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">',
+                result;
+
+            index = originHtml.indexOf('?>') + 2;
+            result = originHtml.slice(0, index) + html + originHtml.slice(index);
+
+            return result;
         },
 
         // This will show up in the XCode console as we are able to push this into an NSLog.
