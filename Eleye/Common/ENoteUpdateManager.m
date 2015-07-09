@@ -59,7 +59,7 @@ SINGLETON_CLASS(ENoteUpdateManager)
     for (NSString *guid in dic.allKeys) {
         NSNumber *updateTime = [dic objectForKey:guid];
         EDAMNote *note = [[ENoteDAO sharedENoteDAO] noteWithGuid:guid];
-        if (note.deleted) {
+        if ([note.deleted integerValue] != 0) {
             [EUtility removeValueWithKey:guid fileName:WAITUPLOADFILE];
         } else if ([updateTime integerValue] <= [note.updated integerValue]) {
             [EUtility removeValueWithKey:guid fileName:WAITUPLOADFILE];
@@ -82,23 +82,6 @@ SINGLETON_CLASS(ENoteUpdateManager)
     ENNoteStoreClient *client = [ENSession sharedSession].primaryNoteStore;
     
     NSString *htmlString = [EUtility noteHtmlFromLocalPathWithGuid:note.guid];
-    NSString *topString = @"<?xml version=\"1.0\" encoding=\"UTF-8";
-    NSRange range = [htmlString rangeOfString:topString];
-    
-    if (range.location != NSNotFound) {
-        NSRange subRange = [htmlString rangeOfString:@"?>"];
-        if (subRange.location != NSNotFound) {
-            htmlString = [htmlString substringFromIndex:(subRange.location + 2)];
-            NSString *newHtmlString = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                                       "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
-                                       "%@", htmlString];
-            htmlString = newHtmlString;
-        }
-    } else {
-        htmlString = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                      "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
-                      "%@", htmlString];
-    }
     
     note.content = htmlString;
     
