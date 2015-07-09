@@ -89,7 +89,7 @@ SINGLETON_CLASS(ENoteUpdateManager)
         NSLog(@"更新笔记成功 %@", newNote.title);
         
         [EUtility setSafeValue:newNote.updated key:note.guid fileName:LOCALUPDATEFILE];
-        
+        [EUtility removeValueWithKey:newNote.guid fileName:WAITUPLOADFILE]; 
         note.updated = newNote.updated;
         [[ENoteDAO sharedENoteDAO] saveBaseDO:note];
         
